@@ -10,8 +10,12 @@ public class Grafo {
 		this.Vertices = new Hashtable<String, Grafo.Vertice>();
 	}
 	
-	public Integer getPesoArista(Vertice v1, Vertice v2) {
-		return v1.getPesoArista(v2.getDato());
+	public Hashtable<String,Vertice> getVertices() {
+		return this.Vertices;
+	}
+	
+	public Integer getPesoArista(String v1, String v2) {
+		return this.obtenerVertice(v1).getPesoArista(v2);
 	}
 	
 	public void insertarVertice(String clave, String dato){
@@ -40,7 +44,7 @@ public class Grafo {
 		return this.Vertices.get(vertice).getVerticesAdyacentes();
 	}
 
-	private class Vertice {
+	public class Vertice {
 		public String Dato; // que tipo de dato deberia ser?
 		public Hashtable<String, Integer> adyacentes;
 		
