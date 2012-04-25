@@ -3,6 +3,7 @@ package Ejercicios;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.Iterator;
@@ -23,10 +24,6 @@ public class Grafo {
 		return this.Vertices;
 	}
 	
-	public Integer getPesoArista(String v1, String v2) {
-		return this.obtenerVertice(v1).getPesoArista(v2);
-	}
-	
 	public void insertarVertice(String clave, String dato){
 		Vertice v = new Vertice(dato);
 		this.Vertices.put(clave, v);
@@ -40,7 +37,7 @@ public class Grafo {
 		if (this.obtenerVertice(v1) != null && this.obtenerVertice(v2) != null) {
 			this.Vertices.get(v1).agregarArista(v2, peso);
 			this.Vertices.get(v2).agregarArista(v1, peso);
-			this.Aristas.add(new Arista(v1, v2, peso));
+			this.Aristas.add(new Arista(v1, v2, peso)); 
 			return true;
 		}
 		return false;
@@ -50,8 +47,8 @@ public class Grafo {
 		return this.Vertices;
 	}
 	
-	public Hashtable<String,Integer> obtenerVerticesAdyacentes(String vertice){
-		return this.Vertices.get(vertice).getVerticesAdyacentes();
+	public HashSet<Arista> obtenerVerticesAdyacentes(String vertice){
+		return this.obtenerVertice(vertice).getVerticesAdyacentes();
 	}
 	
 	public PriorityQueue<Arista> getAristas() {
@@ -68,7 +65,7 @@ public class Grafo {
 	 * @return Grafo arbol recubridor minimo
 	 */
 	public Grafo getArbolRecubridoMinimo(){
-		Hashtable<String, Vertice> v = this.getVertices();
+		Hashtable<String, Vertice> v = ((Hashtable<String,Vertice>)this.getVertices().clone());
 		int initialSize = v.size();
 		PriorityQueue<Arista> aristasGrafo = this.getAristas();
 		Grafo agm = new Grafo();
@@ -120,24 +117,20 @@ public class Grafo {
 	
 	public class Vertice {
 		public String Dato; // que tipo de dato deberia ser?
-		public Hashtable<String, Integer> adyacentes;
+		public HashSet<Arista> adyacentes;
 		
 		public Vertice(String dato) {
 			this.Dato = new String(dato);
-			this.adyacentes = new Hashtable<String, Integer>();
+			this.adyacentes = new HashSet<Grafo.Arista>(); // modificar esto
 		}
 		
-		public Hashtable<String, Integer> getVerticesAdyacentes() {
+		public HashSet<Arista> getVerticesAdyacentes() {
 			return this.adyacentes;
 		}
 		
 		
-		public void agregarArista(String clave, Integer peso) {
-			this.adyacentes.put(clave, peso);
-		}
-		
-		public Integer getPesoArista(String vecino) {
-			return this.adyacentes.get(vecino);
+		public void agregarArista(String v, Integer peso) {
+			this.adyacentes.add(new Arista(this.Dato, v, peso));
 		}
 		
 		public String getDato() {
@@ -161,7 +154,7 @@ public class Grafo {
 		}
 		
 		public String toString() {
-			return new String(this.v1 + "," + this.v2 + " | Peso: " + this.peso);
+			return new String("<" + this.v1 + "," + this.v2 + "> | Peso: " + this.peso);
 		}
 		
 		
