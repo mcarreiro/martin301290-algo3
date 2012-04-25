@@ -50,19 +50,6 @@ public class TestGrafo extends TestCase {
 		assertEquals(v2.getVerticesAdyacentes().get("C1"), new Integer(20));
 	}
 	
-	public void testGetPesoArista() {
-		Grafo g =  new Grafo();
-		g.insertarVertice("C1", "1");
-		g.insertarVertice("C2", "1");
-		g.insertarVertice("C3", "3");
-		g.agregarArista("C1", "C2", new Integer(20));
-		g.agregarArista("C1", "C3", new Integer(10));
-		g.agregarArista("C2", "C3", new Integer(15));
-		assertEquals(g.getPesoArista("C1", "C2"), new Integer(20));
-		assertEquals(g.getPesoArista("C1", "C3"), new Integer(10));
-		assertEquals(g.getPesoArista("C3", "C2"), new Integer(15));		
-	}
-	
 	public void testGetAristas() {
 		Grafo g = new Grafo();
 		g.insertarVertice("C1", "1");
@@ -83,8 +70,8 @@ public class TestGrafo extends TestCase {
 		g.agregarArista("C1", "C2", new Integer(20));
 		g.agregarArista("C1", "C3", new Integer(30));
 		g.agregarArista("C2", "C3", new Integer(15));
-		//@SuppressWarnings("unused")
-		//Grafo agm = g.getArbolRecubridoMinimo();
+		@SuppressWarnings("unused")
+		Grafo agm = g.getArbolRecubridoMinimo();
 	}
 	
 	public void testCrearAgm2() {
@@ -108,7 +95,6 @@ public class TestGrafo extends TestCase {
 		g.agregarArista("B", "C", 8);
 		@SuppressWarnings("unused")
 		Grafo agm = g.getArbolRecubridoMinimo();
-		
 	}
 	
 }
