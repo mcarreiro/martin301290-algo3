@@ -1,4 +1,7 @@
 package Ejercicios;
+import java.util.HashSet;
+import java.util.Iterator;
+
 import Ejercicios.Grafo;
 import Ejercicios.Grafo.Arista;
 import Ejercicios.Grafo.Vertice;
@@ -17,13 +20,38 @@ public class Ej3 {
 		 * - Poder borrar aristas
 		 * - Si el grafo es conexo ya se que hay solución.
 		 * - Ver como recorrer el grafo para encontrar solución rapida
+		 * - Lista de adyacentes: maximo 20
 		 */
-		
-		
-		return true;
+		 
+		return DFS(g, inicio, fin);
 	}
 	
 	
+	private Boolean DFS(Grafo g, Vertice inicio, Vertice fin){
+		inicio.Dato="V"; //Lo marco visitado.
+		
+		HashSet<Arista> ady = inicio.getVerticesAdyacentes();
+		Iterator<Arista> it =  ady.iterator();
+		while(it.hasNext()){
+			Arista a = it.next();
+			if(a.peso > 0)
+			{
+				Vertice opuesto = g.obtenerVertice(a.v1).Dato != "V" ? g.obtenerVertice(a.v1) : g.obtenerVertice(a.v2); 
+				if(opuesto.Dato != "V"){
+					
+					if(opuesto == fin)
+						return true;
+					else
+					{
+						opuesto.Dato = "V";
+						return DFS(g, opuesto, fin);						
+					}
+				}
+				
+			}
+		}
+		return false;
+	}
 	
 	private Boolean PuedeSaltar(int x, int y, int p, int q)
 	{
@@ -33,17 +61,25 @@ public class Ej3 {
 	
 	private Grafo GenerarEscenario(String[] nodos,int p, int q){
 		Grafo grafo = new Grafo();							//O(1)
-		int i,j, peso;
+		int i,j;
 		//Agrego todos los nodos.
 		for(i=0; i < nodos.length;i++) 						//O(n)
 			grafo.insertarVertice(nodos[i], "");		//O(1)
 		//Uno con aristas los nodos que su distancia este entre p y q, maximo pueden ser 10.
 		for(i=0; i < nodos.length;i++){ 					//O(10n) = O(n)
 			j = i+1;
-			peso = Integer.parseInt(nodos[j]) - Integer.parseInt(nodos[i]);
-			while(j < nodos.length && peso <= 10 && peso >= p &&peso <= q) //O(10)
-				grafo.agregarArista(nodos[i], nodos[j], peso); //O(1)
+			while(j < nodos.length && 
+					CalcularDiferencia(nodos[j],nodos[i]) <= 10 && 
+					CalcularDiferencia(nodos[j],nodos[i]) >= p && 
+					CalcularDiferencia(nodos[j],nodos[i]) <= q){ //O(10)
+				grafo.agregarArista(nodos[i], nodos[j], CalcularDiferencia(nodos[j],nodos[i])); //O(1)
+				j++;
+			}
 		}
-		return null;
+		return grafo;
+	}
+	private int CalcularDiferencia(String x, String y)
+	{
+		return Integer.parseInt(x) - Integer.parseInt(y);
 	}
 }
