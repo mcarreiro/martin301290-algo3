@@ -1,13 +1,21 @@
 package Ejercicios;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Stack;
+
 
 import Ejercicios.Grafo;
 import Ejercicios.Grafo.Arista;
 import Ejercicios.Grafo.Vertice;
 public class Ej3 {
 	public Stack<String> Resolver(String[] nodos, int x, int y, int p, int q){
+		//Me fijo si el salto puede ser directo
+		if(Math.abs(x-y) >= p && Math.abs(x-y) <= q)
+		{
+			Stack<String> pila = new Stack<String>();
+			pila.add(String.valueOf(y));
+			pila.add(String.valueOf(x));
+			return pila;
+		}
 		Grafo g = GenerarEscenario(nodos, p, q); 				//O(n)
 		Vertice inicio = g.obtenerVertice(String.valueOf(x));	
 		Vertice fin = g.obtenerVertice(String.valueOf(y));		 
@@ -16,7 +24,6 @@ public class Ej3 {
 			pila.add(String.valueOf(x));
 		return pila ;
 	}
-	
 	
 	private Stack<String> DFS(Grafo g, Vertice inicio, Vertice fin){
 		inicio.Dato="V"; //Lo marco visitado.
@@ -52,12 +59,6 @@ public class Ej3 {
 		return null;
 	}
 	
-	private Boolean PuedeSaltar(int x, int y, int p, int q)
-	{
-		int dif = Math.abs(y - x); 		
-		return dif <= q && dif >= p;
-	}
-	
 	private Grafo GenerarEscenario(String[] nodos,int p, int q){
 		Grafo grafo = new Grafo();							//O(1)
 		int i,j;
@@ -75,8 +76,15 @@ public class Ej3 {
 		}
 		return grafo;
 	}
+	
 	private int CalcularDiferencia(String x, String y)
 	{
 		return Integer.parseInt(x) - Integer.parseInt(y);
+	}
+	
+	public void ImprimirPila(Stack<String> pila){
+		while(pila!= null && !pila.isEmpty())
+			System.out.print(pila.pop()+" ");
+		System.out.println("");
 	}
 }
