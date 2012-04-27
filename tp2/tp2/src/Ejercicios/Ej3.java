@@ -1,45 +1,55 @@
 package Ejercicios;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Stack;
 
 import Ejercicios.Grafo;
 import Ejercicios.Grafo.Arista;
 import Ejercicios.Grafo.Vertice;
 public class Ej3 {
-	public Boolean Resolver(String[] nodos, int x, int y, int p, int q){
-		if(PuedeSaltar(x,y,p,q))
-			return true;
+	public Stack<String> Resolver(String[] nodos, int x, int y, int p, int q){
 		Grafo g = GenerarEscenario(nodos, p, q); 				//O(n)
 		Vertice inicio = g.obtenerVertice(String.valueOf(x));	
 		Vertice fin = g.obtenerVertice(String.valueOf(y));		 
-		return DFS(g, inicio, fin);
+		Stack<String> pila = DFS(g, inicio, fin);
+		if(pila!=null)
+			pila.add(String.valueOf(x));
+		return pila ;
 	}
 	
 	
-	private Boolean DFS(Grafo g, Vertice inicio, Vertice fin){
+	private Stack<String> DFS(Grafo g, Vertice inicio, Vertice fin){
 		inicio.Dato="V"; //Lo marco visitado.
 		
-		HashSet<Arista> ady = inicio.getVerticesAdyacentes();
-		Iterator<Arista> it =  ady.iterator();
-		while(it.hasNext()){
+		Iterator<Arista> it = inicio.getVerticesAdyacentes().iterator();
+		while(it.hasNext()){	//O(20) = O(1)
 			Arista a = it.next();
 			if(a.peso > 0)
 			{
 				Vertice opuesto = g.obtenerVertice(a.v2); 
 				if(opuesto.Dato != "V"){
 					
-					if(opuesto == fin)
-						return true;
+					if(opuesto == fin){
+						Stack<String> pila =  new Stack<String>();
+						pila.add(a.v2);
+						return pila;
+					}
+					
 					else
 					{
 						opuesto.Dato = "V";
-						return DFS(g, opuesto, fin);						
+						Stack<String> pila = DFS(g, opuesto, fin);
+						if(pila != null)
+						{
+							pila.add(a.v2);
+							return pila;
+						}
 					}
 				}
 				
 			}
 		}
-		return false;
+		return null;
 	}
 	
 	private Boolean PuedeSaltar(int x, int y, int p, int q)
