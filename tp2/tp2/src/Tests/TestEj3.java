@@ -2,12 +2,48 @@ package Tests;
 
 import java.io.Console;
 import java.util.Stack;
+import java.util.ArrayList;
+import Archivos.*;
 
 import junit.framework.TestCase;
 
 import Ejercicios.Ej3;
 
 public class TestEj3  extends TestCase {
+	public void testCatedra(){
+		java.io.File currentDir = new java.io.File("");
+		LeerArchivos reader = new LeerArchivos();
+		ArrayList<String> inputs = reader.leer(currentDir.getAbsolutePath()+ "/enunciado/Tp1Ej3.in");
+
+		int est = 0;
+		Ej3 ej3 = new Ej3();
+		for(int i=0;i<inputs.size();i=i+3){
+			String[] limiteSalto = inputs.get(i).split(" ");
+			String[] nodos = inputs.get(i+1).split(" ");
+			String[] instancias = inputs.get(i+2).split(";");
+
+			int p = Integer.parseInt(limiteSalto[0]);
+			int q = Integer.parseInt(limiteSalto[1]);
+							
+			for(int j=0;j<instancias.length;j++){
+				String[] posicion = instancias[j].trim().split(" ");
+				int x = Integer.parseInt(posicion[0]);
+				int y = Integer.parseInt(posicion[1]);	
+				ej3.ImprimirPila(ej3.Resolver(nodos, x, y, p, q));
+			}
+			
+			
+			
+		}
+		//FALTA ESCRIBIR RESULTADOS
+		/*EscribirArchivo.escribir(currentDir.getAbsolutePath() + "/enunciadoTP1/Tp1Ej3.out",resultado);
+		EscribirArchivo.escribir(currentDir.getAbsolutePath() + "/enunciadoTP1/Tp1Ej3_Estadisticas.out",estadistica);
+		EscribirArchivo.escribir(currentDir.getAbsolutePath() + "/enunciadoTP1/Tp1Ej3_Logs.out",logs);
+
+		for(int a = 0; a < estadistica.length; a++)
+			System.out.println(estadistica[a]);
+		System.out.println("FIN ARCHIVOS");*/
+	}
 	public void test(){
 		Ej3 ej3 = new Ej3();
 		String nodos[]= {"1","3","4","5","7","10"};
