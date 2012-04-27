@@ -7,8 +7,10 @@ import Ejercicios.Grafo;
 import Ejercicios.Grafo.Arista;
 import Ejercicios.Grafo.Vertice;
 public class Ej3 {
+	int ciclos;
 	public Stack<String> Resolver(String[] nodos, int x, int y, int p, int q){
 		//Me fijo si el salto puede ser directo
+		ciclos = 1;
 		if(Math.abs(x-y) >= p && Math.abs(x-y) <= q)
 		{
 			Stack<String> pila = new Stack<String>();
@@ -30,6 +32,7 @@ public class Ej3 {
 		
 		Iterator<Arista> it = inicio.getVerticesAdyacentes().iterator();
 		while(it.hasNext()){	//O(20) = O(1)
+			ciclos++;
 			Arista a = it.next();
 			if(a.peso > 0)
 			{
@@ -63,7 +66,7 @@ public class Ej3 {
 		Grafo grafo = new Grafo();							//O(1)
 		int i,j;
 		//Agrego todos los nodos.
-		for(i=0; i < nodos.length;i++) 						//O(n)
+		for(i=0; i < nodos.length;i++,ciclos++) 						//O(n)
 			grafo.insertarVertice(nodos[i], "");		//O(1)
 		//Uno con aristas los nodos que su distancia este entre p y q, maximo pueden ser 10.
 		for(i=0; i < nodos.length;i++){ 					//O(10n) = O(n)
@@ -72,6 +75,7 @@ public class Ej3 {
 				if(CalcularDiferencia(nodos[j],nodos[i]) >= p && CalcularDiferencia(nodos[j],nodos[i]) <= q)
 					grafo.agregarArista(nodos[i], nodos[j], CalcularDiferencia(nodos[j],nodos[i])); //O(1)
 				j++;
+				ciclos++;
 			}
 		}
 		return grafo;
