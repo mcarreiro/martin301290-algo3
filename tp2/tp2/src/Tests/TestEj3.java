@@ -11,7 +11,9 @@ public class TestEj3  extends TestCase {
 		Ej3 ej3 = new Ej3();
 		String nodos[]= {"1","3","4","5","7","10"};
 		Boolean res = ej3.Resolver(nodos, 4, 7, 3, 5);
+		Boolean res1 = ej3.Resolver(nodos, 4, 3, 3, 5);
 		System.out.println(res);
+		System.out.println(res1);
 	}
 	public void test1(){
 		Ej3 ej3 = new Ej3();

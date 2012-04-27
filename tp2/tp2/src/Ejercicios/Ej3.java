@@ -11,18 +11,7 @@ public class Ej3 {
 			return true;
 		Grafo g = GenerarEscenario(nodos, p, q); 				//O(n)
 		Vertice inicio = g.obtenerVertice(String.valueOf(x));	
-		Vertice fin = g.obtenerVertice(String.valueOf(y));
-		/* LISTO:
-		 * - Crea el escenario en O(n)
-		 * - El escenario solo tiene aristas posibles de salto
-		 * 
-		 * FALTA:
-		 * - Poder borrar aristas
-		 * - Si el grafo es conexo ya se que hay solución.
-		 * - Ver como recorrer el grafo para encontrar solución rapida
-		 * - Lista de adyacentes: maximo 20
-		 */
-		 
+		Vertice fin = g.obtenerVertice(String.valueOf(y));		 
 		return DFS(g, inicio, fin);
 	}
 	
@@ -36,7 +25,7 @@ public class Ej3 {
 			Arista a = it.next();
 			if(a.peso > 0)
 			{
-				Vertice opuesto = g.obtenerVertice(a.v1).Dato != "V" ? g.obtenerVertice(a.v1) : g.obtenerVertice(a.v2); 
+				Vertice opuesto = g.obtenerVertice(a.v2); 
 				if(opuesto.Dato != "V"){
 					
 					if(opuesto == fin)
@@ -68,11 +57,9 @@ public class Ej3 {
 		//Uno con aristas los nodos que su distancia este entre p y q, maximo pueden ser 10.
 		for(i=0; i < nodos.length;i++){ 					//O(10n) = O(n)
 			j = i+1;
-			while(j < nodos.length && 
-					CalcularDiferencia(nodos[j],nodos[i]) <= 10 && 
-					CalcularDiferencia(nodos[j],nodos[i]) >= p && 
-					CalcularDiferencia(nodos[j],nodos[i]) <= q){ //O(10)
-				grafo.agregarArista(nodos[i], nodos[j], CalcularDiferencia(nodos[j],nodos[i])); //O(1)
+			while(j < nodos.length && CalcularDiferencia(nodos[j],nodos[i]) <= 10){ //O(10)
+				if(CalcularDiferencia(nodos[j],nodos[i]) >= p && CalcularDiferencia(nodos[j],nodos[i]) <= q)
+					grafo.agregarArista(nodos[i], nodos[j], CalcularDiferencia(nodos[j],nodos[i])); //O(1)
 				j++;
 			}
 		}
