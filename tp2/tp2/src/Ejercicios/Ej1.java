@@ -53,7 +53,7 @@ public class Ej1 {
 		for(int i = 0;i <= numeros.size() ;i++){
 			mat[i][0] = true;
 		}
-		for(int i = 0;i <= suma;i++){
+		for(int i = 1;i <= suma;i++){
 			mat[0][i] = false;
 		}
 		for (int i = 1; i <= numeros.size(); i++){
