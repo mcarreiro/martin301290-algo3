@@ -59,7 +59,7 @@ public class TestEj1  extends TestCase {
 	public void test2(){
 		Ej1 ej1 = new Ej1();
 		ArrayList<Integer> numeros = new ArrayList<Integer>();
-		numeros.add(0);
+	
 		numeros.add(2);
 		numeros.add(4);
 		numeros.add(7);
