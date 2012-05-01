@@ -14,16 +14,46 @@ public class TestEj1  extends TestCase {
 	public void test(){
 		Ej1 ej1 = new Ej1();
 		ArrayList< Integer > pisos = new ArrayList< Integer >();
+		ArrayList< Integer > pisosAux = new ArrayList< Integer >();
 		pisos.add(10);
 		pisos.add(10);
 		pisos.add(10);
 		pisos.add(10);
 		pisos.add(10);
 		pisos.add(10);
-		int result = ej1.resolver(6, 10, pisos);
+		pisosAux = (ArrayList< Integer >)pisos.clone();
+		int result = ej1.resolver(6, 10, pisosAux);
 		assertEquals(result,20);
-		result = ej1.resolver(12, 5, pisos);
-		assertEquals(result,20); 
+		pisosAux = (ArrayList< Integer >)pisos.clone();
+		result = ej1.resolver(12, 5, pisosAux);
+		assertEquals(result,20);
+		
+		ArrayList< Integer > pisosAux2 = new ArrayList< Integer >();
+		pisosAux2.add(0);
+		pisosAux2.add(3);
+		pisosAux2.add(4);
+		result = ej1.resolver(12, 3, pisosAux2);
+		assertEquals(result,6); 
+
+		ArrayList< Integer > tincher = new ArrayList< Integer >();
+		tincher.add(20);
+		tincher.add(20);
+		tincher.add(0);
+		tincher.add(0);
+		tincher.add(0);
+		tincher.add(30);
+		result = ej1.resolver(12, 30, tincher);
+		assertEquals(result,40);
+		
+		ArrayList< Integer > pablo = new ArrayList< Integer >();
+		pablo.add(0);
+		pablo.add(10);
+		pablo.add(10);
+		pablo.add(30);
+		pablo.add(20);
+		pablo.add(20);
+		result = ej1.resolver(12, 70, pablo);
+		assertEquals(result,70);
 	}
 
 }
