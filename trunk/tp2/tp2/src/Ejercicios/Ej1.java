@@ -14,15 +14,12 @@ public class Ej1 {
 			pisosAux = (ArrayList< Integer >)pisos.clone();
 			//levanto de cada piso de forma tal q me llene la capacidad
 			for(int a=i; a>=0; a--){
-				if(energiaAux >= ((a+1)*2)){
-					
+				if(energiaAux >= ((a+1)*2)){					
 					if(pisosAux.get(a) >= capacidad){
 						energiaAux = energiaAux - ((a+1)*2);
 						cantPersonasAux += capacidad;						
 						pisosAux.set(a, pisosAux.get(a) - capacidad);
 						a++;
-					}else{
-						//cantPersonasAux += pisosAux.get(a);
 					}
 				}else{
 					break;
@@ -35,8 +32,11 @@ public class Ej1 {
 						energiaAux = energiaAux - ((a+1)*2);
 						cantPersonasAux += pisosAux.get(a);						
 						pisosAux.set(a, pisosAux.get(a) - capacidad);
-						
-						//aca deberia levantar de los pisos que hay abajo de forma optima
+						//Me fijo cual es la suma maxima que puedo hacer con la gente del resto de los pisos
+						int sumaMax = this.subSetSum(pisosAux.subList(0, a-1), capacidad - pisosAux.get(a));
+						if(sumaMax > 0){
+							//ACA TENGO QUE VER QUE NUMEROS SUMAR PARA OBTENER SUMAMAX Y EN CASO DE HABER MAS DE 1 ELEGIR EL Q TENGA GENTE EN LOS PISOS DE MAS ARRIBA
+						}
 					}
 				}
 			}
@@ -47,7 +47,14 @@ public class Ej1 {
 		return cantPersonas;
 	}
 	
-	public boolean subSetSum(ArrayList<Integer> numeros, int suma){
+	/**
+	 * Se fija si se puede sumar 'suma' con los valores de 'numeros' en caso negatvio busca la suma mas cercana y devuelve esa suma
+	 * 
+	 * @param numeros
+	 * @param suma
+	 * @return
+	 */
+	public int subSetSum(List<Integer> numeros, int suma){
 		Boolean[][] mat = new Boolean[numeros.size()+1][suma+1];
 		
 		for(int i = 0;i <= numeros.size() ;i++){
@@ -65,12 +72,15 @@ public class Ej1 {
 		        }
 		      }
 		}
+		//Busco cual es la suma maxima
+		int sumaMaxima = 0;
+		for(int i = suma;i > 0;i--){
+			if(mat[numeros.size()][i] == true){
+				sumaMaxima = i;
+				break;
+			}
+		}
 		
-		String s = Arrays.deepToString(mat)
-				   .replace("], ", "\n").replaceAll(",|\\[|\\]", "");
-
-				System.out.println(s);
-				System.out.println(numeros.get(0));
-		return true;
+		return sumaMaxima;
 	}
 }
