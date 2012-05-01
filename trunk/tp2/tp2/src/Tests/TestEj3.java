@@ -14,8 +14,7 @@ public class TestEj3  extends TestCase {
 		java.io.File currentDir = new java.io.File("");
 		LeerArchivos reader = new LeerArchivos();
 		ArrayList<String> inputs = reader.leer(currentDir.getAbsolutePath()+ "/enunciado/Tp1Ej3.in");
-
-		int est = 0;
+		String result = "", estadistica = "";
 		Ej3 ej3 = new Ej3();
 		for(int i=0;i<inputs.size();i=i+3){
 			String[] limiteSalto = inputs.get(i).split(" ");
@@ -29,20 +28,20 @@ public class TestEj3  extends TestCase {
 				String[] posicion = instancias[j].trim().split(" ");
 				int x = Integer.parseInt(posicion[0]);
 				int y = Integer.parseInt(posicion[1]);	
-				ej3.ImprimirPila(ej3.Resolver(nodos, x, y, p, q));
+				result+=(ej3.ImprimirPila(ej3.Resolver(nodos, x, y, p, q))) + ";";
+				estadistica+=(ej3.ImprimirPila(ej3.Resolver(nodos, x, y, p, q))) + " - Ciclos: "+ ej3.ciclos_DFS + ";";
+
 			}
 			
 			
 			
 		}
-		//FALTA ESCRIBIR RESULTADOS
-		/*EscribirArchivo.escribir(currentDir.getAbsolutePath() + "/enunciadoTP1/Tp1Ej3.out",resultado);
-		EscribirArchivo.escribir(currentDir.getAbsolutePath() + "/enunciadoTP1/Tp1Ej3_Estadisticas.out",estadistica);
-		EscribirArchivo.escribir(currentDir.getAbsolutePath() + "/enunciadoTP1/Tp1Ej3_Logs.out",logs);
-
-		for(int a = 0; a < estadistica.length; a++)
-			System.out.println(estadistica[a]);
-		System.out.println("FIN ARCHIVOS");*/
+		
+		String[] res = result.substring(0, result.length()).split(";");
+		String[] est = estadistica.substring(0, estadistica.length()).split(";");
+		EscribirArchivo.escribir(currentDir.getAbsolutePath() + "/enunciado/Tp1Ej3.out",res);		
+		EscribirArchivo.escribir(currentDir.getAbsolutePath() + "/enunciado/Tp1Ej3_Estadisticas.out",est);
+		
 	}
 	public void test(){
 		Ej3 ej3 = new Ej3();
