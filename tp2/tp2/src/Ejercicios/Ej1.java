@@ -35,6 +35,7 @@ public class Ej1 {
 						energiaAux = energiaAux - ((a+1)*2);
 						cantPersonasAux += pisosAux.get(a);						
 						pisosAux.set(a, pisosAux.get(a) - capacidad);
+						
 						//aca deberia levantar de los pisos que hay abajo de forma optima
 					}
 				}
@@ -44,5 +45,32 @@ public class Ej1 {
 			}
 		}
 		return cantPersonas;
+	}
+	
+	public boolean subSetSum(ArrayList<Integer> numeros, int suma){
+		Boolean[][] mat = new Boolean[numeros.size()+1][suma+1];
+		
+		for(int i = 0;i <= numeros.size() ;i++){
+			mat[i][0] = true;
+		}
+		for(int i = 0;i <= suma;i++){
+			mat[0][i] = false;
+		}
+		for (int i = 1; i <= numeros.size(); i++){
+		      for (int j = 1; j <= suma; j++){
+		        if (j >=  numeros.get(i - 1)){
+		        	mat[i][j] = mat[i - 1][j] || mat[i - 1][j - numeros.get(i - 1)];
+		        }else{
+		        	mat[i][j] = mat[i - 1][j];
+		        }
+		      }
+		}
+		
+		String s = Arrays.deepToString(mat)
+				   .replace("], ", "\n").replaceAll(",|\\[|\\]", "");
+
+				System.out.println(s);
+				System.out.println(numeros.get(0));
+		return true;
 	}
 }
