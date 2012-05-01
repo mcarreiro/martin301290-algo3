@@ -1,7 +1,6 @@
 package Tests;
 
 import java.util.Hashtable;
-import java.util.Iterator;
 import java.util.PriorityQueue;
 
 import junit.framework.TestCase;
@@ -16,7 +15,23 @@ public class TestGrafo extends TestCase {
 		//Grafo g = new Grafo();
 		
 	}
+	
+	public void testMarcarVertices() {
+		Grafo g = new Grafo();
+		g.insertarVertice("v1", "v1");
+		g.insertarVertice("v2", "v2");
+		g.insertarVertice("v3", "v3");
+		Vertice v1 = g.obtenerVertice("v1");
+		Vertice v2 = g.obtenerVertice("v2");
+		v1.marcarVisitado();
+		v2.marcarVisitado();
+		Vertice v = g.obtenerVertice("v2");
+		assertTrue(v.fueVisitado());
+		v = g.obtenerVertice("v3");
+		assertTrue(!v.fueVisitado());
+	}
 
+	/*
 	public void testInsertarVertice() {
 		Grafo g = new Grafo();
 		g.insertarVertice("Ciudad 1", "1");
@@ -31,7 +46,7 @@ public class TestGrafo extends TestCase {
 		Vertice v = g.obtenerVertice("Ciudad 1");
 		assertEquals(v.getDato(), "1");		
 	}
-	
+
 	public void testAgregarArista() {
 		Grafo g = new Grafo();
 		g.insertarVertice("C1", "1");
@@ -61,17 +76,17 @@ public class TestGrafo extends TestCase {
 		PriorityQueue<Arista> cola = g.getAristas();
 		assertEquals(cola.size(), 3);
 	}
-	
+	*/
 	public void testCrearAgm() {
 		Grafo g = new Grafo();
 		g.insertarVertice("C1", "1");
-		g.insertarVertice("C2", "1");
+		g.insertarVertice("C2", "2");
 		g.insertarVertice("C3", "3");
-		g.agregarArista("C1", "C2", new Integer(20));
-		g.agregarArista("C1", "C3", new Integer(30));
-		g.agregarArista("C2", "C3", new Integer(15));
+		g.agregarArista(g.obtenerVertice("C1"), g.obtenerVertice("C2"), new Integer(20));
+		g.agregarArista(g.obtenerVertice("C1"), g.obtenerVertice("C3"), new Integer(30));
+		g.agregarArista(g.obtenerVertice("C2"), g.obtenerVertice("C3"), new Integer(15));
 		@SuppressWarnings("unused")
-		Grafo agm = g.getArbolRecubridoMinimo();
+		Grafo agm = g.getAgm();
 	}
 	
 	public void testCrearAgm2() {
@@ -83,18 +98,18 @@ public class TestGrafo extends TestCase {
 		g.insertarVertice("E", "E");
 		g.insertarVertice("F", "F");
 		g.insertarVertice("G", "G");
-		g.agregarArista("A", "B", 7);
-		g.agregarArista("A", "D", 5);
-		g.agregarArista("D", "F", 6);
-		g.agregarArista("D", "E", 15);
-		g.agregarArista("F", "E", 8);
-		g.agregarArista("F", "G", 11);
-		g.agregarArista("E", "G", 9);
-		g.agregarArista("C", "E", 5);
-		g.agregarArista("B", "E", 7);
-		g.agregarArista("B", "C", 8);
-		@SuppressWarnings("unused")
-		Grafo agm = g.getArbolRecubridoMinimo();
+		g.agregarArista(g.obtenerVertice("A"), g.obtenerVertice("B"), 7);
+		g.agregarArista(g.obtenerVertice("A"), g.obtenerVertice("D"), 5);
+		g.agregarArista(g.obtenerVertice("D"), g.obtenerVertice("F"), 6);
+		g.agregarArista(g.obtenerVertice("D"), g.obtenerVertice("E"), 15);
+		g.agregarArista(g.obtenerVertice("F"), g.obtenerVertice("E"), 8);
+		g.agregarArista(g.obtenerVertice("F"), g.obtenerVertice("G"), 11);
+		g.agregarArista(g.obtenerVertice("E"), g.obtenerVertice("G"), 9);
+		g.agregarArista(g.obtenerVertice("C"), g.obtenerVertice("E"), 5);
+		g.agregarArista(g.obtenerVertice("B"), g.obtenerVertice("E"), 7);
+		g.agregarArista(g.obtenerVertice("B"), g.obtenerVertice("C"), 8);
+		//@SuppressWarnings("unused")
+		//Grafo agm = g.getAgm();
 	}
 	
 }
