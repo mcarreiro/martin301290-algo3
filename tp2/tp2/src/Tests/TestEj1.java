@@ -56,17 +56,5 @@ public class TestEj1  extends TestCase {
 		//assertEquals(result,70);
 	}
 	
-	public void test2(){
-		Ej1 ej1 = new Ej1();
-		ArrayList<Integer> numeros = new ArrayList<Integer>();
-	
-		numeros.add(2);
-		numeros.add(4);
-		numeros.add(7);
-		numeros.add(9);
-		numeros.add(11);
-		
-		ej1.subSetSum(numeros, 18);
-	}
 
 }
