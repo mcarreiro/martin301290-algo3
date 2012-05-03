@@ -9,8 +9,7 @@ import Ejercicios.Grafo.Vertice;
 public class Ej3 {
 	public int ciclos_DFS;
 	public int ciclos_esc;
-	String visitado = "V"; 	//Marca de nodo visitado
-	String noVisitado = "";	//Marca de nodo no visitado
+	
 	public Stack<String> Resolver(String[] nodos, int x, int y, int p, int q){
 		//Me fijo si el salto puede ser directo
 		ciclos_DFS = 0;
@@ -40,7 +39,7 @@ public class Ej3 {
 			pila.add(String.valueOf(y));
 			return pila;
 		}
-		inicio.Dato = visitado; //Lo marco visitado.
+		inicio.marcarVisitado(); //Lo marco visitado.
 		
 		Iterator<Arista> it = inicio.getVerticesAdyacentes().iterator();
 		while(it.hasNext()){	//O(20) = O(1)
@@ -48,22 +47,22 @@ public class Ej3 {
 			Arista a = it.next();
 			if(a.peso > 0)
 			{
-				Vertice opuesto = g.obtenerVertice(a.v2); 
-				if(opuesto.Dato != visitado){
+				Vertice opuesto = g.obtenerVertice(a.v2.getDato()); 
+				if(!opuesto.fueVisitado()){
 					
 					if(opuesto == fin){ //Ya encontré el ultimo :)
 						Stack<String> pila =  new Stack<String>();
-						pila.add(a.v2);
+						pila.add(a.v2.getDato());
 						return pila;
 					}
 					
 					else //Si no lo encontre sigo...
 					{
-						opuesto.Dato = visitado;
-						Stack<String> pila = DFS(g, opuesto, fin, Integer.parseInt(a.v2), y, p, q);
+						opuesto.marcarVisitado();
+						Stack<String> pila = DFS(g, opuesto, fin, Integer.parseInt(a.v2.getDato()), y, p, q);
 						if(pila != null)
 						{
-							pila.add(a.v2);
+							pila.add(a.v2.getDato());
 							return pila;
 						}
 					}
@@ -76,16 +75,17 @@ public class Ej3 {
 	
 	private Grafo GenerarEscenario(String[] nodos,int p, int q){
 		Grafo grafo = new Grafo();						//O(1)
+		Vertice[] vertices = new Vertice[nodos.length];
 		int i,j;
 		//Agrego todos los nodos.
 		for(i=0; i < nodos.length;i++,ciclos_esc++) 	//O(n)
-			grafo.insertarVertice(nodos[i], noVisitado);		//O(1)
+			vertices[i] = grafo.insertarVertice(nodos[i], nodos[i]);		//O(1)
 		//Uno con aristas los nodos que su distancia este entre p y q, maximo pueden ser 10.
 		for(i=0; i < nodos.length;i++){ 				//O(10n) = O(n)
 			j = i+1;
 			while(j < nodos.length && CalcularDiferencia(nodos[j],nodos[i]) <= 10){ //O(10)
 				if(CalcularDiferencia(nodos[j],nodos[i]) >= p && CalcularDiferencia(nodos[j],nodos[i]) <= q)
-					grafo.agregarArista(nodos[i], nodos[j], CalcularDiferencia(nodos[j],nodos[i])); //O(1)
+					grafo.agregarArista(vertices[i], vertices[j], CalcularDiferencia(nodos[j],nodos[i])); //O(1)
 				j++;
 				ciclos_esc++;
 			}

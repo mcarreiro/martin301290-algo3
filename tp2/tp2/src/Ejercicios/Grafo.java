@@ -103,11 +103,13 @@ public class Grafo {
 		public String Dato; // que tipo de dato deberia ser?
 		public ArrayList<Arista> aristas;
 		public boolean visitado;
+        public HashSet<Arista> adyacentes;
 		
 		public Vertice(String dato) {
 			this.Dato = new String(dato);
 			this.aristas = new ArrayList<Grafo.Arista>(); // modificar esto
 			this.visitado = false;
+			this.adyacentes = new HashSet<Grafo.Arista>(); 
 		}
 		
 		public String toString() {
@@ -118,9 +120,15 @@ public class Grafo {
 			return this.aristas;
 		}
 		
-		
+		public HashSet<Arista> getVerticesAdyacentes() {
+             return this.adyacentes;
+		}
+		 
 		public void agregarArista(Vertice v, Integer peso) {
 			this.aristas.add(new Arista(this, v, peso));
+			v.aristas.add(new Arista(v, this, peso));
+			this.adyacentes.add(new Arista(this, v, peso));
+			v.adyacentes.add(new Arista(v,this, peso));
 		}
 		
 		public String getDato() {
