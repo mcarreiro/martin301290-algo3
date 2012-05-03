@@ -4,16 +4,21 @@ import java.util.*;
 
 public class Ej1 {
 	public int resolver(int energia, int capacidad, ArrayList< Integer > pisos){
+		
+		int totalPersonas = SumaTotalPersonas(pisos);
+		return BusquedaBinariaPersonas(0,totalPersonas, totalPersonas,energia,capacidad,pisos);
+		 
+	}
+	private int SumaTotalPersonas(ArrayList< Integer > pisos){
 		int acum = 0;		
 		int i;
 		for(i = 0; i < pisos.size();i++){
 			acum = acum + pisos.get(i);			
 		}
-		int cantPersonas = BusquedaBinariaPersonas(0,acum, acum,energia,capacidad,pisos);
-		return cantPersonas;
+		return acum;
 	}
 	
-	public int BusquedaBinariaPersonas(int desde, int hasta, int total, int energia, int capacidad, ArrayList< Integer > pisos){
+	private int BusquedaBinariaPersonas(int desde, int hasta, int total, int energia, int capacidad, ArrayList< Integer > pisos){
 		int medio = (desde + hasta)/2;
 		if(desde > hasta) return 0;
 		boolean res = sePuedeLevantar(energia, capacidad, pisos, medio);
@@ -29,54 +34,68 @@ public class Ej1 {
 		}			
 	}
 	
-	public boolean sePuedeLevantar(int energia, int capacidad, ArrayList< Integer > pisosOrig, int cant){
-		int acum = 0;		
+	private void BuscarPisoMaximo(ArrayList< Integer > pisos, int personasABuscar, int[] infoReturn){
+		int personasTotal = 0;		
 		int i;
-		ArrayList< Integer > pisos = (ArrayList< Integer >)pisosOrig.clone();
 		for(i = 0; i < pisos.size();i++){
-			acum = acum + pisos.get(i);
-			if(acum >= cant){			
+			personasTotal = personasTotal + pisos.get(i);
+			if(personasTotal >= personasABuscar){			
 				break;
 			}
 		}
+		
+		infoReturn[0] = i;
+		infoReturn[1] = personasTotal;
+	}
+	private boolean TengoEnergiaParaLlegar(int energia, int piso){
+		return energia >= (piso+1)*2;
+	}
+	private boolean sePuedeLevantar(int energia, int capacidad, ArrayList< Integer > pisosOrig, int personasABuscar){
+		
+		ArrayList< Integer > pisos = (ArrayList< Integer >)pisosOrig.clone();
+		int[] info = new int [2];
+		BuscarPisoMaximo(pisos, personasABuscar, info);
+		int piso = info[0];
+		int personasTotal = info[1];
 		int cuantoLevante = 0;
 		int noLevante = 0;
 		int restaDeCapacidad = capacidad;		
-			for(;i >= 0;i--){
-				if(energia >= (i+1)*2){
-					energia = energia - (i+1)*2;
-					if(pisos.get(i) > capacidad){
+			for(;piso >= 0;piso--){
+				if(TengoEnergiaParaLlegar(energia, piso)){
+					energia = energia - (piso+1)*2;
+					if(pisos.get(piso) > capacidad){
 						cuantoLevante = cuantoLevante + capacidad;
-						pisos.set(i, pisos.get(i)  -capacidad);
-						i++;
+						pisos.set(piso, pisos.get(piso)  -capacidad);
+						piso++;
 					}else{
-						restaDeCapacidad = restaDeCapacidad - pisos.get(i);
-						cuantoLevante = cuantoLevante + pisos.get(i);
-						pisos.set(i, 0);						
-						for(int a = (i-1);a >= 0;a--){
-							if(restaDeCapacidad > 0 && pisos.get(a) > 0){
-								if(restaDeCapacidad >= pisos.get(a)){
-									restaDeCapacidad = restaDeCapacidad - pisos.get(a);
-									cuantoLevante+= pisos.get(a);
-									pisos.set(a, 0);									
+						restaDeCapacidad = restaDeCapacidad - pisos.get(piso);
+						cuantoLevante = cuantoLevante + pisos.get(piso);
+						pisos.set(piso, 0);						
+						for(int pisoMenor = (piso-1);pisoMenor >= 0;pisoMenor--){
+							if(restaDeCapacidad > 0 && pisos.get(pisoMenor) > 0){
+								if(restaDeCapacidad >= pisos.get(pisoMenor)){
+									restaDeCapacidad = restaDeCapacidad - pisos.get(pisoMenor);
+									cuantoLevante+= pisos.get(pisoMenor);
+									pisos.set(pisoMenor, 0);									
 								}else{
 									cuantoLevante+= restaDeCapacidad;
-									pisos.set(a, pisos.get(a) - restaDeCapacidad);									
+									pisos.set(pisoMenor, pisos.get(pisoMenor) - restaDeCapacidad);									
 									restaDeCapacidad = 0;									
 								}
 							}
 						}
 					}
 				}else{
-					noLevante = noLevante + pisos.get(i);
-					if(noLevante > (acum - cant)){						
+					noLevante = noLevante + pisos.get(piso);
+					if(noLevante > (personasTotal - personasABuscar)){						
 						break;
 					}
 				}
 			}
 		
-		return (cuantoLevante >= cant);
+		return (cuantoLevante >= personasABuscar);
 	}
+
 }
 
 
