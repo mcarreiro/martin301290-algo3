@@ -14,8 +14,9 @@ public class TestEj2 extends TestCase {
 	}
 	
 	public void testDoit() {
-		String input = "/home/pablo/Software/java/algo3/tp2/enunciado/Tp1Ej2.in";
-		String output = "/home/pablo/Software/java/algo3/tp2/enunciado/Tp1Ej2.out.bak";
+		java.io.File currentDir = new java.io.File("");
+		String input = currentDir.getAbsolutePath()+ "/enunciado/Tp1Ej2.in";
+		String output = currentDir.getAbsolutePath()+ "/enunciado/Tp1Ej2.out.bak";
 		Ej2.doIt(input, output);
 	}
 
