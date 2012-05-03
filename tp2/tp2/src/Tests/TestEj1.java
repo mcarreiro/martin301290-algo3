@@ -54,6 +54,48 @@ public class TestEj1  extends TestCase {
 		pablo.add(20);
 		result = ej1.resolver(12, 70, pablo);
 		assertEquals(result,70);
+		
+		ArrayList< Integer > kevin = new ArrayList< Integer >();
+		kevin.add(8);
+		kevin.add(7);
+		kevin.add(6);
+		kevin.add(5);
+		kevin.add(4);
+		kevin.add(3);
+		kevin.add(2);
+		kevin.add(1);		
+		result = ej1.resolver(30, 8, kevin);
+		assertEquals(result,30);
+		
+		kevin.clear();
+		kevin.add(1);
+		kevin.add(1);
+		kevin.add(1);
+		kevin.add(1);
+		result = ej1.resolver(10, 4, kevin);
+		assertEquals(result,4);
+		
+		kevin.clear();
+		kevin.add(1);
+		kevin.add(1);
+		kevin.add(1);
+		kevin.add(10);
+		kevin.add(1);
+		kevin.add(1);
+		kevin.add(10);
+		result = ej1.resolver(34, 2, kevin);
+		assertEquals(result,9);
+		
+		kevin.clear();
+		kevin.add(1);
+		kevin.add(1);
+		kevin.add(1);
+		kevin.add(10);
+		kevin.add(1);
+		kevin.add(1);
+		kevin.add(10);
+		result = ej1.resolver(34, 1, kevin);
+		assertEquals(result,5);
 	}
 	
 

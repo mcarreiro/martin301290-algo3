@@ -18,7 +18,7 @@ public class Ej1 {
 		if(desde > hasta) return 0;
 		boolean res = sePuedeLevantar(energia, capacidad, pisos, medio);
 		if(res){
-			if(total > medio+1)
+			if(total != medio )
 				if(!sePuedeLevantar(energia, capacidad, pisos, medio+1))
 					return medio;
 				else 
