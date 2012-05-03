@@ -96,6 +96,22 @@ public class Ej1 {
 		return (cuantoLevante >= personasABuscar);
 	}
 
+	
+	/*public int resolverIterativo(int energia, int capacidad, ArrayList< Integer > pisos){
+		int maxCantGente;
+		
+		if() //
+		
+		
+		maxCantGente = max(resolverIterativo(si quedo gente mi piso si no el siguiente, levante n (si ), energia), resolverIterativo(siguiente piso total no levanto, 0, energia)
+				si pasé por el piso(restar 2 a energia)
+		
+		
+		
+	}*/
+	
+	
+	
 }
 
 
