@@ -53,7 +53,7 @@ public class TestEj1  extends TestCase {
 		pablo.add(20);
 		pablo.add(20);
 		result = ej1.resolver(12, 70, pablo);
-		//assertEquals(result,70);
+		assertEquals(result,70);
 	}
 	
 
