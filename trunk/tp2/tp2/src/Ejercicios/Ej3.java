@@ -41,28 +41,28 @@ public class Ej3 {
 		}
 		inicio.marcarVisitado(); //Lo marco visitado.
 		
-		Iterator<Arista> it = inicio.getVerticesAdyacentes().iterator();
+		Iterator<Arista> it = inicio.getAristas().iterator(); //O(20) = O(1)
 		while(it.hasNext()){	//O(20) = O(1)
 			ciclos_DFS++;
 			Arista a = it.next();
 			if(a.peso > 0)
 			{
-				Vertice opuesto = g.obtenerVertice(a.v2.getDato()); 
+				Vertice opuesto = a.v2; 
 				if(!opuesto.fueVisitado()){
 					
 					if(opuesto == fin){ //Ya encontré el ultimo :)
 						Stack<String> pila =  new Stack<String>();
-						pila.add(a.v2.getDato());
+						pila.add(opuesto.getDato());
 						return pila;
 					}
 					
 					else //Si no lo encontre sigo...
 					{
 						opuesto.marcarVisitado();
-						Stack<String> pila = DFS(g, opuesto, fin, Integer.parseInt(a.v2.getDato()), y, p, q);
+						Stack<String> pila = DFS(g, opuesto, fin, Integer.parseInt(opuesto.getDato()), y, p, q);
 						if(pila != null)
 						{
-							pila.add(a.v2.getDato());
+							pila.add(opuesto.getDato());
 							return pila;
 						}
 					}
