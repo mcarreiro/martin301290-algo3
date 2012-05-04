@@ -55,23 +55,26 @@ public class Ej1 {
 		ArrayList< Integer > pisos = (ArrayList< Integer >)pisosOrig.clone();
 		int[] info = new int [2];
 		BuscarPisoMaximo(pisos, personasABuscar, info);
-		int piso = info[0];
-		int personasTotal = info[1];
-		int cuantoLevante = 0;
-		int noLevante = 0;
-		int restaDeCapacidad = capacidad;		
+		int piso = info[0],
+		personasTotal = info[1],
+		cuantoLevante = 0,
+		noLevante = 0,
+		restaDeCapacidad = capacidad;		
 			for(;piso >= 0;piso--){
-				if(TengoEnergiaParaLlegar(energia, piso)){
+				if(TengoEnergiaParaLlegar(energia, piso)){ //Si tengo energia para llegar a ese piso...
 					energia = energia - (piso+1)*2;
-					if(pisos.get(piso) > capacidad){
-						cuantoLevante = cuantoLevante + capacidad;
-						pisos.set(piso, pisos.get(piso)  -capacidad);
-						piso++;
-					}else{
-						restaDeCapacidad = restaDeCapacidad - pisos.get(piso);
-						cuantoLevante = cuantoLevante + pisos.get(piso);
-						pisos.set(piso, 0);						
-						for(int pisoMenor = (piso-1);pisoMenor >= 0;pisoMenor--){
+					if(pisos.get(piso) > capacidad){ //Si hay mas gente en el piso que la capacidad, es decir, lleno el ascensor.
+						cuantoLevante = cuantoLevante + capacidad; //Sumo lo que levante
+						pisos.set(piso, pisos.get(piso)  -capacidad); //Resto los que agarre
+						piso++; //Le doy una oportunidad mas para procesar este piso por si puedo seguir agarrando
+						//Me voy a PB para dejar la gente.
+					}else{ //Si puedo levantar todo el piso
+						restaDeCapacidad = restaDeCapacidad - pisos.get(piso); //A la capacidad de mi ascensor le resto lo que agarre.
+						cuantoLevante = cuantoLevante + pisos.get(piso); //Sumo lo que levante
+						pisos.set(piso, 0);		//Vacio el piso				
+						//Como no llene el ascensor no me tengo que ir a PB, entonces bajo en el ascensor agarrando lo que puedo de los pisos de abajo.
+						for(int pisoMenor = (piso-1);pisoMenor >= 0;pisoMenor--){ 
+							//Bajo del ascensor agarrando lo que pueda de los pisos inferiores
 							if(restaDeCapacidad > 0 && pisos.get(pisoMenor) > 0){
 								if(restaDeCapacidad >= pisos.get(pisoMenor)){
 									restaDeCapacidad = restaDeCapacidad - pisos.get(pisoMenor);
@@ -85,15 +88,16 @@ public class Ej1 {
 							}
 						}
 					}
-				}else{
+				}else{ //Si no tengo energia para llegar a ese piso...
 					noLevante = noLevante + pisos.get(piso);
-					if(noLevante > (personasTotal - personasABuscar)){						
+					if(noLevante > (personasTotal - personasABuscar)){	
+						//Si ya levante lo que tenia que levantar.
 						break;
 					}
 				}
 			}
 		
-		return (cuantoLevante >= personasABuscar);
+		return (cuantoLevante >= personasABuscar); //Levanté la cantidad que queria?
 	}
 
 	
