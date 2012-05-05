@@ -1,0 +1,39 @@
+Problema:
+---------
+El problema es representar los saltos de un sapo entre piedras a diferente distancia, teniendo que llegar de una cierta piedra a otra, con la condicion de que cada salto tiene que estar en un rango de distancia.
+La idea base del problema es encontrar el camino desde un vertice a otro de un grafo ponderado, sin necesidad de ser el camino minimo. 
+
+Solucion:
+---------
+La solución propuesta, , al ser un problema común de grafos, es buscar el camino de un vertice a otro usando DFS. Para esto, sabiendo que como maximo el sapo puede saltar 10 (o menos) piedras de un salto, generamos un grafo con todos los nodos, y luego agregamos las aristas de posible salto entre cada nodo, que como maximo podrián ser de 20.
+Una vez generado el escenario, lo unico que queda es mediante el algoritmo DFS buscar el nodo final empezando por el inicio. 
+En cada paso recursivo de la busqueda, marca como visitado el nodo actual, luego comprueba si el salto puede ser directo y termina la busqueda, en caso contrario, debera ir visitando los nodos adyacentes al nodo actual que aun no fueron visitados, de un maximo de 20, haciendo recursion con DFS en cada uno hasta encontrar el nodo final dando por finalizadala busqueda.
+
+La correctitud del algoritmo queda demostrada por el hecho de que ya esta demostrada la correctitud del algoritmo de DFS.
+
+Pseudocodigo:
+-------------
+Resolver(nodos, x, y, p, q){
+
+	si puede saltar de una {listo} //O(1)
+	sino	
+		genero el grafo //O(n)
+		busco con DFS(grafo, inicio, fin) //O(n)
+devuelvo pila con saltos
+
+}
+
+Analisis de Complejidad:
+-----------------------
+
+El algoritmo consta de 2 pasos:
+- Generar el escenario: agregando todos nodos, y uniendo cada nodo con aristas solamente si el salto es posible. O(n)
+- Buscar con DFS desde el inicio hasta el fin: O(|V| + |E|) = O(n + 20n) = O(n)
+
+Quedando como complejidad final O(n), tal como fue pedida. 
+
+La cota minima de omega(1) se da en caso de que el salto pueda ser directo.
+
+Conclusiones:
+------------
+
