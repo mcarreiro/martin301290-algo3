@@ -108,4 +108,31 @@ public class Ej3 {
 		System.out.println("");
 		return res.trim();
 	}
+
+	public boolean ProbarSolucion(String[] nodos, int x, int y, int p, int q , Stack<String> solucion){
+		if(solucion == null)
+			return true;
+		if( x != Integer.parseInt(solucion.pop()))
+			return false;
+		int anterior = x;
+		while(solucion!= null && !solucion.isEmpty()){	
+			int actual = Integer.parseInt(solucion.pop());
+			if(actual == y) break;
+			int dif = Math.abs(actual - anterior);
+			if(!(dif >=p && dif <= q))	return false;
+			boolean esta = false;
+			for(int i = 0; i < nodos.length; i++ )
+			{
+				if(Integer.parseInt(nodos[i]) == actual)
+				{
+					esta = true;
+					break;
+				}
+			}
+			if(!esta) return false;
+			anterior = actual;
+		}
+		return true;
+		
+	}
 }

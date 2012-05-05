@@ -27,8 +27,11 @@ public class TestEj3  extends TestCase {
 			for(int j=0;j<instancias.length;j++){
 				String[] posicion = instancias[j].trim().split(" ");
 				int x = Integer.parseInt(posicion[0]);
-				int y = Integer.parseInt(posicion[1]);	
-				String cadena = ej3.ImprimirPila(ej3.Resolver(nodos, x, y, p, q));
+				int y = Integer.parseInt(posicion[1]);
+				Stack<String> resul = ej3.Resolver(nodos, x, y, p, q);
+				if(resul != null)
+					assertEquals(true, ej3.ProbarSolucion(nodos, x, y, p, q, (Stack<String>)resul.clone()));
+				String cadena = ej3.ImprimirPila(resul);
 				result+= cadena + ";";
 				estadistica+=cadena + " - Ciclos: "+ ej3.ciclos_DFS + ";";
 
