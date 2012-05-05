@@ -3,7 +3,7 @@ package Ejercicios;
 import java.util.*;
 
 public class Ej1 {
-	public int resolver(int energia, int capacidad, ArrayList< Integer > pisos){
+	public int resolver(int capacidad, int energia, ArrayList< Integer > pisos){
 		
 		int totalPersonas = SumaTotalPersonas(pisos);
 		return BusquedaBinariaPersonas(0,totalPersonas, totalPersonas,energia,capacidad,pisos);
@@ -61,7 +61,7 @@ public class Ej1 {
 		noLevante = 0,
 		restaDeCapacidad = capacidad;		
 			for(;piso >= 0;piso--){
-				if(TengoEnergiaParaLlegar(energia, piso)){ //Si tengo energia para llegar a ese piso...
+				if(TengoEnergiaParaLlegar(energia, piso) && pisos.get(piso) > 0){ //Si tengo energia para llegar a ese piso y hay alguien a quien rescatar...
 					energia = energia - (piso+1)*2;
 					if(pisos.get(piso) > capacidad){ //Si hay mas gente en el piso que la capacidad, es decir, lleno el ascensor.
 						cuantoLevante = cuantoLevante + capacidad; //Sumo lo que levante
@@ -99,23 +99,6 @@ public class Ej1 {
 		
 		return (cuantoLevante >= personasABuscar); //Levanté la cantidad que queria?
 	}
-
-	
-	/*public int resolverIterativo(int energia, int capacidad, ArrayList< Integer > pisos){
-		int maxCantGente;
-		
-		if() //
-		
-		
-		maxCantGente = max(resolverIterativo(si quedo gente mi piso si no el siguiente, levante n (si ), energia), resolverIterativo(siguiente piso total no levanto, 0, energia)
-				si pasÃ© por el piso(restar 2 a energia)
-		
-		
-		
-	}*/
-	
-	
-	
 }
 
 
