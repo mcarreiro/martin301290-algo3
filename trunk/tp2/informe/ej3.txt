@@ -5,9 +5,10 @@ La idea base del problema es encontrar el camino desde un vertice a otro de un g
 
 Solucion:
 ---------
-La solución propuesta, , al ser un problema común de grafos, es buscar el camino de un vertice a otro usando DFS. Para esto, sabiendo que como maximo el sapo puede saltar 10 (o menos) piedras de un salto, generamos un grafo con todos los nodos, y luego agregamos las aristas de posible salto entre cada nodo, que como maximo podrián ser de 20.
+La solución propuesta, al ser un problema común de grafos, es buscar el camino de un vertice a otro, y como no es necesario que sea el camino minimo usamos DFS (Busqueda en profundida), priorizando complejidad lineal en vez del mejor camino. Para esto, sabiendo que como maximo el sapo puede saltar 10 (o menos) piedras de un salto, generamos un grafo con todos los nodos, y luego agregamos las aristas de posible salto entre cada nodo, que como maximo podrián ser de 20.
 Una vez generado el escenario, lo unico que queda es mediante el algoritmo DFS buscar el nodo final empezando por el inicio. 
-En cada paso recursivo de la busqueda, marca como visitado el nodo actual, luego comprueba si el salto puede ser directo y termina la busqueda, en caso contrario, debera ir visitando los nodos adyacentes al nodo actual que aun no fueron visitados, de un maximo de 20, haciendo recursion con DFS en cada uno hasta encontrar el nodo final dando por finalizadala busqueda.
+En cada paso recursivo de la busqueda, marca como visitado el nodo actual, luego comprueba si el salto puede ser directo y termina la busqueda, en caso contrario, debera ir visitando los nodos adyacentes al nodo actual que aun no fueron visitados, de un maximo de 20, haciendo recursion con DFS en cada uno hasta encontrar el nodo final dando por finalizada la busqueda.
+Es decir, usamos la esencia del algoritmo de DFS, pero lo modificamos para optimizar en ciertos saltos donde el movimiento puede ser directo sin nec
 
 La correctitud del algoritmo queda demostrada por el hecho de que ya esta demostrada la correctitud del algoritmo de DFS.
 
@@ -26,9 +27,9 @@ devuelvo pila con saltos
 Analisis de Complejidad:
 -----------------------
 
-El algoritmo consta de 2 pasos:
-- Generar el escenario: agregando todos nodos, y uniendo cada nodo con aristas solamente si el salto es posible. O(n)
-- Buscar con DFS desde el inicio hasta el fin: O(|V| + |E|) = O(n + 20n) = O(n)
+El algoritmo consta de 2 etapas:
+- Primero se genera el grafo, agregando todas las piedras como nodos, y uniendo cada nodo con aristas solamente si el salto es posible. Al haber n nodos, y por cada nodo un maximo de 20 aristas (ya que el salto maximo puede ser de 10 piedras cualquier "dirección"), la complejidad final y sacando las constantes quedaría en O(n)
+- Segundo, se debe buscar con el algoritmo de DFS desde el inicio hasta el fin, sin repetir los nodos ya visitados: O(|V| + |E|) = O(n + 10n) = O(n)
 
 Quedando como complejidad final O(n), tal como fue pedida. 
 
@@ -36,4 +37,5 @@ La cota minima de omega(1) se da en caso de que el salto pueda ser directo.
 
 Conclusiones:
 ------------
-
+Grafico:
+http://itools.subhashbose.com/grapher/index.php?x%5B%5D=0&y%5B%5D=0&x%5B%5D=1&y%5B%5D=1&x%5B%5D=2&y%5B%5D=2&x%5B%5D=3&y%5B%5D=8&x%5B%5D=4&y%5B%5D=16&x%5B%5D=5&y%5B%5D=23&x%5B%5D=6&y%5B%5D=32&x%5B%5D=7&y%5B%5D=35&x%5B%5D=12&y%5B%5D=75&x%5B%5D=13&y%5B%5D=89&x%5B%5D=14&y%5B%5D=103&x%5B%5D=23&y%5B%5D=200&x%5B%5D=24&y%5B%5D=230&x%5B%5D=30&y%5B%5D=320&x%5B%5D=31&y%5B%5D=360&submit=Plot+Graph&w=500&h=400&n=&dtsz=Auto&title=&shax=on&xlbl=Fichas&axx=on&aspx=1&ylbl=Ciclos&axy=on&aspy=Auto&sh_lbl_hv=on&nfurl=on&nStrip=on
