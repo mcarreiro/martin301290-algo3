@@ -1,0 +1,23 @@
+\select@language {spanish}
+\contentsline {section}{\numberline {1}Introducci\'on}{3}
+\contentsline {section}{\numberline {2}Problema 2}{4}
+\contentsline {subsection}{\numberline {2.1}Enunciado}{4}
+\contentsline {subsection}{\numberline {2.2}Soluci\'on}{4}
+\contentsline {subsection}{\numberline {2.3}Pseudoc\'odigo}{4}
+\contentsline {subsection}{\numberline {2.4}Analis\IeC {\'\i }s de complejidad}{4}
+\contentsline {subsection}{\numberline {2.5}Tests y Gr\IeC {\'a}ficos}{5}
+\contentsline {subsection}{\numberline {2.6}Conclusiones}{6}
+\contentsline {section}{\numberline {3}Problema 2}{7}
+\contentsline {subsection}{\numberline {3.1}Enunciado}{7}
+\contentsline {subsection}{\numberline {3.2}Soluci\'on}{7}
+\contentsline {subsection}{\numberline {3.3}Pseudoc\'odigo}{7}
+\contentsline {subsection}{\numberline {3.4}Analis\IeC {\'\i }s de complejidad}{7}
+\contentsline {subsection}{\numberline {3.5}Tests y Gr\IeC {\'a}ficos}{8}
+\contentsline {subsection}{\numberline {3.6}Conclusiones}{9}
+\contentsline {section}{\numberline {4}Problema 2}{10}
+\contentsline {subsection}{\numberline {4.1}Enunciado}{10}
+\contentsline {subsection}{\numberline {4.2}Soluci\'on}{10}
+\contentsline {subsection}{\numberline {4.3}Pseudoc\'odigo}{10}
+\contentsline {subsection}{\numberline {4.4}Analis\IeC {\'\i }s de complejidad}{10}
+\contentsline {subsection}{\numberline {4.5}Tests y Gr\IeC {\'a}ficos}{11}
+\contentsline {subsection}{\numberline {4.6}Conclusiones}{12}
