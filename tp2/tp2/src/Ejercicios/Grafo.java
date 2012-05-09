@@ -12,10 +12,16 @@ public class Grafo {
 
 	private Hashtable<String,Vertice> Vertices;
 	private ArrayList<Arista> aristas;
+	public int ciclos;
 
 	public Grafo() {
 		this.Vertices = new Hashtable<String, Grafo.Vertice>();
 		this.aristas = new ArrayList<Grafo.Arista>();
+		this.ciclos = 0;
+	}
+	
+	public int getCiclos(){
+		return this.ciclos;
 	}
 	
 	public String toString() {
@@ -51,7 +57,7 @@ public class Grafo {
 	
 	public void agregarArista(Vertice v1, Vertice v2, Integer peso) {
 		v1.agregarArista(v2, peso);
-		v2.agregarArista(v1, peso);
+		//v2.agregarArista(v1, peso);
 		this.aristas.add(new Arista(v1, v2, peso));
 	}	
 	
@@ -86,6 +92,7 @@ public class Grafo {
 				v2.marcarVisitado();
 				aristas.addAll(v2.getAristas());
 			}
+			g.ciclos++;
 		}
 		return g;
 	}

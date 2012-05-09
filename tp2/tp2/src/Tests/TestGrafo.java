@@ -31,7 +31,7 @@ public class TestGrafo extends TestCase {
 		assertTrue(!v.fueVisitado());
 	}
 
-	/*
+	
 	public void testInsertarVertice() {
 		Grafo g = new Grafo();
 		g.insertarVertice("Ciudad 1", "1");
@@ -46,37 +46,20 @@ public class TestGrafo extends TestCase {
 		Vertice v = g.obtenerVertice("Ciudad 1");
 		assertEquals(v.getDato(), "1");		
 	}
-
-	public void testAgregarArista() {
-		Grafo g = new Grafo();
-		g.insertarVertice("C1", "1");
-		g.insertarVertice("C2", "1");
-		g.agregarArista("C1", "C2", new Integer(20));
-		Vertice v1, v2;
-		v1 = g.obtenerVertice("C1");
-		v2 = g.obtenerVertice("C2");
-		// existe un vertice adyacente a c1, que es c2
-		assertTrue(v1.getVerticesAdyacentes().containsKey("C2"));
-		// existe un vertice adyacente a c2, que es c1
-		assertTrue(v2.getVerticesAdyacentes().containsKey("C1"));
-		// el peso de <c1,c2> es 20
-		assertEquals(v1.getVerticesAdyacentes().get("C2"), new Integer(20));
-		// el peso de <c2,c1> es 20
-		assertEquals(v2.getVerticesAdyacentes().get("C1"), new Integer(20));
-	}
 	
 	public void testGetAristas() {
 		Grafo g = new Grafo();
-		g.insertarVertice("C1", "1");
-		g.insertarVertice("C2", "1");
-		g.insertarVertice("C3", "3");
-		g.agregarArista("C1", "C2", new Integer(20));
-		g.agregarArista("C1", "C3", new Integer(30));
-		g.agregarArista("C2", "C3", new Integer(15));
-		PriorityQueue<Arista> cola = g.getAristas();
-		assertEquals(cola.size(), 3);
+		Vertice v1 = g.insertarVertice("C1", "1");
+		Vertice v2 = g.insertarVertice("C2", "1");
+		Vertice v3 = g.insertarVertice("C3", "3");
+		g.agregarArista(v1, v2, new Integer(20));
+		g.agregarArista(v1, v3, new Integer(30));
+		g.agregarArista(v2, v3, new Integer(15));
+		assertEquals(g.obtenerVertice("C1").getAristas().size(), 2);
+		assertEquals(g.obtenerVertice("C2").getAristas().size(), 2);
+		assertEquals(g.obtenerVertice("C3").getAristas().size(), 2);
 	}
-	*/
+	
 	public void testCrearAgm() {
 		Grafo g = new Grafo();
 		g.insertarVertice("C1", "1");
@@ -108,8 +91,8 @@ public class TestGrafo extends TestCase {
 		g.agregarArista(g.obtenerVertice("C"), g.obtenerVertice("E"), 5);
 		g.agregarArista(g.obtenerVertice("B"), g.obtenerVertice("E"), 7);
 		g.agregarArista(g.obtenerVertice("B"), g.obtenerVertice("C"), 8);
-		//@SuppressWarnings("unused")
-		//Grafo agm = g.getAgm();
+		@SuppressWarnings("unused")
+		Grafo agm = g.getAgm();
 	}
 	
 }
