@@ -1,12 +1,21 @@
-\section{Problema 2}
+\section{Problema 1}
 
 \subsection{Enunciado}
-El enunciado nos plantea una situación en donde tenemos $n$ localidades conectadas entre si, mediante uno o más enlaces telefónicos. La empresa desea que la conectividad entre todas las ciudades nunca se pierda, por lo que está interesada en invertir en cableado subterraneo indestructible. El precio de conectar las distintas localidades varía según las mismas, por lo que la empresa nos pide que hallemos la forma de conectar todas las ciudades y que ninguna quede incomunicada, de forma de que la inversión en éste nuevo cableado subterraneo sea mínima.
+El enunciado nos plantea una situación en donde tenemos un edificio con n pisos y personas en cada piso que quiere ir a planta baja. Para poder hacerlo, el edificio provee un 
+ascensor que deberá buscar a las personas para poder bajarlas. 
+Este ascensor posee energía y capacidad limitada que no le permite recorrer siempre todos los pisos y levantar todas las personas, por lo tanto queremos maximizar la cantidad
+de personas a descender del edificio dado la cantidad de personas por piso, su energía y la capacidad.
 
 \subsection{Soluci\'on}
-l presentarnos éste problema, inmediatamente pensamos que era posible reprentarlo mediante un problema de grafos. El mismo representaría todo la red de conectividad de la empresa telefónica, los vértices del mismo representarían las localidades y las aristas entre los distintos nodos representarían el costo del cableado subterraneo entre las ciudades que uniera la misma.
-Dicho ésto, el problema se reducía, entonces, a hallar un grafo cuyas aristas permitan ir de una ciudad a cualquier otra del grafo, y además, a que esas aristas tengan un costo mínimo de construcción. En otras palabras, necesitamos un algoritmo que nos calcule, dado un grafo cualquiera, el arbol generador mínimo (AGM). El agm es un grafo que contiene los mismo vértices que el original, pero sólo contiene v-2 aristas (siendo v la cantidad de vértices), que unen todo el grafo y cuyo peso total es mínimo.
-Para el problema, hemos implementado una clase propia de Grafo, representanda por una lista de adyacencia, y utilizado el conocido y demostrado Algoritmo de Prim para generar el AGM. El mismo consiste en, dado un grafo cualquiera, agarrar un vértice del mismo al azar, y agregarlo al AGM (que originalmente no tenía ningún vértice ni aristas). Luego, agregamos al grafo la arista de menor peso que conecte al vértice recién insertado con un vértice que no esté en el agm. Para ello, agregamos todas las aristas del vértice en una cola de prioridad, y vamos desencolando hasta que encontremos una arista que tenga un extremo en el agm y otro no (es decir, tengo un sólo vértice en el árbol). Una vez que encontramos dicha arista, agregamos el vértice que no estaba al AGM y también la arista. El proceso debe ser repetido, de la misma forma, con todos los vértices del grafo, es decir, hasta que la cantidad de vértices que hay en el árbol sea la misma que había en el grafo original. Ésta es la forma en que se describe el algoritmo de prim y la forma en que actúa nuestro algoritmo, por lo que podemos decir que la implementación realizada se corresponde con dicho algorítmo.
+La solución planteada utiliza Programación Dinámica a través de decisiones. Es decir, planteamos el problema de forma tal que en vez de maximizar la cantidad de personas que 
+se pueden descender, encontramos el máximo valor posible que va a estar ubicado entre cero y la cantidad total de personas en el edificio.\\
+A continuación se explicará cómo se resolvió el problema:\\
+Primero obtenemos la cantidad total de personas recorriendo el edificio dado, y buscaremos ese dicho máximo valor.
+Para ello, utilizaremos la conocida búsqueda binaria en la cantidad de personas en el edificio, hasta encontrar el valor tal que el siguiente no sea posible levantarlo y sin embargo el número que estoy evaluando si.\\
+Por lo tanto lo único que queda es ver si se puede levantar ese valor obtenido por parámetro
+
+
+Para solucionar el problema pensamos en crear una función que reciba todos los datos del enunciado (capacidad, energia, pisos y cantidad de personas en cada uno) mas un entero que represente si es posible levantar esa cantidad de personas. Osea la funcion devolvería un boleean. Entonces lo que hacemos es averiguar cuanta gente hay en total en el edificio y mediante un busqueda binaria (entre 0 y el total) le vamos preguntando a la función si es posible levantar esa cantidad de gente hasta encontrar el punto de quiebre (cuando es true y el siguiente valor ya es false) o el total y finalmente devolvemos el valor que encontramos.
 
 \subsection{Pseudoc\'odigo}
 En código del ejercicio básicamente hace una cosa: lee el archivo de entrada, y procesa las lineas y va creando las distintas instancias del ejercicio. La lógica del problema está toda delegada en la clase Grafo, que es la que se encarga de modelar las localidades y sus enlaces (el grafo en sí), y luego, una vez modelado, de crear el propio AGM. El agm está implementado a partir del algoritmo de prim, que busca para cada vertice nuevo agregado, la arista de menor peso que lo conecte con un vertice que no esté en el grafo y la agrega.
