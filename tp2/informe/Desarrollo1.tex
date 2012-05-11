@@ -8,17 +8,16 @@ de personas a descender del edificio dado la cantidad de personas por piso, su e
 
 \subsection{Soluci\'on}
 La solución planteada utiliza Programación Dinámica a través de decisiones. Es decir, planteamos el problema de forma tal que en vez de maximizar la cantidad de personas que 
-pueden descender, encontramos el máximo valor posible que va a estar ubicado entre cero y la cantidad de personas total en el edificio.\\
+pueden descender, encontramos el máximo valor posible que va a estar ubicado entre cero y la cantidad de personas totales en el edificio.\\
 A continuación se explicará cómo se resolvió el problema:\\
-Primero obtenemos la cantidad total de personas recorriendo el edificio dado, y buscaremos ese dicho máximo valor.
-Para ello, utilizaremos la conocida búsqueda binaria en la cantidad de personas en el edificio, hasta encontrar el valor tal que el siguiente no sea posible levantarlo y sin embargo el número que estoy evaluando si.
+Primero recorreremos todos los pisos del edificio dado para obtener la cantidad total de personas en el edificio, para luego buscar el máximo valor de personas que podremos bajar.
+Para ello, utilizaremos la conocida búsqueda binaria en la cantidad de personas en el edificio, hasta encontrar el valor más alto de personas que se pueda levantar, tal que el siguiente no sea posible levantarlo pero el número que estoy evaluando si.
 Por lo tanto lo único que resta, es ver si se puede levantar esa cantidad de personas dada la capacidad del ascensor, su energía y el edificio. \\
-Para poder levantar esas personas buscaremos el piso mínimo al que necesitamos ir para poder levantar la cantidad de personas requeridas$^*$. Recorreremos el edificio desde ese piso mínimo hacia abajo, en caso de
-ser posible llegar hasta él y poder volver a descender, levantando la máxima cantidad de personas de cada piso en el camino hasta llenar la capacidad. Una vez completada, descenderemos a los pasajeros y volveremos a repetir el proceso,
+Para comprobar que se puedan levantar cierta cantidad de personas requeridas buscaremos el piso mínimo al que necesitaremos ir $^*$. Recorreremos el edificio desde ese piso mínimo hacia abajo, en caso de ser posible llegar hasta él y poder volver a descender, levantando la máxima cantidad de personas de cada piso en el camino hasta llenar la capacidad. Una vez completada, descenderemos a los pasajeros y volveremos a repetir el proceso,
 para el mismo piso en caso de que haya quedado gente, o el siguiente en caso de haberlo vaciado o no poder llegar por poca energía, hasta que levantemos la cantidad requerida (caso que devolveremos que se puede) o hasta que nos quedemos sin energía (caso que devolveremos que no se puede). Tener en cuenta que el piso mínimo elegido puede dejarnos en la parte inferior del edificio con más personas de las requeridas. Entonces al momento de levantar puede pasar que no levantemos gente y que sin embargo, descendamos la cantidad requeridad personas.\\
 Para la demostración de la resolución, explicaremos por qué el piso mínimo elegido previamente es el correcto, y por qué la estrategia de levantar de arriba hacia abajo es verdadera.
 Este piso mínimo es la mejor opción ya que si subimos más pisos estaríamos utilizando energía para levantar la misma cantidad de gente que podríamos encontrar en los pisos
-inferiores, y no se puede ir más abajo porque si no, no tenemos la cantidad de gente necesaria para poder levantar el valor pedido.\\
+inferiores, y, no se puede ir más abajo porque si no, no tendríamos la cantidad de gente necesaria para poder levantar el valor pedido.\\
 Definimos el mundo de las estrategias, como el conjunto de estrategias posibles y definimos estrategia como el método por el cual se levanta gente. Cómo no nos interesa
 la energía utilizada, ya que solo queremos ver si puede levantar la cantidad de personas mencionada, y no la optimalidad de energía, una estrategia estará conformada por la cantidad
 de personas que levanta en cada piso. De este mundo de estrategias, tomaremos solo aquellas que su piso más alto en el cual levantan personas es el nuestro, y que
@@ -28,7 +27,7 @@ forma que consigamos nuestra estrategia. Vamos a dividir a las estrategias verda
 El caso de que E levante mientras sube, sabemos ya que el piso máximo de E es el mismo que 
 el nuestro, que podemos ir hasta el piso máximo y al bajar vamos a pasar por los mismos pasos, entonces se terminan levantando la misma cantidad de personas. Puede llenarse antes en los pisos superiores, pero siempre vamos a poder
 llenar con los pisos que E llenó.\\
-Para el otro caso, el caso desordenado, podremos ubicar la forma que recorre el edificio tal que levante de forma ascendente. Esto es ya que si el edificio pasa por los pisos 1 hasta max pero en el medio va agarrando gente
+Para el otro caso, el caso desordenado, podremos ubicar la forma que recorre el edificio tal que levante de forma ascendente. Esto es ya que si el edificio pasa por los pisos 1 hasta el máximo pero en el medio va agarrando gente
 desordenadamente, podemos permutar el método y que vaya levantando mientras ascende. \\
 Por lo tanto tenemos que el segundo caso puede llevarse al primero, y el primero hacia el nuestro. Y como las estrategias que tomamos son las que andaban, entonces la nuestra también anda\\
 
@@ -74,7 +73,7 @@ Por lo tanto tenemos que el segundo caso puede llevarse al primero, y el primero
 
 
 \subsection{Analisís de complejidad}	
-Para averiguar cuanta gente hay en todo el edificio tenemos que recorrer todo el vector 'pisos' e ir sumando la cantidad de gente en cada piso. Eso nos cuesto O(n) donde n es la cantidad de pisos. Luego hacemos una búsqueda binaria sobre la cantidad total de gente que mediante la función sePuedeLevantar busca el máximo de gente que es posible cargar. La complejidad de la búsqueda binaria es de O(log cantGente) (esto es sabido, porque ya lo vimos en algoritmos y estructura de datos 2) y la complejidad de la función sePuedeLevantar en el peor caso (sería cuando tiene que irse hasta el último piso para poder levantar la cantidad de gente solicitada y tiene energía suficiente para levantarlos a todos) es de: \\
+Para averiguar cuanta gente hay en todo el edificio tenemos que recorrer todo el vector 'pisos' e ir sumando la cantidad de gente en cada piso. Eso nos cuesto O(n) donde n es la cantidad de pisos. Luego hacemos una búsqueda binaria sobre la cantidad total de gente que mediante la función sePuedeLevantar busca el máximo de gente que es posible cargar. La complejidad de la búsqueda binaria es de O(log (cantGente)) (esto es sabido, porque ya fue visto en la materia de Algoritmos y Estructura de Datos II) y la complejidad de la función sePuedeLevantar en el peor caso (sería cuando tiene que irse hasta el último piso para poder levantar la cantidad de gente solicitada y tiene energía suficiente para levantarlos a todos) es de: \\
 	O( $\sum\limits_{i=0}^{n} { ( \lceil (pisos[i]/capacidad) \rceil  + i}$ ) ) \\
 Esto es porque por cada piso al que voy tengo que ir tantas veces tal que levante el total de gente de ese piso (eso es $\lceil$pisos[i]/capacidad$\rceil$) y luego en caso que me haya sobrado espacio voy recorriendo todos los pisos inferiores para llenar la capacidad restante.
 Finalmente la complejidad total del ejercicio nos queda:\\
