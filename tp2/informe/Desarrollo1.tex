@@ -80,15 +80,32 @@ O( n + Log(g) * $\sum\limits_{i=0}^{n} { ( \lceil (pisos[i]/capacidad) \rceil  +
 Donde n es la cantidad total de pisos y g la cantidad total de gente en todo el edificio.
 
 \subsection{Tests y Gráficos}
-Con respecto a los tests realizados, los mismos no se hicieron en cuanto a la complejidad (ya que al utilizar estructuras primitivas de java, podemos asegurar que la complejidad de cada una de sus operaciones es la que aparece en la documentación de ellas y por tanto, es la que detallamos en el apartado anterior), sino en cuanto a la cantidad de ciclos que realiza cada solución (más precisamente, la creación del árbol generador mínimo) para distintas instancias, de acuerdo a la cantidad de vértices (localidades) y aristas (enlaces) que posee cada una.
-Como podemos apreciar en los siguientes gráficos, la cantidad de ciclos, para grafos en donde la cantidad de aristas es la misma, es directamente proporcional a la cantidad de vértices que contenga el mismo (figura 1). Es cierto que en algunos casos ésto no se cumple pero, en el caso promedio, a más cantidad de vértices, con igual cantidad de aristas, más ciclos tendrá que hacer nuestro algoritmo para encontrar el AGM válido. Los casos extremos serían aquellos en donde las aristas se insertan ordenados de la misma forma que los leerá nuestro algoritmo, donde la cantidad de ciclos se corresponde con la cantidad de vértices. Por el contrario, el peor caso se da cuando hay muchas aristas de 2 vértices que ya fueron visitados, de menor peso de aquellas que contengan 1 vértice visitado y otro sin visitar. De ésta forma, el algoritmo hará tantos ciclos como aristas tenga el vértice para, recién en la último, procesar el vértice y agregarlo al AGM.
+En los test quisimos demostrar que cuanto menos capacidad tenga el ascensor (siempre y cuando tenga energía suficiente) mas ciclos va a requerir la resolución. Y por otro lado que la energía es un factor limitante ya que cuanto menos energía tenga el ascensor no solamente va a levantar menos gente sino que ademas va a ciclar menos.
+Para los dos gráficos utilizamos el mismo edificio (ya que para lo que queremos demostrar no necesitamos variar el edificio), que es el siguiente: \\
+
+PISO 12 | 45 | \\
+PISO 11 | 20 | \\
+PISO 10 | 60 | \\
+PISO 9  | 90 | \\
+PISO 8  | 80 | \\
+PISO 7  | 45 | \\
+PISO 6  | 8  | \\
+PISO 5  | 38 | \\
+PISO 4  | 46 | \\
+PISO 3  | 66 | \\
+PISO 2  | 11 | \\
+PISO 1  | 4  | \\
+
+En el siguiente gráfico dejamos fija la energía en un valor muy grande (9700) para que la mimsa no sea un factor limitante.Aquí podemos observar como disminuye la cantidad de ciclos a medida que aumenta la capacidad. Esto es por el factor (pisos[i]/capacidad) que mencionamos en la complejidad, por trivialidad matemática ese factor aumenta a medida q disminuye la capacidad. \\
 \begin {center}
-\includegraphics[width=8cm]{./graficos/grafico_vfijo.png}
+\includegraphics[width=8cm]{./graficos/grafico_ej1_variaCapacidad.png}
 % grafico.eps: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=50 50 410 302
 \end {center} 
-Por otro lado, y con respecto a la figura 2, donde la cantidad de aristas está fijo, vemos que la cantidad de ciclos que se llevan a cabo es netamente aleatorio, ya que, de acuerdo a cómo estén distribuidas las distintas aristas y sus pesos, es posible crear el AGM en n pasos, siendo n la cantida de vértices, o bien, en n x e(n), siendo e(n) la cantidad de aristas de n. El primer caso se daría sólo cuando el grafo que analizamos posee aristas minimas sin descubrir en todos los pasos, mientras que el peor caso, que sería el de recorrer todas las aristas del vértice, es el mismo que analizamos en el párrafo anterior.
+
+En el siguiente gráfico dejamos fija la capacidad en un valor chico (5) para demostrar como la energía limita la cantidad de ciclos. Decimos que limita ya que no sólo no nos restringe la cantidad de personas a levantar sino que ademas descartamos muchos casos al resultar imposibles por esta cuestión energética.\\
+Claramente podemos observar como los ciclos aumentan al tener mas energía. Notar que también aumenta porque hay mucha gente para levantar y poca capacidad, podría pasar que hubiese un solo piso con 1 persona y en caso, por ejemplo, la energía acotaría muy poco los ciclos, ya que se requieren pocos ciclos para levantar la máxima cantidad de gente.
 \begin {center}
-\includegraphics[width=8cm]{./graficos/grafico_efijo.png}
+\includegraphics[width=8cm]{./graficos/grafico_variaEnergia.png}
 % grafico.eps: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=50 50 410 302
 \end {center} 
 
