@@ -13,6 +13,7 @@ Para nuestra solución utilizamos el algoritmo tal cual es, con la unica optimiz
 
 La demostración de la correctitud del algoritmo se sustenta sobre el hecho de que el algoritmo basicamente se encarga de generar un grafo con todos los nodos y aristas de posible salto con los datos de entrada, paso necesario para poder resolver la instancia, para luego, realizar una búsqueda entre dos nodos del grafo con el algoritmo de \textbf{DFS} (Busqueda en profundida), la cual su correctitud ya esta demostrada. 
 
+Siendo G mi grafo generado a partir de los datos de entrada, el algoritmo recorrerá recursivamente la componente conexa perteneciente al nodo del cual se inicia la búsqueda, por lo tanto para que exista un camino, el nodo inicial y final deberan pertenecer a la misma componente conexa, es decir, que en caso de ser un grafo conexo (que ninguna piedra esté fuera del rango de distancias de posible salto), siempre habrá una solución para todo par de nodos. El caso base será cuando el salto entre piedras pueda ser directo, caso que siempre tendrá lugar cuando los dos nodos pertenezcan a la misma componente conexa, pero en caso de que no pertenezcan, en el paso recursivo, recorrerá en profundidad todos los nodos adyacentes de cada nodo del grafo de la componente conexa del nodo inicial llegando al resultado de que no existe un camino entre el par de nodos.
 
 \subsection{Pseudoc\'odigo}
 \begin{codebox}
@@ -53,14 +54,22 @@ Primero se genera el grafo, agregando todas las piedras como nodos, y uniendo ca
 Segundo, se debe buscar el camino, mediante  el algoritmo de DFS, partiend desde la piedra de inicio hasta la final, sin repetir los nodos ya visitados, con lo cual, al ser la complejidad del algoritmo: O($|V|$ + $|E|$), en nuestro caso pasaria a ser O(n + 10n) = O(n), debido a que las aristas de cada nodo estan acotadas por el rango de distancia de saltos que puede realizar, que no pueden ser mayor a 10\\  
 %\end{itemsize}
 Quedando como complejidad final O(n), tal como fue pedida. \\
-\textit{Observación:} La cota minima de $\Omega$ $(1)$ se da en caso de que el salto pueda ser directo.
+\textit{Observación:} La cota mínima de $\Omega$ $(1)$ se da en caso de que el salto pueda ser directo.
 
 \subsection{Tests y Gráficos}
-En el siguiente gráfico, con respecto a la cantidad de piedras, se puede observar mediante la cantidad de ciclos que realizó el algoritmo para encontrar una solución, que la complejidad temporal es lineal a la cantidad de piedras. 
+En el siguiente gráfico, con respecto a la cantidad de piedras, se puede observar mediante la cantidad de ciclos totales que realizó el algoritmo para encontrar una solución, que la complejidad temporal es lineal a la cantidad de piedras:
 \begin {center}
 \includegraphics[width=15cm]{./graficos/grafico_ej3_0.png}
 % grafico.eps: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=50 50 410 302
 \end {center} 
+
+Además, enfocandonos en el algoritmo de búsqueda DFS que realizamos luego de generar nuestro grafo, se puede observar como también la complejidad es lineal en relación a la cantidad de piedras:
+\begin {center}
+\includegraphics[width=15cm]{./graficos/grafico_ej3_1.png}
+% grafico.eps: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=50 50 410 302
+\end {center} 
+
+Con lo cual, mediante un cantidad limitada de tests, se puede observar que el algoritmo propuesto para resolver el problema se comporta de la manera correcta y con la complejidad pedida.
 
 \subsection{Conclusiones}
 Como conclusión al problema dado en relación con la complejidad pedida, se pudo modelar un grafo, a partir de un simulacro de un sapo llegar desde una piedra a otra, saltando entre otras piedras a diferentes distancias con saltos limitados entre rangos, de tal forma de encontrar un camino posible entre nodos, de modo tal que se priorice la performance temporal del algoritmo en vez de una solución más eficiente, ya que en caso contrario, si se quiere buscar un camino mínimo, la complejidad aumentaría considerablemente. Sin embargo, pudimos demostrar que además de que el algoritmo cumple lo pedido, para diferentes instancias con rangos, piedras y caminos variados, el algoritmo se suele comportar de la misma manera con complejidad siempre lineal a la cantidad de piedras que tenga la instancia, y esto es principalmente debido al algoritmo de búsqueda en profundidad usado que como máximo visitará todos los n nodos del grafo. 
