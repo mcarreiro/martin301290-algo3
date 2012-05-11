@@ -41,40 +41,62 @@ public class TestEj2 extends TestCase {
 	 * A partir de un archivo con instancias aleatorias, verifico la eficiencia de la solucion
 	 * obtenida
 	 */
-	public void testAleatorios1() {
+	
+	public void testAristasFijas() {
 		java.io.File currentDir = new java.io.File("");
 		for(int j=10; j < 41; j=j+10){
-			String input = currentDir.getAbsolutePath()+ "/enunciado/graficos_ej2eFijo" + new Integer(j).toString() + ".in";
-			String output = currentDir.getAbsolutePath()+ "/enunciado/graficos_ej2eFijo" + new Integer(j).toString() + ".out";
-			ArrayList<String> inputs = LeerArchivos.leer(input);
-			String[] out = new String[inputs.size()/2];
-			int aux = 0;
-			for(int i=0; i < inputs.size(); i+=2){
-				//out[i] = inputs.get(i);
-				Grafo g = Ej2.crearGrafoDesdeInstancia(inputs.get(i + 1));
-				Grafo agm = g.getAgm();
-				out[aux] = inputs.get(i) + " " + new Integer(agm.getCiclos()).toString();
-				aux++;
+			int[] prom = new int[100];
+			String[] vert = new String[100];
+			int inpSize = 0;
+			for(int ins = 1; ins < 11; ins++) {
+				String input = currentDir.getAbsolutePath()+ "/enunciado/instEFijos_" + new Integer(j).toString() + "-" + new Integer(ins).toString() + ".in";
+				ArrayList<String> inputs = LeerArchivos.leer(input);
+				int aux = 0;
+				inpSize = inputs.size();
+				for(int i=0; i < inputs.size(); i+=2){
+					Grafo g = Ej2.crearGrafoDesdeInstancia(inputs.get(i + 1));
+					Grafo agm = g.getAgm();
+					prom[aux] += agm.getCiclos();
+					vert[aux] = inputs.get(i);
+					aux++;
+				}
 			}
+			String[] out = new String[inpSize/2];
+			for(int ij =0; ij < inpSize / 2;  ij++) {
+				prom[ij] = prom[ij] / 10;
+				out[ij] = vert[ij] + " " + new Integer(prom[ij]).toString();
+			}
+			String output = currentDir.getAbsolutePath()+ "/enunciado/instEFijos_" + new Integer(j).toString() + ".out";
 			EscribirArchivo.escribir(output, out);
 		}
 	}
 	
-	public void testAleatorios2() {
+	
+	public void testVerticesFijos() {
 		java.io.File currentDir = new java.io.File("");
 		for(int j=10; j < 41; j=j+10){
-			String input = currentDir.getAbsolutePath()+ "/enunciado/graficos_ej2vFijo" + new Integer(j).toString() + ".in";
-			String output = currentDir.getAbsolutePath()+ "/enunciado/graficos_ej2vFijo" + new Integer(j).toString() + ".out";
-			ArrayList<String> inputs = LeerArchivos.leer(input);
-			String[] out = new String[inputs.size()/2];
-			int aux = 0;
-			for(int i=0; i < inputs.size(); i+=2){
-				//out[i] = inputs.get(i);
-				Grafo g = Ej2.crearGrafoDesdeInstancia(inputs.get(i + 1));
-				Grafo agm = g.getAgm();
-				out[aux] = inputs.get(i) + " " + new Integer(agm.getCiclos()).toString();
-				aux++;
+			int[] prom = new int[100];
+			String[] vert = new String[100];
+			int inpSize = 0;
+			for(int ins = 1; ins < 11; ins++) {
+				String input = currentDir.getAbsolutePath()+ "/enunciado/instVFijos_" + new Integer(j).toString() + "-" + new Integer(ins).toString() + ".in";
+				ArrayList<String> inputs = LeerArchivos.leer(input);
+				int aux = 0;
+				inpSize = inputs.size();
+				for(int i=0; i < inputs.size(); i+=2){
+					Grafo g = Ej2.crearGrafoDesdeInstancia(inputs.get(i + 1));
+					Grafo agm = g.getAgm();
+					prom[aux] += agm.getCiclos();
+					vert[aux] = inputs.get(i);
+					aux++;
+				}
 			}
+			String[] out = new String[inpSize/2];
+			for(int ij =0; ij < inpSize / 2;  ij++) {
+				prom[ij] = prom[ij] / 10;
+				out[ij] = vert[ij] + " " + new Integer(prom[ij]).toString();
+			}
+			String output = currentDir.getAbsolutePath()+ "/enunciado/instVFijos_" + new Integer(j).toString() + ".out";
 			EscribirArchivo.escribir(output, out);
 		}
 	}
