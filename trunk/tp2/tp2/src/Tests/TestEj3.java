@@ -33,7 +33,7 @@ public class TestEj3  extends TestCase {
 					assertEquals(true, ej3.ProbarSolucion(nodos, x, y, p, q, (Stack<String>)resul.clone()));
 				String cadena = ej3.ImprimirPila(resul);
 				result+= cadena + ";";
-				estadistica+=cadena +" - #Fichas: " + nodos.length + " - Ciclos: "+ (ej3.ciclos_DFS + ej3.ciclos_esc )+ ";";
+				estadistica+=cadena +" - #Fichas: " + nodos.length + " - Ciclos: "+ (ej3.ciclos_DFS)+ ";";
 
 			}
 			

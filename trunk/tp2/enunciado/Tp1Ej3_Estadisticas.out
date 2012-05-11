@@ -1,117 +1,114 @@
-4 1 6 - #Fichas: 3 - Ciclos: 8
-6 1 4 - #Fichas: 3 - Ciclos: 8
+4 1 6 - #Fichas: 3 - Ciclos: 2
+6 1 4 - #Fichas: 3 - Ciclos: 2
 4 9 - #Fichas: 4 - Ciclos: 1
-4 9 3 - #Fichas: 4 - Ciclos: 14
+4 9 3 - #Fichas: 4 - Ciclos: 4
 4 1 - #Fichas: 4 - Ciclos: 1
 4 8 - #Fichas: 5 - Ciclos: 1
- - #Fichas: 5 - Ciclos: 19
+ - #Fichas: 5 - Ciclos: 4
 4 1 - #Fichas: 5 - Ciclos: 1
 4 7 - #Fichas: 6 - Ciclos: 1
 4 1 - #Fichas: 6 - Ciclos: 1
-4 1 5 10 7 3 - #Fichas: 6 - Ciclos: 29
-1 5 9 4 - #Fichas: 7 - Ciclos: 32
-4 8 1 5 - #Fichas: 7 - Ciclos: 31
-7 1 8 - #Fichas: 7 - Ciclos: 30
-9 1 5 10 - #Fichas: 7 - Ciclos: 31
-1 5 10 - #Fichas: 7 - Ciclos: 30
-1 3 9 15 17 23 - #Fichas: 7 - Ciclos: 30
-1 3 9 - #Fichas: 7 - Ciclos: 22
-1 3 9 15 17 23 - #Fichas: 7 - Ciclos: 30
-9 15 10 - #Fichas: 7 - Ciclos: 26
-9 15 10 - #Fichas: 7 - Ciclos: 26
-1 3 9 - #Fichas: 12 - Ciclos: 59
-1 3 5 7 9 15 - #Fichas: 12 - Ciclos: 68
-1 3 5 7 9 11 13 15 17 23 - #Fichas: 12 - Ciclos: 84
-23 17 11 5 1 - #Fichas: 12 - Ciclos: 61
-21 15 9 - #Fichas: 12 - Ciclos: 59
-9 3 1 5 7 11 13 15 21 - #Fichas: 12 - Ciclos: 78
-11 5 1 3 7 9 13 19 - #Fichas: 12 - Ciclos: 73
+4 1 5 10 7 3 - #Fichas: 6 - Ciclos: 8
+1 5 9 4 - #Fichas: 7 - Ciclos: 4
+4 8 1 5 - #Fichas: 7 - Ciclos: 3
+7 1 8 - #Fichas: 7 - Ciclos: 2
+9 1 5 10 - #Fichas: 7 - Ciclos: 3
+1 5 10 - #Fichas: 7 - Ciclos: 2
+1 3 9 15 17 23 - #Fichas: 7 - Ciclos: 10
+1 3 9 - #Fichas: 7 - Ciclos: 2
+1 3 9 15 17 23 - #Fichas: 7 - Ciclos: 10
+9 15 10 - #Fichas: 7 - Ciclos: 6
+9 15 10 - #Fichas: 7 - Ciclos: 6
+1 3 9 - #Fichas: 12 - Ciclos: 2
+1 3 5 7 9 15 - #Fichas: 12 - Ciclos: 11
+1 3 5 7 9 11 13 15 17 23 - #Fichas: 12 - Ciclos: 27
+23 17 11 5 1 - #Fichas: 12 - Ciclos: 4
+21 15 9 - #Fichas: 12 - Ciclos: 2
+9 3 1 5 7 11 13 15 21 - #Fichas: 12 - Ciclos: 21
+11 5 1 3 7 9 13 19 - #Fichas: 12 - Ciclos: 16
 4 9 - #Fichas: 13 - Ciclos: 1
-10 4 1 6 9 7 15 21 24 27 33 - #Fichas: 13 - Ciclos: 74
-28 21 15 7 1 - #Fichas: 13 - Ciclos: 53
-7 1 6 - #Fichas: 13 - Ciclos: 51
-27 21 15 10 - #Fichas: 13 - Ciclos: 52
+10 4 1 6 9 7 15 21 24 27 33 - #Fichas: 13 - Ciclos: 25
+28 21 15 7 1 - #Fichas: 13 - Ciclos: 4
+7 1 6 - #Fichas: 13 - Ciclos: 2
+27 21 15 10 - #Fichas: 13 - Ciclos: 3
 4 9 - #Fichas: 13 - Ciclos: 1
-10 4 9 15 21 27 33 - #Fichas: 13 - Ciclos: 61
-28 21 15 9 4 10 6 1 - #Fichas: 13 - Ciclos: 58
-7 1 6 - #Fichas: 13 - Ciclos: 51
-27 21 15 10 - #Fichas: 13 - Ciclos: 52
-1 7 12 5 10 4 11 17 23 28 33 - #Fichas: 14 - Ciclos: 79
-1 7 12 5 10 4 - #Fichas: 14 - Ciclos: 67
-10 4 11 - #Fichas: 14 - Ciclos: 63
-1 7 12 - #Fichas: 14 - Ciclos: 63
-24 17 10 15 21 28 - #Fichas: 14 - Ciclos: 83
-24 17 10 15 21 28 33 - #Fichas: 14 - Ciclos: 85
+10 4 9 15 21 27 33 - #Fichas: 13 - Ciclos: 12
+28 21 15 9 4 10 6 1 - #Fichas: 13 - Ciclos: 9
+7 1 6 - #Fichas: 13 - Ciclos: 2
+27 21 15 10 - #Fichas: 13 - Ciclos: 3
+1 7 12 5 10 4 11 17 23 28 33 - #Fichas: 14 - Ciclos: 18
+1 7 12 5 10 4 - #Fichas: 14 - Ciclos: 6
+10 4 11 - #Fichas: 14 - Ciclos: 2
+1 7 12 - #Fichas: 14 - Ciclos: 2
+24 17 10 15 21 28 - #Fichas: 14 - Ciclos: 22
+24 17 10 15 21 28 33 - #Fichas: 14 - Ciclos: 24
 28 33 - #Fichas: 14 - Ciclos: 1
 1 4 - #Fichas: 23 - Ciclos: 1
- - #Fichas: 23 - Ciclos: 97
- - #Fichas: 23 - Ciclos: 113
-1 4 8 - #Fichas: 23 - Ciclos: 97
+ - #Fichas: 23 - Ciclos: 2
+ - #Fichas: 23 - Ciclos: 18
+1 4 8 - #Fichas: 23 - Ciclos: 2
 11 15 - #Fichas: 23 - Ciclos: 1
- - #Fichas: 23 - Ciclos: 113
- - #Fichas: 23 - Ciclos: 97
- - #Fichas: 23 - Ciclos: 113
- - #Fichas: 23 - Ciclos: 101
+ - #Fichas: 23 - Ciclos: 18
+ - #Fichas: 23 - Ciclos: 2
+ - #Fichas: 23 - Ciclos: 18
+ - #Fichas: 23 - Ciclos: 6
 1 6 - #Fichas: 23 - Ciclos: 1
-7 1 5 9 - #Fichas: 23 - Ciclos: 111
-1 5 11 17 21 26 22 28 24 30 34 38 33 39 45 51 - #Fichas: 23 - Ciclos: 157
-48 44 38 33 28 22 17 21 26 30 34 39 45 51 - #Fichas: 23 - Ciclos: 152
-1 5 11 17 - #Fichas: 23 - Ciclos: 116
-21 17 22 - #Fichas: 23 - Ciclos: 110
-26 21 17 22 28 - #Fichas: 23 - Ciclos: 131
-30 24 28 33 38 34 39 45 51 - #Fichas: 23 - Ciclos: 160
-38 33 28 22 17 11 5 1 - #Fichas: 23 - Ciclos: 115
+7 1 5 9 - #Fichas: 23 - Ciclos: 3
+1 5 11 17 21 26 22 28 24 30 34 38 33 39 45 51 - #Fichas: 23 - Ciclos: 49
+48 44 38 33 28 22 17 21 26 30 34 39 45 51 - #Fichas: 23 - Ciclos: 44
+1 5 11 17 - #Fichas: 23 - Ciclos: 8
+21 17 22 - #Fichas: 23 - Ciclos: 2
+26 21 17 22 28 - #Fichas: 23 - Ciclos: 23
+30 24 28 33 38 34 39 45 51 - #Fichas: 23 - Ciclos: 52
+38 33 28 22 17 11 5 1 - #Fichas: 23 - Ciclos: 7
 1 6 - #Fichas: 24 - Ciclos: 1
-7 1 5 9 - #Fichas: 24 - Ciclos: 118
-1 5 9 3 6 11 14 17 21 24 28 22 26 30 33 37 34 38 44 39 45 51 - #Fichas: 24 - Ciclos: 169
+7 1 5 9 - #Fichas: 24 - Ciclos: 3
+1 5 9 3 6 11 14 17 21 24 28 22 26 30 33 37 34 38 44 39 45 51 - #Fichas: 24 - Ciclos: 54
 48 51 - #Fichas: 24 - Ciclos: 1
-1 5 9 3 6 11 17 - #Fichas: 24 - Ciclos: 125
-21 17 22 - #Fichas: 24 - Ciclos: 117
-26 21 17 22 28 - #Fichas: 24 - Ciclos: 150
-30 24 21 17 22 28 33 37 34 38 44 39 45 51 - #Fichas: 24 - Ciclos: 178
-38 33 28 22 17 11 5 1 - #Fichas: 24 - Ciclos: 122
-1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 30 - #Fichas: 30 - Ciclos: 430
-1 2 12 - #Fichas: 30 - Ciclos: 277
-1 2 3 4 5 6 7 17 - #Fichas: 30 - Ciclos: 297
-10 1 2 3 4 5 6 7 8 9 11 21 - #Fichas: 30 - Ciclos: 323
-15 5 1 2 3 4 6 7 8 9 10 11 12 13 14 16 17 18 19 20 30 - #Fichas: 30 - Ciclos: 418
-1 4 7 2 5 8 3 6 9 12 15 10 13 16 11 14 17 20 23 18 21 24 19 22 25 30 - #Fichas: 31 - Ciclos: 353
-1 4 7 12 - #Fichas: 31 - Ciclos: 290
-1 4 7 2 5 8 3 6 9 12 17 - #Fichas: 31 - Ciclos: 305
-10 5 1 4 7 2 6 3 8 11 14 9 12 15 18 21 - #Fichas: 31 - Ciclos: 322
-15 10 5 1 4 7 2 6 3 8 11 14 9 12 16 13 17 20 23 18 21 24 19 22 25 30 - #Fichas: 31 - Ciclos: 354
-1 4 7 3 10 13 20 15 21 24 28 22 25 29 33 37 40 45 50 54 57 61 65 70 66 73 78 83 88 94 100 - #Fichas: 38 - Ciclos: 247
-28 21 15 10 3 7 13 20 24 29 - #Fichas: 38 - Ciclos: 185
-20 13 7 1 4 10 15 21 - #Fichas: 38 - Ciclos: 178
-20 13 7 1 4 10 15 21 24 28 22 25 29 33 37 40 45 50 54 57 61 65 70 - #Fichas: 38 - Ciclos: 226
-88 83 89 - #Fichas: 38 - Ciclos: 162
-10 3 7 13 20 - #Fichas: 38 - Ciclos: 176
-1 4 7 3 10 13 20 15 21 28 - #Fichas: 38 - Ciclos: 183
-1 4 7 3 - #Fichas: 38 - Ciclos: 164
-3 7 4 - #Fichas: 38 - Ciclos: 162
-5 1 4 7 3 10 13 20 15 21 24 28 22 25 29 33 37 40 45 50 54 57 61 65 70 66 73 78 83 88 94 97 - #Fichas: 38 - Ciclos: 246
-52 45 40 33 28 21 15 10 13 - #Fichas: 38 - Ciclos: 168
- - #Fichas: 23 - Ciclos: 95
- - #Fichas: 23 - Ciclos: 117
- - #Fichas: 23 - Ciclos: 145
-1 4 6 7 8 9 11 15 16 19 23 25 29 33 36 38 41 44 49 54 55 60 - #Fichas: 23 - Ciclos: 149
-1 4 6 7 8 9 11 15 16 19 23 25 29 33 36 38 41 44 49 54 60 - #Fichas: 23 - Ciclos: 152
-1 4 6 7 8 9 11 15 16 19 23 25 29 33 36 38 41 44 49 54 60 - #Fichas: 23 - Ciclos: 158
-1 4 6 7 8 9 11 15 16 19 23 25 29 33 36 38 41 44 49 54 60 - #Fichas: 23 - Ciclos: 167
-1 4 6 7 8 9 11 15 16 19 23 25 29 33 36 38 41 44 49 54 60 - #Fichas: 23 - Ciclos: 171
-1 4 6 7 8 9 11 15 16 19 23 25 29 33 36 38 41 44 49 54 60 - #Fichas: 23 - Ciclos: 177
- - #Fichas: 23 - Ciclos: 111
- - #Fichas: 23 - Ciclos: 137
-1 4 6 8 11 15 19 23 25 29 33 36 38 41 44 49 54 56 60 - #Fichas: 23 - Ciclos: 146
-1 4 6 8 11 7 9 15 19 23 25 29 33 36 38 41 44 49 54 60 - #Fichas: 23 - Ciclos: 146
-1 4 6 8 11 7 9 15 19 16 23 25 29 33 36 38 41 44 49 54 60 - #Fichas: 23 - Ciclos: 152
-1 4 6 8 11 7 9 15 19 16 23 25 29 33 36 38 41 44 49 54 60 - #Fichas: 23 - Ciclos: 161
-1 4 6 8 11 7 9 15 19 16 23 25 29 33 36 38 41 44 49 54 60 - #Fichas: 23 - Ciclos: 165
-1 4 6 8 11 7 9 15 19 16 23 25 29 33 36 38 41 44 49 54 60 - #Fichas: 23 - Ciclos: 171
- - #Fichas: 23 - Ciclos: 113
- - #Fichas: 23 - Ciclos: 123
-1 4 7 11 6 9 15 19 23 29 33 36 41 38 44 49 54 60 - #Fichas: 23 - Ciclos: 137
-1 4 7 11 6 9 15 19 16 23 29 33 36 41 38 44 49 54 60 - #Fichas: 23 - Ciclos: 146
-1 4 7 11 6 9 15 8 16 19 23 29 25 33 36 41 38 44 49 54 60 - #Fichas: 23 - Ciclos: 153
-1 4 7 11 6 9 15 8 16 19 23 29 25 33 36 41 38 44 49 54 60 - #Fichas: 23 - Ciclos: 157
-1 4 7 11 6 9 15 8 16 19 23 29 25 33 36 41 38 44 49 54 60 - #Fichas: 23 - Ciclos: 163
+1 5 9 3 6 11 17 - #Fichas: 24 - Ciclos: 10
+21 17 22 - #Fichas: 24 - Ciclos: 2
+26 21 17 22 28 - #Fichas: 24 - Ciclos: 35
+30 24 21 17 22 28 33 37 34 38 44 39 45 51 - #Fichas: 24 - Ciclos: 63
+38 33 28 22 17 11 5 1 - #Fichas: 24 - Ciclos: 7
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 30 - #Fichas: 30 - Ciclos: 156
+1 2 3 12 - #Fichas: 30 - Ciclos: 4
+1 2 3 4 5 6 7 8 17 - #Fichas: 30 - Ciclos: 29
+10 1 2 3 4 5 6 7 8 9 11 12 21 - #Fichas: 30 - Ciclos: 58
+15 6 1 2 3 4 5 7 8 9 10 11 12 13 14 16 17 18 19 20 21 30 - #Fichas: 30 - Ciclos: 144
+1 4 7 2 5 8 3 6 9 12 15 10 13 16 11 14 17 20 23 18 21 24 19 22 25 30 - #Fichas: 31 - Ciclos: 67
+1 4 7 12 - #Fichas: 31 - Ciclos: 4
+1 4 7 2 5 8 3 6 9 12 17 - #Fichas: 31 - Ciclos: 19
+10 5 1 4 7 2 6 3 8 11 14 9 12 15 18 21 - #Fichas: 31 - Ciclos: 36
+15 10 5 1 4 7 2 6 3 8 11 14 9 12 16 13 17 20 23 18 21 24 19 22 25 30 - #Fichas: 31 - Ciclos: 68
+1 4 7 3 10 13 20 15 21 24 28 22 25 29 33 37 40 45 50 54 57 61 65 70 66 73 78 83 88 94 100 - #Fichas: 38 - Ciclos: 87
+28 21 15 10 3 7 13 20 24 29 - #Fichas: 38 - Ciclos: 25
+20 13 7 1 4 10 15 21 - #Fichas: 38 - Ciclos: 18
+20 13 7 1 4 10 15 21 24 28 22 25 29 33 37 40 45 50 54 57 61 65 70 - #Fichas: 38 - Ciclos: 66
+88 83 89 - #Fichas: 38 - Ciclos: 2
+10 3 7 13 20 - #Fichas: 38 - Ciclos: 16
+1 4 7 3 10 13 20 15 21 28 - #Fichas: 38 - Ciclos: 23
+1 4 7 3 - #Fichas: 38 - Ciclos: 4
+3 7 4 - #Fichas: 38 - Ciclos: 2
+5 1 4 7 3 10 13 20 15 21 24 28 22 25 29 33 37 40 45 50 54 57 61 65 70 66 73 78 83 88 94 97 - #Fichas: 38 - Ciclos: 86
+52 45 40 33 28 21 15 10 13 - #Fichas: 38 - Ciclos: 8
+ - #Fichas: 23 - Ciclos: 0
+ - #Fichas: 23 - Ciclos: 22
+ - #Fichas: 23 - Ciclos: 50
+1 4 6 7 8 9 11 15 16 19 23 25 29 33 36 38 41 44 49 54 55 60 - #Fichas: 23 - Ciclos: 54
+1 4 6 7 8 9 11 15 16 19 23 25 29 33 36 38 41 44 49 54 60 - #Fichas: 23 - Ciclos: 57
+1 4 6 7 8 9 11 15 16 19 23 25 29 33 36 38 41 44 49 54 60 - #Fichas: 23 - Ciclos: 63
+1 4 6 7 8 9 11 15 16 19 23 25 29 33 36 38 41 44 49 54 60 - #Fichas: 23 - Ciclos: 72
+1 4 6 7 8 9 11 15 16 19 23 25 29 33 36 38 41 44 49 54 60 - #Fichas: 23 - Ciclos: 76
+ - #Fichas: 23 - Ciclos: 16
+ - #Fichas: 23 - Ciclos: 42
+1 4 6 8 11 15 19 23 25 29 33 36 38 41 44 49 54 56 60 - #Fichas: 23 - Ciclos: 51
+1 4 6 8 11 7 9 15 19 23 25 29 33 36 38 41 44 49 54 60 - #Fichas: 23 - Ciclos: 51
+1 4 6 8 11 7 9 15 19 16 23 25 29 33 36 38 41 44 49 54 60 - #Fichas: 23 - Ciclos: 57
+1 4 6 8 11 7 9 15 19 16 23 25 29 33 36 38 41 44 49 54 60 - #Fichas: 23 - Ciclos: 66
+1 4 6 8 11 7 9 15 19 16 23 25 29 33 36 38 41 44 49 54 60 - #Fichas: 23 - Ciclos: 70
+ - #Fichas: 23 - Ciclos: 18
+ - #Fichas: 23 - Ciclos: 28
+1 4 7 11 6 9 15 19 23 29 33 36 41 38 44 49 54 60 - #Fichas: 23 - Ciclos: 42
+1 4 7 11 6 9 15 19 16 23 29 33 36 41 38 44 49 54 60 - #Fichas: 23 - Ciclos: 51
+1 4 7 11 6 9 15 8 16 19 23 29 25 33 36 41 38 44 49 54 60 - #Fichas: 23 - Ciclos: 58
+1 4 7 11 6 9 15 8 16 19 23 29 25 33 36 41 38 44 49 54 60 - #Fichas: 23 - Ciclos: 62
