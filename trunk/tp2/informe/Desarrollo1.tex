@@ -4,7 +4,7 @@
 El enunciado nos plantea una situación en donde tenemos un edificio con n pisos y personas en cada piso que quiere ir a planta baja. Para poder hacerlo, el edificio provee un 
 ascensor que deberá buscar a las personas para poder bajarlas. 
 Este ascensor posee energía y capacidad limitada que no le permite recorrer siempre todos los pisos y levantar todas las personas, por lo tanto queremos maximizar la cantidad
-de personas a descender del edificio dado la cantidad de personas por piso, su energía y la capacidad.
+de personas a descender del edificio dado la cantidad de personas por piso, su energía y capacidad.
 
 \subsection{Soluci\'on}
 La solución planteada utiliza Programación Dinámica a través de decisiones. Es decir, planteamos el problema de forma tal que en vez de maximizar la cantidad de personas que 
@@ -12,25 +12,27 @@ pueden descender, encontramos el máximo valor posible que va a estar ubicado en
 A continuación se explicará cómo se resolvió el problema:\\
 Primero obtenemos la cantidad total de personas recorriendo el edificio dado, y buscaremos ese dicho máximo valor.
 Para ello, utilizaremos la conocida búsqueda binaria en la cantidad de personas en el edificio, hasta encontrar el valor tal que el siguiente no sea posible levantarlo y sin embargo el número que estoy evaluando si.
-Por lo tanto lo único que resta, es ver si se puede levantar esa cantidad de personas dada la capacidad del ascensor, su energía y un edificio. \\
+Por lo tanto lo único que resta, es ver si se puede levantar esa cantidad de personas dada la capacidad del ascensor, su energía y el edificio. \\
 Para poder levantar esas personas buscaremos el piso mínimo al que necesitamos ir para poder levantar la cantidad de personas requeridas$^*$. Recorreremos el edificio desde ese piso mínimo hacia abajo, en caso de
-ser posible llegar hasta él y poder volver a descender, levantando la máxima cantidad de personas de cada piso en el camino hasta llenar la capacidad. Una vez completada, descenderemos a los pasajeros y volveremos a repetir el proceso
-para el mismo piso en caso de que haya quedado gente, o el siguiente en caso de haberlo vaciado o no poder llegar por poca energía, hasta que levantemos la cantidad requerida (caso que devolveremos que se puede) o hasta que nos quedemos sin energía (caso que devolveremos que no se puede). Tener en cuenta que el piso elegido como mínimo puede contener más cantidad de gente que la requerida por lo tanto puede pasar que no levantemos gente y que sin embargo, descendamos la cantidad requeridad personas.\\
-Para la demostración de la resolución, explicaremos por qué el piso elegido previamente es el correcto, y por qué la estrategia de levantar de arriba hacia abajo es verdadera.
+ser posible llegar hasta él y poder volver a descender, levantando la máxima cantidad de personas de cada piso en el camino hasta llenar la capacidad. Una vez completada, descenderemos a los pasajeros y volveremos a repetir el proceso,
+para el mismo piso en caso de que haya quedado gente, o el siguiente en caso de haberlo vaciado o no poder llegar por poca energía, hasta que levantemos la cantidad requerida (caso que devolveremos que se puede) o hasta que nos quedemos sin energía (caso que devolveremos que no se puede). Tener en cuenta que el piso mínimo elegido puede dejarnos en la parte inferior del edificio con más personas de las requeridas. Entonces al momento de levantar puede pasar que no levantemos gente y que sin embargo, descendamos la cantidad requeridad personas.\\
+Para la demostración de la resolución, explicaremos por qué el piso mínimo elegido previamente es el correcto, y por qué la estrategia de levantar de arriba hacia abajo es verdadera.
 Este piso mínimo es la mejor opción ya que si subimos más pisos estaríamos utilizando energía para levantar la misma cantidad de gente que podríamos encontrar en los pisos
-inferiores, y no se puede ir más abajo porque si no, tenemos la cantidad de gente necesaria para poder levantar el valor pedido.\\
-Definimos el mundo de las estrategias, como el conjunto de estrategias posibles y definimos estrategia como el método por el que se levanta gente. Cómo no nos interesa
-la energía utilizada, ya que solo queremos ver si puede levantar la cantidad de personas mencionada, y no la optimalidad de energía, una estrategia estará conformada por el
-conjunto de personas que levanta en cada piso. De este mundo de estrategias, tomaremos solo aquellas que su piso más alto en el cual levantan personas es el nuestro, y que
+inferiores, y no se puede ir más abajo porque si no, no tenemos la cantidad de gente necesaria para poder levantar el valor pedido.\\
+Definimos el mundo de las estrategias, como el conjunto de estrategias posibles y definimos estrategia como el método por el cual se levanta gente. Cómo no nos interesa
+la energía utilizada, ya que solo queremos ver si puede levantar la cantidad de personas mencionada, y no la optimalidad de energía, una estrategia estará conformada por la cantidad
+de personas que levanta en cada piso. De este mundo de estrategias, tomaremos solo aquellas que su piso más alto en el cual levantan personas es el nuestro, y que
 levanten la misma cantidad que nosotros. Este conjunto es distinto de vacío ya que es un conjunto acotado de personas y pisos, por lo tanto se van a poder levantar a partir de
-cierta energía dada. Ahora queremos ver que nuestra estrategia se encuentra en este conjunto. Para ello, tomaremos una de esas estrategias E y veremos que se puede permutar de tal
-forma que consigamos nuestra estrategia. Esta permutación se debe a que si la estrategia E 
+cierta energía. Ahora queremos ver que nuestra estrategia se encuentra en este conjunto. Para ello, tomaremos una de esas estrategias E y veremos que se puede permutar de tal
+forma que consigamos nuestra estrategia. Vamos a dividir a las estrategias verdaderas entre las que levantan mientras suben y el resto.\\
+El caso de que E levante mientras sube, sabemos ya que el piso máximo de E es el mismo que 
+el nuestro, que podemos ir hasta el piso máximo y al bajar vamos a pasar por los mismos pasos, entonces se terminan levantando la misma cantidad de personas. Puede llenarse antes en los pisos superiores, pero siempre vamos a poder
+llenar con los pisos que E llenó.\\
+Para el otro caso, el caso desordenado, podremos ubicar la forma que recorre el edificio tal que levante de forma ascendente. Esto es ya que si el edificio pasa por los pisos 1 hasta max pero en el medio va agarrando gente
+desordenadamente, podemos permutar el método y que vaya levantando mientras ascende. \\
+Por lo tanto tenemos que el segundo caso puede llevarse al primero, y el primero hacia el nuestro. Y como las estrategias que tomamos son las que andaban, entonces la nuestra también anda\\
 
-
-\small {\textbf{*} Para ubicar este piso mínimo recorreremos el edificio desde abajo contando la cantida de personas en los pisos, hasta que el valor sea mayor o igual al requerido.}
-
-
-
+\footnotesize {\textbf{*} Para ubicar este piso mínimo recorreremos el edificio desde abajo contando la cantidad de personas en los pisos, hasta que el valor sea mayor o igual al requerido.}
 
 \subsection{Pseudoc\'odigo}
 \begin{codebox}
