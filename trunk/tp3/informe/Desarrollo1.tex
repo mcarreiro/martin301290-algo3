@@ -1,0 +1,16 @@
+\section{Problema 1}
+
+\subsection{Situación 1}
+Supongamos que se organiza una fiesta a la que asiste mucho gente (es una fiesta democrática e inclusiva y cada uno puede invitar a todos los amigos que quiere). Como la fiesta es en un parque de diversiones jurásico en el que hay dinosaurios vivos y mutantes sueltos es necesario capacitar a la gente por cualquier accidente o imprevisto que pueda ocurrir. Ahora, resulta que la fiesta tuvo tanta difusión que asistieron alrededor de 70 mil personas. Esto desconcertó profundamente a los organizadores, ya que al ser tanta gente es muy dificil capacitarla. Por suerte el presidente del parque conocía a un grupo de investigadores de exactas (grupo 10) a los que les delegó la tarea, aclarandoles que con la única información que contaban era con una tabla de relaciones (obtenida de facebook) personas a personas, en la que una persona se relaciona con otra si y solo si son amigos.
+Los investigadores abstrayeron el problema y realizaron el siguiente planteo:
+-Plantemos el problema como un problema de grafos!
+-Cada persona es un nodo
+-Un nodo se relaciona con otro si y solo si esas personas son amigas
+-Busquemos la menor cantidad de nodos para capacitar (podría pensarse como los más populares), para que luego estos nodos (o personas) capaciten a sus amigos y se logre así capacitar a toda la gente que concurrió a esta zarpada fiesta.
+
+Buenísimo pero ahora ¿Cómo obtenemos la menor cantidad de gente a capacitar?.... Conjunto dominante!, este conjunto dominante representaria a la mínima cantidad de gente a capacitar, tal que luego esas personas al capacitar a sus amigos logran capacitar a toda la gente que concurrió a la fiesta.
+
+\subsection{Situación 2}
+Supongamos que en un tablero de ajedrez queremos poner algunas reinas de manera que todas las casillas estén amenazadas por al menos una de ellas y queremos usar la menor cantidad posible de damas. ¿Cuántas reinas son necesarias? y ¿cómo hay que ubicarlas? Se puede plantear este ejemplo como un problema de conjunto dominante. Para ello
+consideramos el grafo donde los vértices representan las casillas de un tablero de ajedrez y dos vértices son adyacentes si una reina ubicada en la casilla u amenaza la casilla v. Un conjunto dominante mínimo D nos dice dónde hay que ubicar las reinas en el tablero para amenazar a todas las casillas. 
+
