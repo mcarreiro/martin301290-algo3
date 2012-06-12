@@ -7,7 +7,6 @@ import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.PriorityQueue;
 
-
 public class Grafo {
 
 	private Hashtable<String,Vertice> Vertices;
@@ -111,11 +110,15 @@ public class Grafo {
 		public ArrayList<Arista> aristas;
 		public boolean visitado;
         public HashSet<Arista> adyacentes;
+        public int grado;
+        public int gradoSinDominar;
+        public boolean dominada;
 		
 		public Vertice(String dato) {
 			this.Dato = new String(dato);
 			this.aristas = new ArrayList<Grafo.Arista>(); // modificar esto
-			this.visitado = false;
+			this.visitado = this.dominada = false;
+			this.grado = this.gradoSinDominar = 0;
 		}
 		
 		public String toString() {
@@ -131,7 +134,10 @@ public class Grafo {
 		public void agregarArista(Vertice v, Integer peso) {
 			this.aristas.add(new Arista(this, v, peso));
 			v.aristas.add(new Arista(v, this, peso));
-			
+			this.grado++;
+			this.gradoSinDominar++;
+			v.grado++;
+			v.gradoSinDominar++;
 		}
 		
 		public String getDato() {

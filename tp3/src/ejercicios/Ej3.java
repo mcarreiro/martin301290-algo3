@@ -1,0 +1,122 @@
+package ejercicios;
+
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+import java.util.Stack;
+import java.util.ArrayList;
+
+
+import ejercicios.Grafo;
+import ejercicios.Grafo.Arista;
+import ejercicios.Grafo.Vertice;
+
+public class Ej3 {
+    public int ciclos_DFS;
+    public int ciclos_esc;
+    
+    public ArrayList<Vertice> MCD_Greedy(String[] datos){
+    	ArrayList<Vertice> vertices = new ArrayList<Vertice>();
+        Grafo g = GenerarGrafo(datos, vertices);        
+        ArrayList<Vertice> dominantes = new ArrayList<Vertice>();
+        Vertice elegido;
+        while(!TodasCubiertas(g, vertices)){
+            elegido = ElegirVertice(vertices);
+            ActualizarGradoSinDominar(elegido);
+            dominantes.add(elegido);            
+        }
+        return dominantes;
+    }
+    
+    //Ordena por mayor adyacentes sin dominar y devuelve el mayor.
+    public Vertice ElegirVertice(ArrayList<Vertice> vertices){
+        MergeSort(vertices, 0, vertices.size()-1);
+        Vertice elegido = vertices.get(0);
+        vertices.remove(0);
+    	return elegido; //Devuelvo el que mas adyacentes sin dominar tiene
+    }
+    
+    public void ActualizarGradoSinDominar(Vertice elegido){
+       Iterator<Arista> it = elegido.adyacentes.iterator();
+       elegido.dominada = true;
+       ArrayList<Vertice> unionAdyacentes = new ArrayList<Vertice>();
+       while(it.hasNext()){
+    	   Vertice ady = it.next().v2;
+    	   ady.dominada = true;
+    	   ady.gradoSinDominar--;
+    	   Iterator<Arista> itAdy = ady.adyacentes.iterator();
+    	   while(itAdy.hasNext())
+    		   unionAdyacentes.add(itAdy.next().v2);
+       }
+      Iterator<Vertice> itUnion = unionAdyacentes.iterator();
+      while(itUnion.hasNext()){
+    	  Vertice ady = itUnion.next();
+    	  ady.gradoSinDominar--;
+      }
+    }
+   
+    public void MergeSort(ArrayList<Vertice> vertices, int d, int h){
+    	if (h < d){
+	    	int m = (d+h)/2;
+	    	MergeSort(vertices, d, m);
+	    	MergeSort(vertices, m+1, h);
+	    	Merge(vertices, d, m, h);
+    	}
+    }
+    
+    public void Merge(ArrayList<Vertice> v, int l, int m, int r)
+    		{
+    	ArrayList<Vertice> helper = new ArrayList<Grafo.Vertice>();
+    	// Copy both parts into the helper array
+    			for (int i = l; i <= r; i++) {
+    				helper.add(v.get(i));
+    			}
+
+    			int i = l;
+    			int j = m + 1;
+    			int k = l;
+    			// Copy the smallest values from either the left or the right side back
+    			// to the original array
+    			while (i <= m && j <= r) {
+    				if (helper.get(i).gradoSinDominar <= helper.get(j).gradoSinDominar) {
+    					v.add(k, helper.get(i));
+    					i++;
+    				} else {
+    					v.add(k, helper.get(j));
+    					j++;
+    				}
+    				k++;
+    			}
+    			// Copy the rest of the left side of the array into the target array
+    			while (i <= m) {
+    				v.add(k, helper.get(i));
+    				k++;
+    				i++;
+    			}
+    	
+    		}
+    
+    public boolean TodasCubiertas(Grafo g, ArrayList<Vertice> vertices){
+    	return true;
+    }
+   
+    private Grafo GenerarGrafo(String[] nodos, ArrayList<Vertice> vertices){
+        Grafo grafo = new Grafo();                        //O(1)
+        int i,j;
+        //Agrego todos los nodos.
+        for(i=0; i < nodos.length;i++,ciclos_esc++)     //O(n)
+            vertices.add(grafo.insertarVertice(nodos[i], nodos[i]));        //O(1)
+        //Uno con aristas los nodos que su distancia este entre p y q, maximo pueden ser 10.
+        for(i=0; i < nodos.length;i++){                 //O(10n) = O(n)
+            j = i+1;
+            while(j < nodos.length){
+                    //grafo.agregarArista(vertices[i], vertices[j], null); //O(1)
+                j++;
+                ciclos_esc++;
+            }
+        }
+        return grafo;
+    }
+    
+   
+}
