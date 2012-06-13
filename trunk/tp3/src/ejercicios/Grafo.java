@@ -109,7 +109,6 @@ public class Grafo {
 		public String Dato; // que tipo de dato deberia ser?
 		public ArrayList<Arista> aristas;
 		public boolean visitado;
-        public HashSet<Arista> adyacentes;
         public int grado;
         public int gradoSinDominar;
         public boolean dominada;

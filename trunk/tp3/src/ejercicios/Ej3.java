@@ -15,9 +15,11 @@ public class Ej3 {
     public int ciclos_DFS;
     public int ciclos_esc;
     
-    public ArrayList<Vertice> MCD_Greedy(String[] datos){
+    public ArrayList<Vertice> MCD_Greedy(Grafo g){
     	ArrayList<Vertice> vertices = new ArrayList<Vertice>();
-        Grafo g = GenerarGrafo(datos, vertices);        
+    	Iterator<Vertice> itVertice = g.getVertices().values().iterator();
+    	while(itVertice.hasNext())
+    		vertices.add(itVertice.next());
         ArrayList<Vertice> dominantes = new ArrayList<Vertice>();
         Vertice elegido;
         while(!TodasCubiertas(g, vertices)){
@@ -30,23 +32,28 @@ public class Ej3 {
     
     //Ordena por mayor adyacentes sin dominar y devuelve el mayor.
     public Vertice ElegirVertice(ArrayList<Vertice> vertices){
-        MergeSort(vertices, 0, vertices.size()-1);
+        //MergeSort(vertices, 0, vertices.size()-1);
+    	SelectionSort(vertices);
         Vertice elegido = vertices.get(0);
         vertices.remove(0);
     	return elegido; //Devuelvo el que mas adyacentes sin dominar tiene
     }
     
     public void ActualizarGradoSinDominar(Vertice elegido){
-       Iterator<Arista> it = elegido.adyacentes.iterator();
+       Iterator<Arista> it = elegido.aristas.iterator();
+       Boolean dominacionElegido = elegido.dominada;
        elegido.dominada = true;
        ArrayList<Vertice> unionAdyacentes = new ArrayList<Vertice>();
        while(it.hasNext()){
     	   Vertice ady = it.next().v2;
+    	   if(!dominacionElegido)
+    		   ady.gradoSinDominar--;
+    	   if(!ady.dominada){
+    		   Iterator<Arista> itAdy = ady.aristas.iterator();
+    		   while(itAdy.hasNext())
+    			   unionAdyacentes.add(itAdy.next().v2);
+    	   }
     	   ady.dominada = true;
-    	   ady.gradoSinDominar--;
-    	   Iterator<Arista> itAdy = ady.adyacentes.iterator();
-    	   while(itAdy.hasNext())
-    		   unionAdyacentes.add(itAdy.next().v2);
        }
       Iterator<Vertice> itUnion = unionAdyacentes.iterator();
       while(itUnion.hasNext()){
@@ -54,9 +61,25 @@ public class Ej3 {
     	  ady.gradoSinDominar--;
       }
     }
-   
+   public void SelectionSort(ArrayList<Vertice> vertices)
+   {
+	   int i = 0;
+	   while(i < vertices.size())
+	   {
+		   int max = i;
+		   for(int j = i; j < vertices.size(); j++)
+			   if(vertices.get(max).gradoSinDominar < vertices.get(j).gradoSinDominar)
+				   max = j;
+		   Vertice aux = vertices.get(i);
+		   vertices.set(i, vertices.get(max));
+		   vertices.set(max, aux);
+
+		   i++;
+	   }
+   }
+    
     public void MergeSort(ArrayList<Vertice> vertices, int d, int h){
-    	if (h < d){
+    	if (d < h){
 	    	int m = (d+h)/2;
 	    	MergeSort(vertices, d, m);
 	    	MergeSort(vertices, m+1, h);
@@ -97,12 +120,16 @@ public class Ej3 {
     		}
     
     public boolean TodasCubiertas(Grafo g, ArrayList<Vertice> vertices){
+    	Iterator<Vertice> it = vertices.iterator();
+    	while(it.hasNext())
+    		if(!it.next().dominada)
+    			return false;
     	return true;
     }
    
-    private Grafo GenerarGrafo(String[] nodos, ArrayList<Vertice> vertices){
+    private Grafo GenerarGrafo(String[] instancia, ArrayList<Vertice> vertices){
         Grafo grafo = new Grafo();                        //O(1)
-        int i,j;
+        /*int i,j;
         //Agrego todos los nodos.
         for(i=0; i < nodos.length;i++,ciclos_esc++)     //O(n)
             vertices.add(grafo.insertarVertice(nodos[i], nodos[i]));        //O(1)
@@ -114,7 +141,7 @@ public class Ej3 {
                 j++;
                 ciclos_esc++;
             }
-        }
+        }*/
         return grafo;
     }
     
