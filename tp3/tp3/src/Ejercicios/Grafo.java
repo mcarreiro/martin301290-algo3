@@ -57,6 +57,7 @@ public class Grafo {
 	
 	public void agregarArista(Vertice v1, Vertice v2, Integer peso) {
 		v1.agregarArista(v2, peso);
+		
 		//v2.agregarArista(v1, peso);
 		this.aristas.add(new Arista(v1, v2, peso));
 	}	
@@ -131,7 +132,7 @@ public class Grafo {
 		public void agregarArista(Vertice v, Integer peso) {
 			this.aristas.add(new Arista(this, v, peso));
 			v.aristas.add(new Arista(v, this, peso));
-			
+		
 		}
 		
 		public String getDato() {
