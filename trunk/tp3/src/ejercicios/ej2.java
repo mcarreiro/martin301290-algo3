@@ -23,14 +23,18 @@ public class ej2 {
 			String[] enlaceInfo = enlace.split(delim);
 			Vertice v1 = g.insertauObtenerVertice(enlaceInfo[0], enlaceInfo[0]); 
 			Vertice v2 = g.insertauObtenerVertice(enlaceInfo[1], enlaceInfo[1]);
-			g.agregarArista(v1, v2, new Integer(enlaceInfo[2]));
+			if(enlaceInfo.length > 2){
+				g.agregarArista(v1, v2, new Integer(enlaceInfo[2]));
+			}
 		}
 		return g;
 	}
 	
 	public static List<Grafo.Vertice> obtenerConjuntoDominanteMinimo(Grafo graph) {
-		Collection<Grafo.Vertice> vertices  = graph.getVertices().values();
-		grafoOriginal = vertices;
+		Collection<Grafo.Vertice> vertices  = new ArrayList<Grafo.Vertice>(); 
+		vertices.addAll(graph.getVertices().values());
+		grafoOriginal = new ArrayList<Grafo.Vertice>();
+		grafoOriginal.addAll(vertices);
 		List<Grafo.Vertice> conjuntoDominanteMinimo = new ArrayList<Grafo.Vertice>();
 		return conjuntoDominanteMinimo = buscar_minimo(vertices, conjuntoDominanteMinimo);
 		
@@ -40,20 +44,40 @@ public class ej2 {
 	private static List<Grafo.Vertice> buscar_minimo(Collection<Grafo.Vertice> vertices, List<Grafo.Vertice> conjuntoDominanteMinimo){
 		if(es_dominante(conjuntoDominanteMinimo)){
 			return conjuntoDominanteMinimo;
-		}else{
+		}else{			
 			Iterator<Grafo.Vertice> it = vertices.iterator();
-			Grafo.Vertice v = it.next();
-			it.remove();
-			List<Grafo.Vertice> conjuntoDominanteMinimoSinV = new ArrayList<Grafo.Vertice>(); 
-			conjuntoDominanteMinimoSinV.addAll(conjuntoDominanteMinimo);
-			conjuntoDominanteMinimo.add(v);
-			conjuntoDominanteMinimo = buscar_minimo(vertices, conjuntoDominanteMinimo);
-			conjuntoDominanteMinimoSinV = buscar_minimo(vertices, conjuntoDominanteMinimoSinV);
-			if(conjuntoDominanteMinimo.size() > conjuntoDominanteMinimoSinV.size()){
-				return conjuntoDominanteMinimoSinV;
+			//veo si quedan vertices
+			if(it.hasNext()){				
+				Grafo.Vertice v = it.next();
+				it.remove();
+				//Creo el conjunto sin v
+				List<Grafo.Vertice> conjuntoDominanteMinimoSinV = new ArrayList<Grafo.Vertice>(); 
+				conjuntoDominanteMinimoSinV.addAll(conjuntoDominanteMinimo);
+				
+				//creo el conjunto con v 
+				conjuntoDominanteMinimo.add(v);
+				//copio los vertice (porq sino los objetos los envia por referencia)
+				Collection<Grafo.Vertice> verticesCopia = new ArrayList<Grafo.Vertice>();
+				verticesCopia.addAll(vertices);	
+				
+				//Busco el conjunto dominante minimo que contiene a v
+				conjuntoDominanteMinimo = buscar_minimo(vertices, conjuntoDominanteMinimo);
+				
+				//Busco el conjunto dominante minimo que no contiene a v
+				conjuntoDominanteMinimoSinV = buscar_minimo(verticesCopia, conjuntoDominanteMinimoSinV);
+				
+				if(conjuntoDominanteMinimo.size() > conjuntoDominanteMinimoSinV.size()){
+					return conjuntoDominanteMinimoSinV;
+				}else{
+					return conjuntoDominanteMinimo;
+				}	
 			}else{
-				return conjuntoDominanteMinimo;
-			}			
+				//Si no hay mas vertices quiere decir que estoy en una rama en la que ya no puede devolverme un conjunto dominante
+				//entonces devuelvo el grafo completo que seguro es dominante
+				List<Grafo.Vertice> dominante = new ArrayList<Grafo.Vertice>();
+				dominante.addAll(grafoOriginal);
+				return dominante;
+			}
 		}
 	}
 	
