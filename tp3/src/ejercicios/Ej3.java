@@ -12,38 +12,38 @@ import ejercicios.Grafo.Arista;
 import ejercicios.Grafo.Vertice;
 
 public class Ej3 {
-    public int ciclos_DFS;
-    public int ciclos_esc;
-    
-    public ArrayList<Vertice> MCD_Greedy(Grafo g){
+   
+    public ArrayList<Vertice> MCD_Greedy(Grafo g, int k){
     	ArrayList<Vertice> vertices = new ArrayList<Vertice>();
     	Iterator<Vertice> itVertice = g.getVertices().values().iterator();
     	while(itVertice.hasNext())
     		vertices.add(itVertice.next());
         ArrayList<Vertice> dominantes = new ArrayList<Vertice>();
         Vertice elegido;
-        while(!TodasCubiertas(g, vertices)){
-            elegido = ElegirVertice(vertices);
+        while(!TodasCubiertas(vertices)){
+        	vertices = OrdenarVertices(vertices);
+            elegido = ElegirVertice(vertices, k);
             ActualizarGradoSinDominar(elegido);
             dominantes.add(elegido);            
         }
         return dominantes;
     }
     
-    //Ordena por mayor adyacentes sin dominar y devuelve el mayor.
-    public Vertice ElegirVertice(ArrayList<Vertice> vertices){
-    	Vertice max = vertices.get(0);
-    	int indiceMax = 0;
-    	for(int i=0; i < vertices.size();i++)
-    		if(vertices.get(i).gradoSinDominar > max.gradoSinDominar){
-    			max = vertices.get(i);
-    			indiceMax = i;
-    		}
-        vertices.remove(indiceMax);
-    	return max; //Devuelvo el que mas adyacentes sin dominar tiene
+    public Vertice ElegirVertice(ArrayList<Vertice> vertices, int k){
+    	int randomNum = (int)(Math.random()*(k-1)); 
+    	Vertice elegido = vertices.get(randomNum);    	
+    	return elegido; 
     }
     
-    public void ActualizarGradoSinDominar(Vertice elegido){
+    public ArrayList<Vertice> OrdenarVertices(ArrayList<Vertice> vertices){
+    	//return MergeSort(vertices, 0, vertices.size()-1);
+    	SelectionSort(vertices);
+    	return vertices;
+
+    }
+   
+
+	public void ActualizarGradoSinDominar(Vertice elegido){
        Iterator<Arista> it = elegido.aristas.iterator();
        Boolean dominacionElegido = elegido.dominada;
        elegido.dominada = true;
@@ -67,31 +67,57 @@ public class Ej3 {
     	  ady.gradoSinDominar--;
       }
     }
-   public boolean TodasCubiertas(Grafo g, ArrayList<Vertice> vertices){
+   public boolean TodasCubiertas(ArrayList<Vertice> vertices){
     	Iterator<Vertice> it = vertices.iterator();
     	while(it.hasNext())
     		if(!it.next().dominada)
     			return false;
     	return true;
-    }
+    }   
+
+   public void MergeSort(ArrayList<Vertice> vertices, int d, int h){
+       if (d < h){
+               int m = (d+h)/2;
+               MergeSort(vertices, d, m);
+               MergeSort(vertices, m+1, h);
+               Merge(vertices, d, m, h);
+       }
+     
+   }
+	private void SelectionSort(ArrayList<Vertice> vertices) {
    
-    private Grafo GenerarGrafo(String[] instancia, ArrayList<Vertice> vertices){
-        Grafo grafo = new Grafo();                        //O(1)
-        /*int i,j;
-        //Agrego todos los nodos.
-        for(i=0; i < nodos.length;i++,ciclos_esc++)     //O(n)
-            vertices.add(grafo.insertarVertice(nodos[i], nodos[i]));        //O(1)
-        //Uno con aristas los nodos que su distancia este entre p y q, maximo pueden ser 10.
-        for(i=0; i < nodos.length;i++){                 //O(10n) = O(n)
-            j = i+1;
-            while(j < nodos.length){
-                    //grafo.agregarArista(vertices[i], vertices[j], null); //O(1)
-                j++;
-                ciclos_esc++;
-            }
-        }*/
-        return grafo;
-    }
-    
-   
-}
+           int i = 0;
+           while(i < vertices.size())
+           {
+                   int max = i;
+                   for(int j = i; j < vertices.size(); j++){
+                           if(vertices.get(max).gradoSinDominar < vertices.get(j).gradoSinDominar){
+                                   max = j;
+                           }
+                   }
+                   Vertice aux = vertices.get(i);
+                   vertices.set(i, vertices.get(max));
+                   vertices.set(max, aux);
+
+                   i++;
+           }
+   }
+	 public void Merge(ArrayList<Vertice> v, int l, int m, int r)
+     {
+ArrayList<Vertice> helper = new ArrayList<Grafo.Vertice>();
+// Copy both parts into the helper array
+             for (int i = l; i <= r; i++) {
+                     helper.add(v.get(i));
+             }
+
+             int i = l;
+             int j = m + 1;
+             int k = l;
+             // Copy the smallest values from either the left or the right side back
+             // to the original array
+             while (i <= m && j <= r) {
+                     if (helper.get(i).gradoSinDominar <= helper.get(j).gradoSinDominar) {
+                             v.add(k, helper.get(i));
+                             i++;
+                     } else {
+         
