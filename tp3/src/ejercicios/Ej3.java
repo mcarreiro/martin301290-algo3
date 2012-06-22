@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import ejercicios.Grafo;
 import ejercicios.Grafo.Arista;
 import ejercicios.Grafo.Vertice;
-
+//
 public class Ej3 {
    
     public ArrayList<Vertice> MCD_Greedy(Grafo g, int k){
@@ -120,4 +120,17 @@ ArrayList<Vertice> helper = new ArrayList<Grafo.Vertice>();
                              v.add(k, helper.get(i));
                              i++;
                      } else {
-         
+                             v.add(k, helper.get(j));
+                             j++;
+                     }
+                     k++;
+             }
+             // Copy the rest of the left side of the array into the target array
+             while (i <= m) {
+                     v.add(k, helper.get(i));
+                     k++;
+                     i++;
+             }
+
+     }
+}
