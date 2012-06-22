@@ -21,7 +21,7 @@ public class TestEj3 extends TestCase{
 		g.agregarArista(b, d, 0);
 		g.agregarArista(a, e, 0);
 		g.agregarArista(b, f, 0);
-		List<Grafo.Vertice> conj = ej3.MCD_Greedy(g);
+		List<Grafo.Vertice> conj = ej3.MCD_Greedy(g,0);
 	}
 	
 	public void test2() {
@@ -51,6 +51,6 @@ public class TestEj3 extends TestCase{
 		grafo.agregarArista(k, l, 0);
 		grafo.agregarArista(h, l, 0);
 
-		List<Grafo.Vertice> conj = ej3.MCD_Greedy(grafo);
+		List<Grafo.Vertice> conj = ej3.MCD_Greedy(grafo,0);
 	}
 }
