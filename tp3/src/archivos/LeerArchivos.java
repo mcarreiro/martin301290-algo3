@@ -1,8 +1,13 @@
 package archivos;
 import java.io.*;
 import java.util.*;
+import ejercicios.Grafo;
+import ejercicios.Grafo.Arista;
+import ejercicios.Grafo.Vertice;
+
+
 public class LeerArchivos {
-	public static ArrayList<String> leer (String dir) {
+	public static ArrayList<Grafo> leer (String dir) {
 	      File archivo = null;
 	      FileReader fr = null;
 	      BufferedReader br = null;
@@ -33,10 +38,38 @@ public class LeerArchivos {
 	      }catch (Exception e2){ 
 	         e2.printStackTrace();
 	      }
-	      return result;
+	      
+	      return crearGrafo(result);
+	      
 	      
 	      
 	      
 	   }
+	
+	   public static ArrayList<Grafo> crearGrafo (ArrayList<String> dir) {
+			int n;
+			ArrayList<Grafo> ListaDeGrafos = new ArrayList<Grafo>();
+			Grafo g;
+			Vertice v;
+			Vertice v2;
+			String linea;
+			String delim = " ";
+			for(int i = 0; i<dir.size();i++){
+				n = new Integer(dir.get(i));
+				g = new Grafo();
+				for(int a = 0; a < n;a++){					
+					v = g.insertauObtenerVertice(Integer.toString(a), Integer.toString(a));
+					linea = dir.get(a);
+					String[] adyacentes = linea.split(delim);
+					for(int b = 0; b < adyacentes.length;b++){
+						v2 = g.insertauObtenerVertice(adyacentes[b], adyacentes[b]);
+						g.agregarArista(v, v2, 1);
+					}
+				}
+				ListaDeGrafos.add(g);
+				i += n -1;
+			}
+			return ListaDeGrafos;
+		}
 
 }
