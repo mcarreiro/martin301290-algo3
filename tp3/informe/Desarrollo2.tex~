@@ -14,7 +14,7 @@ return buscarMinimo(g,c)
 }
 
 buscarMinimo(grafo, conjuntoDom){
-	if(esDominante(conjuntoDom)){
+	if(es_dominante(conjuntoDom)){
 		return conjuntoDom
 	}else{
 		vertice = grafo.obtenerVertice(); 

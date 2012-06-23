@@ -9,21 +9,21 @@ global grafoOriginal
 obtenerConjuntoDominanteMinimo(grafo g){
 c = crearConj()
 grafoOriginal = g
-return buscarMinimo(g,c)
+return buscar_minimo(g,c)
 
 }
 
-buscarMinimo(grafo, conjuntoDom){
-	if(esDominante(conjuntoDom)){
+buscar_minimo(grafo, conjuntoDom){
+	if(es_dominante(conjuntoDom)){
 		return conjuntoDom
 	}else{
 		vertice = grafo.obtenerVertice(); 
 		grafo = grafo.sinUno()
-		return min(buscarMinimo(grafo, conjuntoDom), buscarMinimo(grafo, conjuntoDom + vertice)
+		return min(buscar_minimo(grafo, conjuntoDom), buscar_minimo(grafo, conjuntoDom + vertice)
 	}
 }
 
-esDominante(grafo, conjuntoDom){
+es_dominante(grafo, conjuntoDom){
 	foreach(v en V(grafoOriginal)){
 		if(conjuntoDom.esta?(v){
 			continue
