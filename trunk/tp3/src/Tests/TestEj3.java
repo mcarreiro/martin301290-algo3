@@ -1,13 +1,26 @@
 package Tests;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import archivos.LeerArchivos;
 
 import ejercicios.Grafo;
 import ejercicios.Ej3;
 import junit.framework.TestCase;
 
 public class TestEj3 extends TestCase{
-	public void testCrearGrafo(){
+	public void testCatedra(){
+		java.io.File currentDir = new java.io.File("");
+		ArrayList<Grafo> ListaDeGrafos = new ArrayList<Grafo>();		
+		ListaDeGrafos = LeerArchivos.leer(currentDir.getAbsolutePath()+ "/enunciado/Tp3.in");
+		List<Grafo.Vertice> conj;
+		for(int i = 0; i < ListaDeGrafos.size(); i++){
+			conj = Ej3.MCD_Greedy(ListaDeGrafos.get(i),1);
+		}
+	}
+	
+	public void test(){
 		//Ej3 ej3 = new Ej3();
 		Grafo g = new Grafo();
 		Grafo.Vertice a = g.insertarVertice("A", "A");

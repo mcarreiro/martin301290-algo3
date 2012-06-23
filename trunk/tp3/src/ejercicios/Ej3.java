@@ -16,16 +16,16 @@ public class Ej3 {
     public static ArrayList<Vertice> MCD_Greedy(Grafo g, int k){
     	ArrayList<Vertice> vertices = new ArrayList<Vertice>();
     	Iterator<Vertice> itVertice = g.getVertices().values().iterator();
-    	while(itVertice.hasNext())
+    	while(itVertice.hasNext())					//O(n)
     		vertices.add(itVertice.next());
         ArrayList<Vertice> dominantes = new ArrayList<Vertice>();
         Vertice elegido;
-        while(!TodasCubiertas(vertices)){
-        	vertices = OrdenarVertices(vertices);
-            elegido = ElegirVertice(vertices, k);
-            vertices.remove(elegido);
-            ActualizarGradoSinDominar(elegido);
-            dominantes.add(elegido);            
+        while(!TodasCubiertas(vertices)){			//O(n4)
+        	vertices = OrdenarVertices(vertices);	//O(n*logn)
+            elegido = ElegirVertice(vertices, k);	//O(1)
+            vertices.remove(elegido);				//O(n)
+            ActualizarGradoSinDominar(elegido);		//O(n2)
+            dominantes.add(elegido);   				//O(1)         
         }
         return dominantes;
     }
@@ -39,11 +39,9 @@ public class Ej3 {
     
     public static ArrayList<Vertice> OrdenarVertices(ArrayList<Vertice> vertices){
     	mergeSort(vertices);
-    	//SelectionSort(vertices);
     	return vertices;
 
-    }
-   
+    }  
 
 	public static void ActualizarGradoSinDominar(Vertice elegido){
        Iterator<Arista> it = elegido.aristas.iterator();
@@ -60,8 +58,6 @@ public class Ej3 {
     			   unionAdyacentes.add(itAdy.next().v2);
     	   }
     	   ady.dominada = true;
-    	   if(ady.gradoSinDominar == 0)
-    		  it.remove(); 
        }
       Iterator<Vertice> itUnion = unionAdyacentes.iterator();
       while(itUnion.hasNext()){
@@ -77,26 +73,7 @@ public class Ej3 {
     	return true;
     }   
 
-   
-	private static void SelectionSort(ArrayList<Vertice> vertices) {
-   
-           int i = 0;
-           while(i < vertices.size())
-           {
-                   int max = i;
-                   for(int j = i; j < vertices.size(); j++){
-                           if(vertices.get(max).gradoSinDominar < vertices.get(j).gradoSinDominar){
-                                   max = j;
-                           }
-                   }
-                   Vertice aux = vertices.get(i);
-                   vertices.set(i, vertices.get(max));
-                   vertices.set(max, aux);
-
-                   i++;
-           }
-   }
-public static  void mergeSort (ArrayList<Vertice> in) {
+   public static  void mergeSort (ArrayList<Vertice> in) {
 		
 		int n = in.size();
 	    if (n < 2) 
@@ -119,7 +96,7 @@ public static  void mergeSort (ArrayList<Vertice> in) {
 	    merge(in1,in2,in); 
 	}
 	
-	public static void merge(ArrayList<Vertice> in1, ArrayList<Vertice> in2, ArrayList<Vertice> in) {
+   public static void merge(ArrayList<Vertice> in1, ArrayList<Vertice> in2, ArrayList<Vertice> in) {
 		
 		while (!in1.isEmpty() && !in2.isEmpty())
 			if ((in1.get(0).gradoSinDominar > (in2.get(0).gradoSinDominar)))
