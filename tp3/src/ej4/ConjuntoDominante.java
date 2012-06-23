@@ -2,9 +2,13 @@ package ej4;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.PriorityQueue;
+import java.util.Set;
 
 import ejercicios.Grafo;
+import ejercicios.Grafo.Arista;
 import ejercicios.Grafo.Vertice;
 
 public class ConjuntoDominante {
@@ -39,7 +43,7 @@ public class ConjuntoDominante {
 		switch(m) {
 			case QuitarUno: return tryQuitarUno();
 			case UnoPorUno: return tryUnoPorUno();
-			case AgregarUno: return tryAgregarUno();
+			case AgregarUno: return tryAgregarUno(); // ver si hace falta, ya que estamos haciendo Gredy cn Grasp
 		}
 		return false;
 	}
@@ -106,11 +110,8 @@ public class ConjuntoDominante {
 		for(Vertice v : this.dominantes ) {
 			for(Vertice v2 : this.dominantes ){
 				for(Vertice d : this.dominados ) {
-					// me fijo si sacando <v1,v2> y agregando d, los vertices siguen siendo dominantes
-					// hago una copia de la solucion, le saco los vertices
-					// le pregunto si es dominante
-					boolean esDominante = true; // cambia por metodo
-					if( esDominante ) {
+					// si es reemplazable, tomo como posibles del 2x1
+					if( this.nodosSonReemplazables(v, v2, d) ) {
 						Tupla<Vertice, Vertice> t = new Tupla<Grafo.Vertice, Grafo.Vertice>(v, v2);
 						intercambiables.add(new DosPorUnoSet(t, d));
 					}
@@ -118,6 +119,24 @@ public class ConjuntoDominante {
 			}
 		}
 		return intercambiables;
+	}
+	
+	private boolean nodosSonReemplazables(Vertice v1, Vertice v2, Vertice reemplazo) {
+		// me fijo si la union de las aristas de v1,v2 es igual a las aristas de reemplazo
+		Set<Vertice> hs = new HashSet<Vertice>();
+		for(Arista a : v1.getAristas() ){
+			hs.add(a.v1);
+			hs.add(a.v2);
+		}
+		for(Arista a : v2.getAristas() ) {
+			hs.add(a.v1);
+			hs.add(a.v2);
+		}
+		for( Arista a: reemplazo.getAristas() ) {
+			hs.remove(a.v1);
+			hs.remove(a.v2);
+		}
+		return !(hs.size() > 0);
 	}
 
 }
