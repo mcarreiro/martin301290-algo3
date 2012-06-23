@@ -7,8 +7,8 @@ import ejercicios.Ej3;
 import junit.framework.TestCase;
 
 public class TestEj3 extends TestCase{
-	public void testCrearGrafo() {
-		Ej3 ej3 = new Ej3();
+	public void testCrearGrafo(){
+		//Ej3 ej3 = new Ej3();
 		Grafo g = new Grafo();
 		Grafo.Vertice a = g.insertarVertice("A", "A");
 		Grafo.Vertice b = g.insertarVertice("B", "B");
@@ -23,11 +23,11 @@ public class TestEj3 extends TestCase{
 		g.agregarArista(b, d, 0);
 		g.agregarArista(a, e, 0);
 		g.agregarArista(b, f, 0);
-		List<Grafo.Vertice> conj = ej3.MCD_Greedy(g,1);
+		List<Grafo.Vertice> conj = Ej3.MCD_Greedy(g,1);
 	}
 	
 	public void test2() {
-		Ej3 ej3 = new Ej3();
+		//Ej3 ej3 = new Ej3();
 		Grafo grafo = new Grafo();
 		Grafo.Vertice a = grafo.insertarVertice("A", "A");
 		Grafo.Vertice b = grafo.insertarVertice("B", "B");
@@ -53,6 +53,6 @@ public class TestEj3 extends TestCase{
 		grafo.agregarArista(k, l, 0);
 		grafo.agregarArista(h, j, 0);
 
-		List<Grafo.Vertice> conj = ej3.MCD_Greedy(grafo,1);
+		List<Grafo.Vertice> conj = Ej3.MCD_Greedy(grafo,1);
 	}
 }
