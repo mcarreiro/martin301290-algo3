@@ -1,9 +1,9 @@
+
 package ej4;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashSet;
-//import java.util.Iterator;
 import java.util.PriorityQueue;
 import java.util.Set;
 
@@ -16,13 +16,15 @@ public class ConjuntoDominante {
 	private ArrayList<Vertice> dominantes;
 	private ArrayList<Vertice> dominados;
 	private int estrategiaFailed;
+	private ArrayList<Tupla<Vertice, Vertice>> intercambiosRealizados;
 	
-	static public enum Movimientos { QuitarUno, UnoPorUno, AgregarUno   }
+	static public enum Movimientos { DosPorUno, QuitarUno, UnoPorUno   }
 	
 	public ConjuntoDominante(ArrayList<Vertice> dominantes, ArrayList<Vertice> dominados) {
 		this.dominantes = dominantes;
 		this.dominados = dominados;
 		this.estrategiaFailed = 0;
+		this.intercambiosRealizados = new ArrayList<Tupla<Vertice,Vertice>>();
 	}
 	
 	public int getEstrategiaFailed() {
@@ -33,43 +35,96 @@ public class ConjuntoDominante {
 		return this.dominantes;
 	}
 	
-	public void alternativeStrategy() {
+	public ArrayList<Vertice> getDominados() {
+		return this.dominados;
+	}
+	
+	public void selectStrategy(Comparator<DosPorUnoSet> funcion) {
 		for(Movimientos m: Movimientos.values() ) {
-			if( tryStrategy(m) ) return;
+			if( tryStrategy(m, funcion) ) return;
 		}
 	}
 	
-	public boolean tryStrategy(Movimientos m) {
+	public boolean tryStrategy(Movimientos m, Comparator<DosPorUnoSet> funcion) {
 		switch(m) {
+			case DosPorUno: return tryDosPorUno(funcion);
 			case QuitarUno: return tryQuitarUno();
 			case UnoPorUno: return tryUnoPorUno();
-			case AgregarUno: return tryAgregarUno(); // ver si hace falta, ya que estamos haciendo Gredy cn Grasp
 		}
 		return false;
 	}
 	
+	private boolean tryDosPorUno(Comparator<DosPorUnoSet> funcion) {
+		PriorityQueue<DosPorUnoSet> intercambiables = this.getNodosIntercambiables(funcion);
+		if( !intercambiables.isEmpty() ) {
+			// busco el 2x1 que tenga mejor priorida de acuerdo a la funcion establecida
+			DosPorUnoSet in = intercambiables.poll();
+			// hago el 2 x 1
+			this.intercambiarNodos(in);
+			this.estrategiaFailed = 0;
+			return true;
+		}
+		return false;
+	}
+
 	private boolean tryQuitarUno() {
-		for(Vertice v: this.dominantes) {
-			this.dominantes.remove(v);
-			/*if( esConjuntoDominante(this) ){
-			 	// le saque uno y sigue siendo dominante
+		for(Vertice v: this.dominantes ) {
+			if( this.sigueDominante(v) ) {
+				this.dominantes.remove(v);
 				return true;
 			}
-			*/
-			this.dominantes.add(v);
+		}
+		return false;
+	}
+	
+	private boolean sigueDominante(Vertice nodoSacado) {
+		HashSet<Vertice> adyac = new HashSet<Grafo.Vertice>();
+		if ( nodoSacado.getAristas().size() == 0 ) return false;
+		for(Arista a : nodoSacado.getAristas() ) {
+			if( !nodoSacado.equals(a.v1) ) {
+				adyac.add(a.v1);
+			} else {
+				adyac.add(a.v2);
+			}
+		}
+		for(Vertice v : this.dominantes) {
+			if( !v.equals(nodoSacado) ) {
+				// me fijo si tengo las aristas
+				for(Arista a : v.getAristas() ) {
+					if( adyac.contains(a.v1) ) adyac.remove(a.v1);
+					if( adyac.contains(a.v2) ) adyac.remove(a.v2);
+					if ( adyac.size() == 0 ) return true;
+				}
+			}
 		}
 		return false;
 	}
 	
 	private boolean tryUnoPorUno() {
+		// recordar cuales intercambie
+		// para no intercambiarlos infinitamente
 		for(Vertice v: this.dominantes) {
 			for(Vertice d: this.dominados) {
-				// intercambio los vertices
-				this.intercambiarVertices(v,d);
-				//if ( esConjuntoDominante(this) ) return true;
-				// vuelvo a intercambiarlos, pq no es dominante
-				this.intercambiarVertices(d,v);
+				ArrayList<Vertice> list = new ArrayList<Grafo.Vertice>();
+				list.add(v);
+				if ( !this.intercambioRealizado(v, d) && this.nodosSonReemplazables(list, d) ) {
+					// intercambio los vertices
+					this.intercambiarVertices(v,d);
+					this.intercambiosRealizados.add(new Tupla<Grafo.Vertice, Grafo.Vertice>(v, d));
+					this.estrategiaFailed = 0;
+					return true;
+				}
 			}
+		}
+		this.estrategiaFailed++;
+		return false;
+	}
+	
+	private boolean intercambioRealizado(Vertice v1, Vertice v2) {
+		for(Tupla<Vertice,Vertice> t : this.intercambiosRealizados ) {
+			if( v1.equals(t.getDato1()) || v1.equals(t.getDato2()) && 
+					(v2.equals(t.getDato1()) || v2.equals(t.getDato2())) ) 
+				return true;
 		}
 		return false;
 	}
@@ -81,14 +136,6 @@ public class ConjuntoDominante {
 		// los agrego en su nuevo conjunto
 		this.dominantes.add(v2);
 		this.dominados.add(v1);
-	}
-	
-	private boolean tryAgregarUno() {
-		// le agrego a los dominantes cualquiera de los dominados, sigue siendo dominante
-		this.dominantes.add(this.dominados.get(0));
-		// le agrego uno porque me esta "deformando" la solucion"
-		this.estrategiaFailed++;
-		return true;
 	}
 	
 	public void intercambiarNodos(DosPorUnoSet d) {
@@ -109,11 +156,17 @@ public class ConjuntoDominante {
 		PriorityQueue<DosPorUnoSet> intercambiables = new PriorityQueue<DosPorUnoSet>(10, funcion);
 		for(Vertice v : this.dominantes ) {
 			for(Vertice v2 : this.dominantes ){
-				for(Vertice d : this.dominados ) {
-					// si es reemplazable, tomo como posibles del 2x1
-					if( this.nodosSonReemplazables(v, v2, d) ) {
-						Tupla<Vertice, Vertice> t = new Tupla<Grafo.Vertice, Grafo.Vertice>(v, v2);
-						intercambiables.add(new DosPorUnoSet(t, d));
+				if (!v.equals(v2)) {
+					for(Vertice d : this.dominados ) {
+						ArrayList<Vertice> lis = new ArrayList<Grafo.Vertice>();
+						lis.add(v); lis.add(v2);
+						// si es reemplazable, tomo como posibles del 2x1
+						if(v.getAristas().size() > 0 && v2.getAristas().size() > 0 ) {
+							if( this.nodosSonReemplazables(lis, d) ) {
+								Tupla<Vertice, Vertice> t = new Tupla<Grafo.Vertice, Grafo.Vertice>(v, v2);
+								intercambiables.add(new DosPorUnoSet(t, d));
+							}
+						}
 					}
 				}
 			}
@@ -121,22 +174,24 @@ public class ConjuntoDominante {
 		return intercambiables;
 	}
 	
-	private boolean nodosSonReemplazables(Vertice v1, Vertice v2, Vertice reemplazo) {
+	private boolean nodosSonReemplazables(ArrayList<Vertice> candidatos, Vertice reemplazo) {
 		// me fijo si la union de las aristas de v1,v2 es igual a las aristas de reemplazo
 		Set<Vertice> hs = new HashSet<Vertice>();
-		for(Arista a : v1.getAristas() ){
-			hs.add(a.v1);
-			hs.add(a.v2);
+		int agrego = 0;
+		for(Vertice v : candidatos) {
+			for(Arista a : v.getAristas() ) {
+				hs.add(a.v1);
+				hs.add(a.v2);
+				agrego++;
+			}
 		}
-		for(Arista a : v2.getAristas() ) {
-			hs.add(a.v1);
-			hs.add(a.v2);
-		}
+		// saco los del reemplazo
 		for( Arista a: reemplazo.getAristas() ) {
 			hs.remove(a.v1);
 			hs.remove(a.v2);
 		}
-		return !(hs.size() > 0);
+		// si tienen len > 0, no son reemplazables
+		return agrego > 0 && !(hs.size() > 0);
 	}
 
 }
