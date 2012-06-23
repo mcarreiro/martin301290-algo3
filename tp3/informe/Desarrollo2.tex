@@ -1,17 +1,21 @@
 \section{Problema 2}
 
-\subsection{Orden de complejidad}
+\subsection{Introducción}
 
-Pseudocódigo:
+
+\subsection{Desarrollo}
+
+
+\subsection{Pseudocódigo}
 
 global grafoOriginal
 
-obtenerConjuntoDominanteMinimo(grafo g){
-c = crearConj()
-grafoOriginal = g
-return buscarMinimo(g,c)
-
-}
+\begin{codebox}
+\Procname{$\proc{obtenerConjuntoDominanteMinimo}$ (\textbf{in} $Grafo$)}{mesetaMaxima}{Int}
+\li	c = crearConj()
+\li	grafoOriginal = Grafo
+\li	return buscarMinimo(Grafo,c)
+\end{codebox}
 
 buscarMinimo(grafo, conjuntoDom){
 	if(esDominante(conjuntoDom)){
