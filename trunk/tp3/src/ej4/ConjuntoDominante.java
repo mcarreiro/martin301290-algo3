@@ -25,6 +25,10 @@ public class ConjuntoDominante {
 		return this.estrategiaFailed;
 	}
 	
+	public ArrayList<Vertice> getDominantes() {
+		return this.dominantes;
+	}
+	
 	public void alternativeStrategy() {
 		for(Movimientos m: Movimientos.values() ) {
 			if( tryStrategy(m) ) return;
