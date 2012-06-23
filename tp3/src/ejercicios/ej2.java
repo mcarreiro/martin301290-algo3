@@ -13,6 +13,8 @@ public class ej2 {
 	
 	static Collection<Grafo.Vertice> grafoOriginal;
 	
+	public static int ciclos;
+	
 	public static Grafo crearGrafoDesdeInstancia(String instancia) {
 		Grafo g = new Grafo();
 		String enlaceDelim = ";";
@@ -42,6 +44,7 @@ public class ej2 {
 	
 	//El minimo de usar un vertice para el conjunto dominante o no usarlo
 	private static List<Grafo.Vertice> buscar_minimo(Collection<Grafo.Vertice> vertices, List<Grafo.Vertice> conjuntoDominanteMinimo){
+		ciclos++;
 		if(es_dominante(conjuntoDominanteMinimo)){
 			return conjuntoDominanteMinimo;
 		}else{			
@@ -85,6 +88,7 @@ public class ej2 {
 		boolean esta;
 		//me fijo por cada vertice del grafo original
 		for(Grafo.Vertice vertice : grafoOriginal){
+			ciclos++;
 			//si el vertice pertence al conjunto dominante
 			if(conjuntoDominanteMinimo.contains(vertice)){
 				continue;
@@ -92,8 +96,10 @@ public class ej2 {
 				esta = false;
 				//o si pertence a alguno de sus adyacentes
 				for(Grafo.Vertice verticeDominante : conjuntoDominanteMinimo){
+					ciclos++;
 					ArrayList<Arista> aristas = verticeDominante.getAristas();
 					for(Arista arista : aristas){
+						ciclos++;
 						if(arista.v1 == vertice || arista.v2 == vertice){
 							esta = true;
 							break;
