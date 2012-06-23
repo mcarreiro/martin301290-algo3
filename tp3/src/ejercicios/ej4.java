@@ -1,4 +1,4 @@
-package ejercicios;
+/*package ejercicios;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -29,3 +29,4 @@ public class ej4 {
 	
 	
 }
+*/

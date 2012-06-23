@@ -2,7 +2,7 @@ package ejercicios;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Hashtable;
+//import java.util.Hashtable;
 
 import ejercicios.Grafo;
 import ejercicios.Grafo.Arista;
