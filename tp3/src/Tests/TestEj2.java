@@ -52,9 +52,10 @@ public class TestEj2 extends TestCase {
 		assertEquals(conj.size(),3);
 		assertTrue((conj.get(0) != conj.get(1) && conj.get(1)  != conj.get(2) && conj.get(0)  != conj.get(2) ));
 		
-		ArrayList<Grafo> ListaDeGrafos = new ArrayList<Grafo>();		
+		ArrayList<Grafo> ListaDeGrafos = new ArrayList<Grafo>();
 		
-		ListaDeGrafos = LeerArchivos.leer("/home/jmoz/Desktop/algo3/martin301290-algo3/tp3/enunciado/Tp3.in");
+		java.io.File currentDir = new java.io.File("");
+		ListaDeGrafos = LeerArchivos.leer(currentDir.getAbsolutePath()+ "/enunciado/Tp3.in");
 		conj.clear();
 		conj.addAll(ej2.obtenerConjuntoDominanteMinimo(ListaDeGrafos.get(0)));
 		assertEquals(conj.size(),1);
