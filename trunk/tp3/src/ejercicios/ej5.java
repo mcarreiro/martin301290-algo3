@@ -1,7 +1,9 @@
 package ejercicios;
 
 import java.util.ArrayList;
+
 import java.util.Comparator;
+import java.util.Hashtable;
 import java.util.Iterator;
 
 import ej4.ConjuntoDominante;
@@ -23,11 +25,11 @@ public class ej5 {
 	public static ConjuntoDominante MCD_Grasp(Grafo g, int k){
 		
 		//Que me devuelvan todos que es el peor caso posible
+		//Hashtable<String,Vertice> vertices = g.getVertices();
 		ArrayList<Vertice> todosLosVertices = calcularDominados(g,new ArrayList<Vertice>()); 
 		ConjuntoDominante mejorSolucion = new ConjuntoDominante(todosLosVertices, new ArrayList<Vertice>());
-		int i = 0;
 		
-		while(i < k){
+		for(int i = 0;i<k;i++){
 			ArrayList<Vertice> instanciaSolucion = Ej3.MCD_Greedy(g,k);
 			ConjuntoDominante cd = new ConjuntoDominante(instanciaSolucion, calcularDominados(g, instanciaSolucion));
 			//VER CUAL FUNCIONA MEJOR EN LA MAYORIA DE LOS CASOS DE LOS TESTS
@@ -36,7 +38,6 @@ public class ej5 {
 			if(cantNodosDominantes(nuevaSolucion)<cantNodosDominantes(mejorSolucion)){
 				mejorSolucion = nuevaSolucion;
 			}
-			i++;
 		}		
 		return mejorSolucion;
 	}
@@ -48,7 +49,7 @@ public class ej5 {
 	 * @return Cantidad
 	 */
 	
-	protected static int cantNodosDominantes(ConjuntoDominante cd){
+	public static int cantNodosDominantes(ConjuntoDominante cd){
 		
 		ArrayList<Vertice> dominantes = cd.getDominantes();
 		return dominantes.size();		
@@ -62,11 +63,11 @@ public class ej5 {
 	 * @return ArrayList<Vertice>
 	 */
 	
-	protected static ArrayList<Grafo.Vertice> calcularDominados(Grafo g, ArrayList<Vertice> dominantes){
+	public static ArrayList<Grafo.Vertice> calcularDominados(Grafo g, ArrayList<Vertice> dominantes){
 		
 		ArrayList<Grafo.Vertice> dominados = new ArrayList<Vertice>();
 		
-		Iterator<Grafo.Vertice> itVertice = g.getVertices().values().iterator();
+		Iterator<Grafo.Vertice> itVertice = g.getVertices().values().iterator();		
 		while(itVertice.hasNext())
 			if(!dominantes.contains(itVertice.next())){
 				dominados.add(itVertice.next());
