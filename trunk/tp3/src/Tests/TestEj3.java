@@ -1,6 +1,7 @@
 package Tests;
 
 import java.util.ArrayList;
+
 import java.util.List;
 
 import archivos.LeerArchivos;
@@ -10,11 +11,11 @@ import ejercicios.Ej3;
 import junit.framework.TestCase;
 
 public class TestEj3 extends TestCase{
+	List<Grafo.Vertice> conj;
 	public void testCatedra(){
 		java.io.File currentDir = new java.io.File("");
 		ArrayList<Grafo> ListaDeGrafos = new ArrayList<Grafo>();		
 		ListaDeGrafos = LeerArchivos.leer(currentDir.getAbsolutePath()+ "/enunciado/Tp3.in");
-		List<Grafo.Vertice> conj;
 		for(int i = 0; i < ListaDeGrafos.size(); i++){
 			conj = Ej3.MCD_Greedy(ListaDeGrafos.get(i),1);
 		}
@@ -36,7 +37,7 @@ public class TestEj3 extends TestCase{
 		g.agregarArista(b, d, 0);
 		g.agregarArista(a, e, 0);
 		g.agregarArista(b, f, 0);
-		List<Grafo.Vertice> conj = Ej3.MCD_Greedy(g,1);
+		conj = Ej3.MCD_Greedy(g,1);
 	}
 	
 	public void test2() {
@@ -66,6 +67,6 @@ public class TestEj3 extends TestCase{
 		grafo.agregarArista(k, l, 0);
 		grafo.agregarArista(h, j, 0);
 
-		List<Grafo.Vertice> conj = Ej3.MCD_Greedy(grafo,1);
+		conj = Ej3.MCD_Greedy(grafo,1);
 	}
 }
