@@ -1,6 +1,9 @@
 package ej4;
+import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.PriorityQueue;
+
+import ejercicios.Grafo;
+import ejercicios.Grafo.Vertice;
 
 
 public class ej4 {
@@ -10,18 +13,19 @@ public class ej4 {
 	public static ConjuntoDominante MCD_LocalSearch(ConjuntoDominante cd, Comparator<DosPorUnoSet> funcion) {
 		int maxIterations = 5; // fijo? o lo hago aleatorio?
 		while(cd.getEstrategiaFailed() < maxIterations ) {
-			PriorityQueue<DosPorUnoSet> intercambiables = cd.getNodosIntercambiables(funcion);
-			if( !intercambiables.isEmpty() ) {
-				// busco el 2x1 que tenga mejor priorida de acuerdo a la funcion establecida
-				DosPorUnoSet in = intercambiables.poll();
-				// hago el 2 x 1
-				cd.intercambiarNodos(in);
-			} else{
-				// si no pueod hacer el 2x1, trato una de las estrategias alternativas
-				cd.alternativeStrategy();
-			}
+			cd.selectStrategy(funcion);
 		}
 		// encontre una "solucion", un nuevo conjunto dominante, caminando siempre por una "llanura" de soluciones cercanas
 		return cd;
+	}
+	
+	public static ArrayList<Vertice> getListaDominados(Grafo g, ArrayList<Vertice> dominantes) {
+		ArrayList<Vertice> dominados = new ArrayList<Grafo.Vertice>();
+		for(Vertice v : g.getVertices().values() ) {
+			if( !dominantes.contains(v) ) {
+				dominados.add(v);
+			}
+		}
+		return dominados;
 	}
 }
