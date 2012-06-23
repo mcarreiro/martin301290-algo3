@@ -59,18 +59,21 @@ public class LeerArchivos {
 			while( i<dir.size()){
 				n = new Integer(dir.get(i));
 				g = new Grafo();
-				if(n > 0){
-					v = g.insertauObtenerVertice(Integer.toString(1), Integer.toString(1));
-					for(int a = i+1; a < (n+i);a++){					
-						v = g.insertauObtenerVertice(Integer.toString(a), Integer.toString(a));
-						linea = dir.get(a);
+				for(int j = 0; j<n;j++)
+					g.insertarVertice(Integer.toString(j+1), Integer.toString(j+1));
+					
+				for(int a = i+1; a < (n+i);a++){					
+					v = g.obtenerVertice(Integer.toString(a-i+1));
+					linea = dir.get(a);
+					if(linea.trim().length() != 0){
 						String[] adyacentes = linea.split(delim);
 						for(int b = 0; b < adyacentes.length;b++){
-							v2 = g.insertauObtenerVertice(adyacentes[b], adyacentes[b]);
+							v2 = g.obtenerVertice(adyacentes[b]);
 							g.agregarArista(v, v2, 1);
 						}
 					}
 				}
+				
 				ListaDeGrafos.add(g);
 				i += n;
 			}
