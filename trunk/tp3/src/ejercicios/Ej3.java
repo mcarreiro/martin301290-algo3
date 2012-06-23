@@ -1,16 +1,16 @@
 package ejercicios;
 
-import java.util.HashSet;
+//import java.util.HashSet;
 import java.util.Iterator;
-import java.util.Set;
-import java.util.Stack;
+//import java.util.Set;
+//import java.util.Stack;
 import java.util.ArrayList;
 
 
 import ejercicios.Grafo;
 import ejercicios.Grafo.Arista;
 import ejercicios.Grafo.Vertice;
-//
+
 public class Ej3 {
    
     public static ArrayList<Vertice> MCD_Greedy(Grafo g, int k){
