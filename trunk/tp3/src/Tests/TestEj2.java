@@ -3,7 +3,9 @@ package Tests;
 import java.util.ArrayList;
 import java.util.List;
 
+import archivos.LeerArchivos;
 
+import java.util.ArrayList;
 import ejercicios.ej2;
 import ejercicios.Grafo;
 import junit.framework.TestCase;
@@ -48,7 +50,18 @@ public class TestEj2 extends TestCase {
 		
 		conj.addAll(ej2.obtenerConjuntoDominanteMinimo(g));
 		assertEquals(conj.size(),3);
+		assertTrue((conj.get(0) != conj.get(1) && conj.get(1)  != conj.get(2) && conj.get(0)  != conj.get(2) ));
 		
+		ArrayList<Grafo> ListaDeGrafos = new ArrayList<Grafo>();		
+		
+		ListaDeGrafos = LeerArchivos.leer("/home/jmoz/Desktop/algo3/martin301290-algo3/tp3/enunciado/Tp3.in");
+		conj.clear();
+		conj.addAll(ej2.obtenerConjuntoDominanteMinimo(ListaDeGrafos.get(0)));
+		assertEquals(conj.size(),1);
+		
+		conj.clear();
+		conj.addAll(ej2.obtenerConjuntoDominanteMinimo(ListaDeGrafos.get(3)));
+		assertEquals(conj.size(),2);
 		
 	}
 
