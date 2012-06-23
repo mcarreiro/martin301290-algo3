@@ -13,7 +13,7 @@ import ejercicios.Grafo.Vertice;
 //
 public class Ej3 {
    
-    public ArrayList<Vertice> MCD_Greedy(Grafo g, int k){
+    public static ArrayList<Vertice> MCD_Greedy(Grafo g, int k){
     	ArrayList<Vertice> vertices = new ArrayList<Vertice>();
     	Iterator<Vertice> itVertice = g.getVertices().values().iterator();
     	while(itVertice.hasNext())
@@ -23,27 +23,29 @@ public class Ej3 {
         while(!TodasCubiertas(vertices)){
         	vertices = OrdenarVertices(vertices);
             elegido = ElegirVertice(vertices, k);
+            vertices.remove(elegido);
             ActualizarGradoSinDominar(elegido);
             dominantes.add(elegido);            
         }
         return dominantes;
     }
     
-    public Vertice ElegirVertice(ArrayList<Vertice> vertices, int k){
-    	int randomNum = (int)(Math.random()*(k-1)); 
+    public static Vertice ElegirVertice(ArrayList<Vertice> vertices, int k){
+    	if(k > vertices.size()) k = vertices.size();
+    	int randomNum = (int)(Math.random()*(k)); 
     	Vertice elegido = vertices.get(randomNum);    	
     	return elegido; 
     }
     
-    public ArrayList<Vertice> OrdenarVertices(ArrayList<Vertice> vertices){
-    	//return MergeSort(vertices, 0, vertices.size()-1);
-    	SelectionSort(vertices);
+    public static ArrayList<Vertice> OrdenarVertices(ArrayList<Vertice> vertices){
+    	mergeSort(vertices);
+    	//SelectionSort(vertices);
     	return vertices;
 
     }
    
 
-	public void ActualizarGradoSinDominar(Vertice elegido){
+	public static void ActualizarGradoSinDominar(Vertice elegido){
        Iterator<Arista> it = elegido.aristas.iterator();
        Boolean dominacionElegido = elegido.dominada;
        elegido.dominada = true;
@@ -67,7 +69,7 @@ public class Ej3 {
     	  ady.gradoSinDominar--;
       }
     }
-   public boolean TodasCubiertas(ArrayList<Vertice> vertices){
+   public static boolean TodasCubiertas(ArrayList<Vertice> vertices){
     	Iterator<Vertice> it = vertices.iterator();
     	while(it.hasNext())
     		if(!it.next().dominada)
@@ -75,16 +77,8 @@ public class Ej3 {
     	return true;
     }   
 
-   public void MergeSort(ArrayList<Vertice> vertices, int d, int h){
-       if (d < h){
-               int m = (d+h)/2;
-               MergeSort(vertices, d, m);
-               MergeSort(vertices, m+1, h);
-               Merge(vertices, d, m, h);
-       }
-     
-   }
-	private void SelectionSort(ArrayList<Vertice> vertices) {
+   
+	private static void SelectionSort(ArrayList<Vertice> vertices) {
    
            int i = 0;
            while(i < vertices.size())
@@ -102,35 +96,43 @@ public class Ej3 {
                    i++;
            }
    }
-	 public void Merge(ArrayList<Vertice> v, int l, int m, int r)
-     {
-ArrayList<Vertice> helper = new ArrayList<Grafo.Vertice>();
-// Copy both parts into the helper array
-             for (int i = l; i <= r; i++) {
-                     helper.add(v.get(i));
-             }
+public static  void mergeSort (ArrayList<Vertice> in) {
+		
+		int n = in.size();
+	    if (n < 2) 
+	    	return;  // the in list is already sorted in this case
+	    // divide
+	    ArrayList<Vertice> in1 = new ArrayList<Vertice>(); 
+	    ArrayList<Vertice> in2 = new ArrayList<Vertice>(); 
+	    int i = 0;
+	    
+	    while (i < n/2) {
+	      in1.add(in.remove(0)); // move the first n/2 elements to in1
+	      i++;
+	    }
+	    while (!in.isEmpty())
+	      in2.add(in.remove(0)); // move the rest to in2
+	    // recur
+	    mergeSort(in1);
+	    mergeSort(in2);
+	    //conquer
+	    merge(in1,in2,in); 
+	}
+	
+	public static void merge(ArrayList<Vertice> in1, ArrayList<Vertice> in2, ArrayList<Vertice> in) {
+		
+		while (!in1.isEmpty() && !in2.isEmpty())
+			if ((in1.get(0).gradoSinDominar > (in2.get(0).gradoSinDominar)))
+				in.add(in1.remove(0));
+			else
+				if(in1.get(0).gradoSinDominar == in2.get(0).gradoSinDominar && in1.get(0).gradoSinDominar - in1.get(0).grado > in2.get(0).gradoSinDominar - in2.get(0).grado)
+					in.add(in1.remove(0));
+				else
+					in.add(in2.remove(0));
+		while(!in1.isEmpty()) // move the remaining elements of in1
+			in.add(in1.remove(0));
+	    while(!in2.isEmpty()) // move the remaining elements of in2
+	    	in.add(in2.remove(0));
+	}
 
-             int i = l;
-             int j = m + 1;
-             int k = l;
-             // Copy the smallest values from either the left or the right side back
-             // to the original array
-             while (i <= m && j <= r) {
-                     if (helper.get(i).gradoSinDominar <= helper.get(j).gradoSinDominar) {
-                             v.add(k, helper.get(i));
-                             i++;
-                     } else {
-                             v.add(k, helper.get(j));
-                             j++;
-                     }
-                     k++;
-             }
-             // Copy the rest of the left side of the array into the target array
-             while (i <= m) {
-                     v.add(k, helper.get(i));
-                     k++;
-                     i++;
-             }
-
-     }
 }
