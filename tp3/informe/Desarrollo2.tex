@@ -40,7 +40,7 @@ es_dominante(grafo, conjuntoDom){
 	return true
 }
 
-La complejidad de mi algoritmo es de 2^n. Voy a demostrarlo por inducción:
+La complejidad de mi algoritmo es de 2^n * n³. Voy a demostrarlo por inducción:
 
 Caso Base:
 
@@ -57,3 +57,14 @@ Quiero ver que con n+1 nodos la complejidad pertenece a 2^(n+1)*(n+1)³
 Ver si el conjunto vacío es dominante me cuesta O(1) ya que en la primera iteración del grafoOriginal no es posible encontrar ningún vertice en el conjunto dominante o adyacente a él. Luego obtengo un nodo del grafo (grafo en el que me guarde todos los vertices, no el origianl) y busco el minimo conjunto dominante agregando ese nodo al conjunto o no, esto por hipótesis inductiva me cuesta 2 * (2^n * n³), ya que tengo que calcular 2 veces el conjunto minimo para n nodos. Por lo tanto la complejidad me termina costando  2^(n+1)*n³ y esto pertence a 2^(n+1)*(n+1)³. Con lo cual queda demostrada la complejidad.
 
 Notar que esta complejidad esta por encima de la complejidad exacta, ya que el n³ variaría en cada iteración dependiendo de la cantidad de nodos en el conjuntoDominante.
+
+
+\subsection{Peor Caso}
+
+Como el algoritmo es exacto y recorre todas las soluciones posibles siempre obtiene la mejor de ellas. Por lo tanto no existe una 'peor' instancia
+en la que la solución devuelta sea sub-óptima, siempre devuelve la mejor.
+
+\subsection{Tests y análisis}
+
+
+
