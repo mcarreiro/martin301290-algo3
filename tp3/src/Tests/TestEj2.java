@@ -61,8 +61,12 @@ public class TestEj2 extends TestCase {
 		assertEquals(conj.size(),1);
 		
 		conj.clear();
-		conj.addAll(ej2.obtenerConjuntoDominanteMinimo(ListaDeGrafos.get(3)));
+		conj.addAll(ej2.obtenerConjuntoDominanteMinimo(ListaDeGrafos.get(1)));
 		assertEquals(conj.size(),2);
+		
+		conj.clear();
+		conj.addAll(ej2.obtenerConjuntoDominanteMinimo(ListaDeGrafos.get(2)));
+		assertEquals(conj.size(),1);
 		
 	}
 
