@@ -1,10 +1,16 @@
 \section{Problema 2}
 
-\subsection{Introducción}
+\subsection{Enunciado}
+En este ejercicio se nos solicita buscar el conjunto dominante mínimo y óptimo dado un grafo cualquiera. Este es un problema del tipo NP completo 
+para el cual aún no se encontró forma de resolverlo polinomialmente pero tampoco se demostró que no sea posible solucionarlo con dicha complejidad.
 
-
-\subsection{Desarrollo}
-
+\subsection{Soluci\'on}
+Como todavía no se halló algoritmo alguno para resolverlo poliniomalmente y nosotros no somos investigadores/iluminados (aún) decidimos resolverlo
+de manera exponencial. Para esto utilizamos el popular método (dicho en criollo) de quedarme con la mejor opción entre poner y no un nodo en el 
+conjunto dominante. Este procedimiento lo que hace, básicamente, es analizar todas las soluciones posibles y agarrar la mejor de ellas. 
+No nos pareció primordial agregarle memorization ya que su complejidad no mejoriría de forma considerable y tampoco nos pareció imperante 
+preocuparnos por la complejidad de la función que chequea si el conjunto recibido es dominante, ya que, mientras sea polinimal, va ser despreciable 
+al lado de la complejidad de analizar todas las soluciones (que como dijimos es exponencial).
 
 \subsection{Pseudocódigo}
 
