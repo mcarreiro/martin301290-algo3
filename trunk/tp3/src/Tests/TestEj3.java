@@ -8,6 +8,7 @@ import archivos.LeerArchivos;
 
 import ejercicios.Grafo;
 import ejercicios.Ej3;
+import ejercicios.ej2;
 import junit.framework.TestCase;
 
 public class TestEj3 extends TestCase{
@@ -68,5 +69,21 @@ public class TestEj3 extends TestCase{
 		grafo.agregarArista(h, j, 0);
 
 		conj = Ej3.MCD_Greedy(grafo,1);
+	}
+	public void testCompareExacto(){
+		java.io.File currentDir = new java.io.File("");	
+		ArrayList<Grafo>  ListaDeGrafosG = LeerArchivos.leer(currentDir.getAbsolutePath()+ "/enunciado/Tp3.in");
+		ArrayList<Grafo>  ListaDeGrafosE = LeerArchivos.leer(currentDir.getAbsolutePath()+ "/enunciado/Tp3.in");
+
+		for(int i = 0; i < ListaDeGrafosG.size(); i++){
+			List<Grafo.Vertice> conjG = Ej3.MCD_Greedy(ListaDeGrafosG.get(i),1);
+			List<Grafo.Vertice> conjE = ej2.obtenerConjuntoDominanteMinimo(ListaDeGrafosE.get(i)); 
+			if( conjG.size() != conjE.size() )
+				System.out.print("DISTINTO GR:" + conjG.size() + " EX:"+conjE.size());
+
+			else
+				System.out.println("IGUAL");
+
+		}
 	}
 }
