@@ -12,12 +12,14 @@ import ejercicios.Grafo.Arista;
 import ejercicios.Grafo.Vertice;
 
 public class Ej3 {
-   
+   public static int ciclos;
     public static ArrayList<Vertice> MCD_Greedy(Grafo g, int k){
     	ArrayList<Vertice> vertices = new ArrayList<Vertice>();
     	Iterator<Vertice> itVertice = g.getVertices().values().iterator();
-    	while(itVertice.hasNext())					//O(n)
+    	while(itVertice.hasNext()){					//O(n)
     		vertices.add(itVertice.next());
+    		ciclos++;
+    	}
         ArrayList<Vertice> dominantes = new ArrayList<Vertice>();
         Vertice elegido;
         while(!TodasCubiertas(vertices)){			//O(n4)
@@ -25,7 +27,8 @@ public class Ej3 {
             elegido = ElegirVertice(vertices, k);	//O(1)
             vertices.remove(elegido);				//O(n)
             ActualizarGradoSinDominar(elegido);		//O(n2)
-            dominantes.add(elegido);   				//O(1)         
+            dominantes.add(elegido);   				//O(1) 
+            ciclos++;
         }
         return dominantes;
     }
@@ -58,18 +61,22 @@ public class Ej3 {
     			   unionAdyacentes.add(itAdy.next().v2);
     	   }
     	   ady.dominada = true;
+    	   ciclos++;
        }
       Iterator<Vertice> itUnion = unionAdyacentes.iterator();
       while(itUnion.hasNext()){
     	  Vertice ady = itUnion.next();
     	  ady.gradoSinDominar--;
+    	  ciclos++;
       }
     }
    public static boolean TodasCubiertas(ArrayList<Vertice> vertices){
     	Iterator<Vertice> it = vertices.iterator();
-    	while(it.hasNext())
+    	while(it.hasNext()){
     		if(!it.next().dominada)
     			return false;
+    		ciclos++;
+    	}
     	return true;
     }   
 
@@ -85,10 +92,10 @@ public class Ej3 {
 	    
 	    while (i < n/2) {
 	      in1.add(in.remove(0)); // move the first n/2 elements to in1
-	      i++;
+	      i++;ciclos++;
 	    }
 	    while (!in.isEmpty())
-	      in2.add(in.remove(0)); // move the rest to in2
+	      {in2.add(in.remove(0));ciclos++;} // move the rest to in2
 	    // recur
 	    mergeSort(in1);
 	    mergeSort(in2);
@@ -98,7 +105,7 @@ public class Ej3 {
 	
    public static void merge(ArrayList<Vertice> in1, ArrayList<Vertice> in2, ArrayList<Vertice> in) {
 		
-		while (!in1.isEmpty() && !in2.isEmpty())
+		while (!in1.isEmpty() && !in2.isEmpty()){
 			if ((in1.get(0).gradoSinDominar > (in2.get(0).gradoSinDominar)))
 				in.add(in1.remove(0));
 			else
@@ -106,10 +113,12 @@ public class Ej3 {
 					in.add(in1.remove(0));
 				else
 					in.add(in2.remove(0));
+			ciclos++;
+		}
 		while(!in1.isEmpty()) // move the remaining elements of in1
-			in.add(in1.remove(0));
+			{in.add(in1.remove(0));ciclos++;}
 	    while(!in2.isEmpty()) // move the remaining elements of in2
-	    	in.add(in2.remove(0));
+	    	{in.add(in2.remove(0));ciclos++;}
 	}
 
 }
