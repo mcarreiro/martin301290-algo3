@@ -76,14 +76,96 @@ public class TestEj3 extends TestCase{
 		ArrayList<Grafo>  ListaDeGrafosE = LeerArchivos.leer(currentDir.getAbsolutePath()+ "/enunciado/Tp3.in");
 
 		for(int i = 0; i < ListaDeGrafosG.size(); i++){
+			Ej3.ciclos=0;
+			System.out.print("n="+ListaDeGrafosG.get(i).getVertices().size());
+			long milisegundosactuales,milisegundos;
+			
+			milisegundosactuales = System.nanoTime();
 			List<Grafo.Vertice> conjG = Ej3.MCD_Greedy(ListaDeGrafosG.get(i),1);
+			milisegundos = System.nanoTime() - milisegundosactuales;
+
 			List<Grafo.Vertice> conjE = ej2.obtenerConjuntoDominanteMinimo(ListaDeGrafosE.get(i)); 
 			if( conjG.size() != conjE.size() )
-				System.out.print("DISTINTO GR:" + conjG.size() + " EX:"+conjE.size());
+				System.out.print(" DISTINTO GR:" + conjG.size() + " EX:"+conjE.size()+" ");
 
 			else
-				System.out.println("IGUAL");
-
+				System.out.print(" IGUAL ");
+	        System.out.println("Ciclos:" + Ej3.ciclos + " Ns: "+ milisegundos);
 		}
+	}
+	public void testCrearGrafo() {
+		Ej3.ciclos = 0;
+		//4 vertices
+		String instancia = "1 2 2;1 2 4;2 3 2;2 3 3;2 3 8;3 1 1;3 1 3;3 1 5;1 4 2;1 4 9";
+		Grafo g = ej2.crearGrafoDesdeInstancia(instancia);
+		//@SuppressWarnings("unused")
+		List<Grafo.Vertice> conj = Ej3.MCD_Greedy(g,1);
+		assertEquals(conj.size(),1);
+		assertEquals(conj.get(0).Dato,"1");
+		System.out.print('\n');
+        System.out.print(Ej3.ciclos);
+		conj.clear();
+		Ej3.ciclos = 0;
+		//8 vertices
+		instancia = "1 2 2;1 3 4;1 4 2;5 6 3;5 7 8;5 8 1";
+		g = ej2.crearGrafoDesdeInstancia(instancia);
+		
+		conj.addAll(Ej3.MCD_Greedy(g,1));
+		assertEquals(conj.size(),2);
+		System.out.print('\n');
+        System.out.print(Ej3.ciclos);
+		conj.clear();
+		Ej3.ciclos = 0;
+
+        //10
+        conj.clear();
+		Ej3.ciclos = 0;
+		instancia = "1 2;3 4;4 5;5 6;6 7;8 9;10 9";
+		g = ej2.crearGrafoDesdeInstancia(instancia);
+		
+		conj.addAll(Ej3.MCD_Greedy(g,1));
+		System.out.print('\n');
+        System.out.print(Ej3.ciclos);
+        
+        //12
+        conj.clear();
+		Ej3.ciclos = 0;
+		instancia = "1 2;3 4;4 5;5 6;6 7;8 9;10 200;11 200";
+		g = ej2.crearGrafoDesdeInstancia(instancia);
+		
+		conj.addAll(Ej3.MCD_Greedy(g,1));
+		System.out.print('\n');
+        System.out.print(Ej3.ciclos);
+        
+        //14
+        conj.clear();
+		Ej3.ciclos = 0;
+		instancia = "1 2;3 4;4 5;5 6;6 7;8 9;10 11;11 12;13 14";
+		g = ej2.crearGrafoDesdeInstancia(instancia);
+		
+		conj.addAll(Ej3.MCD_Greedy(g,1));
+		System.out.print('\n');
+        System.out.print(Ej3.ciclos);
+        
+      //16
+        conj.clear();
+		Ej3.ciclos = 0;
+		instancia = "1 2;3 4;4 5;5 6;6 7;8 9;10 11;11 12;13 14;15 16";
+		g = ej2.crearGrafoDesdeInstancia(instancia);
+		
+		conj.addAll(Ej3.MCD_Greedy(g,1));
+		System.out.print('\n');
+        System.out.print(Ej3.ciclos);
+        
+      //18
+        conj.clear();
+		Ej3.ciclos = 0;
+		instancia = "1 2;3 4;4 5;5 6;6 7;8 9;10 11;11 12;13 14;15 16;17 18";
+		g = ej2.crearGrafoDesdeInstancia(instancia);
+		
+		conj.addAll(Ej3.MCD_Greedy(g,1));
+		System.out.print('\n');
+        System.out.print(Ej3.ciclos);
+        
 	}
 }
