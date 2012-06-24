@@ -8,29 +8,29 @@ Para ello nos basamos en una estrategia de selección de nodos dominantes, la cu
 \subsection{Pseudocódigo}
 
 \begin{codebox}
-\Procname{$\proc{MCD_Greedy}$ (\textbf{in} $Grafo$)}{conjuntoDomGoloso}{Conj de Vértices}
+\Procname{$\proc{MCD_Greedy}$ (\textbf{in} $Grafo$)}{conjuntoDomGoloso}{ConjDeVértices}
 \li	vértices = lista de vértices del grafo	\RComment O(n)
 \li	dominantes = conjunto vacio de vértices	
-\li	\textbf{Mientras} no esten todos los vértices cubiertos \Do \RComment O(n^3)
+\li	\textbf{Mientras} no esten todos los vértices cubiertos \Do \RComment O($n^3$)
 \li 		Ordeno los vértices por la cantidad adyacentes que tenga no cubiertas (sin dominar), de mayor a menor. \RComment O(n*log(n))
 \li 		Elijo como dominante al primero de la lista y lo agrego al conjunto de \textbf{dominantes} \RComment O(n)
 \li 		Saco de la lista de vértices al elegido \RComment O(n)
-\li 		Actualizo los nodos del grafo, disminuyendo la cantidad de \textit{grado sin dominar} de los adyacentes al elegido, y de los adyacentes a estos. \RComment O(n^2)
+\li 		Actualizo los nodos del grafo, disminuyendo la cantidad de \textit{grado sin dominar} de los adyacentes al elegido, y de los adyacentes a estos. \RComment O($n^2$)
 	\End
 \li	return \textbf{dominantes}
 \end{codebox}
 
 \subsection{Orden de complejidad}
 
-La complejidad del algoritmo es de n^3
+La complejidad del algoritmo es de $n^3$
 
 El algoritmo comienza creando una lista de vértices en O(n).\\
-Luego entra en un ciclo que como máximo será lineal a la cantidad de vértices. En cada iteración deberá comprobar si el conjunto actual de vértices elegidos domina todo el grafo O(n^2), ordenar todos los vértices O(n*log(n)), elegir un vértice O(1), removerlo de la lista O(n) y finalmente actualizar el atributo de los grados sin dominar adyacentes de cada nodo O(n^2), esto es porque para los adyacentes del nodo elegido y a su vez para los adyacentes de estos tengo que bajar en uno este atributo, recorrer los adyacentes me lleva O(n) y por cada adyacente recorrer sus adyacentes también me lleva O(n), O(n) * O(n) = O(n^2).\\
+Luego entra en un ciclo que como máximo será lineal a la cantidad de vértices. En cada iteración deberá comprobar si el conjunto actual de vértices elegidos domina todo el grafo O($n^2$), ordenar todos los vértices O(n*log(n)), elegir un vértice O(1), removerlo de la lista O(n) y finalmente actualizar el atributo de los grados sin dominar adyacentes de cada nodo O($n^2$), esto es porque para los adyacentes del nodo elegido y a su vez para los adyacentes de estos tengo que bajar en uno este atributo, recorrer los adyacentes me lleva O(n) y por cada adyacente recorrer sus adyacentes también me lleva O(n), O(n) * O(n) = O($n^2$).\\
 
 Por lo tanto, la complejidad nos queda:\\
-O(n) + O(n) * (O(n^2) + O(n*log(n) + O(n) + O(n^2)) = O(n^3)\\\\
+O(n) + O(n) * (O($n^2$) + O(n*log(n) + O(n) + O($n^2$)) = O($n^3$)\\\\
 
-La complejidad final del algoritmo goloso es de O(n^3), cumpliendo el objetivo de ser polinomial.
+La complejidad final del algoritmo goloso es de O($n^3$), cumpliendo el objetivo de ser polinomial.
 
 
 \subsection{Peor Caso}
@@ -54,7 +54,7 @@ La solución optima proporcionada por el algoritmo exacto es {2,4}, mientras que
 
 \subsection{Tests y análisis}
 
-En los gráficos que aparece a continuación  se puede notar que a medida que la cantidad de nodos aumenta, el algoritmo dibuja un comportamiento que se asemeja a O(n^3) en relación a la cantidad de ciclos y el tiempo en nanosegundos.\\
+En los gráficos que aparece a continuación  se puede notar que a medida que la cantidad de nodos aumenta, el algoritmo dibuja un comportamiento que se asemeja a O($n^3$) en relación a la cantidad de ciclos y el tiempo en nanosegundos.\\
 
 \begin {center}
 \includegraphics[width=8cm]{./graficos/goloso_1.png}
