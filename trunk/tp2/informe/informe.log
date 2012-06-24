@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.5.1)  9 MAY 2012 19:25
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.5.1)  11 MAY 2012 16:02
 entering extended mode
  %&-line parsing enabled.
 **informe.tex
@@ -576,51 +576,91 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 37.
 File: umsb.fd 2009/06/22 v3.00 AMS symbols B
 ) [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] (./informe.toc)
-\tf@toc=\write3
-\openout3 = `informe.toc'.
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] (./Desarrollo1.tex
+Underfull \hbox (badness 10000) in paragraph at lines 10--30
 
- [2] (./introduccion.tex) [3]
-(./Desarrollo1.tex [4]
-<./graficos/grafico_vfijo.png, id=21, 642.4pt x 481.8pt>
-File: ./graficos/grafico_vfijo.png Graphic file (type png)
+ []
 
-<use ./graficos/grafico_vfijo.png>
-<./graficos/grafico_efijo.png, id=22, 642.4pt x 481.8pt>
-File: ./graficos/grafico_efijo.png Graphic file (type png)
+[2]
+Underfull \hbox (badness 10000) in paragraph at lines 81--83
 
-<use ./graficos/grafico_efijo.png>) [5 <./graficos/grafico_vfijo.png (PNG copy)
-> <./graficos/grafico_efijo.png (PNG copy)>] [6] (./Desarrollo2.tex [7]
-File: ./graficos/grafico_vfijo.png Graphic file (type png)
+ []
 
-<use ./graficos/grafico_vfijo.png>
-File: ./graficos/grafico_efijo.png Graphic file (type png)
- <use ./graficos/grafico_efijo.png>) [8]
-[9] (./Desarrollo3.tex [10]
-File: ./graficos/grafico_vfijo.png Graphic file (type png)
- <use ./graficos/grafico_vfijo.png>
-File: ./graficos/grafico_efijo.png Graphic file (type png)
 
-<use ./graficos/grafico_efijo.png>) [11] [12] (./informe.aux) ) 
+Underfull \hbox (badness 10000) in paragraph at lines 84--96
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 97--98
+
+ []
+
+<./graficos/grafico_ej1_variaCapacidad.png, id=21, 540.0175pt x 446.66875pt>
+File: ./graficos/grafico_ej1_variaCapacidad.png Graphic file (type png)
+
+<use ./graficos/grafico_ej1_variaCapacidad.png> [3]
+<./graficos/grafico_variaEnergia.png, id=28, 540.0175pt x 446.66875pt>
+File: ./graficos/grafico_variaEnergia.png Graphic file (type png)
+
+<use ./graficos/grafico_variaEnergia.png>) [4 <./graficos/grafico_ej1_variaCapa
+cidad.png (PNG copy)> <./graficos/grafico_variaEnergia.png (PNG copy)>]
+(./Desarrollo2.tex [5]
+<./graficos/graficos_aristas_fijas.png, id=37, 642.4pt x 481.8pt>
+File: ./graficos/graficos_aristas_fijas.png Graphic file (type png)
+
+<use ./graficos/graficos_aristas_fijas.png>
+<./graficos/graficos_vertices_fijos.png, id=38, 642.4pt x 481.8pt>
+File: ./graficos/graficos_vertices_fijos.png Graphic file (type png)
+
+<use ./graficos/graficos_vertices_fijos.png> [6 <./graficos/graficos_aristas_fi
+jas.png (PNG copy)>]) [7 <./graficos/graficos_vertices_fijos.png (PNG copy)>]
+(./Desarrollo3.tex
+LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <10> not available
+(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 21.
+
+Warning: Indentation ends at level 1 in codebox on page 8.
+
+Underfull \hbox (badness 10000) in paragraph at lines 49--50
+
+ []
+
+[8] <./graficos/grafico_ej3_0.png, id=52, 856.19875pt x 446.66875pt>
+File: ./graficos/grafico_ej3_0.png Graphic file (type png)
+
+<use ./graficos/grafico_ej3_0.png>
+<./graficos/grafico_ej3_1.png, id=53, 856.19875pt x 471.7625pt>
+File: ./graficos/grafico_ej3_1.png Graphic file (type png)
+
+<use ./graficos/grafico_ej3_1.png>) [9 <./graficos/grafico_ej3_0.png (PNG copy)
+> <./graficos/grafico_ej3_1.png (PNG copy)>] [10] (./informe.aux) ) 
 Here is how much of TeX's memory you used:
- 3874 strings out of 493848
- 47995 string characters out of 1152824
- 128186 words of memory out of 3000000
- 7054 multiletter control sequences out of 15000+50000
- 7930 words of font info for 31 fonts, out of 3000000 for 9000
+ 3902 strings out of 493848
+ 48874 string characters out of 1152824
+ 129171 words of memory out of 3000000
+ 7080 multiletter control sequences out of 15000+50000
+ 9787 words of font info for 37 fonts, out of 3000000 for 9000
  714 hyphenation exceptions out of 8191
- 34i,7n,35p,1247b,220s stack positions out of 5000i,500n,10000p,200000b,50000s
-</usr/share/texm
-f-texlive/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf-texlive/f
-onts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-texlive/fonts/type1/
-public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsf
-onts/cm/cmr10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr1
-2.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/
-share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf
--texlive/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on informe.pdf (12 pages, 148866 bytes).
+ 34i,7n,35p,1247b,282s stack positions out of 5000i,500n,10000p,200000b,50000s
+</usr/share/
+texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf-texli
+ve/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-texlive/fonts/ty
+pe1/public/amsfonts/cm/cmbx8.pfb></usr/share/texmf-texlive/fonts/type1/public/a
+msfonts/cm/cmcsc10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm
+/cmex10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi10.pfb
+></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share
+/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-texli
+ve/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-texlive/fonts/typ
+e1/public/amsfonts/cm/cmr17.pfb></usr/share/texmf-texlive/fonts/type1/public/am
+sfonts/cm/cmr7.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr
+8.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr
+/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texmf
+-texlive/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texmf-texlive/fo
+nts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texmf-texlive/fonts/type1/p
+ublic/amsfonts/symbols/msam10.pfb>
+Output written on informe.pdf (10 pages, 254323 bytes).
 PDF statistics:
- 77 PDF objects out of 1000 (max. 8388607)
+ 115 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 11 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 31 words of extra memory for PDF output out of 10000 (max. 10000000)
 
