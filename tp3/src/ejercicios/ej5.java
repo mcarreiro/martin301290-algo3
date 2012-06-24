@@ -3,7 +3,7 @@ package ejercicios;
 import java.util.ArrayList;
 
 import java.util.Comparator;
-import java.util.Hashtable;
+//import java.util.Hashtable;
 import java.util.Iterator;
 
 import ej4.ConjuntoDominante;
