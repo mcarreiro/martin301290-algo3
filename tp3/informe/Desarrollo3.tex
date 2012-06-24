@@ -8,7 +8,7 @@ Para ello nos basamos en una estrategia de selección de nodos dominantes, la cu
 \subsection{Pseudocódigo}
 
 \begin{codebox}
-\Procname{$\proc{MCD_Greedy}$ (\textbf{in} $Grafo$)}{conjuntoDomGoloso}{ConjDeVértices}
+\Procname{$\proc{MCDGreedy}$ (\textbf{in} $Grafo$)}{conjuntoDomGoloso}{ConjDeVértices}
 \li	vértices = lista de vértices del grafo	\RComment O(n)
 \li	dominantes = conjunto vacio de vértices	
 \li	\textbf{Mientras} no esten todos los vértices cubiertos \Do \RComment O($n^3$)
@@ -16,7 +16,7 @@ Para ello nos basamos en una estrategia de selección de nodos dominantes, la cu
 \li 		Elijo como dominante al primero de la lista y lo agrego al conjunto de \textbf{dominantes} \RComment O(n)
 \li 		Saco de la lista de vértices al elegido \RComment O(n)
 \li 		Actualizo los nodos del grafo, disminuyendo la cantidad de \textit{grado sin dominar} de los adyacentes al elegido, y de los adyacentes a estos. \RComment O($n^2$)
-	\End
+\End
 \li	return \textbf{dominantes}
 \end{codebox}
 
@@ -25,7 +25,7 @@ Para ello nos basamos en una estrategia de selección de nodos dominantes, la cu
 La complejidad del algoritmo es de $n^3$
 
 El algoritmo comienza creando una lista de vértices en O(n).\\
-Luego entra en un ciclo que como máximo será lineal a la cantidad de vértices. En cada iteración deberá comprobar si el conjunto actual de vértices elegidos domina todo el grafo O($n^2$), ordenar todos los vértices O(n*log(n)), elegir un vértice O(1), removerlo de la lista O(n) y finalmente actualizar el atributo de los grados sin dominar adyacentes de cada nodo O($n^2$), esto es porque para los adyacentes del nodo elegido y a su vez para los adyacentes de estos tengo que bajar en uno este atributo, recorrer los adyacentes me lleva O(n) y por cada adyacente recorrer sus adyacentes también me lleva O(n), O(n) * O(n) = O($n^2$).\\
+Luego entra en un ciclo que como máximo será lineal en la cantidad de vértices. En cada iteración deberá comprobar si el conjunto actual de vértices elegidos domina todo el grafo O($n^2$), ordenar todos los vértices O(n*log(n)), elegir un vértice O(1), removerlo de la lista O(n) y finalmente actualizar el atributo de los grados sin dominar adyacentes de cada nodo O($n^2$), esto es porque para los adyacentes del nodo elegido y a su vez para los adyacentes de estos tengo que bajar en uno este atributo, recorrer los adyacentes me lleva O(n) y por cada adyacente recorrer sus adyacentes también me lleva O(n), O(n) * O(n) = O($n^2$).\\
 
 Por lo tanto, la complejidad nos queda:\\
 O(n) + O(n) * (O($n^2$) + O(n*log(n) + O(n) + O($n^2$)) = O($n^3$)\\\\
@@ -50,7 +50,7 @@ La solución optima proporcionada por el algoritmo exacto es {6,2}, mientras que
 \includegraphics[width=8cm]{./graficos/grafo_camino.png}
 % grafico.eps: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=50 50 410 302
 \end {center} 
-La solución optima proporcionada por el algoritmo exacto es {2,4}, mientras que el goloso podría devolver {3,2,5}, ya que como los nodos 2, 3 y 4 tienen el mismo grado, si se decide por el 3, dejaría a todos los demas nodos con 1 grado sin dominar y faltando los dos extremos, provocando que si o si se necesite cubrirlos o elegirlos como dominantes, haciendo que el conjunto tenga tamaño 3 y no 2 como el exacto.
+La solución óptima proporcionada por el algoritmo exacto es {2,4}, mientras que el goloso podría devolver {3,2,5}, ya que como los nodos 2, 3 y 4 tienen el mismo grado, si se decide por el 3, dejaría a todos los demas nodos con 1 grado sin dominar y faltando los dos extremos, provocando que si o si se necesite cubrirlos o elegirlos como dominantes, haciendo que el conjunto tenga tamaño 3 y no 2 como el exacto.
 
 \subsection{Tests y análisis}
 
