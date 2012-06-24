@@ -10,7 +10,7 @@ de las k*$|$MinConjDominante$|$ posibles soluciones que me puede devolver en cad
 \subsection{Pseudocódigo}
 
 \begin{codebox}
-\Procname{$\proc{MCD_Grasp}$ (\textbf{in} $Grafo$, \textbf{in} $k$)}{ConjDominante}{Conj}
+\Procname{$\proc{MCDGrasp}$ (\textbf{in} $Grafo$, \textbf{in} $k$)}{ConjDominante}{Conj}
 \li	mejorSolucion = TodosLosVertices
 \li \textbf{Para} i=0 hasta k \Do
 \li 	instanciaSolucionGreedyRandomized = MCDGreedy(grafo,k)
@@ -19,7 +19,7 @@ de las k*$|$MinConjDominante$|$ posibles soluciones que me puede devolver en cad
 \li		mejorSolucion = nuevaSolucion
 	\End
     \End	
-%\li	return mejorSolucion	
+\li	return mejorSolucion	
 \end{codebox}
 Se debe aclarar que tanto LocalSearch como Greedy devuelven ConjuntosDominantes verdaderos, por lo que lo único que importa es la cantidad de nodos devuelta
 
@@ -27,24 +27,24 @@ Se debe aclarar que tanto LocalSearch como Greedy devuelven ConjuntosDominantes 
 Por la demostración de la complejidad de la búsqueda local, sabemos que la complejidad es: O(ALGO);\\
 Por la demostración de la complejidad del goloso, sabemos que la complejidad es: O(ALGO);\\
 Dentro del GRASP se realizan k iteraciones de las siguientes operaciones:
-\begin{itemsize}
+\begin{itemize}
 \item Ejecutar algoritmo goloso con random
 \item Ejecutar algoritmo localSearch a partir de la solución del goloso
 \item Comparar mejorSolución con nuevaSolución (esta operación es en O(1) ya que tanto conseguir el tamaño de un ArrayList en Java como la comparación de enteros es en O(1)) 
-\end{itemsize}
+\end{itemize}
 Esto es O(k*(goloso + localSearch)), que resulta polinomial.
 
 \subsection{Peor Caso}
 Antes de hacer el gráfico, deberíamos calcular cual es el peor caso para este algoritmo. Sin embargo, el mismo depende de dos cosas:
-\begin{itemsize}
+\begin{itemize}
 \item La solución random generada por el algoritmo goloso cuando se usa el valor de k. 	Esto es importante, ya que mientras esa solución sea generada de forma pseudo-random, menor cantidad
 	de operaciones va a haber en la búsqueda local.
 \item No se pudo determinar un peor caso para la búqueda local. Es decir, no se encontró una entrada, en donde la
 	cantidad de operaciones que se hagan sean máimas. Sin embargo, encontramos casos malos para la misma.
-\end{itemsize}
+\end{itemize}
 Por lo tanto, veamos como es que se comporta el algoritmo en casos especificos. Empezamos por el caso cuando el
-grafo tiene una gran cantidad de componente conexas. En estos casos, el grado y el peso de los vétices se dejaba fijo,
-pero se variaba la cantidad de v ́rtices por componentes conexas del grafo.
+grafo tiene una gran cantidad de componente conexas. En estos casos, el grado y el peso de los vértices se dejaba fijo,
+pero se variaba la cantidad de vértices por componentes conexas del grafo.
 
 \subsection{Tests y análisis}
 
