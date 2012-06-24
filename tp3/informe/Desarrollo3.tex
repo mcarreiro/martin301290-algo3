@@ -1,52 +1,60 @@
-\section{Problema 3}
+\section{Algoritmo Goloso}
+
+\subsection{Soluci\'on}
+
+Proponemos una solución heuristica golosa para encontrar un conjunto dominante de un grafo lo mas pequeño posible con una complejidad polinomial.\\
+Para ello nos basamos en una estrategia de selección de nodos dominantes, la cual consiste en elegir el nodo que mas adyacentes no cubiertas tenga (es decir, que todavía no fueron dominadas) y verificando en cada iteración si el conjunto actual es dominante. En base a diferentes estrategias y tipos de grafos (estrella, bipartitos, completos, estrellas unidas, caminos, ciclos) que fuimos observando, elegimos esta ya que fue la que más nos convenció y mejores resultados nos dió debido a que siempre intenta seleccionar el nodo que mas pueda dominar a otros nodos reduciendo el conjunto de los no cubiertos y acercandose a una mejor solución del problema. 
 
 \subsection{Pseudocódigo}
 
 \begin{codebox}
-\Procname{$\proc{MCD_Greedy}$ (\textbf{in} $Grafo$)}{conjuntoDomGoloso}{Conj de Vertices}
-\li	vertices = lista de vertices del grafo
-\li	dominantes = conjunto vacio de vertices
-\li	\textbf{Mientras} no esten todos los vertices cubiertos \Do
-\li 		Ordeno los vertices por la cantidad adyacentes que tenga no cubiertas (sin dominar), de mayor a menor.
-\li 		Elijo como dominante al primero de la lista y lo agrego al conjunto de \textbf{dominantes}
-\li 		Saco de la lista de vertices al elegido
-\li 		Actualizo los nodos del grafo, disminuyendo la cantidad de \texit{grado sin dominar} de los adyacentes al elegido, y de los adyacentes a estos.
+\Procname{$\proc{MCD_Greedy}$ (\textbf{in} $Grafo$)}{conjuntoDomGoloso}{Conj de Vértices}
+\li	vértices = lista de vértices del grafo	\RComment O(n)
+\li	dominantes = conjunto vacio de vértices	
+\li	\textbf{Mientras} no esten todos los vértices cubiertos \Do \RComment O(n^3)
+\li 		Ordeno los vértices por la cantidad adyacentes que tenga no cubiertas (sin dominar), de mayor a menor. \RComment O(n*log(n))
+\li 		Elijo como dominante al primero de la lista y lo agrego al conjunto de \textbf{dominantes} \RComment O(n)
+\li 		Saco de la lista de vértices al elegido \RComment O(n)
+\li 		Actualizo los nodos del grafo, disminuyendo la cantidad de \textit{grado sin dominar} de los adyacentes al elegido, y de los adyacentes a estos. \RComment O(n^2)
 	\End
 \li	return \textbf{dominantes}
 \end{codebox}
 
 \subsection{Orden de complejidad}
 
-La complejidad de mi algoritmo es de 2^n * n³. Voy a demostrarlo por inducción:
+La complejidad del algoritmo es de n^3
 
-Caso Base:
+El algoritmo comienza creando una lista de vértices en O(n).\\
+Luego entra en un ciclo que como máximo será lineal a la cantidad de vértices. En cada iteración deberá comprobar si el conjunto actual de vértices elegidos domina todo el grafo O(n^2), ordenar todos los vértices O(n*log(n)), elegir un vértice O(1), removerlo de la lista O(n) y finalmente actualizar el atributo de los grados sin dominar adyacentes de cada nodo O(n^2), esto es porque para los adyacentes del nodo elegido y a su vez para los adyacentes de estos tengo que bajar en uno este atributo, recorrer los adyacentes me lleva O(n) y por cada adyacente recorrer sus adyacentes también me lleva O(n), O(n) * O(n) = O(n^2).\\
 
-n = 1, si n tiene un solo nodo ver si es dominante me cuesta O(1) ya que recorrer los vertices del grafo original es una sola iteracion y no es posible recorrer sus aristas. Luego divido en el caso en el que uso a ese nodo en el conjunto dominante y el caso en que no. El caso en que no al no tener mas nodos con cual probar me va a devolver el grafo original y el otro caso también ya que el grafo original era el que contenía únicamente a ese nodo. Ambos casos ver si el conjunto es dominante cuesta O(1) ya que tiene a lo sumo una iteración para hacer. Por lo tanto el algoritmo costaría O(1) que es igual a O(2¹*1³).
+Por lo tanto, la complejidad nos queda:\\
+O(n) + O(n) * (O(n^2) + O(n*log(n) + O(n) + O(n^2)) = O(n^3)\\\\
 
-Hipótesis inductiva:
-
-Supongo que con n nodos la complejidad es 2^n * n³
-
-Paso inductivo:
-
-Quiero ver que con n+1 nodos la complejidad pertenece a 2^(n+1)*(n+1)³
-
-Ver si el conjunto vacío es dominante me cuesta O(1) ya que en la primera iteración del grafoOriginal no es posible encontrar ningún vertice en el conjunto dominante o adyacente a él. Luego obtengo un nodo del grafo (grafo en el que me guarde todos los vertices, no el origianl) y busco el minimo conjunto dominante agregando ese nodo al conjunto o no, esto por hipótesis inductiva me cuesta 2 * (2^n * n³), ya que tengo que calcular 2 veces el conjunto minimo para n nodos. Por lo tanto la complejidad me termina costando  2^(n+1)*n³ y esto pertence a 2^(n+1)*(n+1)³. Con lo cual queda demostrada la complejidad.
-
-Notar que esta complejidad esta por encima de la complejidad exacta, ya que el n³ variaría en cada iteración dependiendo de la cantidad de nodos en el conjuntoDominante.
+La complejidad final del algoritmo goloso es de O(n^3), cumpliendo el objetivo de ser polinomial.
 
 
 \subsection{Peor Caso}
 
-Como el algoritmo es exacto y recorre todas las soluciones posibles siempre obtiene la mejor de ellas. Por lo tanto no existe una 'peor' instancia
-en la que la solución devuelta sea sub-óptima, siempre devuelve la mejor.
+Al ser una heurística, en cierto casos la solución no es la optima que podría dar un algoritmo exacto, pero aún asi es correcta.
+Los peores casos, donde se produce una diferencia en el tamaño de conjunto dominante respecto a la optima, se suelen dar en grafos en los que varios nodos tienen el mismo grado o hay pequeña diferencia, y esto es debido que para la elección del vertice dominante en cada iteración nos quedamos con el que mayor grado de nodos adyacentes no cubiertos tenga y si hay varios con esta misma característica puede pasar que el nodo seleccionado no sea conveniente a futuro para llegar a una solución optima.
+
+En los siguientes ejemplos de grafos se puede apreciar mejor:
+
+\begin {center}
+\includegraphics[width=8cm]{./graficos/grafo.png}
+% grafico.eps: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=50 50 410 302
+\end {center} 
+La solución optima proporcionada por el algoritmo exacto es {6,2}, mientras que el goloso devuelve {4,3,5}, ya que como los nodos 6,4 y 5 tienen el mismo grado, al momento de la elección se decide por el 4 provocando esta diferencia en el tamaño del conjunto con respecto a la solución optima.
+
+\begin {center}
+\includegraphics[width=8cm]{./graficos/grafo_camino.png}
+% grafico.eps: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=50 50 410 302
+\end {center} 
+La solución optima proporcionada por el algoritmo exacto es {2,4}, mientras que el goloso podría devolver {3,2,5}, ya que como los nodos 2, 3 y 4 tienen el mismo grado, si se decide por el 3, dejaría a todos los demas nodos con 1 grado sin dominar y faltando los dos extremos, provocando que si o si se necesite cubrirlos o elegirlos como dominantes, haciendo que el conjunto tenga tamaño 3 y no 2 como el exacto.
 
 \subsection{Tests y análisis}
 
-En los siguientes gráfico podemos observar que la cantidad de ciclos y el tiempo crecen notablemente a medida que el grafo tiene cada vez mas nodos.\\
-Esto es debido a que, como dijimos anteriormente, la complejidad es polinomica en el tamaño de la entrada (en este caso, la cantidad de nodos 
-del grafo) y no existe un mejor o peor en caso en el cual la complejidad sea mucho menor a O(n^4). Por esto es que tanto en el grafico de tiempos
- como en el de ciclos se puede observar claramente que la complejidad es exponencial.
+En los gráficos que aparece a continuación  se puede notar que a medida que la cantidad de nodos aumenta, el algoritmo dibuja un comportamiento que se asemeja a O(n^3) en relación a la cantidad de ciclos y el tiempo en nanosegundos.\\
 
 \begin {center}
 \includegraphics[width=8cm]{./graficos/goloso_1.png}
