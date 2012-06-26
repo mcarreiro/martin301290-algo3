@@ -9,7 +9,7 @@ def main():
 	for x in range (k):
 		f.write(str(random.randint(1, k))+ ' ')
 		f.write(str(random.randint(1, k))+ ' ')
-		f.write('3;')
+		f.write('0;')
 	f.write('\n')
 	f.close()
 main()
