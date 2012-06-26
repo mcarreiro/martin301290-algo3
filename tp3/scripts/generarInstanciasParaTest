@@ -1,0 +1,15 @@
+#!/usr/local/bin/python
+
+import sys,random
+
+def main():
+
+	f = open('instanciasGeneradas','w')
+	k = int(sys.argv[1])
+	for x in range (k):
+		f.write(str(random.randint(1, k))+ ' ')
+		f.write(str(random.randint(1, k))+ ' ')
+		f.write('3;')
+	f.write('\n')
+	f.close()
+main()
