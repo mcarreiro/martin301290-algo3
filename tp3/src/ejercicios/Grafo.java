@@ -96,6 +96,14 @@ public class Grafo {
 		return g;
 	}
 	
+	public Grafo desmarcarVertices() {
+		for(Vertice v: this.Vertices.values()) {
+			v.dominada = false;
+			v.gradoSinDominar = v.grado;
+		}
+		return this;
+	}
+	
 	public Vertice insertauObtenerVertice(String clave, String dato) {
 		Vertice v = this.obtenerVertice(clave);
 		if ( v == null ) {
