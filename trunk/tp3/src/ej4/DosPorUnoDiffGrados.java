@@ -11,5 +11,9 @@ public class DosPorUnoDiffGrados implements Comparator<DosPorUnoSet> {
 				(dp2.getSumaGradosTupla() - dp2.getGradoVertice());
 	}
 	
+	public String __toString(){
+		return "Diferencia de Grados";
+	}
+	
 
 }
