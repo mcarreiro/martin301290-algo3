@@ -121,6 +121,7 @@ public class ConjuntoDominante {
 	}
 	
 	private boolean intercambioRealizado(Vertice v1, Vertice v2) {
+		if (!(this.intercambiosRealizados.size() > 0)) return false;
 		for(Tupla<Vertice,Vertice> t : this.intercambiosRealizados ) {
 			if( v1.equals(t.getDato1()) || v1.equals(t.getDato2()) && 
 					(v2.equals(t.getDato1()) || v2.equals(t.getDato2())) ) 
@@ -175,6 +176,8 @@ public class ConjuntoDominante {
 	}
 	
 	private boolean nodosSonReemplazables(ArrayList<Vertice> candidatos, Vertice reemplazo) {
+		// si el reemplazo esta en dominantes, no va
+		if( this.dominantes.contains(reemplazo) ) return false;
 		// me fijo si la union de las aristas de v1,v2 es igual a las aristas de reemplazo
 		Set<Vertice> hs = new HashSet<Vertice>();
 		int agrego = 0;

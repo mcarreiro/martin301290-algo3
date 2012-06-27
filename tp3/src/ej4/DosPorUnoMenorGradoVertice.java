@@ -9,5 +9,9 @@ public class DosPorUnoMenorGradoVertice implements Comparator<DosPorUnoSet> {
 	public int compare(DosPorUnoSet dp1, DosPorUnoSet dp2) {
 		return dp2.getGradoVertice() - dp1.getGradoVertice();
 	}
+	
+	public String __toString(){
+		return "Menor Grado Vertice a Reemplazar";
+	}
 
 }

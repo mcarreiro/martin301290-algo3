@@ -8,10 +8,21 @@ import ejercicios.Grafo.Vertice;
 
 public class ej4 {
 	
+	static public enum Funciones { DiffGrados, MenorGrado, SumaTupla   }
+	
+	public static Comparator<DosPorUnoSet> getInstanciaFuncion(Funciones f) {
+		switch (f) {
+			case DiffGrados: return new DosPorUnoDiffGrados();
+			case MenorGrado: return new DosPorUnoMenorGradoVertice();
+			case SumaTupla: return new DosPorUnoSumaTupla();			
+		}
+		return null;
+	}
+	
 	// paso por parametro tmb la funcion de prioridad de los nodos
 	// todavia no se que voy a devolver
 	public static ConjuntoDominante MCD_LocalSearch(ConjuntoDominante cd, Comparator<DosPorUnoSet> funcion) {
-		int maxIterations = 5; // fijo? o lo hago aleatorio?
+		int maxIterations = 10; // fijo? o lo hago aleatorio?
 		while(cd.getEstrategiaFailed() < maxIterations ) {
 			cd.selectStrategy(funcion);
 		}

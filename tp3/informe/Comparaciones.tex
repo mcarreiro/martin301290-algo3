@@ -10,11 +10,21 @@ En cambio si no me importa mucho el tiempo de proceso, se que los datos de entra
 
 
 
-\subsection{Exacto - Local Search}
+\subsection{Exacto - Goloso - Local Search}
+En ésta sección vamos a comparar tanto las soluciones obtenidas como el consumo de tiempo en éstos tres algoritmos. Decidimos hacerlo de ésta forma, y no separadamente, ya que el algoritmo greedy es parte (al menos, en nuestro caso), de la búsqueda local, y utilizamos el exacto para saber si las soluciones obtenidas son buenas o no. Por lo tanto, analizaremos los tres casos juntos. Para ello, vamos a ayudarnos de dos gráficos, donde podemos ver la cardinalidad de las soluciones para distinta cantidad de nodos, y el tiempo tomado para resolverlos. \\
+\begin{center}
+  \includegraphics[width=12cm]{./graficos/local_comparacion.png}
+\end{center}
+Como vimos en el análisis anterior, para instancias muy pequeñas, y donde la exactitud es preponderante, el algoritmo exacto es el más adecuado a utilizar, ya que la diferencia de tiempo es muy poca, pero la diferencia de la solución podría ser considerable. En cambio, para entradas muy grandes, no es conveniente utilizar el algoritmo exacto, ya que el tiempo que consume es exponencial a su cantidad de nodos, como podemos ver en el gráfico 1. En cambio, es recomendable utilizar alguno de los otros dos algoritmos que estamos analizando.
+Cuál de ellos es una pregunta que debe ser respondida según la situación y la exactitud de la solución que se busque, a partir del análisis de los gráficos 1 y 2 de ésta sección, donde se analiza la cantidad de soluciones y el tiempo demandado para encontrarlas. 
+
+\begin{center}
+  \includegraphics[width=12cm]{./graficos/local_comparacion_soluciones.png}
+\end{center}
+
+Por un lado, si sólo se desea encontrar un conjunto dominante, podemos utilizar la solución golosa, que es la más rápida de las 3 ya que no depende de ninguna otra solución. Por su parte, si la instancia es muy grande, pero deseamos que la solución sea lo más óptima posible, y que el tiempo de resolución sea polinomial, debemos utilizar la búsqueda local, ya que ha demostrado ser al menos tan mala como la solución greedy, aún en casos cuando la solución que le pasamos es el grafo entero (es decir, tomamos como conjunto dominante a todo el grafo, por más malo que eso sea). 
 
 \subsection{Exacto - GRASP}
-
-\subsection{Goloso - Local Search}
 
 \subsection{Goloso - GRASP}
 
