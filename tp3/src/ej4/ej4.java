@@ -22,7 +22,7 @@ public class ej4 {
 	// paso por parametro tmb la funcion de prioridad de los nodos
 	// todavia no se que voy a devolver
 	public static ConjuntoDominante MCD_LocalSearch(ConjuntoDominante cd, Comparator<DosPorUnoSet> funcion) {
-		int maxIterations = 10; // fijo? o lo hago aleatorio?
+		int maxIterations = (int) Math.floor(Math.random()*(20-10+1)+10);; // aletorio entre 10 y 20
 		while(cd.getEstrategiaFailed() < maxIterations ) {
 			cd.selectStrategy(funcion);
 		}
