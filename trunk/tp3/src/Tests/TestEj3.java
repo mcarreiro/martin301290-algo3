@@ -251,6 +251,7 @@ public void testInstancias(){
 			System.out.println(" "+ milisegundosTot/1000);
 	        
 		}*/
+		/*
 		for(int k = 1; k < 29; k++){
 			long milisegundosTot = 0;
 			Grafo gGr =  ej2.crearGrafoDesdeInstancia(instancias.get(instancias.size()-1));
@@ -258,17 +259,17 @@ public void testInstancias(){
 			System.out.print(k);
 			long milisegundosactuales,milisegundos;
 			
-			for(int j = 0; j < 100;j++){
+			for(int j = 0; j < 10;j++){
 				gGr =  ej2.crearGrafoDesdeInstancia(instancias.get(instancias.size()-1));
 				milisegundosactuales = System.nanoTime();				
 				ej5.MCD_Grasp(gGr,k);
 
 				milisegundosTot += System.nanoTime() - milisegundosactuales;
 			}
-			System.out.println(" "+ milisegundosTot/100);
+			System.out.println(" "+ milisegundosTot/10000000);
 	        
-		}
-		/*System.out.println("GRASP");
+		}*/
+		System.out.println("GRASP");
 
 		for(int i = 0; i < instancias.size(); i++){
 			long milisegundosTot = 0;
@@ -277,17 +278,17 @@ public void testInstancias(){
 			System.out.print(gGr.getVertices().size());
 			long milisegundosactuales,milisegundos;
 			
-			for(int j = 0; j < 1000;j++){
+			for(int j = 0; j < 10;j++){
 				gGr =  ej2.crearGrafoDesdeInstancia(instancias.get(i));
 				milisegundosactuales = System.nanoTime();
-				@SuppressWarnings("unused")
-				ej5.MCD_Grasp(gGr,1);
+				
+				ej5.MCD_Grasp(gGr,5);
 
 				milisegundosTot += System.nanoTime() - milisegundosactuales;
 			}
-			System.out.println(" "+ milisegundosTot/1000);
+			System.out.println(" "+ milisegundosTot/10000000);
 	        
-		}*//*
+		}/*
 		for(int i = 0; i < instancias.size() && false; i++){
 			long milisegundosTot = 0;
 			Grafo gE =  ej2.crearGrafoDesdeInstancia(instancias.get(i));
