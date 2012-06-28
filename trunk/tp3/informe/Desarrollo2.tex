@@ -8,9 +8,8 @@ para el cual aún no se encontró forma de resolverlo polinomialmente pero tampo
 Como todavía no se halló algoritmo alguno para resolverlo poliniomalmente y nosotros no somos investigadores/iluminados (aún) decidimos resolverlo
 de manera exponencial. Para esto utilizamos el popular método (dicho en criollo) de quedarme con la mejor opción entre poner y no un nodo en el 
 conjunto dominante. Este procedimiento lo que hace, básicamente, es analizar todas las soluciones posibles y agarrar la mejor de ellas. \\
-%No nos pareció significativo agregarle memorization ya que su complejidad no mejoriría de forma considerable y tampoco nos pareció imperante 
-%preocuparnos por la complejidad de la función que chequea si el conjunto recibido es dominante, ya que, mientras sea polinimal, va a ser despreciable 
-%al lado de la complejidad de analizar todas las soluciones (que como dijimos es exponencial).
+No nos pareció significativo agregarle memorization ya que su complejidad no mejoriría de forma considerable debido a que la complejidad del algoritmo reside en calcular cada solución posible y no en el recalculo de las mismas, además de que ocuparía mas memoria. Tampoco nos pareció imperante preocuparnos por la complejidad de la función que chequea si el conjunto recibido es dominante, ya que, mientras sea polinimal, va a ser despreciable al lado de la complejidad de analizar todas las soluciones (que como dijimos es exponencial). \\
+Finalmente queremos resaltar que cualquier optimización conocida para este algoritmo no haría mas que mejorar la complejidad para ciertos tipos de casos, como el ejercicio no especifica que los grafos a recibir cumplan ciertos parametros o restricciones, todo tipo de perfeccionamiento que le implementemos va a dar lo mismo para las consignas del ejercicio.
 
 \subsection{Pseudocódigo}
 
