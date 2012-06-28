@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import java.util.List;
 
+import archivos.EscribirArchivo;
 import archivos.LeerArchivos;
 
 import ejercicios.Grafo;
@@ -27,9 +28,18 @@ public class TestEj3 extends TestCase{
 		java.io.File currentDir = new java.io.File("");
 		ArrayList<Grafo> ListaDeGrafos = new ArrayList<Grafo>();		
 		ListaDeGrafos = LeerArchivos.leer(currentDir.getAbsolutePath()+ "/enunciado/Tp3.in");
+		String[] output = new String[ListaDeGrafos.size()]; 
+
 		for(int i = 0; i < ListaDeGrafos.size(); i++){
 			conj = Ej3.MCD_Greedy(ListaDeGrafos.get(i),1);
+			output[i] = "";
+			for(Vertice v : conj) {
+				output[i] += v + " "; 
+			}
 		}
+		String file = currentDir.getAbsolutePath()+ "/enunciado/Tp3Goloso.out";
+		// escribo archibos para el tiempo
+		EscribirArchivo.escribir(file, output);
 	}
 	
 	public void test(){
@@ -269,12 +279,11 @@ public void testInstancias(){
 			System.out.println(" "+ milisegundosTot/10000000);
 	        
 		}*/
-		System.out.println("GRASP");
+		System.out.println("K=5");
 
 		for(int i = 0; i < instancias.size(); i++){
 			long milisegundosTot = 0;
 			Grafo gGr =  ej2.crearGrafoDesdeInstancia(instancias.get(i));
-			Ej3.ciclos=0;
 			System.out.print(gGr.getVertices().size());
 			long milisegundosactuales,milisegundos;
 			
@@ -286,28 +295,104 @@ public void testInstancias(){
 
 				milisegundosTot += System.nanoTime() - milisegundosactuales;
 			}
-			System.out.println(" "+ milisegundosTot/10000000);
+			System.out.println(" "+ milisegundosTot/10);
 	        
-		}/*
-		for(int i = 0; i < instancias.size() && false; i++){
+		}System.out.println("K=10");
+
+		for(int i = 0; i < instancias.size(); i++){
+			long milisegundosTot = 0;
+			Grafo gGr =  ej2.crearGrafoDesdeInstancia(instancias.get(i));
+			System.out.print(gGr.getVertices().size());
+			long milisegundosactuales,milisegundos;
+			
+			for(int j = 0; j < 10;j++){
+				gGr =  ej2.crearGrafoDesdeInstancia(instancias.get(i));
+				milisegundosactuales = System.nanoTime();
+				
+				ej5.MCD_Grasp(gGr,10);
+
+				milisegundosTot += System.nanoTime() - milisegundosactuales;
+			}
+			System.out.println(" "+ milisegundosTot/10);
+	        
+		}
+		System.out.println("K=15");
+
+		for(int i = 0; i < instancias.size(); i++){
+			long milisegundosTot = 0;
+			Grafo gGr =  ej2.crearGrafoDesdeInstancia(instancias.get(i));
+			System.out.print(gGr.getVertices().size());
+			long milisegundosactuales,milisegundos;
+			
+			for(int j = 0; j < 10;j++){
+				gGr =  ej2.crearGrafoDesdeInstancia(instancias.get(i));
+				milisegundosactuales = System.nanoTime();
+				
+				ej5.MCD_Grasp(gGr,15);
+
+				milisegundosTot += System.nanoTime() - milisegundosactuales;
+			}
+			System.out.println(" "+ milisegundosTot/10);
+	        
+		}
+		System.out.println("K=20");
+
+		for(int i = 0; i < instancias.size(); i++){
+			long milisegundosTot = 0;
+			Grafo gGr =  ej2.crearGrafoDesdeInstancia(instancias.get(i));
+			System.out.print(gGr.getVertices().size());
+			long milisegundosactuales,milisegundos;
+			
+			for(int j = 0; j < 10;j++){
+				gGr =  ej2.crearGrafoDesdeInstancia(instancias.get(i));
+				milisegundosactuales = System.nanoTime();
+				
+				ej5.MCD_Grasp(gGr,20);
+
+				milisegundosTot += System.nanoTime() - milisegundosactuales;
+			}
+			System.out.println(" "+ milisegundosTot/10);
+	        
+		}
+		System.out.println("K=25");
+
+		for(int i = 0; i < instancias.size(); i++){
+			long milisegundosTot = 0;
+			Grafo gGr =  ej2.crearGrafoDesdeInstancia(instancias.get(i));
+			System.out.print(gGr.getVertices().size());
+			long milisegundosactuales,milisegundos;
+			
+			for(int j = 0; j < 10;j++){
+				gGr =  ej2.crearGrafoDesdeInstancia(instancias.get(i));
+				milisegundosactuales = System.nanoTime();
+				
+				ej5.MCD_Grasp(gGr,25);
+
+				milisegundosTot += System.nanoTime() - milisegundosactuales;
+			}
+			System.out.println(" "+ milisegundosTot/10);
+	        
+		}
+		System.out.println("EXACTO");
+
+		for(int i = 0; i < instancias.size(); i++){
 			long milisegundosTot = 0;
 			Grafo gE =  ej2.crearGrafoDesdeInstancia(instancias.get(i));
 			Ej3.ciclos=0;
 			System.out.print(gE.getVertices().size());
 			long milisegundosactuales,milisegundos;
 			
-			for(int j = 0; j < 1000;j++){
+			for(int j = 0; j < 10;j++){
 				gE =  ej2.crearGrafoDesdeInstancia(instancias.get(i));
 				milisegundosactuales = System.nanoTime();
-				@SuppressWarnings("unused")
-List<Grafo.Vertice> conjE = ej2.obtenerConjuntoDominanteMinimo(gE); 				
+				ej2.obtenerConjuntoDominanteMinimo(gE); 				
 				milisegundosTot += System.nanoTime() - milisegundosactuales;
 			}
-			System.out.println(" "+ milisegundosTot/1000);
+			System.out.println(" "+ milisegundosTot/10);
 			
 			
 			
 	        
-		}*/
+		}
 	}
 }
