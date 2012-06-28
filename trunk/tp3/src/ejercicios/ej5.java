@@ -28,8 +28,9 @@ public class ej5 {
 		//Hashtable<String,Vertice> vertices = g.getVertices();
 		ArrayList<Vertice> todosLosVertices = calcularDominados(g,new ArrayList<Vertice>()); 
 		ConjuntoDominante mejorSolucion = new ConjuntoDominante(todosLosVertices, new ArrayList<Vertice>());
-		
+		Grafo gOriginal = g;
 		for(int i = 0;i<k;i++){
+			g = g.desmarcarVertices();
 			ArrayList<Vertice> instanciaSolucion = Ej3.MCD_Greedy(g,k);
 			ConjuntoDominante cd = new ConjuntoDominante(instanciaSolucion, calcularDominados(g, instanciaSolucion));
 			//VER CUAL FUNCIONA MEJOR EN LA MAYORIA DE LOS CASOS DE LOS TESTS
