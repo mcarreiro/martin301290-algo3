@@ -24,15 +24,16 @@ de las k*$|$MinConjDominante$|$ posibles soluciones que me puede devolver en cad
 Se debe aclarar que tanto LocalSearch como Greedy devuelven ConjuntosDominantes verdaderos, por lo que lo único que importa es la cantidad de nodos devuelta
 
 \subsection{Análisis de Complejidad}
-Por la demostración de la complejidad de la búsqueda local, sabemos que la complejidad es: O(ALGO);\\
-Por la demostración de la complejidad del goloso, sabemos que la complejidad es: O(ALGO);\\
+Por la demostración de la complejidad de la búsqueda local, sabemos que la complejidad es: O($n^2$);\\
+Por la demostración de la complejidad del goloso, sabemos que la complejidad es: O($n^3$);\\
 Dentro del GRASP se realizan k iteraciones de las siguientes operaciones:
 \begin{itemize}
 \item Ejecutar algoritmo goloso con random
 \item Ejecutar algoritmo localSearch a partir de la solución del goloso
 \item Comparar mejorSolución con nuevaSolución (esta operación es en O(1) ya que tanto conseguir el tamaño de un ArrayList en Java como la comparación de enteros es en O(1)) 
 \end{itemize}
-Esto es O(k*(goloso + localSearch)), que resulta polinomial.
+Esto es O(k*(goloso + localSearch)), que resulta polinomial.\\
+Entonces la complejidad resulta O(k*$n^3$);
 
 \subsection{Peor Caso}
 Antes de hacer el gráfico, deberíamos calcular cual es el peor caso para este algoritmo. Sin embargo, el mismo depende de dos cosas:
