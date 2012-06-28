@@ -258,14 +258,14 @@ public void testInstancias(){
 			System.out.print(k);
 			long milisegundosactuales,milisegundos;
 			
-			for(int j = 0; j < 1000;j++){
+			for(int j = 0; j < 100;j++){
 				gGr =  ej2.crearGrafoDesdeInstancia(instancias.get(instancias.size()-1));
 				milisegundosactuales = System.nanoTime();				
 				ej5.MCD_Grasp(gGr,k);
 
 				milisegundosTot += System.nanoTime() - milisegundosactuales;
 			}
-			System.out.println(" "+ milisegundosTot/1000);
+			System.out.println(" "+ milisegundosTot/100);
 	        
 		}
 		/*System.out.println("GRASP");
