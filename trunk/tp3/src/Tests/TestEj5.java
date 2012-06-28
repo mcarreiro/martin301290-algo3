@@ -19,11 +19,31 @@ import ejercicios.Ej3;
 import ejercicios.Grafo;
 import ejercicios.ej2;
 import ejercicios.Grafo.Vertice;
+import ejercicios.ej5;
 import junit.framework.TestCase;
 
 
 
 public class TestEj5 extends TestCase {
+	
+	public void testArchivoIN(){
+		java.io.File currentDir = new java.io.File("");
+		ArrayList<Grafo> ListaDeGrafos = new ArrayList<Grafo>();		
+		ListaDeGrafos = LeerArchivos.leer(currentDir.getAbsolutePath()+ "/enunciado/Tp3.in");
+		String[] output = new String[ListaDeGrafos.size()]; 
+
+		for(int i = 0; i < ListaDeGrafos.size(); i++){
+			int k = (int)(Math.random()*(ListaDeGrafos.get(i).getVertices().size()))+1; 
+			ConjuntoDominante solu = ej5.MCD_Grasp(ListaDeGrafos.get(i), k);
+			output[i] = "";
+			for(Vertice v : solu.getDominantes()) {
+				output[i] += v + " "; 
+			}
+		}
+		String file = currentDir.getAbsolutePath()+ "/enunciado/Tp3GRASP.out";
+		// escribo archibos para el tiempo
+		EscribirArchivo.escribir(file, output);
+	}
 	
 	public void testVertices() {
 		Grafo g = new Grafo();
