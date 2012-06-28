@@ -24,7 +24,7 @@ import ejercicios.ej5;
 
 public class TestEj3 extends TestCase{
 	List<Grafo.Vertice> conj;
-	public void testCatedra(){
+	public void testArchivoIN(){
 		java.io.File currentDir = new java.io.File("");
 		ArrayList<Grafo> ListaDeGrafos = new ArrayList<Grafo>();		
 		ListaDeGrafos = LeerArchivos.leer(currentDir.getAbsolutePath()+ "/enunciado/Tp3.in");
@@ -239,7 +239,7 @@ public void testInstancias(){
 			System.out.println(" "+ milisegundosTot/1000);
 	        
 		}*/
-		/*
+		
 		System.out.println("LS");
 
 		for(int i = 0; i < instancias.size(); i++){
@@ -248,7 +248,7 @@ public void testInstancias(){
 			System.out.print(gLS.getVertices().size());
 			long milisegundosactuales,milisegundos;
 			
-			for(int j = 0; j < 1000;j++){
+			for(int j = 0; j < 100;j++){
 				gLS =  ej2.crearGrafoDesdeInstancia(instancias.get(i));
 				milisegundosactuales = System.nanoTime();
 				@SuppressWarnings("unused")
@@ -258,9 +258,9 @@ public void testInstancias(){
 				ConjuntoDominante solu = ej4.MCD_LocalSearch(cd, new DosPorUnoDiffGrados());
 				milisegundosTot += System.nanoTime() - milisegundosactuales;
 			}
-			System.out.println(" "+ milisegundosTot/1000);
+			System.out.println(" "+ milisegundosTot/100);
 	        
-		}*/
+		}
 		/*
 		for(int k = 1; k < 29; k++){
 			long milisegundosTot = 0;
@@ -278,7 +278,7 @@ public void testInstancias(){
 			}
 			System.out.println(" "+ milisegundosTot/10000000);
 	        
-		}*/
+		}*//*
 		System.out.println("K=5");
 
 		for(int i = 0; i < instancias.size(); i++){
@@ -315,7 +315,7 @@ public void testInstancias(){
 			}
 			System.out.println(" "+ milisegundosTot/10);
 	        
-		}
+		}*/
 		System.out.println("K=15");
 
 		for(int i = 0; i < instancias.size(); i++){
@@ -324,7 +324,7 @@ public void testInstancias(){
 			System.out.print(gGr.getVertices().size());
 			long milisegundosactuales,milisegundos;
 			
-			for(int j = 0; j < 10;j++){
+			for(int j = 0; j < 100;j++){
 				gGr =  ej2.crearGrafoDesdeInstancia(instancias.get(i));
 				milisegundosactuales = System.nanoTime();
 				
@@ -332,9 +332,9 @@ public void testInstancias(){
 
 				milisegundosTot += System.nanoTime() - milisegundosactuales;
 			}
-			System.out.println(" "+ milisegundosTot/10);
+			System.out.println(" "+ milisegundosTot/100);
 	        
-		}
+		}/*
 		System.out.println("K=20");
 
 		for(int i = 0; i < instancias.size(); i++){
@@ -393,6 +393,6 @@ public void testInstancias(){
 			
 			
 	        
-		}
+		}*/
 	}
 }
