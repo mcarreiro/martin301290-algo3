@@ -61,11 +61,11 @@ En primer lugar, hemos hecho test para encontrar cuál de todas las funciones en
 Una vez establecida qué función deberíamos utilizar para el 2x1, nos abocamos a testear el método de búsqueda local de acuerdo a la cantidad de nodos del grafo y el tiempo que le consume encontrar una solución. Vale aclarar que no tomamos en consideración el tiempo que nos consume encontrar una solución para darle a la búsqueda loca, ya que consideramos que ello no es parte de nuestro algoritmo. De ésta forma, podemos ver que nuestro algoritmo se comporta de forma polinómica en función del tiempo, como lo analizamos en la sección de complejidad. Es decir, mientras mayor cantidad de nodos tenga la solución que nos proveen, y más relacionados estén entre sí dichos nodos (es decir, a través de aristas hacia nodos del mismo conjunto o del conjunto de los dominados), mayor tiempo requerirá calcular nuestra solución. Además, y de forma conjunta con éste crecimiento, aumenta la cantidad de operaciones requeridas por el algortimo para finalizar cada iteración $k$, incremento que se ve directamente relacionado con el aumento de la cardinalidad de conjunto dominante. Ésto puede verse en el gráfico 1, de forma tal que a mayor cantidad de nodos que le pasamos a nuestra solución, mayor será el tiempo que le toma resolverlo, debido a que debe realizar más operaciones.
 
 \begin{center}
-\includegraphics[width=12cm]{./graficos/tiempoLocalSearch.png}
+\includegraphics[width=13cm]{./graficos/tiempoLocalSearch.png}
 \end{center}
 
 Además, creemos conveniente probar / mostrar la mejoría que realiza nuestro algoritmo a las soluciones que se le dan. Para ello, comparamos la ejecución de la misma instancia para el algoritmo exacto, el algoritmo greedy y el algoritmo de solución local, y la calidad de la solución (la cardinalidad de las mismas), mostrando cómo mejoran las mismas de acuerdo a cada método. Es válido aclarar que en todas las corridas, hemos utilizado como instancia de entrada para el local search la solución  dada por el algoritmo greedy, por lo que en todos los casos, la cardinalidad de las soluciones de la búsqueda loca, será por lo menos, igual a la greedy y como máximo, si tuvimos suerte, igual a la exacta.
 
 \begin{center}
-\includegraphics[width=12cm]{./graficos/local_comparacion_soluciones.png}
+\includegraphics[width=13cm]{./graficos/local_comparacion_soluciones.png}
 \end{center}
