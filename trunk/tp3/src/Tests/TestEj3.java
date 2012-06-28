@@ -9,7 +9,17 @@ import archivos.LeerArchivos;
 import ejercicios.Grafo;
 import ejercicios.Ej3;
 import ejercicios.ej2;
+import ejercicios.Grafo.Vertice;
+import ej4.ConjuntoDominante;
+import ej4.DosPorUnoDiffGrados;
+import ej4.DosPorUnoMenorGradoVertice;
+import ej4.DosPorUnoSumaTupla;
+import ej4.ej4;
+import ej4.ConjuntoDominante.Movimientos;
+import ej4.ej4.Funciones;
 import junit.framework.TestCase;
+import ejercicios.ej5;
+
 
 public class TestEj3 extends TestCase{
 	List<Grafo.Vertice> conj;
@@ -201,10 +211,9 @@ public void testInstancias(){
 		instancias.add("13 2 0;15 19 0;24 12 0;2 27 0;24 22 0;5 16 0;18 28 0;23 12 0;2 8 0;6 26 0;20 28 0;8 24 0;4 17 0;26 16 0;15 12 0;26 13 0;5 4 0;25 12 0;26 28 0;26 1 0;15 27 0;24 2 0;21 14 0;24 28 0;2 18 0;9 4 0;3 5 0;17 15 0");
 		instancias.add("4 20 0;9 12 0;17 29 0;12 25 0;29 27 0;27 19 0;26 26 0;16 27 0;4 12 0;19 6 0;18 11 0;7 4 0;29 24 0;16 7 0;3 14 0;26 23 0;25 5 0;9 22 0;2 12 0;11 3 0;28 1 0;23 19 0;24 16 0;15 23 0;28 18 0;29 22 0;1 1 0;19 27 0;5 26 0");
 		instancias.add("22 3 0;2 11 0;17 21 0;15 5 0;29 7 0;23 9 0;7 16 0;18 29 0;24 11 0;10 28 0;30 2 0;15 27 0;12 18 0;25 23 0;7 10 0;2 11 0;23 3 0;16 9 0;23 28 0;3 20 0;18 25 0;28 3 0;21 11 0;13 1 0;14 21 0;13 24 0;13 6 0;11 16 0;12 26 0;19 8 0");
-		
-		for(int i = 0; i < instancias.size(); i++){
-			int milisegundosTot = 0;
-			//Grafo gE =  ej2.crearGrafoDesdeInstancia(instancias.get(i));
+		/*
+		for(int i = 0; i < instancias.size() && false; i++){
+			long milisegundosTot = 0;
 			Grafo gG =  ej2.crearGrafoDesdeInstancia(instancias.get(i));
 			Ej3.ciclos=0;
 			System.out.print(gG.getVertices().size());
@@ -219,8 +228,67 @@ public void testInstancias(){
 			}
 			System.out.println(" "+ milisegundosTot/1000);
 	        
-		}
+		}*/
+		/*
+		System.out.println("LS");
+
 		for(int i = 0; i < instancias.size(); i++){
+			long milisegundosTot = 0;
+			Grafo gLS =  ej2.crearGrafoDesdeInstancia(instancias.get(i));
+			System.out.print(gLS.getVertices().size());
+			long milisegundosactuales,milisegundos;
+			
+			for(int j = 0; j < 1000;j++){
+				gLS =  ej2.crearGrafoDesdeInstancia(instancias.get(i));
+				milisegundosactuales = System.nanoTime();
+				@SuppressWarnings("unused")
+				ArrayList<Grafo.Vertice> dominantes = Ej3.MCD_Greedy(gLS,1);		
+				ArrayList<Vertice> dominados = ej4.getListaDominados(gLS, dominantes);		
+				ConjuntoDominante cd = new ConjuntoDominante(dominantes, dominados);
+				ConjuntoDominante solu = ej4.MCD_LocalSearch(cd, new DosPorUnoDiffGrados());
+				milisegundosTot += System.nanoTime() - milisegundosactuales;
+			}
+			System.out.println(" "+ milisegundosTot/1000);
+	        
+		}*/
+		for(int k = 1; k < 29; k++){
+			long milisegundosTot = 0;
+			Grafo gGr =  ej2.crearGrafoDesdeInstancia(instancias.get(instancias.size()-1));
+			Ej3.ciclos=0;
+			System.out.print(k);
+			long milisegundosactuales,milisegundos;
+			
+			for(int j = 0; j < 1000;j++){
+				gGr =  ej2.crearGrafoDesdeInstancia(instancias.get(instancias.size()-1));
+				milisegundosactuales = System.nanoTime();				
+				ej5.MCD_Grasp(gGr,k);
+
+				milisegundosTot += System.nanoTime() - milisegundosactuales;
+			}
+			System.out.println(" "+ milisegundosTot/1000);
+	        
+		}
+		/*System.out.println("GRASP");
+
+		for(int i = 0; i < instancias.size(); i++){
+			long milisegundosTot = 0;
+			Grafo gGr =  ej2.crearGrafoDesdeInstancia(instancias.get(i));
+			Ej3.ciclos=0;
+			System.out.print(gGr.getVertices().size());
+			long milisegundosactuales,milisegundos;
+			
+			for(int j = 0; j < 1000;j++){
+				gGr =  ej2.crearGrafoDesdeInstancia(instancias.get(i));
+				milisegundosactuales = System.nanoTime();
+				@SuppressWarnings("unused")
+				ej5.MCD_Grasp(gGr,1);
+
+				milisegundosTot += System.nanoTime() - milisegundosactuales;
+			}
+			System.out.println(" "+ milisegundosTot/1000);
+	        
+		}*//*
+		for(int i = 0; i < instancias.size() && false; i++){
 			long milisegundosTot = 0;
 			Grafo gE =  ej2.crearGrafoDesdeInstancia(instancias.get(i));
 			Ej3.ciclos=0;
@@ -239,6 +307,6 @@ List<Grafo.Vertice> conjE = ej2.obtenerConjuntoDominanteMinimo(gE);
 			
 			
 	        
-		}
+		}*/
 	}
 }
