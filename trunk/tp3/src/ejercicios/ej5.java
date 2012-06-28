@@ -66,11 +66,14 @@ public class ej5 {
 	public static ArrayList<Grafo.Vertice> calcularDominados(Grafo g, ArrayList<Vertice> dominantes){
 		
 		ArrayList<Grafo.Vertice> dominados = new ArrayList<Vertice>();
+		Grafo.Vertice vert;
 		
 		Iterator<Grafo.Vertice> itVertice = g.getVertices().values().iterator();		
-		while(itVertice.hasNext())
-			if(!dominantes.contains(itVertice.next())){
-				dominados.add(itVertice.next());
+		while(itVertice.hasNext()){
+				vert = itVertice.next();
+				if(!dominantes.contains(vert)){
+					dominados.add(vert);
+				}
 			}
 		return dominados;
 	}	
