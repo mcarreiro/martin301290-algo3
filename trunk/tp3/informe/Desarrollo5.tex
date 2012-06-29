@@ -7,7 +7,7 @@ lista de nodos a ser considerado dominante.\\
 Para ello, agregamos en el algoritmo Greedy que reciba por parámetro dicho k, de forma tal que al momento de elegir el próximo nodo, en vez de elegir el primero de los nodos ordenados por la cantidad de adyacentes
 sin dominar, ahora elige la posición i, que será el número obtenido pseudo-aleatoriamente a través de la función random entre 0 y k. En caso de que este k sea mayor a la cantidad de nodos considerados en la lista, 
 k se definirá como la longitud de dicha lista.\\
-Un tema importante de GRASP es que nunca termina, y neceista una condición de parada arbitraria. Elegimos, al igual que en LocalSearch, una iteración que busque hasta k veces asumiendo que
+Un tema importante de GRASP es que nunca termina, y necesita una condición de parada arbitraria. Elegimos, al igual que en LocalSearch, una iteración que busque hasta k veces asumiendo que
 de las k*$|$MinConjDominante$|$ posibles soluciones que me puede devolver en cada iteración el algoritmo greedy.
 
 \subsection{Pseudocódigo}
