@@ -37,7 +37,7 @@ Si luego de k iteraciones, con $k$ aleatorio entre 10 y 20, el algoritmo no logr
 \li \textbf{return} false
 \end{codebox}
 
-\section{Análisis de Complejidad}
+\subsection{Análisis de Complejidad}
 Para todos los casos, se corre al menos k veces, y para cada una de esas k corridas, se utilizan 3 métodos para intentar hallar una nueva solucion:
 \begin{description}
 \item[2x1:] Se crea una cola de nodos, ordenados por una funcion f (pasada por parametro). Para ello, se recorren todos los posibles pares de nodos dominantes, y para cada par, se analiza si es posible reemplazarlo por un nodo del conjunto dominado. La complejidad de crear esta cola es de $O(n^2)$, siempre y cuando se considere que $n^2$ es mayor a m, siendo m la cantidad de vertices del conjunto dominado. Luego, para hacer el intercambio, se realizan operaciones en ArrayList, que son $O(n)$. Por lo que la complejidad de éste método es de $O(n^2)$.
