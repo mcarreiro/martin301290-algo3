@@ -17,24 +17,24 @@ Si luego de k iteraciones, con $k$ aleatorio entre 10 y 20, el algoritmo no logr
 \begin{codebox}
 \Procname{$\proc{EncontrarSolucion}$ (\textbf{ConjuntoDominante} $cd$, \textbf{Comparator} $funcion$)}{cd}{Conjunto Dominante}
 \li	elijo un k aleatorio entre 10 y 20.
-\li	hasta que la cardinalidad de la solucion no cambie durante k estrategias: \Do
+\li	\textbf{hasta} que la cardinalidad de la solucion no cambie durante k estrategias: \Do
 \li		ElegirEstrategia(cd, funcion)
 \End
 \End
-\li	devuelvo el ConjuntoDominante cd
+\li	\textbf{return} cd
 \end{codebox}
 
 \begin{codebox}
 \Procname{$\proc{ElegirEstrategia}$ (\textbf{ConjuntoDominante} $cd$, \textbf{Comparator} $f$)}{res}{Boolean}
-\li	para cada una de las E estrategias: \Do
+\li	\textbf{para} cada una de las E estrategias: \Do
 \li		intento la estregia E en el conjunto dominante cd
-\li		Si es posible llevar a cabo la estrategia E con la funcion f: \Do
+\li		\textbf{Si} es posible llevar a cabo la estrategia E con la funcion f: \Do
 \li			devuelvo true
 \End
-\li		Si no es posible llevar a cabo la estrategia E, sigo con la proxima estrategia
+\li		\textbf{Si} no es posible llevar a cabo la estrategia E, sigo con la proxima estrategia
 \End
-\li si no pude llevar a cabo ninguna estrategia, aumento el contador de estrategias fallidas
-\li devuelvo false
+\li \textbf{si} no pude llevar a cabo ninguna estrategia, aumento el contador de estrategias fallidas
+\li \textbf{return} false
 \end{codebox}
 
 \subsection{Complejidad}
