@@ -15,14 +15,14 @@ Para ello nos basamos en una estrategia de selección de nodos dominantes, la cu
 \li 		Ordeno los vértices por la cantidad adyacentes que tenga no cubiertas (sin dominar), de mayor a menor. \RComment O(n*log(n))
 \li 		Elijo como dominante al primero de la lista y lo agrego al conjunto de \textbf{dominantes} \RComment O(n)
 \li 		Saco de la lista de vértices al elegido \RComment O(n)
-\li 		Actualizo los nodos del grafo, disminuyendo la cantidad de \textit{grado sin dominar} de los adyacentes al elegido, y de los adyacentes a estos. \RComment O($n^2$)
+\li 		Actualizo los nodos del grafo, disminuyendo la cantidad de \textit{grado sin dominar} de los adyacentes al elegido,\\ y de los adyacentes a estos. \RComment O($n^2$)
 \End
 \li	return \textbf{dominantes}
 \end{codebox}
 
 \subsection{Orden de complejidad}
 
-La complejidad del algoritmo es de $n^3$
+La complejidad del algoritmo es de O($n^3$)
 
 El algoritmo comienza creando una lista de vértices en O(n).\\
 Luego entra en un ciclo que como máximo será lineal en la cantidad de vértices. En cada iteración deberá comprobar si el conjunto actual de vértices elegidos domina todo el grafo O($n^2$), ordenar todos los vértices O(n*log(n)), elegir un vértice O(1), removerlo de la lista O(n) y finalmente actualizar el atributo de los grados sin dominar adyacentes de cada nodo O($n^2$), esto es porque para los adyacentes del nodo elegido y a su vez para los adyacentes de estos tengo que bajar en uno este atributo, recorrer los adyacentes me lleva O(n) y por cada adyacente recorrer sus adyacentes también me lleva O(n), O(n) * O(n) = O($n^2$).\\

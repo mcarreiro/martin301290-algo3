@@ -38,7 +38,6 @@ public class TestEj3 extends TestCase{
 			}
 		}
 		String file = currentDir.getAbsolutePath()+ "/enunciado/Tp3Goloso.out";
-		// escribo archibos para el tiempo
 		EscribirArchivo.escribir(file, output);
 	}
 	
