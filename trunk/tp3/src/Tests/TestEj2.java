@@ -4,13 +4,33 @@ import java.util.ArrayList;
 
 import java.util.List;
 
+import archivos.EscribirArchivo;
 import archivos.LeerArchivos;
 
+import ejercicios.Ej3;
 import ejercicios.ej2;
 import ejercicios.Grafo;
+import ejercicios.Grafo.Vertice;
 import junit.framework.TestCase;
 
 public class TestEj2 extends TestCase {
+	List<Grafo.Vertice> conj;
+	public void testArchivoIN(){
+		java.io.File currentDir = new java.io.File("");
+		ArrayList<Grafo> ListaDeGrafos = new ArrayList<Grafo>();		
+		ListaDeGrafos = LeerArchivos.leer(currentDir.getAbsolutePath()+ "/enunciado/Tp3.in");
+		String[] output = new String[ListaDeGrafos.size()]; 
+
+		for(int i = 0; i < ListaDeGrafos.size(); i++){
+			conj = ej2.obtenerConjuntoDominanteMinimo(ListaDeGrafos.get(i));
+			output[i] = "";
+			for(Vertice v : conj) {
+				output[i] += v + " "; 
+			}
+		}
+		String file = currentDir.getAbsolutePath()+ "/enunciado/Tp3exacto.out";
+		EscribirArchivo.escribir(file, output);
+	}
 	
 	public void testCrearGrafo() {
 		ej2.ciclos = 0;
