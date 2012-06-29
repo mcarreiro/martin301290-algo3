@@ -11,13 +11,36 @@ Para ello nos basamos en una estrategia de selección de nodos dominantes, la cu
 \Procname{$\proc{MCDGreedy}$ (\textbf{in} $Grafo$)}{conjuntoDomGoloso}{ConjDeVértices}
 \li	vértices = lista de vértices del grafo	\RComment O(n)
 \li	dominantes = conjunto vacio de vértices	
-\li	\textbf{Mientras} no esten todos los vértices cubiertos \Do \RComment O($n^3$)
+\li	\textbf{Mientras} no estén TodasCubiertas(vértices) \Do \RComment O($n^3$)
 \li 		Ordeno los vértices por la cantidad adyacentes que tenga no cubiertas (sin dominar), de mayor a menor. \RComment O(n*log(n))
 \li 		Elijo como dominante al primero de la lista y lo agrego al conjunto de \textbf{dominantes} \RComment O(n)
 \li 		Saco de la lista de vértices al elegido \RComment O(n)
-\li 		Actualizo los nodos del grafo, disminuyendo la cantidad de \textit{grado sin dominar} de los adyacentes al elegido,\\ y de los adyacentes a estos. \RComment O($n^2$)
+\li 		ActualizarGradoSinDominar(elegido) \RComment Actualizo los nodos del grafo,\\ disminuyendo la cantidad de \textit{grado sin dominar} de los adyacentes al elegido, y de los adyacentes a estos.  O($n^2$)
 \End
 \li	\textbf{return} dominantes
+\end{codebox}
+
+\begin{codebox}
+\Procname{$\proc{TodasCubiertas}$ (\textbf{in} $ListaDeVertices$)}{result}{Boolean}
+\li 	\textbf{Mientras} haya vértices en la lista \Do
+\li 		\textbf{Si} el vértice no esta dominado \Do
+\li 			\textbf{return} falso \End \End
+\li 	\textbf{return} verdadero
+\end{codebox}
+
+\begin{codebox}
+\Procname{$\proc{ActualizarGradoSinDominar}$ (\textbf{in} $Vertice elegido$)}
+\li 	Marcar al vértice elegido como dominado.
+\li 	unionDeAdyacentes = lista de vértices vacia, que luego se usará para actualizar.
+\li 	\textbf{Mientras} haya vértices en la lista de adyacentes al \textbf{elegido} \Do
+\li 		\textbf{Si} el vértice \textit{elegido} no estaba dominado \Do
+\li 			Decremento en uno el grado de adyacentes sin dominar del nodo actual \End
+\li 		\textbf{Si} el nodo actual \textit{elegido} no estaba dominado \Do
+\li 			Agrego los nodos adyacentes a la lista \textit{unionDeAdyacentes} \End
+\li 		Marco al nodo actual como dominado. \End
+\li 	\RComent Recorro la lista unionDeAdyacentes para actualizar el grado de nodos adyacentes sin dominar
+\li 	\textbf{Mientras} haya vértices en la lista unionDeAdyacentes \Do
+\li 			Decremento en uno el grado de adyacentes sin dominar del nodo actual \End
 \end{codebox}
 
 \subsection{Orden de complejidad}
