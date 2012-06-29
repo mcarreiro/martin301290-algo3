@@ -4,6 +4,9 @@
 La idea de este algoritmo es ejecutar una serie de veces nuestro algoritmo GREEDY randomizado y mejorarlo con la búsqueda local, guardando la mejor solución hasta el momento.
 Esa randomización se debe a que el método por el cuál dicho algoritmo goloso elige siempre el mejor valor bajo su criterio, es ahora aleatorizada seleccionando al azar entre los primeros k elementos de la
 lista de nodos a ser considerado dominante.\\
+Para ello, agregamos en el algoritmo Greedy que reciba por parámetro dicho k, de forma tal que al momento de elegir el próximo nodo, en vez de elegir el primero de los nodos ordenados por la cantidad de adyacentes
+sin dominar, ahora elige la posición i, que será el número obtenido pseudo-aleatoriamente a través de la función random entre 0 y k. En caso de que este k sea mayor a la cantidad de nodos considerados en la lista, 
+k se definirá como la longitud de dicha lista.\\
 Un tema importante de GRASP es que nunca termina, y neceista una condición de parada arbitraria. Elegimos, al igual que en LocalSearch, una iteración que busque hasta k veces asumiendo que
 de las k*$|$MinConjDominante$|$ posibles soluciones que me puede devolver en cada iteración el algoritmo greedy.
 
@@ -19,9 +22,19 @@ de las k*$|$MinConjDominante$|$ posibles soluciones que me puede devolver en cad
 \li		mejorSolucion = nuevaSolucion
 	\End
     \End	
-\li	return mejorSolucion	
+\li	\textbf{return} mejorSolucion	
 \end{codebox}
-Se debe aclarar que tanto LocalSearch como Greedy devuelven ConjuntosDominantes verdaderos, por lo que lo único que importa es la cantidad de nodos devuelta
+Se debe aclarar que tanto LocalSearch como Greedy devuelven ConjuntosDominantes verdaderos, por lo que lo único que importa es la cantidad de nodos devuelta.\\
+
+A continuación se agrega el cambio hecho en el algoritmo greedy para aleatorizar la selección de nodos:\\
+\begin{codebox}
+\Procname{$\proc{elegirVertice}$ (\textbf{in} $ListaVerticesORdenada$, \textbf{in} $k$)}{proxVertice}{Vertice}	
+\li     \textbf{Si} k $>$ $|$ListaVerticesORdenada$|$ \Do
+\li 		k = $|$ListaVerticesORdenada$|$;
+\li 	posiciónAElegir = random(0,k);
+\li	proxVertice = ListaVerticesORdenada[posiciónAElegir]
+\li 	\textbf{return} proxVertice
+\end{codebox}
 
 \subsection{Análisis de Complejidad}
 Por la demostración de la complejidad de la búsqueda local, sabemos que la complejidad es: O($n^2$);\\

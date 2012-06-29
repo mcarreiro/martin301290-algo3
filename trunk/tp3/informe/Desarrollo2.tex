@@ -19,18 +19,18 @@ global grafoOriginal
 \Procname{$\proc{obtenerConjuntoDominanteMinimo}$ (\textbf{in} $Grafo$)}{conjuntoDom}{Conj}
 \li	c = crearConj()
 \li	grafoOriginal = Grafo
-\li	return buscarMinimo(Grafo,c)
+\li	\textbf{return} buscarMinimo(Grafo,c)
 \end{codebox}
 
 \begin{codebox}
 \Procname{$\proc{buscarMinimo}$(\textbf{in} $Grafo$, \textbf{in} $conjuntoDom$)}{conjuntoDom}{Conj}
 \li\textbf{Si} esDominante(conjuntoDom) \textbf{Hacer:} \Do
-\li		return conjuntoDom 
+\li		\textbf{return} conjuntoDom 
 \End
 \li	\textbf{Si no}  \Do
 \li		vertice = grafo.obtenerVertice(); 
 \li		grafo = grafo.sinUno()
-\li		return min(buscarMinimo(grafo, conjuntoDom), buscarMinimo(grafo, conjuntoDom + vertice)	
+\li		\textbf{return} min(buscarMinimo(grafo, conjuntoDom), buscarMinimo(grafo, conjuntoDom + vertice)	
 \End
 
 \end{codebox}
@@ -50,10 +50,10 @@ global grafoOriginal
 			\End
 	\End		
 \li	\textbf{Si} !encontre \textbf{Hacer:} \Do				
-\li		return false
+\li		\textbf{return} false
 			\End		
 	\End
-\li	return true
+\li	\textbf{return} true
 \End
 \end{codebox}
 La complejidad de mi algoritmo es de $2^n$ * $n^3$. Voy a demostrarlo por inducción:\\
