@@ -35,10 +35,16 @@ public class ej5 {
 			ConjuntoDominante cd = new ConjuntoDominante(instanciaSolucion, calcularDominados(g, instanciaSolucion));
 			//VER CUAL FUNCIONA MEJOR EN LA MAYORIA DE LOS CASOS DE LOS TESTS
 			Comparator<DosPorUnoSet> funcion = new DosPorUnoSumaTupla(); 
-			ConjuntoDominante nuevaSolucion = ej4.MCD_LocalSearch(cd,funcion);
+			ConjuntoDominante nuevaSolucion = ej4.MCD_LocalSearch(cd,funcion);						
+			
 			if(cantNodosDominantes(nuevaSolucion)<cantNodosDominantes(mejorSolucion)){
 				mejorSolucion = nuevaSolucion;
 			}
+			
+			System.out.print(i+" ");
+			System.out.println(mejorSolucion.getDominantes().size());
+			
+			
 		}		
 		return mejorSolucion;
 	}

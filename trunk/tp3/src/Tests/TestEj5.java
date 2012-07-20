@@ -55,6 +55,84 @@ public class TestEj5 extends TestCase {
 		assertEquals(hs.size(), 0);
 	}
 	
+	public void testGrid(){ // PEOR CASO
+		
+		//Cada ciclo me devuelve un gráfico en el que van 5 lineas en cada uno que tiene por cada k una linea con la cantidad de 
+		//nodos en cada iteración
+		
+		int k = 8;
+		Grafo g=  Ej3.generarGrid(5, 2);
+		ej5.MCD_Grasp(g,k);
+		System.out.println();
+		
+		g = Ej3.generarTriangulosUnidos(10);
+		ej5.MCD_Grasp(g,k);
+		System.out.println();
+		
+		g = Ej3.generarMobius(10);
+		ej5.MCD_Grasp(g,k);
+		System.out.println();
+		
+		System.out.println("-----------");
+		
+		k = 30;
+		g=  Ej3.generarGrid(7, 7);
+		ej5.MCD_Grasp(g,k);
+		System.out.println();
+		
+		g = Ej3.generarTriangulosUnidos(50);
+		ej5.MCD_Grasp(g,k);
+		System.out.println();
+		
+		g = Ej3.generarMobius(50);
+		ej5.MCD_Grasp(g,k);
+		System.out.println();
+		
+		System.out.println("-----------");
+		
+		k = 150;
+		g=  Ej3.generarGrid(15, 15);
+		ej5.MCD_Grasp(g,k);
+		System.out.println();
+		
+		g = Ej3.generarTriangulosUnidos(226);
+		ej5.MCD_Grasp(g,k);
+		System.out.println();
+		
+		g = Ej3.generarMobius(226);
+		ej5.MCD_Grasp(g,k);
+		System.out.println();
+		
+		System.out.println("-----------");
+		
+		k = 400;
+		g=  Ej3.generarGrid(25, 20);
+		ej5.MCD_Grasp(g,k);
+		System.out.println();
+		g = Ej3.generarTriangulosUnidos(500);
+		ej5.MCD_Grasp(g,k);
+		System.out.println();
+		g = Ej3.generarMobius(500);
+		ej5.MCD_Grasp(g,k);
+		System.out.println();
+		
+		System.out.println("-----------");			
+		
+		k = 700;
+		g=  Ej3.generarGrid(30, 30);
+		ej5.MCD_Grasp(g,k);
+		System.out.println();
+		g = Ej3.generarTriangulosUnidos(900);
+		ej5.MCD_Grasp(g,k);
+		System.out.println();
+		g = Ej3.generarMobius(900);
+		ej5.MCD_Grasp(g,k);
+		System.out.println();
+		
+		System.out.println("-----------");	
+						
+	}
+	
 	public void testCalcularDominados() {
 		Grafo g = new Grafo();
 		Grafo.Vertice a = g.insertarVertice("A", "A");
