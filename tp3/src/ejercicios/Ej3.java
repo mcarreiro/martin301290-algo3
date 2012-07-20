@@ -136,4 +136,49 @@ public class Ej3 {
 		
 		return g;
 	}
+   
+   public static Grafo generarMobius(int n){
+	   if(n%2==1)n--; // Lo hago par
+ 		Grafo g = new Grafo();
+ 		Vertice[] vertices = new Vertice[n];
+ 		for(int i = 0;i < n;i++){
+ 				vertices[i] = g.insertarVertice(Integer.toString(i), Integer.toString(i));	 			
+ 		}
+ 		for(int i = 0;i < n;i++)
+ 			g.agregarArista(vertices[i] ,vertices[(i+1)%n], 0);	
+ 		for(int i = 0;i < n/2;i++)
+ 			g.agregarArista(vertices[i] ,vertices[(i+n/2+1)%n], 0);
+ 		return g;
+ 	}
+   public static Grafo generarTriangulosUnidos(int n){
+	   if(n%2==1)n--; // Lo hago par
+ 		Grafo g = new Grafo();
+ 		Vertice universal = g.insertarVertice("U", "U");
+ 		Vertice[] vertices = new Vertice[n];
+ 		for(int i = 0;i < n;i++){
+ 				vertices[i] = g.insertarVertice(Integer.toString(i), Integer.toString(i));	
+ 				g.agregarArista(vertices[i], universal,0);
+ 		}
+ 		for(int i = 0;i < n;i+=2)
+ 			g.agregarArista(vertices[i] ,vertices[(i+1)%n], 0);	
+ 		
+ 		return g;
+ 	}
+   
+   public static Grafo generarGrafo(Boolean[][] matriz){
+		Grafo g = new Grafo();
+		Vertice[][] vertices = new Vertice[n][m];
+		int k = 0;
+		for(int i = 0;i < n;i++){
+			for(int j = 0;j < m;j++,k++){
+				vertices[i][j] = g.insertarVertice(Integer.toString(k), Integer.toString(k));	
+				if(i!=0)
+					g.agregarArista(vertices[i][j] ,vertices[i-1][j], 0);
+				if(j!=0)
+					g.agregarArista(vertices[i][j] ,vertices[i][j-1], 0);
+			}
+		}
+		
+		return g;
+	}
 }
