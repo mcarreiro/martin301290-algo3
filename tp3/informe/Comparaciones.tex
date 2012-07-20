@@ -1,5 +1,14 @@
 \section{Comparaciones}
 
+\subsection{Introducción}
+
+Realizamos diferentes gráficos generados pseudo-aleatoriamente con el fin de poder obtener una idea generalizada entre los algoritmos, ya que en las secciones anteriores pudimos
+detallar los peores y mejores casos de cada uno. Estos algoritmos fueron generados con una función que recibe como parámetro la cantidad de nodos, y una probabilidad. Dicha función, por cada par de nodos, genera un valor random entre 0 y 1, si este valor está por debajo de la probabilidad recibida como parámetro, unirá dichos nodos, de otra manera, no.\\
+Los análisis a realizar serán del estilo cantidad de nodos del conjunto dominante otorgado por cada heurística, comparándolo con el Exacto, y tiempos.\\
+Para el GRASP, elegimos correr con k=15, ya que después de varias pruebas, nos pareció el que más se acercaba al óptimo antes de que el algoritmo entre en lo que denominamos "esperando mejor solución que puede no llegar" (remitirse al análisis del GRASP en la sección anterior).\\
+Cabe destacar que el algoritmo exacto, se deja de correr para los n $>$ 30 debido a su complejidad.
+
+
 \subsection{Exacto - Goloso}
 
 Como vimos anteriormente el algoritmo Exacto tiene complejidad exponencial mientras que el Goloso polinomial. Es decir que para valores de entrada grandes el Goloso va a costar mucho menos ciclos. Por otra parte el Greedy puede devolver conjuntos dominantes no mínimos (es decir un conjunto dominante tal que exista un conjunto con menor cantidad de nodos que también sea dominante) mientras que el Exacto absolutamente siempre va a devolver el mínimo. \\
