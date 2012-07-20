@@ -1,6 +1,7 @@
 package Tests;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
 
 import java.util.List;
 
@@ -186,6 +187,60 @@ public class TestEj3 extends TestCase{
 		System.out.print('\n');
         System.out.print(Ej3.ciclos);
         
+	}
+	
+	public void testGrid(){
+		int n = 40;
+		int m = 25;
+		long[] results = new long[m*n];
+		for(int i = 1; i <= n*m; i++){
+				results[i-1] = -1;
+			}
+		int itera = 10;
+
+		for(int i = 1; i <= n; i++){
+			for(int j = 1; j <= m; j++){
+				long milisegundosTot = 0;
+				Grafo g=  Ej3.generarGrid(i, j);
+				//System.out.print(g.getVertices().size());
+				long milisegundosactuales,milisegundos;
+				for(int h = 0; h < itera;h++){
+					g =   Ej3.generarGrid(i, j);
+					milisegundosactuales = System.nanoTime();
+					ArrayList<Grafo.Vertice> dominantes = Ej3.MCD_Greedy(g,1);		
+					milisegundosTot += System.nanoTime() - milisegundosactuales;
+				}
+				//System.out.println(" "+ milisegundosTot/100);
+				if(results[g.getVertices().size()-1] == -1)
+					results[g.getVertices().size()-1] = milisegundosTot/itera;				
+		        
+			}
+		}
+	
+			for(int j = 1; j <= m*n; j++){
+				long milisegundosTot = 0;
+				Grafo g=  Ej3.generarGrid(1, j);
+				//System.out.print(g.getVertices().size());
+				if(results[g.getVertices().size()-1] == -1){
+					long milisegundosactuales,milisegundos;
+					for(int h = 0; h < itera;h++){
+						g =   Ej3.generarGrid(1, j);
+						milisegundosactuales = System.nanoTime();
+						ArrayList<Grafo.Vertice> dominantes = Ej3.MCD_Greedy(g,1);		
+						milisegundosTot += System.nanoTime() - milisegundosactuales;
+					}
+					//System.out.println(" "+ milisegundosTot/100);
+					
+						results[g.getVertices().size()-1] = milisegundosTot/itera;				
+				}
+			}
+		
+		for(int i = 1; i <= n*m; i++){
+			if(results[i-1] != -1){
+				System.out.print(i+" ");
+				System.out.println(results[i-1]);
+			}
+		}
 	}
 
 public void testInstancias(){

@@ -120,5 +120,20 @@ public class Ej3 {
 	    while(!in2.isEmpty()) // move the remaining elements of in2
 	    	{in.add(in2.remove(0));ciclos++;}
 	}
-
+   public static Grafo generarGrid(int n, int m){
+		Grafo g = new Grafo();
+		Vertice[][] vertices = new Vertice[n][m];
+		int k = 0;
+		for(int i = 0;i < n;i++){
+			for(int j = 0;j < m;j++,k++){
+				vertices[i][j] = g.insertarVertice(Integer.toString(k), Integer.toString(k));	
+				if(i!=0)
+					g.agregarArista(vertices[i][j] ,vertices[i-1][j], 0);
+				if(j!=0)
+					g.agregarArista(vertices[i][j] ,vertices[i][j-1], 0);
+			}
+		}
+		
+		return g;
+	}
 }
