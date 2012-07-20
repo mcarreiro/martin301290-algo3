@@ -5,9 +5,9 @@ En este ejercicio se nos solicita buscar el conjunto dominante mínimo y óptimo
 para el cual aún no se encontró forma de resolverlo polinomialmente pero tampoco se demostró que no sea posible solucionarlo con dicha complejidad.
 
 \subsection{Soluci\'on}
-Como todavía no se halló algoritmo alguno para resolverlo poliniomalmente y nosotros no somos investigadores/iluminados (aún) decidimos resolverlo
-de manera exponencial. Para esto utilizamos el popular método (dicho en criollo) de quedarme con la mejor opción entre poner o no un nodo en el 
-conjunto dominante. Este procedimiento lo que hace, básicamente, es analizar todas las soluciones posibles y agarrar la mejor de ellas. \\
+Como todavía no se halló algoritmo alguno para resolverlo polinomialmente y nosotros no somos investigadores/iluminados (aún) decidimos resolverlo
+de manera exponencial. Para esto utilizamos el popular método de backtracking (dicho en criollo) de quedarme con la mejor opción entre poner o no un nodo en el 
+conjunto dominante. Este procedimiento lo que hace, básicamente, es analizar todas las soluciones posibles y agarrar la mejor de ellas.  \\
 No nos pareció significativo agregarle memorization ya que su complejidad no mejoriría de forma considerable debido a que la complejidad del algoritmo reside en calcular cada solución posible y no en el recalculo de las mismas, además de que ocuparía mas memoria. Tampoco nos pareció imperante preocuparnos por la complejidad de la función que chequea si el conjunto recibido es dominante, ya que, mientras sea polinimal, va a ser despreciable al lado de la complejidad de analizar todas las soluciones (que como dijimos es exponencial). \\
 Finalmente queremos resaltar que cualquier optimización conocida para este algoritmo no haría mas que mejorar la complejidad para ciertos tipos de casos, como el ejercicio no especifica que los grafos a recibir cumplan ciertos parametros o restricciones, todo tipo de perfeccionamiento que le implementemos va a dar lo mismo para las consignas del ejercicio.
 
@@ -29,8 +29,12 @@ global grafoOriginal
 \End
 \li	\textbf{Si no}  \Do
 \li		vertice = grafo.obtenerVertice(); 
-\li		grafo = grafo.sinUno()
-\li		\textbf{return} min(buscarMinimo(grafo, conjuntoDom), buscarMinimo(grafo, conjuntoDom + vertice)	
+\li		grafo = grafo.sinUno(vertice);
+\li		conjunto1 = buscarMinimo(grafo, conjuntoDom);
+\li		if($|$conjunto1$|$ == 1) \textbf{return} conjunto1
+\li		conjunto2 = buscarMinimo(grafo, conjuntoDom + vertice);
+\li		if($|$conjunto2$|$ == 1) \textbf{return} conjunto2
+\li		\textbf{return} min(conjunto1, conjunto2)	
 \End
 
 \end{codebox}
@@ -59,7 +63,7 @@ global grafoOriginal
 
 \subsection{Análisis de Complejidad}
 
-La complejidad de mi algoritmo es de $2^n$ * $n^3$. Voy a demostrarlo por inducción:\\
+La complejidad de mi algoritmo es de $2^n$ * $n^3$. Ya que hace $2^n$ recursiones y en cada una de ellas ver si el conjunto formado es dominante cuesta a lo sumo $n^3$. Voy a demostrar por inducción la parte exponencial:\\
 
 \underline{Caso Base:}\\
 
@@ -67,20 +71,31 @@ n = 1, si n tiene un solo nodo ver si es dominante me cuesta O(1) ya que recorre
 
 \underline{Hipótesis inductiva:}\\
 
-Supongo que con n nodos la complejidad es $2^n$ * $n^3$\\
+Supongo que con n nodos la cantidad de recursiones es $2^n$ \\
 
 \underline{Paso inductivo:}\\
 
-Quiero ver que con n+1 nodos la complejidad pertenece a $2^{n+1}*(n+1)^3$\\
+Quiero ver que con n+1 nodos la cantidad de recursiones será $2^{n+1}$\\
 
-Ver si el conjunto vacío es dominante me cuesta O(1) ya que en la primera iteración del grafoOriginal no es posible encontrar ningún vertice en el conjunto dominante o adyacente a él. Luego obtengo un nodo del grafo (grafo en el que me guarde todos los vertices, no el origianl) y busco el minimo conjunto dominante agregando ese nodo al conjunto o no, esto por hipótesis inductiva me cuesta 2 * ($2^n * n^3$), ya que tengo que calcular 2 veces el conjunto minimo para n nodos. Por lo tanto la complejidad me termina costando  $2^{n+1}*n^3$ y esto pertence a $2^{n+1}*(n+1)^3$. Con lo cual queda demostrada la complejidad.\\
+Ver si el conjunto vacío es dominante me cuesta O(1) ya que en la primera iteración del grafoOriginal no es posible encontrar ningún vertice en el conjunto dominante o adyacente a él. Luego obtengo un nodo del grafo (grafo en el que me guarde todos los vertices, no el origianl) y busco el minimo conjunto dominante agregando ese nodo al conjunto o no, esto por hipótesis inductiva me cuesta 2 * ($2^n$), ya que tengo que calcular 2 veces el conjunto dominante mínimo para n nodos. Por lo tanto la complejidad me termina costando  $2^{n+1}$. Con lo cual queda demostrada la complejidad.\\
+\\
+Ahora voy a demostrar que verificar si el conjunto recibido es dominante cuesta  O($n^3$):\\
+\\
+La iteración principal la hace sobre los nodos del grafo sin modificar el grafo sobre el que se itera y sin volver hacia atrás en la iteración, por lo tanto realizará a lo sumo n pasos donde n = $|$V(grafo)$|$.\\
+Dentro de cada ciclo realiza todas operaciones básicas que cuestan O(1), utiliza la función de ArrayList 'contains' que toma O($|$conjunto recibido$|$)$^{1}$  e itera sobre el conjunto recibido (el conjunto que queremos ver si es dominante) para ver si el nodo del grafo original que tome pertence a algun adyacente o es parte del conjunto. En el caso que el grafo del que deseamos obtener el conjunto dominante mínimo contenga un clique de n/2 nodos y cada uno de los nodos que estan fuera del clique se relacionen con todos los nodos del clique menos uno, como el caso que podemos ver en la siguiente imagen:\\
 
-Notar que esta complejidad esta por encima de la complejidad exacta, ya que el $n^3$ variaría en cada iteración dependiendo de la cantidad de nodos en el conjuntoDominante.
+ \begin {center}
+\includegraphics[width=12cm]{./graficos/grafo-clique-N-sobre-2.png}
+% grafico.eps: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=50 50 410 302
+\end {center} 
+
+Ver si el nodo que tomé pertenece a ese conjunto o es adyacente puede tomarme (n/2) ciclos (en el caso que el conjunto recibido sea el clique), donde además ver si es adyacente a cada uno de los nodos me tomaría ((n/2) - 1) comparaciones. Por lo tanto la complejidad total sería (n/2) * ((n/2) -1) que pertenece a O($n^2$) y esto podría llegar a hacerlo un total de (n/2) veces en la iteración principal, por lo tanto la complejidad total me queda O($n^3$). Notar que no es posbile que la complejidad de este for anidado supere esa complejidad ya que el conjunto dominante no puede tener mas de n nodos y cada nodo de este conjunto no puede tener mas de n-1 nodos adyacentes.
+
 
 \subsection{Peor Caso}
 
 Como el algoritmo es exacto y recorre todas las soluciones posibles siempre obtiene la mejor de ellas. Por lo tanto no existe una 'peor' instancia
-en la que la solución devuelta sea sub-óptima, siempre devuelve la mejor.
+en la que la solución devuelta sea sub-óptima, siempre devuelve la mejor. 
 
 \subsection{Tests y análisis}
 En los siguientes gráfico podemos observar que la cantidad de ciclos y el tiempo crecen notablemente a medida que el grafo tiene cada vez mas nodos.\\

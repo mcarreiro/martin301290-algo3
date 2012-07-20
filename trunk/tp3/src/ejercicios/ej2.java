@@ -65,10 +65,14 @@ public class ej2 {
 				
 				//Busco el conjunto dominante minimo que contiene a v
 				conjuntoDominanteMinimo = buscar_minimo(vertices, conjuntoDominanteMinimo);
-				
+				if(conjuntoDominanteMinimo.size() == 1){
+					return conjuntoDominanteMinimo;
+				}
 				//Busco el conjunto dominante minimo que no contiene a v
 				conjuntoDominanteMinimoSinV = buscar_minimo(verticesCopia, conjuntoDominanteMinimoSinV);
-				
+				if(conjuntoDominanteMinimoSinV.size() == 1){
+					return conjuntoDominanteMinimoSinV;
+				}
 				if(conjuntoDominanteMinimo.size() > conjuntoDominanteMinimoSinV.size()){
 					return conjuntoDominanteMinimoSinV;
 				}else{
