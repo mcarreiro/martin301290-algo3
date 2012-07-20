@@ -81,8 +81,25 @@ en caso de existir a través del camino elegido.\\
 A continuación se muestran algunos de los ejemplos realizados para distintas cantidades de nodos, distintas iteraciones obteniendo resultados en los peores y mejores casos.
 
 
+\begin{center}
+\includegraphics[width=15cm]{./graficos/GRASP_distintosK.png}\\
+Peores y mejores casos con n = 10.
+\end{center}
 
+\begin{center}
+\includegraphics[width=15cm]{./graficos/GRASP_distintosK.png}\\
+Peores y mejores casos con n = 49.
+\end{center}
 
+\begin{center}
+\includegraphics[width=15cm]{./graficos/GRASP_distintosK.png}\\
+Peores y mejores casos con n = 225.
+\end{center}
+
+\begin{center}
+\includegraphics[width=15cm]{./graficos/GRASP_distintosK.png}\\
+Peores y mejores casos con n = 500.
+\end{center}
 
 
 Como se puede ver en los gráficos, la cantidad de nodos no se reduce por utilizar un k más grande. Esto es importante pero veamos por qué.
@@ -96,28 +113,45 @@ llevaría a explorar una cantidad más acotada de vecindarios de soluciones al m
 Entonces concluimos que al momento de elegir el k, notar que con pocos k ya se puede obtener lo que sería el ideal, pero sin embargo es conveniente utilizar una RCL
 más grande para abrir el panorama de soluciones.
 
-A continuación se agrega un gráfico para evaluar los tiempos para distintos k, comparado con la función de la cota superior:
+A continuación se agrega un gráfico para evaluar los tiempos para distintos k con distintos nodos del conjunto de familias detallado en los gráficos anteriores, comparado con la función de la cota superior:
 
-
-
-
-
-
-Ahora se presenta un algoritmo con un mismo grafo corrido n veces con k random cada vez
 
 \begin{center}
-\includegraphics[width=15cm]{./graficos/GRASP_distintosK.png}
+\includegraphics[width=15cm]{./graficos/GRASP_distintosK.png}\\
+Flia de grafo perteneciente al peor caso con n=10, n=50, n=100, n=200, n=500.
 \end{center}
-
-Como se puede notar en la imágen, el tiempo no varía ya que k se comporta como una constante al ser siempre menos a la cantidad de nodos, por lo que en caso de saber valores de la entrada en los que sabemos
-que Greedy se comportaría mal al elegir siempre el mejor a partir de su estrategia, elegir un k más grande para poder elegir entre más nodos aleatoriamente, no arruina el tiempo de procesamiento.
-
-Ahora se presenta un algoritmo con distintos grafos corrido cada uno con k = 5,10,15,20
 
 \begin{center}
-\includegraphics[width=15cm]{./graficos/GRASP_distGrafos_distK.png}
+\includegraphics[width=15cm]{./graficos/GRASP_distintosK.png}\\
+Flia de grafo perteneciente al mejor caso con n=10, n=50, n=100, n=200, n=500.
 \end{center}
 
-Tal como era esperado el algorimto hace menos operaciones cuando tiene menos nodos y el k multiplica el tiempo como una constante.
-Sin embargo, es necesario tener en cuenta que, al depender de otros algoritmos como ser: Greedy y LocalSearch, que tienen una condición de corte distinta a la de este algoritmo, puede pasar que terminen antes o tarden más.
-Es así que se explican la falta de paralelismo exacto de los gráficos. Por ejemplo, en caso de que greedy con un k, elija en tres iteraciones un conjunto dominante minimal y sin embargo para otro k elija en más iteraciones.
+
+Como era esperable, la relación es lineal. Esto es ya que el K multiplica como constante y esta es siempre menor a n, ya que correr con un k mayor a n no tendría sentido práctico. Las pequeñas diferencias se deben a que al depender de otros algoritmos como ser: Greedy y LocalSearch, que tienen una condición de corte distinta a la de este algoritmo, puede pasar que terminen antes o tarden más. Por ejemplo, en caso de que greedy con un k, elija en tres iteraciones un conjunto dominante minimal y sin embargo para otro k elija en más iteraciones.
+
+
+
+
+%-------------------------------------------------------------------------- VERSION ANTERIOR QUE NO IRIA --------------------------------------------------------------------
+
+
+
+
+%Ahora se presenta un algoritmo con un mismo grafo corrido n veces con k random cada vez
+
+%\begin{center}
+%\includegraphics[width=15cm]{./graficos/GRASP_distintosK.png}
+%\end{center}
+
+%Como se puede notar en la imágen, el tiempo no varía ya que k se comporta como una constante al ser siempre menos a la cantidad de nodos, por lo que en caso de saber valores %de la entrada en los que sabemos
+%que Greedy se comportaría mal al elegir siempre el mejor a partir de su estrategia, elegir un k más grande para poder elegir entre más nodos aleatoriamente, no arruina el tiempo de procesamiento.
+
+%Ahora se presenta un algoritmo con distintos grafos corrido cada uno con k = 5,10,15,20
+
+%\begin{center}
+%\includegraphics[width=15cm]{./graficos/GRASP_distGrafos_distK.png}
+%\end{center}
+
+%Tal como era esperado el algorimto hace menos operaciones cuando tiene menos nodos y el k multiplica el tiempo como una constante.
+%Sin embargo, es necesario tener en cuenta que, al depender de otros algoritmos como ser: Greedy y LocalSearch, que tienen una condición de corte distinta a la de este algoritmo, puede pasar que terminen antes o tarden más.
+%Es así que se explican la falta de paralelismo exacto de los gráficos. Por ejemplo, en caso de que greedy con un k, elija en tres iteraciones un conjunto dominante minimal y sin embargo para otro k elija en más iteraciones.
