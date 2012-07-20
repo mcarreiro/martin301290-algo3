@@ -189,7 +189,36 @@ public class TestEj3 extends TestCase{
         
 	}
 	
-	public void testGrid(){
+	
+	@SuppressWarnings("unused")
+	public void testMobius(){ //PEOR CASO
+		Grafo gG, gE;
+		int e, g;
+		for(int i = 2; i<=20;i+=2){
+			gG = Ej3.generarMobius(i);
+			gE = Ej3.generarMobius(i);
+			g = Ej3.MCD_Greedy(gG, 1).size();
+			e = ej2.obtenerConjuntoDominanteMinimo(gE).size();
+			System.out.println(i+"- G: "+g+" - E:"+e);
+
+		}		
+	}
+	
+	@SuppressWarnings("unused")
+	public void testTriangulos(){ // MEJOR CASO
+		Grafo gG, gE;
+		int e, g;
+		for(int i = 2; i<=20;i+=2){
+			gG = Ej3.generarTriangulosUnidos(i);
+			gE = Ej3.generarTriangulosUnidos(i);
+			g = Ej3.MCD_Greedy(gG, 1).size();
+			e = ej2.obtenerConjuntoDominanteMinimo(gE).size();
+			System.out.println(i+"- G: "+g+" - E:"+e);
+
+		}		
+	}
+	
+	public void testGrid(){ // PEOR CASO
 		int n = 40;
 		int m = 25;
 		long[] results = new long[m*n];
