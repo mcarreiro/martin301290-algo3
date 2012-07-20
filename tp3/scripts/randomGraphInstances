@@ -1,0 +1,36 @@
+#!/usr/bin/env python
+import sys, random, math
+
+def main():
+	# 1er parametro: cantidad de nodos
+	n = int(sys.argv[1])
+	# 2do parametro: densidad de aristas
+	d = float(sys.argv[2])
+	# 3er parametro: cantidad de instancias
+	ins = int(sys.argv[3])
+	m = round((n * (n-1) / 2.00 )* d)
+	fileName ="TP3_Random_%s-%s.in" % (sys.argv[1], sys.argv[2])
+	a = open(fileName, "w+")
+	for x in range(ins):
+		a.write("%s\n" % n)
+		total = 0
+		for i in range(2, n + 1):
+			aristas = round((i - 1) * d)
+			# si es el ultimo nodo a agregar
+			if ( i == n ): aristas = addOrDecreaseLast(total, aristas, m)
+			total += aristas
+			agregadas = []
+			while len(agregadas) < aristas:
+				v = random.randrange(1, i)
+				if not v in agregadas:
+					a.write("%s " % v)
+					agregadas.append(v)
+			a.write("\n")
+	print "El archivo fue creado correctamente con el nombre %s" % fileName
+	
+def addOrDecreaseLast(total, aristas, max):
+	if ( total + aristas > max ):
+		return aristas - (total + aristas - max)
+	return aristas
+	
+main()
