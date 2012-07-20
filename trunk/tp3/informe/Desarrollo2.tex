@@ -41,29 +41,27 @@ global grafoOriginal
 
 \begin{codebox}
 \Procname{$\proc{esDominante}$(\textbf{in} $Grafo$, \textbf{in} $conjuntoDom$)}{esDominante}{Boolean}
+\li Grafo grafoDom = crearGrafo()
+\li \textbf{Para} cada v en conjuntoDom \Do
+\li	grafoDom.agregarVertice(v)
+\li     grafoDom.agregarVertices(v.adyacentes())
+\End
 \li \textbf{Para} cada v en V(grafoOriginal) \Do
-\li \textbf{Si} conjuntoDom.esta?(v) \textbf{Hacer:} \Do
+\li \textbf{Si} grafoDom.esta?(v) \textbf{Hacer:} \Do
 \li			continue 
-		\End
+\End		
 \li \textbf{Si no}  \Do
-\li			encontre = false
-\li \textbf{Para} cada ver en conjuntoDOm \Do
-\li	\textbf{Si} ver.adyacentes.esta?(v) \textbf{Hacer:} \Do	
-\li			encontre = true
-\li			break
-			\End
-	\End		
-\li	\textbf{Si} !encontre \textbf{Hacer:} \Do				
+\li							
 \li		\textbf{return} false
-			\End		
+    \End		
 	\End
 \li	\textbf{return} true
-\End
+
 \end{codebox}
 
 \subsection{Análisis de Complejidad}
 
-La complejidad de mi algoritmo es de $2^n$ * $n^3$. Ya que hace $2^n$ recursiones y en cada una de ellas ver si el conjunto formado es dominante cuesta a lo sumo $n^3$. Voy a demostrar por inducción la parte exponencial:\\
+La complejidad de mi algoritmo es de $2^n$ * $n^2$. Ya que hace $2^n$ recursiones y en cada una de ellas ver si el conjunto formado es dominante cuesta a lo sumo $n^2$. Voy a demostrar por inducción la parte exponencial:\\
 
 \underline{Caso Base:}\\
 
@@ -79,17 +77,11 @@ Quiero ver que con n+1 nodos la cantidad de recursiones será $2^{n+1}$\\
 
 Ver si el conjunto vacío es dominante me cuesta O(1) ya que en la primera iteración del grafoOriginal no es posible encontrar ningún vertice en el conjunto dominante o adyacente a él. Luego obtengo un nodo del grafo (grafo en el que me guarde todos los vertices, no el origianl) y busco el minimo conjunto dominante agregando ese nodo al conjunto o no, esto por hipótesis inductiva me cuesta 2 * ($2^n$), ya que tengo que calcular 2 veces el conjunto dominante mínimo para n nodos. Por lo tanto la complejidad me termina costando  $2^{n+1}$. Con lo cual queda demostrada la complejidad.\\
 \\
-Ahora voy a demostrar que verificar si el conjunto recibido es dominante cuesta  O($n^3$):\\
+Ahora voy a demostrar que verificar si el conjunto recibido es dominante cuesta  O($n^2$):\\
 \\
-La iteración principal la hace sobre los nodos del grafo sin modificar el grafo sobre el que se itera y sin volver hacia atrás en la iteración, por lo tanto realizará a lo sumo n pasos donde n = $|$V(grafo)$|$.\\
-Dentro de cada ciclo realiza todas operaciones básicas que cuestan O(1), utiliza la función de ArrayList 'contains' que toma O($|$conjunto recibido$|$)$^{1}$  e itera sobre el conjunto recibido (el conjunto que queremos ver si es dominante) para ver si el nodo del grafo original que tome pertence a algun adyacente o es parte del conjunto. En el caso que el grafo del que deseamos obtener el conjunto dominante mínimo contenga un clique de n/2 nodos y cada uno de los nodos que estan fuera del clique se relacionen con todos los nodos del clique menos uno, como el caso que podemos ver en la siguiente imagen:\\
-
- \begin {center}
-\includegraphics[width=12cm]{./graficos/grafo-clique-N-sobre-2.png}
-% grafico.eps: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=50 50 410 302
-\end {center} 
-
-Ver si el nodo que tomé pertenece a ese conjunto o es adyacente puede tomarme (n/2) ciclos (en el caso que el conjunto recibido sea el clique), donde además ver si es adyacente a cada uno de los nodos me tomaría ((n/2) - 1) comparaciones. Por lo tanto la complejidad total sería (n/2) * ((n/2) -1) que pertenece a O($n^2$) y esto podría llegar a hacerlo un total de (n/2) veces en la iteración principal, por lo tanto la complejidad total me queda O($n^3$). Notar que no es posbile que la complejidad de este for anidado supere esa complejidad ya que el conjunto dominante no puede tener mas de n nodos y cada nodo de este conjunto no puede tener mas de n-1 nodos adyacentes.
+ Esta funcion cuenta con 2 iteraciones, una sobre el conjunto de nodos dominantes y otra sobre el grafo original. La iteracion sobre el conjunto dominante crea un grafo con todos los nodos del conjunto y sus adyacentes, para esto por cada elemento del conjunto agrega todos sus adyacentes al nuevo grafo (obviamente si se agrega 2 veces el mismo queda 1 vez sola en el grafo) esto nos puede dar un total de n*(n-1) iteraciones, lo que pertenece a O($n^2$).\\
+En la iteracion sobre el grafo original, por cada nodo de este se fija si pertence al grafo recien creado, chequear si el nodo pertence al grafo cuesta O(n) ya que debe compararlo contra todos los nodos del otro grafo y como el grafo original tiene n nodos nos terminar quedando tambien una complejidad de O($n^2$).\\
+Finalmente obtenemos que la complejidad de esta verificacion es de O(2$n^2$) que es igual a O($n^2$). Por lo tanto la complejidad total del algoritmo nos termina quedando O($2^n$*$n^2$)\\
 
 
 \subsection{Peor Caso}
@@ -98,17 +90,21 @@ Como el algoritmo es exacto y recorre todas las soluciones posibles siempre obti
 en la que la solución devuelta sea sub-óptima, siempre devuelve la mejor. 
 
 \subsection{Tests y análisis}
-En los siguientes gráfico podemos observar que la cantidad de ciclos y el tiempo crecen notablemente a medida que el grafo tiene cada vez mas nodos.\\
-Esto es debido a que, como dijimos anteriormente, la complejidad es exponencial en el tamaño de la entrada (en este caso, la cantidad de nodos 
-del grafo) y no existe un mejor o peor en caso en el cual la complejidad sea mucho menor a O($2^n*n^3$). Por esto es que tanto en el grafico de tiempos
- como en el de ciclos se puede observar claramente que la complejidad es exponencial.
+Como no podiamos correr el algoritmo para grafos de muchos nodos, no solo por una cuestion temporal sino porque se hace casi imposible de graficarlos por los saltos cada vez mas grandes que se producen, se nos ocurrio correr el algoritmo para grafos aleatorios. Como generamos estos grafos aleatorios? mediante un algoritmo (se encuentra en la clase grafoFactory) que recibe un n (cantidad de nodos) y un entero (probabilidad)  que lo que hace basicamente es crear un grafo con n nodos y para cada par de nodos genera un numero random de 0 a 100 y si ese numero es menor a la probabilidad recibida crea la arista entre esos nodos.\\
+Como a nuestro algoritmo le agregamos que si encuentra algun conjunto dominante de un 1 nodo lo devuelva (ya que no puede haber un conjunto dominante de menos de un nodo) al aumentar el parametro probabilidad que recibe nuestro algoritmo aumentamos la probabilidad de que haya algun nodo con grado (n-1) y por lo tanto disminuimos la cantidad de ciclos de nuestro algoritmo exacto, ya que al probar el conjunto dominante con ese nodo lo devolvera automaticamente.\\
+En los siguientes grafos podemos ver que a menor probabilidad mas se acerca la curva a la funcion O($2^n$*$n^2$), debido a que no encuentra un punto de corte el algoritmo y analiza todas las posibilidades, en camibo a medida que se aumenta la probabilidad la curva no solo se aleja de la funcion sino que empieza a perder su forma exponencial y aparecen casos extranos en los que un grafo de x nodos requiere menor o la misma cantidad de ciclos que un grafo de x+1 nodos. Esto se puede ver claramente en el grafo de probabilidad 50 en los puntos 14 y 15, esto pudo haberse debido a que en el grafo de 14 nodos tuvo que analizar mas casos hasta llegar al conjunto dominante de 1 nodo y en el de 15 probo antes con ese conjunto (como no agarramos los nodos con algun criterio especifico nos vienen en el orden que el grafo nos los da con la funcion obtenerVertice). 
 
 \begin {center}
-\includegraphics[width=12cm]{./graficos/exacto.png}
+\includegraphics[width=12cm]{./graficos/exacto-proba-10.png}
 % grafico.eps: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=50 50 410 302
 \end {center} 
 
 \begin {center}
-\includegraphics[width=12cm]{./graficos/exactoConTiempo.png}
+\includegraphics[width=12cm]{./graficos/exacto-proba-25.png}
 % grafico.eps: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=50 50 410 302
 \end {center}
+ 
+\begin {center}
+\includegraphics[width=12cm]{./graficos/exacto-proba-50.png}
+% grafico.eps: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=50 50 410 302
+\end {center} 
