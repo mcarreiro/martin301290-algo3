@@ -13,7 +13,7 @@ public class ej2 {
 	
 	static Collection<Grafo.Vertice> grafoOriginal;
 	
-	public static int ciclos;
+	public static int ciclos = 0;
 	
 	public static Grafo crearGrafoDesdeInstancia(String instancia) {
 		Grafo g = new Grafo();
