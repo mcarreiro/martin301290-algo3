@@ -40,6 +40,7 @@ public class Grafo {
 		return v;
 	}
 	
+	
 	/**
 	 * Método para insertar vértice a partir de un vértice ya creado
 	 * @param v
