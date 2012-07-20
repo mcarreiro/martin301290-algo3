@@ -1,14 +1,19 @@
 \section{Algoritmo GRASP}
 
+
 \subsection{Solución}
-La idea de este algoritmo es ejecutar una serie de veces nuestro algoritmo GREEDY randomizado y mejorarlo con la búsqueda local, guardando la mejor solución hasta el momento.
+La idea de este algoritmo es ejecutar una serie de veces nuestro algoritmo GREEDY randomizado y buscar en cada solución una mejora local, guardando la mejor solución hasta el momento.
+Gracias a la parte aleatoria del algoritmo Greedy, aplicar repetidas veces este algoritmo nos otorga soluciones obtenidas de distinta forma en cada caso, de distintas partes del espectro de soluciones, las cuales llevamos a mínimos locales para allí comparar sus cardinales y quedarnos con la menor. Nuestra esperanza es, entonces,poder caer en un mínimo global.
 Esa randomización se debe a que el método por el cuál dicho algoritmo goloso elige siempre el mejor valor bajo su criterio, es ahora aleatorizada seleccionando al azar entre los primeros k elementos de la
 lista de nodos a ser considerado dominante.\\
+Hablándo un poco más en lenguaje de GRASP, la RCL (Restricted Candidate List) es la lista que contiene un conjunto de posibles mejores candidatos según el criterio de nuestro Greedy y de ella eligiremos un valor al azar. Esta lista decidimos armarla desde el algoritmo Greedy.
 Para ello, agregamos en el algoritmo Greedy que reciba por parámetro dicho k, de forma tal que al momento de elegir el próximo nodo, en vez de elegir el primero de los nodos ordenados por la cantidad de adyacentes
 sin dominar, ahora elige la posición i, que será el número obtenido pseudo-aleatoriamente a través de la función random entre 0 y k. En caso de que este k sea mayor a la cantidad de nodos considerados en la lista, 
 k se definirá como la longitud de dicha lista.\\
-Un tema importante de GRASP es que nunca termina, y necesita una condición de parada arbitraria. Elegimos, al igual que en LocalSearch, una iteración que busque hasta k veces asumiendo que
-de las k*$|$MinConjDominante$|$ posibles soluciones que me puede devolver en cada iteración el algoritmo greedy.
+En las heurísticas GRASP es necesario elegir un criterio de parada para que el algoritmo no se ejecute infinitamente. En nuestro caso, decidimos elegir unicamente
+una cantidad de iteraciones, ya que esto nos permitió jugar libremente con ese parámetro y no preocuparnos por casos en los que
+la solución inicial fuera optima y nunca se realizara mejora.
+
 
 \subsection{Pseudocódigo}
 
@@ -24,6 +29,7 @@ de las k*$|$MinConjDominante$|$ posibles soluciones que me puede devolver en cad
     \End	
 \li	\textbf{return} mejorSolucion	
 \end{codebox}
+Comenzamos con todos los vertices como mejor solución, de forma tal que la próxima solución siempre sera mejor o igual.\\
 Se debe aclarar que tanto LocalSearch como Greedy devuelven ConjuntosDominantes verdaderos, por lo que lo único que importa es la cantidad de nodos devuelta.\\
 
 A continuación se agrega el cambio hecho en el algoritmo greedy para aleatorizar la selección de nodos:\\
@@ -59,9 +65,28 @@ Antes de hacer el gráfico, deberíamos calcular cual es el peor caso para este 
 \end{itemize}
 
 \subsection{Tests y análisis}
+Tal como hicimos con los anteriores algoritmos, acá también se tomaron los peores y los mejores casos. Como la randomización evita encontrar un peor/mejor caso per-se, se decidió correr los mencioandos
+en los puntos anteriores. Retomando un comentario anterior, GRASP te da la oportunidad de recorrer más el espacio de soluciones y buscar en cada uno una mejor versión vecinal, gracias a esto podemos socorrer los 
+casos en donde Greedy o Greedy+LocalSearch no son óptimos gracias a esta cuota de randomización. Muchas veces esto pasa porque Greedy encuentra una solución que localmente es buena, lo que reduce el marco 
+de posibles soluciones locales. Cuando ejecutamos GRASP, el greedy ejecutando en él notamos que devuelve un peor caso que el goloso original, pero eso provee un espacio vecinal mucho más grande para que el Local
+Search pueda trabajar. \\
 Al igual que en la búsqueda local, en este algoritmo tambien se incremente la cantidad de operaciones a medida
 que se incrementa la cantidad de conjuntos dominantes devuelto por la solución greedy.\\
-Cabe recordar que en cada iteración, el algoritmo greedy retorna una solución de las k*$|$conjuntoDomniante$|$ posibles soluciones, que después se buscará localmente una mejora en caso de existir a través del camino elegido.\\
+Cabe recordar que en cada iteración, el algoritmo greedy retorna una solución de las k*$|$conjuntoDominante$|$
+A continuación se muestran algunos de los ejemplos realizados para distinta cantidades de nodos, distintas iteraciones obteniendo tanto tiempos como resultados.
+posibles soluciones, que después se buscará localmente una mejora en caso de existir a través del camino elegido.\\
+
+
+
+
+
+
+
+
+
+
+
+
 Ahora se presenta un algoritmo con un mismo grafo corrido n veces con k random cada vez
 
 \begin{center}
