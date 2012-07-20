@@ -65,22 +65,38 @@ Antes de hacer el gráfico, deberíamos calcular cual es el peor caso para este 
 \end{itemize}
 
 \subsection{Tests y análisis}
-Tal como hicimos con los anteriores algoritmos, acá también se tomaron los peores y los mejores casos. Como la randomización evita encontrar un peor/mejor caso per-se, se decidió correr los mencioandos
-en los puntos anteriores. Retomando un comentario anterior, GRASP te da la oportunidad de recorrer más el espacio de soluciones y buscar en cada uno una mejor versión vecinal, gracias a esto podemos socorrer los 
-casos en donde Greedy o Greedy+LocalSearch no son óptimos gracias a esta cuota de randomización. Muchas veces esto pasa porque Greedy encuentra una solución que localmente es buena, lo que reduce el marco 
-de posibles soluciones locales. Cuando ejecutamos GRASP, el greedy ejecutando en él notamos que devuelve un peor caso que el goloso original, pero eso provee un espacio vecinal mucho más grande para que el Local
+Tal como hicimos con los anteriores algoritmos, acá también se tomaron los peores y los mejores casos. Como la randomización evita encontrar un peor/mejor caso per-se, se 
+decidió correr los mencioandos
+en los puntos anteriores. Retomando un comentario anterior, GRASP te da la oportunidad de recorrer más el espacio de soluciones y buscar en cada uno una mejor versión vecinal, 
+gracias a esto podemos socorrer los 
+casos en donde Greedy o Greedy+LocalSearch no son óptimos gracias a esta cuota de randomización. Muchas veces esto pasa porque Greedy encuentra una solución que localmente es 
+buena, lo que reduce el marco 
+de posibles soluciones locales. Cuando ejecutamos GRASP, el greedy ejecutado en él notamos que devuelve un peor caso que el goloso original, pero eso provee un espacio vecinal 
+mucho más grande para que el Local
 Search pueda trabajar. \\
-Al igual que en la búsqueda local, en este algoritmo tambien se incremente la cantidad de operaciones a medida
+Al igual que en la búsqueda local, en este algoritmo tambien se incrementa la cantidad de operaciones a medida
 que se incrementa la cantidad de conjuntos dominantes devuelto por la solución greedy.\\
-Cabe recordar que en cada iteración, el algoritmo greedy retorna una solución de las k*$|$conjuntoDominante$|$
-A continuación se muestran algunos de los ejemplos realizados para distinta cantidades de nodos, distintas iteraciones obteniendo tanto tiempos como resultados.
-posibles soluciones, que después se buscará localmente una mejora en caso de existir a través del camino elegido.\\
+Cabe recordar que en cada iteración, el algoritmo greedy retorna una solución de las k*$|$conjuntoDominante$|$ posibles soluciones, que después se buscará localmente una mejora 
+en caso de existir a través del camino elegido.\\
+A continuación se muestran algunos de los ejemplos realizados para distintas cantidades de nodos, distintas iteraciones obteniendo resultados en los peores y mejores casos.
 
 
 
 
 
 
+Como se puede ver en los gráficos, la cantidad de nodos no se reduce por utilizar un k más grande. Esto es importante pero veamos por qué.
+En la i-esima iteración, GRASP le pide a Greedy que obtenga una nueva solución tomando siempre,en cada iteración de este último, de los primeros k posibles un nodo random como 
+próximo elemento a ser considerado como dominante, y una vez que el conjunto sea dominante, será mejorado con local search.\\
+Ahora entonces tenemos una nueva solución, independiente de la i-1-esima iteración. Notemos que esta solución no es necesariamente mejor a la anterior, 
+Esto se debe a que el elemento obtenido de la RCL puede ser bastante malo según el criterio greedy y por lo
+tanto se obtiene un conjunto grande, que la búsqueda local no alcanza a mejorar del todo. En el otro extremo, si el tamaño de la
+RCL es muy chico, la solución inicial greedy randomizada va a ser muy similar a la greedy clásico (no randomizado). Esto nos
+llevaría a explorar una cantidad más acotada de vecindarios de soluciones al momento de aplicar la búsqueda local.
+Entonces concluimos que al momento de elegir el k, notar que con pocos k ya se puede obtener lo que sería el ideal, pero sin embargo es conveniente utilizar una RCL
+más grande para abrir el panorama de soluciones.
+
+A continuación se agrega un gráfico para evaluar los tiempos para distintos k, comparado con la función de la cota superior:
 
 
 
