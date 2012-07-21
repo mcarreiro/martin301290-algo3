@@ -54,6 +54,9 @@ O(n) + O(n) * (O($n^2$) + O(n*log(n) + O(n) + O($n^2$)) = O($n^3$)\\\\
 
 La complejidad final del algoritmo goloso es de O($n^3$), cumpliendo el objetivo de ser polinomial.
 
+\subsection{Mejor Caso}
+
+Las familias de grafos en donde la solución es la mejor son en los grafos bipartitos completos, triangulos unidos, estrellas, arboles binarios, arbol de cliques. Por que? Porque en cada ordenamiento y selección de nodos, el nodo con más grado sin dominar es exactemente el que hay que elegir. EXPLICAR MAS
 
 \subsection{Peor Caso}
 
@@ -73,6 +76,25 @@ La solución optima proporcionada por el algoritmo exacto es {6,2}, mientras que
 % grafico.eps: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=50 50 410 302
 \end {center} 
 La solución óptima proporcionada por el algoritmo exacto es {2,4}, mientras que el goloso podría devolver {3,2,5}, ya que como los nodos 2, 3 y 4 tienen el mismo grado, si se decide por el 3, dejaría a todos los demás nodos con 1 grado sin dominar y faltando los dos extremos, provocando que si o si se necesite cubrirlos o elegirlos como dominantes, haciendo que el conjunto tenga tamaño 3 y no 2 como el exacto.
+
+\subsubsection {Familias}
+Las familias de grafos que encontramos que el algoritmo goloso da un resultado no optime frente al exacto fue con los Möbius–Kantor y Grid. Esto suele pasar por que son regulares (3-regular) y casi regulares (4-regular internamente, 3-regular en los bordes) respectivamente y al momento de la elección del mejor vértice, la estrategia solo distingue por grado de adyacentes sin dominar. 
+
+Nos pareció más interesante hacer un análisis mas detallado sobre los grafos Grid.
+
+\begin {center}
+\includegraphics{./graficos/grid_5x5_goloso.png}
+% grafico.eps: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=50 50 410 302
+\includegraphics{./graficos/grid_5x5_exacto.png}
+% grafico.eps: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=50 50 410 302
+\end {center} 
+
+
+\begin {center}
+\includegraphics{./graficos/goloso-900nodos.png}
+% grafico.eps: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=50 50 410 302
+\end {center} 
+
 
 \subsection{Tests y análisis}
 

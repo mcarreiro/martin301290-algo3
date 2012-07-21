@@ -12,6 +12,7 @@ import ejercicios.Grafo;
 import ejercicios.Ej3;
 import ejercicios.ej2;
 import ejercicios.Grafo.Vertice;
+import ejercicios.grafoFactory;
 import ej4.ConjuntoDominante;
 import ej4.DosPorUnoDiffGrados;
 import ej4.DosPorUnoMenorGradoVertice;
@@ -201,9 +202,38 @@ public class TestEj3 extends TestCase{
 			e = ej2.obtenerConjuntoDominanteMinimo(gE).size();
 			System.out.println(i+"- G: "+g+" - E:"+e);
 
-		}		
-	}
+		}	
 	
+		int n = 900;
+		int itera = 10;
+
+		for(int i = 2; i <= n; i+=2){
+				long milisegundosTot = 0;
+				gG =  Ej3.generarMobius(i);
+				System.out.print(gG.getVertices().size());
+				long milisegundosactuales,milisegundos;
+				for(int h = 0; h < itera;h++){
+					gG =  Ej3.generarMobius(i);
+					milisegundosactuales = System.nanoTime();
+					ArrayList<Grafo.Vertice> dominantes = Ej3.MCD_Greedy(gG,1);		
+					milisegundosTot += System.nanoTime() - milisegundosactuales;
+				}
+				System.out.println(" "+ milisegundosTot/100);
+		}
+	}
+	@SuppressWarnings("unused")
+	public void testCompletosEntreFilas(){ // MEJOR CASO
+		Grafo gG, gE;
+		int e, g;
+		for(int i = 1; i<=24;i+=1){
+			gG = grafoFactory.completoEntreFilas(i);
+			gE = grafoFactory.completoEntreFilas(i);
+			g = Ej3.MCD_Greedy(gG, 1).size();
+			e = ej2.obtenerConjuntoDominanteMinimo(gE).size();
+			System.out.println(gG.getVertices().size()+"- G: "+g+" - E:"+e);
+
+		}	
+	}
 	@SuppressWarnings("unused")
 	public void testTriangulos(){ // MEJOR CASO
 		Grafo gG, gE;
@@ -216,11 +246,181 @@ public class TestEj3 extends TestCase{
 			System.out.println(i+"- G: "+g+" - E:"+e);
 
 		}		
+		int n = 1000;
+		int itera = 100;
+
+		for(int i = 2; i <= n; i+=2){
+				long milisegundosTot = 0;
+				gG = Ej3.generarTriangulosUnidos(i);
+				System.out.print(gG.getVertices().size());
+				long milisegundosactuales,milisegundos;
+				for(int h = 0; h < itera;h++){
+					gG = Ej3.generarTriangulosUnidos(i);
+					milisegundosactuales = System.nanoTime();
+					ArrayList<Grafo.Vertice> dominantes = Ej3.MCD_Greedy(gG,1);		
+					milisegundosTot += System.nanoTime() - milisegundosactuales;
+				}
+				System.out.println(" "+ milisegundosTot/100);
+		}
+	}
+	@SuppressWarnings("unused")
+	public void testArbolCliques(){ // MEJOR CASO
+		Grafo gG, gE;
+		int e, g;
+		for(int i = 2; i<=5;i+=1){
+			gG = grafoFactory.arbolCliques(i);
+			gE = grafoFactory.arbolCliques(i);
+			g = Ej3.MCD_Greedy(gG, 1).size();
+			e = ej2.obtenerConjuntoDominanteMinimo(gE).size();
+			System.out.println(gG.getVertices().size()+"- G: "+g+" - E:"+e);
+
+		}
+		int n = 1000;
+		int itera = 10;
+
+		for(int i = 1; i <= n; i+=1){
+				long milisegundosTot = 0;
+				gG = grafoFactory.arbolCliques(i);
+				System.out.print(gG.getVertices().size());
+				long milisegundosactuales,milisegundos;
+				for(int h = 0; h < itera;h++){
+					gG = grafoFactory.arbolCliques(i);
+					milisegundosactuales = System.nanoTime();
+					ArrayList<Grafo.Vertice> dominantes = Ej3.MCD_Greedy(gG,1);		
+					milisegundosTot += System.nanoTime() - milisegundosactuales;
+				}
+				System.out.println(" "+ milisegundosTot/100);
+		}
 	}
 	
+	public void testHiperCubos(){ // MEJOR CASO, nodos crece 2alaN
+		Grafo gG, gE;
+		int e, g;
+		for(int i = 1; i<=5;i+=1){
+			gG = grafoFactory.hipercubo(i);
+			gE = grafoFactory.hipercubo(i);
+			g = Ej3.MCD_Greedy(gG, 1).size();
+			e = ej2.obtenerConjuntoDominanteMinimo(gE).size();
+			System.out.println(gG.getVertices().size()+"- G: "+g+" - E:"+e);
+
+		}		
+		
+		int n = 20;
+		int itera = 1;
+
+		for(int i = 1; i <= n; i+=1){
+				long milisegundosTot = 0;
+				gG =  grafoFactory.hipercubo(i);
+				System.out.print(gG.getVertices().size());
+				long milisegundosactuales,milisegundos;
+				for(int h = 0; h < itera;h++){
+					gG =  grafoFactory.hipercubo(i);
+					milisegundosactuales = System.nanoTime();
+					ArrayList<Grafo.Vertice> dominantes = Ej3.MCD_Greedy(gG,1);		
+					milisegundosTot += System.nanoTime() - milisegundosactuales;
+				}
+				System.out.println(" "+ milisegundosTot/100);
+		}
+	}
+	
+	public void testArbolBinario(){ // MEJOR CASO
+		Grafo gG, gE;
+		int e, g;
+		for(int i = 1; i<=5;i+=1){
+			gG = grafoFactory.arbolBinario(i);
+			gE = grafoFactory.arbolBinario(i);
+			g = Ej3.MCD_Greedy(gG, 1).size();
+			e = ej2.obtenerConjuntoDominanteMinimo(gE).size();
+			System.out.println(gG.getVertices().size()+"- G: "+g+" - E:"+e);
+
+		}		
+		
+		int n = 10;
+		int itera = 3;
+
+		for(int i = 1; i <= n; i+=1){
+				long milisegundosTot = 0;
+				gG =  grafoFactory.arbolBinario(i);
+				System.out.print(gG.getVertices().size());
+				long milisegundosactuales,milisegundos;
+				for(int h = 0; h < itera;h++){
+					gG =  grafoFactory.arbolBinario(i);
+					milisegundosactuales = System.nanoTime();
+					ArrayList<Grafo.Vertice> dominantes = Ej3.MCD_Greedy(gG,1);		
+					milisegundosTot += System.nanoTime() - milisegundosactuales;
+				}
+				System.out.println(" "+ milisegundosTot/100);
+		}
+	}
+	public void testGrafoAleatorio(){ // PEOR CASO
+			grafoFactory gf = new grafoFactory();
+			Grafo gG, gE;
+			int te, tg;
+			int n = 19;
+			for(int i = 1; i<=100;i+=2){				
+				gG = gf.grafoAleatorio(n, i);				
+				te = ej2.obtenerConjuntoDominanteMinimo(gG).size();
+				tg = Ej3.MCD_Greedy(gG, 1).size();
+				//System.out.println(gG.getVertices().size()+"- G: "+tg+" - E:"+te);				
+				System.out.println(i+" " + (tg-te));				
+			}	
+	}
+	
+public void testGrid_4casos(){ // PEOR CASO
+		
+		Grafo gG, gE;
+		int te, tg;
+		
+		gG = Ej3.generarGrid(8, 5);
+		gE = Ej3.generarGrid(8, 5);
+		tg = Ej3.MCD_Greedy(gG, 1).size();
+		te = ej2.obtenerConjuntoDominanteMinimo(gE).size();
+		System.out.println(gG.getVertices().size()+"- G: "+tg+" - E:"+te);
+		
+		gG = Ej3.generarGrid(10, 10);
+		gE = Ej3.generarGrid(10, 10);
+		tg = Ej3.MCD_Greedy(gG, 1).size();
+		te = ej2.obtenerConjuntoDominanteMinimo(gE).size();
+		System.out.println(gG.getVertices().size()+"- G: "+tg+" - E:"+te);
+		
+		gG = Ej3.generarGrid(15, 15);
+		gE = Ej3.generarGrid(15, 15);
+		tg = Ej3.MCD_Greedy(gG, 1).size();
+		te = ej2.obtenerConjuntoDominanteMinimo(gE).size();
+		System.out.println(gG.getVertices().size()+"- G: "+tg+" - E:"+te);
+
+		gG = Ej3.generarGrid(20, 20);
+		gE = Ej3.generarGrid(20, 20);
+		tg = Ej3.MCD_Greedy(gG, 1).size();
+		te = ej2.obtenerConjuntoDominanteMinimo(gE).size();
+		System.out.println(gG.getVertices().size()+"- G: "+tg+" - E:"+te);
+		
+		
+		
+}
+	
 	public void testGrid(){ // PEOR CASO
-		int n = 40;
-		int m = 25;
+		Grafo gG, gE;
+		int te, tg;
+		gG = Ej3.generarGrid(5, 5);
+		gE = Ej3.generarGrid(5, 5);
+		ArrayList<Vertice> cG = Ej3.MCD_Greedy(gG, 1);
+		List<Vertice> cE = ej2.obtenerConjuntoDominanteMinimo(gE);
+		//System.out.println(gG.getVertices().size()+"- G: "+tg+" - E:"+te);
+		
+		
+		for(int i = 1; i<=6;i+=1){
+			for(int j = 1; j<=5;j+=1){
+			gG = Ej3.generarGrid(i, j);
+			gE = Ej3.generarGrid(i, j);
+			tg = Ej3.MCD_Greedy(gG, 1).size();
+			te = ej2.obtenerConjuntoDominanteMinimo(gE).size();
+			System.out.println(gG.getVertices().size()+"- G: "+tg+" - E:"+te);
+			}
+		}	
+		
+		int n = 1;//40;
+		int m = 1;//25;
 		long[] results = new long[m*n];
 		for(int i = 1; i <= n*m; i++){
 				results[i-1] = -1;
@@ -272,6 +472,110 @@ public class TestEj3 extends TestCase{
 		}
 	}
 
+public void testGrid_ComparacionResult(){ // PEOR CASO
+		
+		Grafo gG, gGRASP, gLS;
+		
+		
+		int n = 14;//40;
+		int m = 15;//25;
+		long[][] goloso = new long[m*n][2];
+		long[][] localsearch = new long[m*n][2];
+		long[][] grasp = new long[m*n][2];
+		for(int i = 1; i <= n*m; i++){
+				goloso[i-1][0] = localsearch[i-1][0] = grasp[i-1][0] =-1;
+			}
+		long nanoP, nanoT;
+		int iter = 1;
+		for(int i = 1; i <= n; i++){
+			for(int j = 1; j <= m; j++){
+
+				if(goloso[i*j-1][0] == -1){	
+					nanoT = 0;
+					for(int k = 0; k < iter;k++){
+						gG 		= Ej3.generarGrid(i, j);
+						nanoP = System.nanoTime();
+						goloso[i*j-1][1] = Ej3.MCD_Greedy(gG,1).size();	
+						nanoT+= System.nanoTime() - nanoP;
+					}
+					goloso[i*j-1][0] = nanoT/iter;
+				}
+				if(localsearch[i*j-1][0] == -1){
+					nanoT = 0;
+					for(int k = 0; k < iter;k++){
+						gLS 	= Ej3.generarGrid(i, j);
+						ArrayList<Grafo.Vertice> dominantes = Ej3.MCD_Greedy(gLS,1);		
+						ArrayList<Vertice> dominados = ej4.getListaDominados(gLS, dominantes);		
+						ConjuntoDominante cd = new ConjuntoDominante(dominantes, dominados);
+						nanoP = System.nanoTime();
+						ConjuntoDominante solu = ej4.MCD_LocalSearch(cd, new DosPorUnoDiffGrados());
+						localsearch[i*j-1][1] = solu.getDominantes().size();
+						nanoT+= System.nanoTime() - nanoP;
+					}
+					localsearch[i*j-1][0] = nanoT/iter;
+
+				}
+				if(grasp[i*j-1][0] == -1){		
+					nanoT = 0;
+					for(int k = 0; k < iter;k++){
+						gGRASP 	= Ej3.generarGrid(i, j);
+						nanoP = System.nanoTime();
+						grasp[i*j-1][1] = ej5.MCD_Grasp(gGRASP,i*j/10+1).getDominantes().size();	
+						nanoT+= System.nanoTime() - nanoP;
+					}
+					grasp[i*j-1][0] = nanoT/iter;
+				}
+		        
+			}
+		}
+	
+		
+			
+		
+		
+		for(int i = 1; i <= n*m; i++){
+			if(goloso[i-1][0] != -1){
+				System.out.print(i+" ");
+				System.out.println(goloso[i-1][1]);
+			}
+		}
+		System.out.println("e");
+		for(int i = 1; i <= n*m; i++){
+			if(localsearch[i-1][0] != -1){
+				System.out.print(i+" ");
+				System.out.println(localsearch[i-1][1]);
+			}
+		}System.out.println("e");
+		for(int i = 1; i <= n*m; i++){
+			if(grasp[i-1][0] != -1){
+				System.out.print(i+" ");
+				System.out.println(grasp[i-1][1]);
+			}
+		}
+		System.out.println("e");
+		System.out.println("-----------------------");
+		for(int i = 1; i <= n*m; i++){
+			if(goloso[i-1][0] != -1){
+				System.out.print(i+" ");
+				System.out.println(goloso[i-1][0]);
+			}
+		}
+		System.out.println("e");
+		for(int i = 1; i <= n*m; i++){
+			if(localsearch[i-1][0] != -1){
+				System.out.print(i+" ");
+				System.out.println(localsearch[i-1][0]);
+			}
+		}System.out.println("e");
+		for(int i = 1; i <= n*m; i++){
+			if(grasp[i-1][0] != -1){
+				System.out.print(i+" ");
+				System.out.println(grasp[i-1][0]);
+			}
+		}
+		System.out.println("e");
+	}
+	
 public void testInstancias(){
 
 		ArrayList<String>  instancias = new ArrayList<String>();
