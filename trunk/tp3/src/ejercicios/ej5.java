@@ -39,6 +39,8 @@ public class ej5 {
 			
 			if(cantNodosDominantes(nuevaSolucion)<cantNodosDominantes(mejorSolucion)){
 				mejorSolucion = nuevaSolucion;
+				if(mejorSolucion.getDominantes().size() == 1)
+					return mejorSolucion;
 			}
 			
 			System.out.print(i+" ");
