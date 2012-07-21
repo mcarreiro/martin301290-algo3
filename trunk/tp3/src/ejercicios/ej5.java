@@ -41,12 +41,8 @@ public class ej5 {
 				mejorSolucion = nuevaSolucion;
 				if(mejorSolucion.getDominantes().size() == 1)
 					return mejorSolucion;
-			}
-			
-			//System.out.print(i+" ");
-			//System.out.println(mejorSolucion.getDominantes().size());
-			
-			
+			}			
+
 		}		
 		return mejorSolucion;
 	}
