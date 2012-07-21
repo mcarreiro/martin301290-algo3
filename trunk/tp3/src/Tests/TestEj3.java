@@ -398,26 +398,50 @@ public void testGrid_4casos(){ // PEOR CASO
 		
 		
 }
+public void testGrid_GreedyVsExacto(){ // PEOR CASO
+	Grafo gG, gE;
+	int te, tg;
+	int n = 5;//40;
+	int m = 5;//25;
+	long[][] results = new long[m*n][2];
+	for(int i = 1; i <= n*m; i++){
+			results[i-1][0] = -1;
+		}
+	for(int i = 1; i<=n;i+=1){
+		for(int j = 1; j<=m;j+=1){
+		
+		gG = Ej3.generarGrid(i, j);
+		gE = Ej3.generarGrid(i, j);
+		tg = Ej3.MCD_Greedy(gG, 1).size();
+		te = ej2.obtenerConjuntoDominanteMinimo(gE).size();
+		System.out.println(gG.getVertices().size()+"- G: "+tg+" - E:"+te);
+		}
+	}
+}
+
+public void testGrid_Matriz(){ // PEOR CASO
+	Grafo gG, gE;
+	int te, tg;
+	int n = 29;//40;
+	int m = 29;//25;
+	long[][] results = new long[n][n];
+	for(int i = 1; i<=n;i+=1){
+		System.out.print(i+" & ");
+		for(int j = 1; j<=n;j+=1){
+		gG = Ej3.generarGrid(i, j);
+		results[i-1][j-1] = Ej3.MCD_Greedy(gG, 1).size();
+		System.out.print(results[i-1][j-1]+" & ");
+		}
+		System.out.println("\\\\");
+
+	}
 	
+}
+
 	public void testGrid(){ // PEOR CASO
 		Grafo gG, gE;
 		int te, tg;
-		gG = Ej3.generarGrid(5, 5);
-		gE = Ej3.generarGrid(5, 5);
-		ArrayList<Vertice> cG = Ej3.MCD_Greedy(gG, 1);
-		List<Vertice> cE = ej2.obtenerConjuntoDominanteMinimo(gE);
-		//System.out.println(gG.getVertices().size()+"- G: "+tg+" - E:"+te);
 		
-		
-		for(int i = 1; i<=6;i+=1){
-			for(int j = 1; j<=5;j+=1){
-			gG = Ej3.generarGrid(i, j);
-			gE = Ej3.generarGrid(i, j);
-			tg = Ej3.MCD_Greedy(gG, 1).size();
-			te = ej2.obtenerConjuntoDominanteMinimo(gE).size();
-			System.out.println(gG.getVertices().size()+"- G: "+tg+" - E:"+te);
-			}
-		}	
 		
 		int n = 1;//40;
 		int m = 1;//25;
