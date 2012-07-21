@@ -55,7 +55,7 @@ public class TestEj5 extends TestCase {
 		assertEquals(hs.size(), 0);
 	}
 	
-	public void testGrid(){ // PEOR CASO
+	public void testVerCantidadDeNodos(){ // PEOR CASO
 		
 		//Cada ciclo me devuelve un gráfico en el que van 5 lineas en cada uno que tiene por cada k una linea con la cantidad de 
 		//nodos en cada iteración
@@ -131,6 +131,44 @@ public class TestEj5 extends TestCase {
 		
 		System.out.println("-----------");	
 						
+	}
+	
+	public void testVerTiempos(){ //Ver tiempo por K, tiene que ser lineal
+		int itera = 3;
+
+		Grafo g=  Ej3.generarTriangulosUnidos(252); //Grafo de 60
+		for(int i=1;i<15;i++){ //To k = 25
+			long milisegundosTot = 0;
+			long milisegundosactuales;
+			for(int h = 0; h < itera;h++){
+				milisegundosactuales = System.nanoTime();	
+				ej5.MCD_Grasp(g,i);
+				milisegundosTot += System.nanoTime() - milisegundosactuales;
+			}	
+			System.out.print(i+" ");
+			System.out.println(milisegundosTot/itera);			
+		}
+	}
+	
+	public void testVerTiemposPorNodo(){ //Ver tiempo por nodo, entonces es la complejidad, encontrar cota
+		int itera = 4;
+		int n = 18;
+		int m = 14;
+		
+		for(int i=1;i<n;i++){ // Para todos los i<n
+			for(int j=1;i<m;j++){ // Para todos los j<m
+				Grafo g=  Ej3.generarGrid(i, j); 
+				long milisegundosTot = 0;
+				long milisegundosactuales;
+				for(int h = 0; h < itera;h++){
+					milisegundosactuales = System.nanoTime();	
+					ej5.MCD_Grasp(g,(n*m)/10);
+					milisegundosTot += System.nanoTime() - milisegundosactuales;
+				}	
+				System.out.print(i+" ");
+				System.out.println(milisegundosTot/itera);			
+			}
+		}	
 	}
 	
 	public void testCalcularDominados() {
