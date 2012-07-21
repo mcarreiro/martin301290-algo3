@@ -43,8 +43,8 @@ public class ej5 {
 					return mejorSolucion;
 			}
 			
-			System.out.print(i+" ");
-			System.out.println(mejorSolucion.getDominantes().size());
+			//System.out.print(i+" ");
+			//System.out.println(mejorSolucion.getDominantes().size());
 			
 			
 		}		

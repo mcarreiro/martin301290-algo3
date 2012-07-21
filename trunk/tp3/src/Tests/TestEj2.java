@@ -39,8 +39,8 @@ public class TestEj2 extends TestCase {
 	public void testCrearGrafo() {
 		grafoFactory factory = new grafoFactory();
 		ej2 ej2 = new ej2();
-		for(int i =1;i<=20;i++){
-			Grafo g = factory.grafoAleatorio(i, 1);
+		for(int i =1;i<=25;i++){
+			Grafo g = factory.grafoAleatorio(i, 2);
 			List<Grafo.Vertice> CD = ej2.obtenerConjuntoDominanteMinimo(g);
 			System.out.println(i+" "+ej2.ciclos);
 			ej2.ciclos = 0;

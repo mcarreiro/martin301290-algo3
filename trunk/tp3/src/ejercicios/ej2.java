@@ -89,36 +89,29 @@ public class ej2 {
 	}
 	
 	private static boolean es_dominante(List<Grafo.Vertice>conjuntoDominanteMinimo){
-		boolean esta;
+		Grafo grafoDominante = new Grafo();
+		//Creo el grafo formado por el conjunto dominante y sus adyacentes para ver despues si es igual al grafo original
+		for(Grafo.Vertice verticeDominante : conjuntoDominanteMinimo){
+			ciclos++;
+			grafoDominante.insertauObtenerVertice(verticeDominante.getDato(),verticeDominante.getDato());
+			ArrayList<Arista> aristas = verticeDominante.getAristas();
+			for(Arista arista : aristas){
+				ciclos++;
+				if(arista.v1 != verticeDominante){
+					grafoDominante.insertauObtenerVertice(arista.v1.getDato(),arista.v1.getDato());
+				}else{
+					grafoDominante.insertauObtenerVertice(arista.v2.getDato(),arista.v2.getDato());
+				}
+			}			
+		}
+		
+		
 		//me fijo por cada vertice del grafo original
 		for(Grafo.Vertice vertice : grafoOriginal){
 			ciclos++;
-			//si el vertice pertence al conjunto dominante
-			if(conjuntoDominanteMinimo.contains(vertice)){
-				continue;
-			}else{
-				esta = false;
-				//o si pertence a alguno de sus adyacentes
-				for(Grafo.Vertice verticeDominante : conjuntoDominanteMinimo){
-					ciclos++;
-					ArrayList<Arista> aristas = verticeDominante.getAristas();
-					for(Arista arista : aristas){
-						ciclos++;
-						if(arista.v1 == vertice || arista.v2 == vertice){
-							esta = true;
-							break;
-						}
-					}
-					if(esta){
-						break;
-					}
-				}
-				//si no pertence ni a sus adyacentes ni es parte del conjunto dominante entonces el conjnto no es dominante
-				if(esta){
-					continue;
-				}else{
-					return false;
-				}
+			Vertice esta = grafoDominante.obtenerVertice(vertice.getDato());
+			if(esta == null ){
+				return false;
 			}
 		}
 		return true;
