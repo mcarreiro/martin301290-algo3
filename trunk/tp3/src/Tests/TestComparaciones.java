@@ -45,7 +45,7 @@ public class TestComparaciones extends TestCase{
 		for(int i =1;i<=100;i++){
 			Grafo g = factory.grafoAleatorio(i, 30);
 			
-			if(i > 25){
+			if(i < 25){
 			milisegundosS = System.nanoTime();	
 			CD = ej2.obtenerConjuntoDominanteMinimo(g);
 			milisegundosE = System.nanoTime();
@@ -66,7 +66,7 @@ public class TestComparaciones extends TestCase{
 			listaLocal.add(i+" "+ (milisegundosE-milisegundosS));
 			listaLocalNodos.add(i+" "+CDLocalSearch.getDominantes().size());
 			g.desmarcarVertices();
-			kGrasp = i/2;
+			kGrasp = i/10;
 			milisegundosS = System.nanoTime();
 			CDGrasp = ej5.MCD_Grasp(g, kGrasp);
 			milisegundosE = System.nanoTime();

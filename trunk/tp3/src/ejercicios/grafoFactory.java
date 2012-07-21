@@ -17,7 +17,7 @@ public class grafoFactory {
 		for(int i=0;i<n;i++){
 			String v = i+"";
 			Vertice ver = g.obtenerVertice(v);
-			for(int a=0;a<n;a++){
+			for(int a=i;a<n;a++){
 				if(r.nextInt(100) < proba){
 					v = a+"";
 					Vertice ver2 = g.obtenerVertice(v);
