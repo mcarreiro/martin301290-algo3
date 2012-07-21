@@ -25,6 +25,9 @@ la solución inicial fuera optima y nunca se realizara mejora.
 \li	nuevaSolucion = MCDLocalSearch(instanciaSolucionGreedyRandomized)
 \li 	\textbf{Si} cantNodosDominantes(nuevaSolucion) $<$ cantNodosDominantes(mejorSolucion)  \Do
 \li		mejorSolucion = nuevaSolucion
+\li		\textbf{Si} mejorSolucion.size() == 1 \Do
+\li			\textbf{return} mejorSolucion
+		\End
 	\End
     \End	
 \li	\textbf{return} mejorSolucion	
@@ -55,14 +58,6 @@ Dentro del GRASP se realizan k iteraciones de las siguientes operaciones:
 Esto es O(k*(goloso + localSearch)), que resulta polinomial.\\
 Entonces la complejidad resulta O(k*$n^3$);
 
-\subsection{Peor Caso}
-Antes de hacer el gráfico, deberíamos calcular cual es el peor caso para este algoritmo. Sin embargo, el mismo depende de dos cosas:
-\begin{itemize}
-\item La solución random generada por el algoritmo goloso cuando se usa el valor de k. 	Esto es importante, ya que mientras esa solución sea generada de forma pseudo-random, menor cantidad
-	de operaciones va a haber en la búsqueda local.
-\item No se pudo determinar un peor caso para la búqueda local. Es decir, no se encontró una entrada, en donde la
-	cantidad de operaciones que se hagan sean máximas.
-\end{itemize}
 
 \subsection{Tests y análisis}
 Tal como hicimos con los anteriores algoritmos, acá también se tomaron los peores y los mejores casos. Como la randomización evita encontrar un peor/mejor caso per-se, se 
@@ -78,61 +73,73 @@ Al igual que en la búsqueda local, en este algoritmo tambien se incrementa la c
 que se incrementa la cantidad de conjuntos dominantes devuelto por la solución greedy.\\
 Cabe recordar que en cada iteración, el algoritmo greedy retorna una solución de las k*$|$conjuntoDominante$|$ posibles soluciones, que después se buscará localmente una mejora 
 en caso de existir a través del camino elegido.\\
+Antes de hacer los gráficos, deberíamos calcular cual es el peor caso para este algoritmo. Sin embargo, el mismo depende de dos cosas:
+La solución random generada por el algoritmo goloso cuando se usa el valor de k. Esto es importante, ya que mientras esa solución sea generada de forma pseudo-random, menor cantidad
+de operaciones va a haber en la búsqueda local.
 A continuación se muestran algunos de los ejemplos realizados para distintas cantidades de nodos, distintas iteraciones obteniendo resultados en los peores y mejores casos.
 
 
 \begin{center}
-\includegraphics[width=15cm]{./graficos/GRASP_distintosK.png}\\
+\includegraphics[width=17cm]{./graficos/grasp/peoresymejoresn10.png}\\
 Peores y mejores casos con n = 10.
 \end{center}
 
 \begin{center}
-\includegraphics[width=15cm]{./graficos/GRASP_distintosK.png}\\
+\includegraphics[width=17cm]{./graficos/grasp/peoresymejoresn49.png}\\
 Peores y mejores casos con n = 49.
 \end{center}
 
 \begin{center}
-\includegraphics[width=15cm]{./graficos/GRASP_distintosK.png}\\
+\includegraphics[width=17cm]{./graficos/grasp/peoresymejoresn225.png}\\
 Peores y mejores casos con n = 225.
 \end{center}
 
-\begin{center}
-\includegraphics[width=15cm]{./graficos/GRASP_distintosK.png}\\
-Peores y mejores casos con n = 500.
-\end{center}
+%\begin{center}
+%\includegraphics[width=15cm]{./graficos/GRASP_distintosK.png}\\
+%Peores y mejores casos con n = 500.
+%\end{center}
 
 
 Como se puede ver en los gráficos, la cantidad de nodos no se reduce por utilizar un k más grande. Esto es importante pero veamos por qué.
-En la i-esima iteración, GRASP le pide a Greedy que obtenga una nueva solución tomando siempre,en cada iteración de este último, de los primeros k posibles un nodo random como 
+En la i-esima iteración, GRASP le pide a Greedy que obtenga una nueva solución tomando siempre, en cada iteración de este último, de los primeros k posibles un nodo random como 
 próximo elemento a ser considerado como dominante, y una vez que el conjunto sea dominante, será mejorado con local search.\\
 Ahora entonces tenemos una nueva solución, independiente de la i-1-esima iteración. Notemos que esta solución no es necesariamente mejor a la anterior, 
-Esto se debe a que el elemento obtenido de la RCL puede ser bastante malo según el criterio greedy y por lo
-tanto se obtiene un conjunto grande, que la búsqueda local no alcanza a mejorar del todo. En el otro extremo, si el tamaño de la
+esto se debe a que el elemento obtenido de la RCL puede ser bastante malo según el criterio greedy y por lo
+tanto se obtiene un conjunto grande, que la búsqueda local no alcanza a mejorar del todo. Por otro lado, si el tamaño de la
 RCL es muy chico, la solución inicial greedy randomizada va a ser muy similar a la greedy clásico (no randomizado). Esto nos
 llevaría a explorar una cantidad más acotada de vecindarios de soluciones al momento de aplicar la búsqueda local.
 Entonces concluimos que al momento de elegir el k, notar que con pocos k ya se puede obtener lo que sería el ideal, pero sin embargo es conveniente utilizar una RCL
 más grande para abrir el panorama de soluciones.
 
-A continuación se agrega un gráfico para evaluar los tiempos para distintos k con distintos nodos del conjunto de familias detallado en los gráficos anteriores, comparado con la función de la cota superior:
+A continuación se agrega un gráfico para evaluar los tiempos para distintos k con distintos nodos del conjunto de familias detallado en los gráficos anteriores:
 
 
 \begin{center}
-\includegraphics[width=15cm]{./graficos/GRASP_distintosK.png}\\
-Flia de grafo perteneciente al peor caso con n=10, n=50, n=100, n=200, n=500, con k < 50
+\includegraphics[width=17cm]{./graficos/GRASP_distintosK.png}\\
+Flia de grafo Mobius perteneciente al peor caso con n=12, n=60, n=168, n=252 con k $<$ 25
 \end{center}
 
 \begin{center}
-\includegraphics[width=15cm]{./graficos/GRASP_distintosK.png}\\
-Flia de grafo perteneciente al mejor caso con n=10, n=50, n=100, n=200, n=500, con k < 50
+\includegraphics[width=17cm]{./graficos/GRASP_distintosK.png}\\
+Flia de grafo Triangulos Unidos perteneciente al mejor caso con n=12, n=60, n=168, n=252 con $<$ 25
 \end{center}
 
 
-Como era esperable, la relación es lineal. Esto es ya que el K multiplica como constante y esta es siempre menor a n, ya que correr con un k mayor a n no tendría sentido práctico. Las pequeñas diferencias se deben a que al depender de otros algoritmos como ser: Greedy y LocalSearch, que tienen una condición de corte distinta a la de este algoritmo, puede pasar que terminen antes o tarden más. Por ejemplo, en caso de que greedy con un k, elija en tres iteraciones un conjunto dominante minimal y sin embargo para otro k elija en más iteraciones.
+Como era esperable, la relación es lineal. Esto es ya que el K multiplica como constante y esta es siempre menor a n, ya que correr con un k mayor a n no tendría sentido práctico. Las pequeñas diferencias se deben a que al depender de otros algoritmos como ser: Greedy y LocalSearch, que tienen una condición de corte distinta a la de este algoritmo, puede pasar que terminen antes o tarden más. Por ejemplo, en caso de que greedy con un k, elija en tres iteraciones un conjunto dominante minimal y sin embargo para otro k elija en más iteraciones.\\
+Tomamos k chicos, ya que como vimos con k muy grandes no significa mejores, resultados, y de esta forma mostramos un gráfico útil al momento de elegir qué algoritmo correr.\\
+
+A continuación se agrega un gráfico con los tiempos de corrida para distintos n de la familia Greed comparado con la cota superior:
+
+\begin{center}
+\includegraphics[width=17cm]{./graficos/grasp/tiempocondistintosngreed.png}\\
+Flia de grafo Triangulos Unidos perteneciente al mejor caso con n=12, n=60, n=168, n=252 con $<$ 25
+\end{center}
+
+Como se puede ver, mantenemos la cota mencionada. Las pequeñas diferencias que hacen que no sea completamente paralela, se deben a lo mencionado en el párrafo anterior, ya que estámos trabajando con un grafo random.
 
 
 
-
-%-------------------------------------------------------------------------- VERSION ANTERIOR QUE NO IRIA --------------------------------------------------------------------
+%-------------------------------------------------------------------------- VERSION ANTERIOR QUE NO IRIA -----------------------------------------------------------------------------
 
 
 
