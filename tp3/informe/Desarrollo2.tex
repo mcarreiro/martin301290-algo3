@@ -78,7 +78,7 @@ Ver si el conjunto vacío es dominante me cuesta O(1) ya que en la primera itera
 \\
 Ahora voy a demostrar que verificar si el conjunto recibido es dominante cuesta  O($n^2$):\\
 \\
- Esta funcion cuenta con 2 iteraciones, una sobre el conjunto de nodos dominantes y otra sobre el grafo original. La iteracion sobre el conjunto dominante crea un grafo con todos los nodos del conjunto y sus adyacentes, para esto por cada elemento del conjunto agrega todos sus adyacentes al nuevo grafo (obviamente si se agrega 2 veces el mismo queda 1 vez sola en el grafo) esto nos puede dar un total de n*(n-1) iteraciones, lo que pertenece a O($n^2$).\\
+ Esta función cuenta con 2 iteraciones, una sobre el conjunto de nodos dominantes y otra sobre el grafo original. La iteracion sobre el conjunto dominante crea un grafo con todos los nodos del conjunto y sus adyacentes, para esto agrega cada elemento del conjunto y todos sus adyacentes al nuevo grafo (obviamente si se agrega 2 veces el mismo queda 1 vez sola en el grafo) esto nos puede dar un total de n*(n-1) iteraciones, lo que pertenece a O($n^2$).\\
 En la iteracion sobre el grafo original, por cada nodo de este se fija si pertence al grafo recien creado, chequear si el nodo pertence al grafo cuesta O(n) ya que debe compararlo contra todos los nodos del otro grafo y como el grafo original tiene n nodos nos terminar quedando tambien una complejidad de O($n^2$).\\
 Finalmente obtenemos que la complejidad de esta verificacion es de O(2$n^2$) que es igual a O($n^2$). Por lo tanto la complejidad total del algoritmo nos termina quedando O($2^n$*$n^2$)\\
 
