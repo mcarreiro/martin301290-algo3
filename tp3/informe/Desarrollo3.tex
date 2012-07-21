@@ -78,37 +78,56 @@ La solución optima proporcionada por el algoritmo exacto es {6,2}, mientras que
 La solución óptima proporcionada por el algoritmo exacto es {2,4}, mientras que el goloso podría devolver {3,2,5}, ya que como los nodos 2, 3 y 4 tienen el mismo grado, si se decide por el 3, dejaría a todos los demás nodos con 1 grado sin dominar y faltando los dos extremos, provocando que si o si se necesite cubrirlos o elegirlos como dominantes, haciendo que el conjunto tenga tamaño 3 y no 2 como el exacto.
 
 \subsubsection {Familias}
-Las familias de grafos que encontramos que el algoritmo goloso da un resultado no optime frente al exacto fue con los Möbius–Kantor y Grid. Esto suele pasar por que son regulares (3-regular) y casi regulares (4-regular internamente, 3-regular en los bordes) respectivamente y al momento de la elección del mejor vértice, la estrategia solo distingue por grado de adyacentes sin dominar. 
+Las familias de grafos que encontramos que el algoritmo goloso da un resultado no optimo frente al exacto fue con los Möbius–Kantor y Grid. Esto suele pasar por que son regulares (3-regular) y casi regulares (4-regular internamente, 3-regular en los bordes) respectivamente y al momento de la elección del mejor vértice, la estrategia solo distingue por grado de adyacentes sin dominar por lo tanto seleccionará por el orden de la etiqueta de los nodos, las cuales son arbitrarias. 
 
-Nos pareció más interesante hacer un análisis mas detallado sobre los grafos Grid.
+Considerando que Möbius–Kantor se puede reducir a un circuito, nos pareció mas interesante enfocarnos en los grafos Grid, ya que es más amplia la diferencia de resultados entre los dos algoritmos, además esta familia de grafos son de más utilidad, ya que equivalen tableros representando cada celda con un nodo.
 
-
+En el siguiente ejemplo, para un grafo Grid de 5x5 con 25 nodos, se puede notar la diferencia entre cantidad de elementos de los conjunto dominante resultantes, el goloso devuelve 9 nodos {6, 18, 21, 9, 1, 11, 20, 4, 23}, mientras que el exacto 7 nodos {19, 18, 10, 7, 4, 1, 21}, y esto se debe principalmente a que el goloso eligirá primero los nodos internos de grado 4 hasta que tengan el mismo grado sin dominar que los del borde y luego seleccionará los que faltan para dominar a todos, mientras que la solución exacta dependia más de los nodos en los bordes que los interiores.
+ 
 \includegraphics[width=8cm]{./graficos/grid_5x5_goloso.png}
 % grafico.eps: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=50 50 410 302
 \includegraphics[width=8cm]{./graficos/grid_5x5_exacto.png}
 % grafico.eps: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=50 50 410 302
 
 
-
 \begin {center}
 \includegraphics[width=19cm]{./graficos/goloso-900nodos.png}
 % grafico.eps: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=50 50 410 302
 \end {center} 
-
-
-\subsection{Tests y análisis}
-
-En los gráficos que aparece a continuación  se puede notar que a medida que la cantidad de nodos aumenta, el algoritmo dibuja un comportamiento que se asemeja a O($n^3$) en relación a la cantidad de ciclos y el tiempo en nanosegundos.\\
-
 \begin {center}
-\includegraphics[width=16cm]{./graficos/goloso_1.png}
-% grafico.eps: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=50 50 410 302
+ \begin{tabular}{ l | l l l l l l l l l l l l l l l l l l l l l l l l l l l l l}
+m/n & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 & 14 & 15 & 16 & 17 & 18 & 19 & 20 & 21 & 22 & 23 & 24 & 25 & 26 & 27 & 28 & 29 \\ \hline
+1 & 1 & 1 & 1 & 2 & 2 & 2 & 3 & 4 & 3 & 4 & 5 & 6 & 6 & 6 & 7 & 7 & 7 & 6 & 7 & 8 & 7 & 8 & 9 & 9 & 9 & 10 & 10 & 10 & 11 & \\
+2 & 1 & 2 & 2 & 3 & 4 & 4 & 5 & 6 & 7 & 8 & 8 & 9 & 10 & 11 & 11 & 12 & 14 & 13 & 13 & 14 & 16 & 16 & 16 & 18 & 18 & 18 & 20 & 20 & 20 & \\
+3 & 1 & 2 & 3 & 4 & 5 & 6 & 8 & 8 & 9 & 10 & 11 & 12 & 14 & 14 & 15 & 17 & 17 & 18 & 19 & 20 & 20 & 22 & 23 & 24 & 26 & 26 & 27 & 29 & 29 & \\
+4 & 2 & 3 & 4 & 6 & 6 & 8 & 10 & 10 & 11 & 13 & 15 & 15 & 18 & 18 & 20 & 20 & 21 & 25 & 26 & 26 & 27 & 28 & 31 & 31 & 34 & 34 & 35 & 38 & 38 & \\
+5 & 2 & 4 & 5 & 6 & 9 & 9 & 12 & 13 & 14 & 15 & 19 & 16 & 21 & 21 & 25 & 27 & 26 & 27 & 30 & 31 & 31 & 33 & 38 & 35 & 41 & 39 & 43 & 45 & 47 & \\
+6 & 2 & 4 & 6 & 8 & 10 & 10 & 14 & 16 & 18 & 18 & 21 & 26 & 23 & 27 & 27 & 28 & 31 & 33 & 35 & 37 & 39 & 41 & 45 & 46 & 47 & 49 & 50 & 51 & 53 & \\
+7 & 3 & 5 & 6 & 9 & 13 & 13 & 15 & 19 & 20 & 21 & 25 & 24 & 29 & 31 & 31 & 36 & 36 & 39 & 43 & 45 & 47 & 46 & 48 & 48 & 52 & 55 & 56 & 58 & 61 & \\
+8 & 4 & 5 & 8 & 12 & 12 & 16 & 15 & 21 & 21 & 25 & 29 & 28 & 31 & 35 & 38 & 42 & 43 & 43 & 47 & 47 & 52 & 51 & 55 & 57 & 63 & 68 & 70 & 74 & 71 & \\
+9 & 3 & 6 & 9 & 11 & 13 & 16 & 21 & 23 & 28 & 28 & 31 & 32 & 36 & 42 & 44 & 47 & 51 & 49 & 53 & 54 & 58 & 59 & 66 & 64 & 71 & 76 & 75 & 82 & 77 & \\
+10 & 4 & 7 & 10 & 14 & 15 & 19 & 20 & 27 & 28 & 30 & 35 & 34 & 39 & 45 & 44 & 52 & 53 & 55 & 58 & 60 & 67 & 65 & 71 & 74 & 76 & 84 & 84 & 89 & 91 & \\
+11 & 5 & 8 & 11 & 15 & 17 & 21 & 23 & 29 & 31 & 33 & 39 & 39 & 42 & 49 & 46 & 55 & 60 & 59 & 66 & 68 & 73 & 70 & 77 & 85 & 93 & 91 & 89 & 101 & 100 & \\
+12 & 6 & 8 & 11 & 16 & 17 & 21 & 26 & 31 & 34 & 36 & 43 & 45 & 48 & 51 & 53 & 60 & 67 & 66 & 71 & 69 & 78 & 82 & 84 & 93 & 94 & 91 & 104 & 109 & 109 & \\
+13 & 6 & 8 & 14 & 18 & 18 & 22 & 25 & 34 & 39 & 43 & 45 & 49 & 53 & 54 & 58 & 66 & 72 & 71 & 77 & 76 & 87 & 87 & 88 & 98 & 104 & 101 & 108 & 114 & 115 & \\
+14 & 6 & 9 & 14 & 16 & 21 & 23 & 28 & 34 & 39 & 43 & 49 & 51 & 54 & 57 & 63 & 71 & 78 & 75 & 84 & 86 & 85 & 87 & 95 & 105 & 109 & 108 & 120 & 124 & 124 & \\
+15 & 7 & 9 & 15 & 18 & 21 & 28 & 31 & 40 & 41 & 47 & 51 & 53 & 61 & 64 & 65 & 75 & 82 & 82 & 90 & 88 & 94 & 98 & 103 & 109 & 122 & 118 & 127 & 134 & 130 & \\
+16 & 7 & 10 & 16 & 19 & 22 & 31 & 32 & 40 & 45 & 51 & 54 & 59 & 63 & 67 & 69 & 80 & 85 & 81 & 90 & 94 & 101 & 107 & 109 & 119 & 131 & 124 & 135 & 142 & 138 & \\
+17 & 7 & 11 & 17 & 24 & 24 & 29 & 36 & 41 & 48 & 56 & 56 & 61 & 65 & 69 & 77 & 84 & 83 & 89 & 97 & 103 & 103 & 114 & 113 & 127 & 136 & 127 & 142 & 150 & 147 & \\
+18 & 6 & 11 & 18 & 24 & 25 & 33 & 37 & 40 & 50 & 58 & 61 & 64 & 69 & 76 & 81 & 87 & 89 & 95 & 98 & 108 & 110 & 118 & 120 & 133 & 138 & 137 & 148 & 160 & 156 & \\
+19 & 7 & 12 & 19 & 27 & 25 & 35 & 39 & 45 & 52 & 61 & 64 & 69 & 74 & 79 & 85 & 94 & 94 & 99 & 109 & 113 & 116 & 126 & 130 & 141 & 146 & 144 & 157 & 168 & 165 & \\
+20 & 8 & 12 & 19 & 28 & 29 & 35 & 41 & 46 & 53 & 62 & 66 & 73 & 77 & 84 & 90 & 97 & 94 & 106 & 112 & 119 & 124 & 134 & 137 & 147 & 153 & 152 & 165 & 175 & 175 & \\
+21 & 7 & 13 & 22 & 30 & 29 & 37 & 46 & 49 & 58 & 67 & 69 & 75 & 81 & 84 & 91 & 101 & 100 & 109 & 121 & 124 & 131 & 139 & 143 & 154 & 162 & 161 & 173 & 180 & 188 & \\
+22 & 8 & 13 & 22 & 31 & 31 & 40 & 49 & 53 & 61 & 69 & 74 & 77 & 83 & 88 & 95 & 104 & 105 & 112 & 127 & 131 & 137 & 142 & 152 & 166 & 167 & 171 & 179 & 187 & 193 & \\
+23 & 9 & 13 & 23 & 33 & 31 & 38 & 51 & 56 & 64 & 71 & 76 & 83 & 90 & 93 & 97 & 109 & 110 & 119 & 133 & 139 & 139 & 153 & 158 & 170 & 181 & 178 & 188 & 192 & 203 & \\
+24 & 9 & 13 & 24 & 31 & 33 & 42 & 51 & 58 & 64 & 77 & 79 & 87 & 92 & 92 & 105 & 114 & 115 & 133 & 136 & 144 & 151 & 162 & 165 & 176 & 172 & 189 & 195 & 199 & 211 & \\
+25 & 9 & 14 & 25 & 33 & 36 & 42 & 53 & 57 & 66 & 76 & 80 & 87 & 96 & 100 & 108 & 118 & 119 & 133 & 142 & 149 & 158 & 163 & 169 & 180 & 182 & 195 & 200 & 217 & 210 & \\
+26 & 10 & 16 & 26 & 38 & 39 & 46 & 55 & 58 & 72 & 83 & 85 & 91 & 102 & 105 & 110 & 122 & 125 & 140 & 151 & 152 & 164 & 172 & 183 & 189 & 189 & 203 & 203 & 217 & 218 & \\
+27 & 10 & 16 & 27 & 38 & 43 & 45 & 56 & 60 & 71 & 83 & 89 & 97 & 107 & 110 & 114 & 126 & 129 & 141 & 156 & 157 & 166 & 177 & 183 & 197 & 200 & 217 & 217 & 223 & 226 & \\
+28 & 10 & 17 & 28 & 37 & 44 & 47 & 61 & 65 & 75 & 87 & 88 & 102 & 109 & 116 & 117 & 129 & 135 & 151 & 162 & 165 & 170 & 182 & 190 & 200 & 204 & 216 & 222 & 232 & 236 & \\
+29 & 11 & 18 & 29 & 40 & 40 & 51 & 59 & 68 & 78 & 78 & 94 & 106 & 114 & 120 & 121 & 139 & 139 & 156 & 170 & 183 & 179 & 189 & 192 & 213 & 211 & 219 & 232 & 245 & 248 & \\
+\end {tabular} 
 \end {center} 
-
-\begin {center}
-\includegraphics[width=16cm]{./graficos/goloso_2.png}
-% grafico.eps: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=50 50 410 302
-\end {center}
 
 ---
 Mejores casos: ESTRELLA
