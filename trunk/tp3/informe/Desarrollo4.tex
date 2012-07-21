@@ -1,39 +1,78 @@
 \section{Algoritmo Local Search}
 
 \subsection{Solución}
-La idea de un algorítmo de búsqueda local (o local search) es, a partir de una solución (no óptima) a un problema dado, trabajar sobre ella, realizar distintas operaciones y estrategias de modo tal de mejorarla e intentar acercarse lo más posible a una solución óptima. La dinstinción de éstos algoritmos está en que cada modificación a la solución original, nos genera una o un conjunto de soluciones al problema, siempre "cercanas" a la solución que fue modificada. \\
-En nuestro caso en particular, la idea es que, a partir de un grafo, hallemos un cojunto dominante de alguna forma (todos los nodos del grafo son, en efecto, un cojunto dominante. O bien también podemos usar la solución obtenida con el algortimo greedy) y, a partir de ella, intentemos construir, mediante estrategia y funciones creadas por nostros, a una nueva solución, mejor o igual a la que nos proveyeron como base. \\
-Es así que nos planteamos lo siguiente: ¿qué operaciones podemos realizar de forma tal que, a partir de un conjunto dominate, no necesariamente mínimo, de forma tal de reduicir la cardinalidad del conjunto y que continúe siendo dominante? Las posibilidades que encontramos fueron orientadas siempre a la posibilidad de reducir o, al menos mantener, la cantidad de nodos en el conjunto dominante. Es por eso que las estrategias que utilizamos en la búsqueda local son las siguientes: 
+La idea de un algorítmo de búsqueda local (o local search) es, a partir de una solución (no óptima) a un problema dado, trabajar sobre ella, realizar distintas operaciones y estrategias de modo tal de mejorarla e intentar acercarse lo más posible a una solución óptima. La distinción de éstos algoritmos está en que cada modificación a la solución original, nos genera una o un conjunto de soluciones al problema, siempre \"cercanas\" a la solución original. En éste sentido, definimos una \textit{vecindad} de soluciones, que está formada por éstas nuevas soluciones cercanas a la original. \\
+En nuestro caso en particular, la idea es que, a partir de un grafo, hallemos un cojunto dominante de alguna forma (todos los nodos del grafo son, en efecto, un cojunto dominante. O bien también podemos usar la solución obtenida con el algoritmo greedy) y, a partir de ella, intentar construir, mediante estrategias y funciones creadas por nostros, una nueva solución, mejor o igual a la que nos proveyeron como base. \\
+Es así que nos planteamos lo siguiente: ¿qué operaciones podemos realizar de forma tal que, a partir de un conjunto dominate, no necesariamente mínimo, podamos reducir la cardinalidad del conjunto y que continúe siendo dominante? Las posibilidades que encontramos fueron orientadas siempre a la posibilidad de reducir o, al menos mantener, la cantidad de nodos en el conjunto dominante. Es por eso que las estrategias que utilizamos en la búsqueda local son las siguientes: 
 
 \begin{description}
-\item[Reemplazar 2 nodos del Conjunto] dominante por uno que se encuentre dominado. Ésta es la forma más directa de reducir la cardinalidad del CD. La forma de seleccionar los nodos intercambiables la realizamos verificando si la unión de nodos vecinos de los dos nodos a quitar del conjunto está incluida en el conjunto formado por los vecinos del vértice a insertar en el CD. Ésta es la forma más sencilla de encontrar dichos nodos, ya que de otra forma, el costo de encontrar estos posibles reemplazos sería muy costoso. Además, existe la posibilidad de encontrar varios posibles candidatos, por lo que ideamos 3 funciones de comparación para ordenar éstas tuplas y, en cada caso, utilizar la más "conveniente" según dicha función.
-\item[Eliminar 1 nodo del CD:] Para éste caso, analizamos si elimiando alguno de los nodos del CD, el mismo sigue dominando a todos los nodos del grafo. Para ello, nos fijamos si el conjunto de vecinos del nodo que queremos quitar, está incluido en la unión de todos los vecinos de los nodos del CD menos el nodo que queremos quitar. Si es así, quitando el nodo el conjunto seguirá siendo dominante. En éste caso, es claro que la cardinalidad disminuye.
-\item[Reemplar 1 nodo del CD] por otro del conjunto dominado. La estrategia aplicada para encontrar los posibles candidatos es la misma que en la técnica del 2x1, es decir, nos fijamos los nodos que estén en el CD, y buscamos aquellos dominados que tengan los mismos vecinos. Es claro que ésta técnica no reduce la cardinalidad del conjunto, pero la utilizamos con la esperanza de que éste cambio de nodos nos modifique la solución parcial y, a partir de ésta, si podamos utilzar algunas de las técnicas anteriores.
+\item[Reemplazar 2 nodos del Conjunto] dominante por uno que se encuentre dominado. Ésta es la forma más directa de reducir la cardinalidad del CD. La forma de seleccionar los nodos intercambiables la realizamos verificando si la unión de nodos vecinos de los dos nodos a quitar del conjunto está incluida en el conjunto formado por los vecinos del vértice a insertar en el CD. Ésta es la forma más sencilla de encontrar dichos nodos, ya que de otra forma, el costo de encontrar estos posibles reemplazos sería muy costoso. Además, existe la posibilidad de encontrar varios posibles candidatos, por lo que ideamos 3 funciones de comparación para ordenar éstas tuplas y, en cada caso, utilizar la más \"conveniente\" según dicha función. Luego, para el método GRASP, eligiremos una de éstas a partir de las pruebas realizadas.
+\item[Eliminar 1 nodo del CD:] Para éste caso, analizamos si eliminando alguno de los nodos del CD, el mismo sigue dominando a todos los nodos del grafo. Para ello, nos fijamos si el conjunto de vecinos del nodo que queremos quitar, está incluido en la unión de todos los vecinos de los nodos del CD menos el nodo que queremos quitar. Si es así, quitando el nodo el conjunto seguirá siendo dominante. En éste caso, es claro que la cardinalidad disminuye.
+\item[Reemplar 1 nodo del CD] por otro del conjunto dominado. La estrategia aplicada para encontrar los posibles candidatos es similar a la que utilizamos en la técnica del 2x1, es decir, nos fijamos los nodos que estén en el CD, y buscamos aquellos dominados cuyos conjunto de vecinos contenga a los vecinos del nodo quitado (no tienen que ser los mismos exactamente, podria tener mas vecinos). Es claro que ésta técnica no reduce la cardinalidad del conjunto, pero la utilizamos con la esperanza de que éste cambio de nodos nos modifique la solución parcial y, a partir de ésta, si podamos utilzar algunas de las técnicas anteriores. Es decir, lo que intentamos realizar con ésta procedimiento es que al cambiar por otro nodo con un número de nodos adyacentes posiblemente mayor, al agregarse nuevas aristas, podamos luego sí, en el próximo paso, reducir la cardinalidad del CD.
 \end{description}
 
-Si luego de k iteraciones, con $k$ aleatorio entre 10 y 20, el algoritmo no logra reducir la cardinalidad de la solución parcial, se decide que no será posible encontrar una solución cuya cardinalidad sea menor y, por tanto, se termina la ejecución, dando como solución al problema a la solución parcial, que tiene una cardinalidad igual o menor a la solución inicial dada al algortimo.
+El algoritmo de búsqueda local intentará, a partir de una solución dada (en la primera iteración, será la solución que se le otorgue a la hora de invocarla), mejorarla a partir de alguna de las tres técnicas mencionadas anteriormen. Primero, intentará quitar 2 nodos del conjunto e ingresar uno. Si no puede, intentará con la siguiente estrategia, que es quitar uno del conjunto dominante. Si tampoco puede reducir la cardinalidad con ésta técnica, intentará reemplazar 1 nodo del CD por un nodo dominado, para así al menos, cambiar la solución. \\
+Si alguna de éstas técnicas tuvo éxito, el algoritmo no probará con las siguientes, y a partir de la solución hallada, intentará volver a crear una nueva ejecutando todas las técnicas nuevamente para la nueva solución. Evidentemenete, llegará una solución para la que nuestro algoritmo no podrá llevar a cabo ninguna de las técnicas especificadas, y es ahí donde termina la búsqueda local, y nuestro algoritmo, dando como solución a la última encontrada, y que tendrá una cardinalidad igual o menor a la solución inicial. \\
+A continuación, mostramos el pseudocódigo de nuestra algoritmo:  \\
 
 \subsection{Pseudocódigo}
 \begin{codebox}
-\Procname{$\proc{EncontrarSolucion}$ (\textbf{ConjuntoDominante} $cd$, \textbf{Comparator} $funcion$)}{cd}{Conjunto Dominante}
-\li	elijo un k aleatorio entre 10 y 20.
-\li	\textbf{hasta} que la cardinalidad de la solucion no cambie durante k estrategias: \Do
-\li		ElegirEstrategia(cd, funcion)
+\Procname{$\proc{MejorarSolucion}$ (\textbf{ConjuntoDominante} $cd$, \textbf{Comparator} $funcion$)}{cd}{Conjunto Dominante}
+\li mejoroSolucion = true
+\li	\textbf{hasta} mejoroSolucion no sea false: \Do
+\li		mejoroSolucion = ElegirYEjecutarEstrategia(cd, funcion)
 \End
 \End
 \li	\textbf{return} cd
 \end{codebox}
 
 \begin{codebox}
-\Procname{$\proc{ElegirEstrategia}$ (\textbf{ConjuntoDominante} $cd$, \textbf{Comparator} $f$)}{res}{Boolean}
-\li	\textbf{para} cada una de las E estrategias: \Do
-\li		intento la estregia E en el conjunto dominante cd
-\li		\textbf{Si} es posible llevar a cabo la estrategia E con la funcion f: \Do
+\Procname{$\proc{ElegirYEjecutarEstrategia}$ (\textbf{ConjuntoDominante} $cd$, \textbf{Comparator} $f$)}{res}{Boolean}
+\li		\textbf{Si} es posible llevar a cabo la estrategia 2x1 con la funcion f: \Do
 \li			devuelvo true
 \End
-\li		\textbf{Si} no es posible llevar a cabo la estrategia E, sigo con la proxima estrategia
+\li		\textbf{Si} es posible llevar a cabo la estrategia quitar un nodo: \Do
+\li			devuelvo true
 \End
-\li \textbf{si} no pude llevar a cabo ninguna estrategia, aumento el contador de estrategias fallidas
+\li		\textbf{Si} es posible llevar a cabo la estrategia 1x1: \Do
+\li			devuelvo true
+\End
+\li \textbf{return} false
+\end{codebox}
+
+\begin{codebox}
+\Procname{$\proc{TryEstrategia2x1}$ (\textbf{ConjuntoDominante} $cd$, \textbf{Comparator} $f$)}{res}{Boolean}
+\li		obtengo los posibles nodos intercambiables, ordenados por la funcion f
+\li		\textbf{Si} existen posibles nodos intercambiables: \Do
+\li			obtengo la primera tupla de nodos intercambiables
+\li			intercambio los nodos de la tupla en el cd
+\li			devuelvo true
+\li		\textbf{sino} devuelvo false
+\End
+\li \textbf{return} false
+\end{codebox}
+
+\begin{codebox}
+\Procname{$\proc{TryEstrategiaQuitarUno}$ (\textbf{ConjuntoDominante} $cd$, \textbf{Comparator} $f$)}{res}{Boolean}
+\li		\textbf{para} cada vertice v del conjunto dominante: \Do
+\li			quito el vertice v del cd
+\li			\textbf{Si} el conjunto sigue siendo dominante: \Do
+\li				devuelvo true
+\End
+\End
+\li \textbf{return} false
+\end{codebox}
+
+\begin{codebox}
+\Procname{$\proc{TryEstrategia1x1}$ (\textbf{ConjuntoDominante} $cd$, \textbf{Comparator} $f$)}{res}{Boolean}
+\li		\textbf{para} cada vertice v del conjunto dominante: \Do
+\li			\textbf{para} cada vertice d del conjunto dominado: \Do
+\li				\textbf{si} no realize el intercambio v,d y los nodos son reemplazables: \Do
+\li					intercambio los vertices en el cd
+\li					devuelvo true
+\End
+\End
+\End
 \li \textbf{return} false
 \end{codebox}
 
