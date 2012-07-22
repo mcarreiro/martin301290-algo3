@@ -47,7 +47,7 @@ A continuación se agrega el cambio hecho en el algoritmo greedy para aleatoriza
 \end{codebox}
 
 \subsection{Análisis de Complejidad}
-Por la demostración de la complejidad de la búsqueda local, sabemos que la complejidad es: O($n^2$);\\
+Por la demostración de la complejidad de la búsqueda local, sabemos que la complejidad es: O($n^4$);\\
 Por la demostración de la complejidad del goloso, sabemos que la complejidad es: O($n^3$);\\
 Dentro del GRASP se realizan k iteraciones de las siguientes operaciones:
 \begin{itemize}
@@ -56,7 +56,7 @@ Dentro del GRASP se realizan k iteraciones de las siguientes operaciones:
 \item Comparar mejorSolución con nuevaSolución (esta operación es en O(1) ya que tanto conseguir el tamaño de un ArrayList en Java como la comparación de enteros es en O(1)) 
 \end{itemize}
 Esto es O(k*(goloso + localSearch)), que resulta polinomial.\\
-Entonces la complejidad resulta O(k*$n^3$);
+Entonces la complejidad resulta O(k*$n^4$);
 
 
 \subsection{Tests y análisis}
@@ -131,7 +131,7 @@ Tomamos k chicos, ya que como vimos con k muy grandes no significa mejores, resu
 A continuación se agrega un gráfico con los tiempos de corrida para distintos n de la familia Greed comparado con la cota superior:
 
 \begin{center}
-\includegraphics[width=17cm]{./graficos/grasp/tiempocondistintosngreed.png}\\
+\includegraphics[width=17cm]{./graficos/grasp/tiempocondistintosngreedconx4.png}\\
 Flia de grafo Triangulos Unidos perteneciente al mejor caso con n=12, n=60, n=168, n=252 con $<$ 25
 \end{center}
 
