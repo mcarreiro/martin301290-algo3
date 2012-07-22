@@ -6,7 +6,7 @@ Realizamos diferentes gráficos generados pseudo-aleatoriamente con el fin de po
 detallar los peores y mejores casos de cada uno. Estos algoritmos fueron generados con una función que recibe como parámetro la cantidad de nodos, y una probabilidad. Dicha función, por cada par de nodos, genera un valor random entre 0 y 100, si este valor está por debajo de la probabilidad recibida como parámetro, unirá dichos nodos, de otra manera, no.\\
 Los análisis a realizar serán del estilo cantidad de nodos del conjunto dominante otorgado por cada heurística, comparándolo con el Exacto, y tiempos.\\
 Para el GRASP, elegimos correr con k=n/10, ya que después de varias pruebas, nos pareció que con esa cantidad de iteraciones en proporción a la cantidad de nodos encuentra un valor óptimo antes de que el algoritmo entre en lo que denominamos $"$esperando mejor solución que puede no llegar$"$ (remitirse al análisis del GRASP en la sección anterior).\\
-Cabe destacar que el algoritmo exacto, se deja de correr para los n $>$ 30 debido a su complejidad. Por esto y porque a partir de ese numero pega saltos tan grandes (en cuanto a tiempos de ejecucion y ciclos de procesador) que se vuelve imposible graficarlo.\\
+Cabe destacar que el algoritmo exacto, se deja de correr para los n $<$ 30 debido a su complejidad. Por esto y porque a partir de ese numero pega saltos tan grandes (en cuanto a tiempos de ejecucion y ciclos de procesador) que se vuelve imposible graficarlo.\\
 Para el LocalSearch usamos la estrategia DosPorUno por las razones ya mencionadas en la seccion de ese algoritmo.\\
 
 
