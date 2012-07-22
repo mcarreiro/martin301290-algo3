@@ -47,7 +47,7 @@ Para ello nos basamos en una estrategia de selección de nodos dominantes, la cu
 La complejidad del algoritmo es de O($n^3$)
 
 El algoritmo comienza creando una lista de vértices en O(n).\\
-Luego entra en un ciclo que como máximo será lineal en la cantidad de vértices porque en cada ciclo saca un vértice y la cantidad de vértices es finita. En cada iteración deberá comprobar si el conjunto actual de vértices elegidos domina todo el grafo en O($n$), ordenar todos los vértices en O(n*log(n)), elegir un vértice en O(1), removerlo de la lista en O(n) y finalmente actualizar el atributo de los grados sin dominar adyacentes de cada nodo en O($n^2$), esto es porque para los adyacentes del nodo elegido y a su vez para los adyacentes de estos tengo que bajar en uno este atributo, recorrer los adyacentes me lleva O(n) y por cada adyacente recorrer sus adyacentes también me lleva O(n), O(n) * O(n) = O($n^2$).\\
+Luego entra en un ciclo que como máximo será lineal en la cantidad de vértices porque en cada ciclo saca un vértice y la cantidad de vértices es finita. En cada iteración deberá comprobar si el conjunto actual de vértices elegidos domina todo el grafo en O($n$), ordenar todos los vértices en O(n*log(n)) mediante QuickSort, elegir un vértice en O(1), removerlo de la lista en O(n) y finalmente actualizar el atributo de los grados sin dominar adyacentes de cada nodo en O($n^2$), esto es porque para los adyacentes del nodo elegido y a su vez para los adyacentes de estos tengo que bajar en uno este atributo, recorrer los adyacentes me lleva O(n) y por cada adyacente recorrer sus adyacentes también me lleva O(n), O(n) * O(n) = O($n^2$).\\
 
 Por lo tanto, la complejidad nos queda:\\
 O(n) + O(n) * (O($n^2$) + O(n*log(n) + O(n) + O($n^2$)) = O($n^3$)\\\\
@@ -58,7 +58,7 @@ La complejidad final del algoritmo goloso es de O($n^3$), cumpliendo el objetivo
 
 Las familias de grafos en donde la solución es la mejor son la de los bipartitos completos, triangulos unidos, estrellas, arboles binarios, arbol de cliques, completo entre filas, hipercubos. Esto es debido al ordenamiento y selección de nodos que realiza nuestra estrategia, obteniendo en cada iteración el nodo justo para lograr el resultado óptimo, ya sea porque contienen un nodo universal o porque selecciona nodos de subgrafos completos maximales.
 
-Decidimos focalizarnos en tres tipos de familias para hacer el análisis (Triangulos Unidos, Árbol de Cliques y Completo entre Filas) por el solo hecho de ser familias átipicas y no muy frecuente analizadas, y que además de dar siempre los mejores casos, se comportan con una complejidad mas lineal que cubica.
+Decidimos focalizarnos en tres tipos de familias para hacer el análisis (Triangulos Unidos, Árbol de Cliques y Completo entre Filas) por el solo hecho de ser familias átipicas y no muy frecuente analizadas, y que además de dar siempre los mejores casos, se comportan por debajo de la cota de complejidad para este algoritmo.
 
 \includegraphics[width=5cm]{./graficos/triangulosunidos.png}
 % grafico.eps: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=50 50 410 302
@@ -66,6 +66,15 @@ Decidimos focalizarnos en tres tipos de familias para hacer el análisis (Triang
 % grafico.eps: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=50 50 410 302
 \includegraphics[width=5cm]{./graficos/completoentrefilas.png}
 % grafico.eps: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=50 50 410 302
+
+A continación un gráfico para grafos de hasta 2000 nodos entre las tres familias:
+
+\begin {center}
+\includegraphics[width=8cm]{./graficos/grafo_camino.png}
+% grafico.eps: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=50 50 410 302
+\end {center} 
+
+En el gráfico se puede observar que el comportamiento de cada familias es muy regular sin picos ni sobresaltos, por lo tanto, sumado principalmente a que siempre devuelve un conjunto dominante óptimo, concluimos que para este tipo de familias es muy recomendable usar este algoritmo polinomial, sin necesidad de optimizarlo o probar distintas estrategias y/o heurísticas.
 
 \subsection{Peor Caso}
 
@@ -89,7 +98,11 @@ La solución óptima proporcionada por el algoritmo exacto es {2,4}, mientras qu
 \subsubsection {Familias}
 Las familias de grafos que encontramos que el algoritmo goloso da un resultado no optimo frente al exacto fue con los Möbius–Kantor y Grid. Esto suele pasar por que son regulares (3-regular) y casi regulares (4-regular internamente, 3-regular en los bordes) respectivamente y al momento de la elección del mejor vértice, la estrategia solo distingue por grado de adyacentes sin dominar por lo tanto seleccionará por el orden de la etiqueta de los nodos, las cuales son arbitrarias. 
 
-Considerando que Möbius–Kantor se puede reducir a un circuito, nos pareció mas interesante enfocarnos en los grafos Grid, ya que es más amplia la diferencia de resultados entre los dos algoritmos, además esta familia de grafos son de más utilidad, ya que equivalen tableros representando cada celda con un nodo.
+Considerando que Möbius–Kantor se puede reducir a un circuito con arcos, nos pareció mas interesante enfocarnos en los grafos Grid, ya que es más amplia la diferencia de resultados entre los dos algoritmos, además esta familia de grafos son de más utilidad, ya que equivalen tableros representando cada celda con un nodo.
+
+La familia de grafos Grid se caracteriza principalmente por modelar un tablero en donde cada celda equivale a un nodo, y dos nodos son adyacentes si están en celdas contiguas. En base a los resultados de pruebas exactas con grandes cantidades de nodos$^{[2]}$, pudimos notar que la diferencia a las pruebas con nuestra heurísta se debe principalmente a que la estrategia seleccionará primero los nodos interiores por tener mayor grado sin dominar a su alrededor y luego completará con los bordes, siendo un grosero por el simple hecho de que con una óptima selección de nodos del borde al comienzo se podría $''$acorralar$''$ los nodos interiores necesitando una menor cantidad de estos para dominar todo el grafo. 
+
+En la sección de \textbf{Cotas} se podrá observar que para este tipo de grafos, el tamaño del conjunto dominate esta por debajo de las cotas establecidas.
 
 En el siguiente ejemplo, para un grafo Grid de 5x5 con 25 nodos, se puede notar la diferencia entre cantidad de elementos de los conjunto dominante resultantes, el goloso devuelve 9 nodos {6, 18, 21, 9, 1, 11, 20, 4, 23}, mientras que el exacto 7 nodos {19, 18, 10, 7, 4, 1, 21}, y esto se debe principalmente a que el goloso eligirá primero los nodos internos de grado 4 hasta que tengan el mismo grado sin dominar que los del borde y luego seleccionará los que faltan para dominar a todos, mientras que la solución exacta dependia más de los nodos en los bordes que los interiores.
  
@@ -98,7 +111,7 @@ En el siguiente ejemplo, para un grafo Grid de 5x5 con 25 nodos, se puede notar 
 \includegraphics[width=8cm]{./graficos/grid_5x5_exacto.png}
 % grafico.eps: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=50 50 410 302
 
-Mediante varios casos de tests que fuimos corriendo y en comparativa con el  siguiente cuadro de valores para conjunto dominantes óptimos para grafos Grid \textbf{[3]}, encontramos que la distancia entre los tamaño de la solución
+Mediante varios casos de tests que fuimos corriendo y en comparativa con el  siguiente cuadro de valores para conjunto dominantes óptimos para grafos Grid$^{[2]}$), encontramos que la distancia entre los tamaño de la solución
 del Greedy y del CDM puede ser bastante grande, por ejemplo, en el grafo de 29x29, con el goloso da soluciones de tamaño 248 cuando el óptimo es 188, con una diferencia de 60 nodos, bastante alto considerando que equivale a más de dos filas de nodos.\\
 
 \begin {center}

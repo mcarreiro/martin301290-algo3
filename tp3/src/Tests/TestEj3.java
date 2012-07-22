@@ -195,15 +195,30 @@ public class TestEj3 extends TestCase{
 	public void testMobius(){ //PEOR CASO
 		Grafo gG, gE;
 		int e, g;
-		for(int i = 2; i<=20;i+=2){
+		/*for(int i = 2; i<=20;i+=2){
 			gG = Ej3.generarMobius(i);
 			gE = Ej3.generarMobius(i);
 			g = Ej3.MCD_Greedy(gG, 1).size();
 			e = ej2.obtenerConjuntoDominanteMinimo(gE).size();
 			System.out.println(i+"- G: "+g+" - E:"+e);
 
-		}	
-	
+		}*/	
+		for(int i = 10; i<=2000;i+=2){
+			gG = Ej3.generarMobius(i);
+			for(Vertice v: gG.getVertices().values())
+			{
+				if(v.grado != 3)
+				{
+					System.out.println("ERROR GRADO: "+v.grado );
+
+				}
+			}
+			
+			g = Ej3.MCD_Greedy(gG, 1).size();
+			
+			System.out.println(i+" " + g);
+
+		}
 		int n = 900;
 		int itera = 10;
 
@@ -338,7 +353,19 @@ public class TestEj3 extends TestCase{
 				System.out.println(" "+ milisegundosTot/100);
 		}
 	}
-	
+	public void testArbolDesnivelado(){ // PEOR CASO
+		Grafo gG, gE;
+		int e, g;
+		for(int i = 4; i<=10;i+=2){
+			Vertice[] ver = new Vertice[2];
+			gG = grafoFactory.arbolDesnivelado(i, ver);
+			gE = grafoFactory.arbolDesnivelado(i, ver);
+			g = Ej3.MCD_Greedy(gG, 1).size();
+			e = ej2.obtenerConjuntoDominanteMinimo(gE).size();
+			System.out.println(gG.getVertices().size()+"- G: "+g+" - E:"+e);
+
+		}	
+	}
 	public void testArbolBinario(){ // MEJOR CASO
 		Grafo gG, gE;
 		int e, g;
