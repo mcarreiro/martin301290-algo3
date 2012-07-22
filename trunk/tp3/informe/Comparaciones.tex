@@ -52,9 +52,9 @@ eso es bastante claro ya que habrá más nodos cerca del grado = n-1, por lo que
 que la probabilidad 
 se vuelve muy alta
 muchos de los nodos del grafo llegan a tener nivel n-1 y para esos grafos todos los algoritmos devuelven el mismo resultado que además es óptimo.\\
-Otro aspecto importante en cuanto al valor de la probabilidad es que cuanto menor sea esta más nodos contiene el conjunto dominante en todos los resultados. Esto es 
-debido a que al haber manos aristas es lógico que se necesiten mas nodos dominantes para cubrir todo el grafo (ejemplo claro es el caso del grafo completamente disconexo
-, osea sin arsitas, que requiere que todos los nodos del grafo esten en el CD.\\
+Otro punto importante en cuanto al valor de la probabilidad es que cuanto menor sea esta más nodos contiene el conjunto dominante en todos los resultados. Esto es 
+debido a que al haber menos aristas es lógico que se necesiten mas nodos dominantes para cubrir todo el grafo (ejemplo claro es el caso del grafo completamente disconexo
+, osea sin arsitas, que requiere que todos los nodos del grafo esten en el CD).\\
 Llevándolo a nuestra primera heurística, es muy probable que el goloso elija bajo su criterio uno de los mejores nodos para el menor
 conjunto dominante. Por otra parte, al tener más aristas, la búsqueda local tiene más vecindad para elegir ya que cada nodo se relaciona con
 muchos para poder aplicar sus estrategias. Por último, pero no por eso peor, tenemos al GRASP que aplica aleatoriamente los algoritmos previamente
