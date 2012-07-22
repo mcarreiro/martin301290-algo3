@@ -45,10 +45,16 @@ Comparacion por cantidad de nodos con p hasta 100 y n=200
 %LISTO
 \end{center}
 
-Como se puede observar en los gráficos, el GRASP se mantiene dominante con la menor cantidad de nodos en su conjunto resultado.
+Como se puede observar en los gráficos, el GRASP se mantiene dominante (dentro de los algoritmos eurísticos) con la menor cantidad de nodos en su conjunto resultado.
 Igualmente, el GREEDY no se aleja demasiado, acompañado por la mejora de Local Search.\\
 Otro aspecto a destacar fue que mientras más aristas posee el grafo, el conjunto dominante va a ser más pequeño,
-eso es bastante claro ya que habrá más nodos cerca del grado = n-1, por lo que con pocos nodos se encuentra el conjunto dominante.\\
+eso es bastante claro ya que habrá más nodos cerca del grado = n-1, por lo que con pocos nodos se encuentra el conjunto dominante. Además una vez 
+que la probabilidad 
+se vuelve muy alta
+muchos de los nodos del grafo llegan a tener nivel n-1 y para esos grafos todos los algoritmos devuelven el mismo resultado que además es óptimo.\\
+Otro aspecto importante en cuanto al valor de la probabilidad es que cuanto menor sea esta más nodos contiene el conjunto dominante en todos los resultados. Esto es 
+debido a que al haber manos aristas es lógico que se necesiten mas nodos dominantes para cubrir todo el grafo (ejemplo claro es el caso del grafo completamente disconexo
+, osea sin arsitas, que requiere que todos los nodos del grafo esten en el CD.\\
 Llevándolo a nuestra primera heurística, es muy probable que el goloso elija bajo su criterio uno de los mejores nodos para el menor
 conjunto dominante. Por otra parte, al tener más aristas, la búsqueda local tiene más vecindad para elegir ya que cada nodo se relaciona con
 muchos para poder aplicar sus estrategias. Por último, pero no por eso peor, tenemos al GRASP que aplica aleatoriamente los algoritmos previamente
@@ -65,8 +71,9 @@ Comparacion por tiempo con n hasta 200 y p=30
 %LISTO
 \end{center}
 
-
-%Generar dos graficos con p$<$100 como eje x y n = 100 (en uno) y n = 250 (en otro)
+Aquí podemos observar la abismal diferencia entre el algoritmo exacto y todas las eurísticas. El exacto desaparece del gráfico para grafos de menos de 25 nodos
+lo que evidencia el porque de la imposibilidad de correr dicho algoritmo para 30 o mas nodos. Algo curioso es la bajada que hace este algoritmo antes de desaparecer,
+eso probablemente sea porque en el grafo recibido existía un nodo con grado n -1 y por esto al encontrarlo lo devolvio y corto el procedimiento (como ya explicamos al principio del informe).
 
 \begin{center}
 \includegraphics[width=17cm]{./graficos/comparaciontiemposprobvariablen50.png}\\
