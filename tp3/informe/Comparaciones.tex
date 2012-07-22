@@ -20,14 +20,14 @@ Para el LocalSearch usamos la estrategia DosPorUno por las razones ya mencionada
 \begin{center}
 \includegraphics[width=17cm]{./graficos/comparacioncantCDprobvariablen200.png}\\
 Comparacion por cantidad de nodos con n hasta 200 y p=30
-%EL QUE ESTA CORRIENDO EN CASA
+%EL QUE ESTA CORRIENDO EN CASA, LLAMAR A FEDE A LAS 2
 \end{center}
 
 
 %\begin{center}
 %\includegraphics[width=17cm]{./graficos/comparacioncantCDprobvariablen200.png}\\
 %Comparacion por cantidad de nodos con n hasta 200 y p=70
-%QUEDO HORRIBLE Y NO SALE NINGUN DATO
+%QUEDO HORRIBLE Y NO SALE NINGUN DATO VEMOS SI PONEOMS UNO CON n hasta 100 con p=10
 %\end{center}
 
 %Generar dos graficos con p$<$100 como eje x y n = 50 (en uno) y n = 250 (en otro)
@@ -75,7 +75,7 @@ Comparacion por tiempo con n hasta 200 y p=30
 %\begin{center}
 %\includegraphics[width=17cm]{./graficos/comparaciontiemposprobvariablen200.png}\\
 %Comparacion por tiempo con n hasta 200 y p=70
-%QUEDO HORRIBLE NO PODEMOS SACAR NINGUN DATO
+%QUEDO HORRIBLE Y NO SALE NINGUN DATO VEMOS SI PONEOMS UNO CON n hasta 100 con p=10
 %\end{center}
 
 %Generar dos graficos con p$<$100 como eje x y n = 100 (en uno) y n = 250 (en otro)
@@ -93,10 +93,14 @@ Comparacion por tiempo con p hasta 100 y n=200
 %LISTO
 \end{center}
 
+En cuanto a la relación cantidad de nodos, vemos como GRASP tarda mucho más que el resto de los algoritmos 
+y esto es debido a la complejidad, la que queda bien evidenciada en el primer gráfico. A mayor costo, mejores resultados.
 
-Si vemos que el GRASP tarda más que otros es por la cantidad de iteraciones
-El grasp tarda 
-
+De los gráficos recién mencionados, podemos extraer que a mayor densidad, el algoritmo tarda menos.
+Esto tiene sentido porque es más probable que la cardinalidad del conjunto dominante sea uno, o que sea muy chico.
+De esta forma, el Greedy seleccionará el de mayor grado, que será muy cercano a n-1 y además habrá varios con este grado, y en pocas iteraciones
+encontrará un conjunto dominante, lo que queda poco trabajo para el LocalSearch por tener una vecindad chica.
+Por parte del GRASP, pasará lo mismo.\\
 Finalmente cabe mencionar que el algoritmo GRASP tarda siempre más que el de búsqueda local y este ultimo más que el
 greedy. Esto se debe a que el de búsqueda local ejecuta el greedy y luego intenta mejorar la solución, y el GRASP realiza una
 determinada cantidad de iteraciones en las que ejecuta, en cada una, el greedy y lo mejora con búsqueda local.
