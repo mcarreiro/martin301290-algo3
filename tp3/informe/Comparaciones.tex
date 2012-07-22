@@ -7,7 +7,7 @@ detallar los peores y mejores casos de cada uno. Estos algoritmos fueron generad
 Los análisis a realizar serán del estilo cantidad de nodos del conjunto dominante otorgado por cada heurística, comparándolo con el Exacto, y tiempos.\\
 Para el GRASP, elegimos correr con k=n/10, ya que después de varias pruebas, nos pareció que con esa cantidad de iteraciones en proporción a la cantidad de nodos encuentra un valor óptimo antes de que el algoritmo entre en lo que denominamos $"$esperando mejor solución que puede no llegar$"$ (remitirse al análisis del GRASP en la sección anterior).\\
 Cabe destacar que el algoritmo exacto, se deja de correr para los n $<$ 30 debido a su complejidad. Por esto y porque a partir de ese numero pega saltos tan grandes (en cuanto a tiempos de ejecucion y ciclos de procesador) que se vuelve imposible graficarlo.\\
-Para el LocalSearch usamos la estrategia DosPorUno por las razones ya mencionadas en la seccion de ese algoritmo.\\
+Para el LocalSearch, en la estrategia DosPorUno, usamos la función de comparación \textbf{DiffGrado}, por las razones ya mencionadas en la seccion correspondiente a ese algoritmo.\\
 
 %En el siguiente grafico se ven las corridas, en nanosegundos, de los 4 algoritmos para un mismo grafo aleatorio con probabilidad 30 (No pusimos grafos con mas de 100 nodos porque al estar corriendo los 4 
 %algoritmos para cada grafo el tiempo de corrida se hace demasiado extenso):\\ REVISAR ESTOOOOO CON LO NUEVO ABAJO
@@ -89,8 +89,7 @@ De esta forma, el Greedy seleccionará el de mayor grado, que será muy cercano 
 encontrará un conjunto dominante, lo que queda poco trabajo para el LocalSearch por tener una vecindad chica.
 Por parte del GRASP, pasará lo mismo.\\
 Finalmente cabe mencionar que el algoritmo GRASP tarda siempre más que el de búsqueda local y este ultimo más que el
-greedy. Esto se debe a que el de búsqueda local ejecuta el greedy y luego intenta mejorar la solución, y el GRASP realiza una
-determinada cantidad de iteraciones en las que ejecuta, en cada una, el greedy y lo mejora con búsqueda local.
+greedy. Esto se debe a que el de búsqueda local busca en toda la vecindad de soluciones a la inicial (y para ello, debe generarlas otra vez para toda nueva subsolucion vecina hallada) y, partir de ellas elige una, y el GRASP realiza una determinada cantidad de iteraciones en las que ejecuta, en cada una, el greedy y lo mejora con búsqueda local.
 
 \subsection{Cotas}
 
