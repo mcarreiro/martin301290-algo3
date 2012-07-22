@@ -225,29 +225,45 @@ public class TestEj3 extends TestCase{
 	public void testCompletosEntreFilas(){ // MEJOR CASO
 		Grafo gG, gE;
 		int e, g;
-		for(int i = 1; i<=24;i+=1){
+		/*for(int i = 1; i<=24;i+=1){
 			gG = grafoFactory.completoEntreFilas(i);
 			gE = grafoFactory.completoEntreFilas(i);
 			g = Ej3.MCD_Greedy(gG, 1).size();
 			e = ej2.obtenerConjuntoDominanteMinimo(gE).size();
 			System.out.println(gG.getVertices().size()+"- G: "+g+" - E:"+e);
 
-		}	
+		}	*/
+		int n = 700;
+		int itera = 5;
+
+		for(int i = 2; i <= n; i+=2){
+				long milisegundosTot = 0;
+				gG = grafoFactory.completoEntreFilas(i);
+				System.out.print(gG.getVertices().size());
+				long milisegundosactuales,milisegundos;
+				for(int h = 0; h < itera;h++){
+					gG = grafoFactory.completoEntreFilas(i);
+					milisegundosactuales = System.nanoTime();
+					ArrayList<Grafo.Vertice> dominantes = Ej3.MCD_Greedy(gG,1);		
+					milisegundosTot += System.nanoTime() - milisegundosactuales;
+				}
+				System.out.println(" "+ milisegundosTot/100);
+		}
 	}
 	@SuppressWarnings("unused")
 	public void testTriangulos(){ // MEJOR CASO
 		Grafo gG, gE;
 		int e, g;
-		for(int i = 2; i<=20;i+=2){
+		/*for(int i = 2; i<=20;i+=2){
 			gG = Ej3.generarTriangulosUnidos(i);
 			gE = Ej3.generarTriangulosUnidos(i);
 			g = Ej3.MCD_Greedy(gG, 1).size();
 			e = ej2.obtenerConjuntoDominanteMinimo(gE).size();
 			System.out.println(i+"- G: "+g+" - E:"+e);
 
-		}		
-		int n = 1000;
-		int itera = 100;
+		}*/		
+		int n = 2000;
+		int itera = 5;
 
 		for(int i = 2; i <= n; i+=2){
 				long milisegundosTot = 0;
@@ -267,16 +283,16 @@ public class TestEj3 extends TestCase{
 	public void testArbolCliques(){ // MEJOR CASO
 		Grafo gG, gE;
 		int e, g;
-		for(int i = 2; i<=5;i+=1){
+		/*for(int i = 2; i<=5;i+=1){
 			gG = grafoFactory.arbolCliques(i);
 			gE = grafoFactory.arbolCliques(i);
 			g = Ej3.MCD_Greedy(gG, 1).size();
 			e = ej2.obtenerConjuntoDominanteMinimo(gE).size();
 			System.out.println(gG.getVertices().size()+"- G: "+g+" - E:"+e);
 
-		}
-		int n = 1000;
-		int itera = 10;
+		}*/
+		int n = 2000;
+		int itera = 5;
 
 		for(int i = 1; i <= n; i+=1){
 				long milisegundosTot = 0;
@@ -443,18 +459,19 @@ public void testGrid_Matriz(){ // PEOR CASO
 		int te, tg;
 		
 		
-		int n = 1;//40;
-		int m = 1;//25;
+		int n = 40;//40;
+		int m = 50;//25;
 		long[] results = new long[m*n];
 		for(int i = 1; i <= n*m; i++){
 				results[i-1] = -1;
 			}
-		int itera = 10;
+		int itera = 3;
 
 		for(int i = 1; i <= n; i++){
 			for(int j = 1; j <= m; j++){
 				long milisegundosTot = 0;
 				Grafo g=  Ej3.generarGrid(i, j);
+				if(results[g.getVertices().size()-1] == -1){
 				//System.out.print(g.getVertices().size());
 				long milisegundosactuales,milisegundos;
 				for(int h = 0; h < itera;h++){
@@ -464,9 +481,9 @@ public void testGrid_Matriz(){ // PEOR CASO
 					milisegundosTot += System.nanoTime() - milisegundosactuales;
 				}
 				//System.out.println(" "+ milisegundosTot/100);
-				if(results[g.getVertices().size()-1] == -1)
+				
 					results[g.getVertices().size()-1] = milisegundosTot/itera;				
-		        
+				}
 			}
 		}
 	
