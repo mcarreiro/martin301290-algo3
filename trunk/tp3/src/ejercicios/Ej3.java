@@ -147,7 +147,7 @@ public class Ej3 {
  		for(int i = 0;i < n;i++)
  			g.agregarArista(vertices[i] ,vertices[(i+1)%n], 0);	
  		for(int i = 0;i < n/2;i++)
- 			g.agregarArista(vertices[i] ,vertices[(i+n/2+1)%n], 0);
+ 			g.agregarArista(vertices[i] ,vertices[(i+n/2)%n], 0);
  		return g;
  	}
    public static Grafo generarTriangulosUnidos(int n){

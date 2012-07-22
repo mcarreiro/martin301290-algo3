@@ -187,4 +187,23 @@ public class grafoFactory {
 		}
 		return g;
 	}
+
+	public static Grafo arbolDesnivelado (int n, Vertice[] ver){
+		Grafo g = new Grafo();
+		if(n%2==1)n--;
+		Vertice raiz = g.insertarVertice(UUID.randomUUID().toString(), UUID.randomUUID().toString());
+		ver[0] = raiz;
+		int k = 0;
+		for(int i = 0;i<n;i++)
+		{
+			Vertice[] auxRaiz = new Vertice[1];
+			Grafo aux = arbolDesnivelado(n-2, auxRaiz);
+			Vertice vaux  = auxRaiz[0];
+			for(Vertice v : aux.getVertices().values()){			
+				g.insertaVertice(v);
+			}
+			g.agregarArista(raiz, vaux, 0);
+		}
+		return g;
+	}
 }
