@@ -78,7 +78,7 @@ En el gráfico se puede observar que el comportamiento de cada familias es muy r
 
 \subsection{Peor Caso}
 
-Al ser una heurística, en cierto casos la solución no es la óptima que podría dar un algoritmo exacto, pero aún asi es correcta.
+Al ser una heurística, en ciertos casos la solución no es la óptima que podría dar un algoritmo exacto, pero aún asi es correcta.
 Los peores casos, donde se produce una diferencia en el tamaño de conjunto dominante respecto a la optima, se suelen dar en grafos en los que varios nodos tienen el mismo grado o hay pequeña diferencia, y esto es debido que para la elección del vertice dominante en cada iteración nos quedamos con el que mayor grado de nodos adyacentes no cubiertos tenga y si hay varios con esta misma característica puede pasar que el nodo seleccionado no sea conveniente a futuro para llegar a una solución óptima.
 
 En los siguientes ejemplos de grafos se puede apreciar mejor:
@@ -111,7 +111,7 @@ En el siguiente ejemplo, para un grafo Grid de 5x5 con 25 nodos, se puede notar 
 \includegraphics[width=8cm]{./graficos/grid_5x5_exacto.png}
 % grafico.eps: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=50 50 410 302
 
-Mediante varios casos de tests que fuimos corriendo y en comparativa con el  siguiente cuadro de valores para conjunto dominantes óptimos para grafos Grid$^{[2]}$), encontramos que la distancia entre los tamaño de la solución
+Mediante varios casos de tests que fuimos corriendo y en comparativa con el  siguiente cuadro de valores para conjunto dominantes óptimos para grafos Grid$^{[2]}$, encontramos que la distancia entre los tamaño de la solución
 del Greedy y del CDM puede ser bastante grande, por ejemplo, en el grafo de 29x29, con el goloso da soluciones de tamaño 248 cuando el óptimo es 188, con una diferencia de 60 nodos, bastante alto considerando que equivale a más de dos filas de nodos.\\
 
 \begin {center}
@@ -119,7 +119,7 @@ del Greedy y del CDM puede ser bastante grande, por ejemplo, en el grafo de 29x2
 \includegraphics[width=18cm]{./graficos/cd_grid_exacto.png}
 % grafico.eps: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=50 50 410 302
 \end {center} 
-
+\hbox{}
 \begin {center}
 \textbf{Tamaño de conjunto dominante goloso para grafos Grid de tamaño n*m}
 \resizebox{18cm}{!} {
