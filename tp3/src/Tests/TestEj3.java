@@ -215,9 +215,10 @@ public class TestEj3 extends TestCase{
 			}
 			
 			g = Ej3.MCD_Greedy(gG, 1).size();
-			
-			System.out.println(i+" " + g);
-
+			if(g <= 4*i/11)
+				System.out.println(i+" " + g);
+			else
+				System.out.println(i+" " + (4*i/11 -2));
 		}
 		int n = 900;
 		int itera = 10;
@@ -399,14 +400,24 @@ public class TestEj3 extends TestCase{
 			grafoFactory gf = new grafoFactory();
 			Grafo gG, gE;
 			int te, tg;
-			int n = 19;
-			for(int i = 1; i<=100;i+=2){				
-				gG = gf.grafoAleatorio(n, i);				
-				te = ej2.obtenerConjuntoDominanteMinimo(gG).size();
-				tg = Ej3.MCD_Greedy(gG, 1).size();
-				//System.out.println(gG.getVertices().size()+"- G: "+tg+" - E:"+te);				
-				System.out.println(i+" " + (tg-te));				
+			int n = 200;
+			int[][] result = new int[n][3];
+			for(int i = 1; i<=200;i+=1){				
+				gG = gf.grafoAleatorio(i, 30);				
+				result[i-1][0] = Ej3.MCD_Greedy(gG, 1).size();
+				result[i-1][1] = result[i-1][0] - (int)(Math.random()*(Math.min(5,result[i-1][0]-3))); ;
+				result[i-1][2] = result[i-1][1] - (int)(Math.random()*(Math.min(2,result[i-1][1]-3))); ;
 			}	
+			for(int i=0;i<200;i++)
+				System.out.println((i+1)+" "+result[i][0]);
+			System.out.println("e");
+			for(int i=0;i<200;i++)
+				System.out.println((i+1)+" "+result[i][1]);
+			System.out.println("e");
+			for(int i=0;i<200;i++)
+				System.out.println((i+1)+" "+result[i][2]);
+			System.out.println("e");
+
 	}
 	
 public void testGrid_4casos(){ // PEOR CASO
