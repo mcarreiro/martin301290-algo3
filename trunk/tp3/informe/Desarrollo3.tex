@@ -98,6 +98,11 @@ La solución óptima proporcionada por el algoritmo exacto es {2,4}, mientras qu
 \subsubsection {Familias}
 Las familias de grafos que encontramos que el algoritmo goloso da un resultado no optimo frente al exacto fue con los Möbius–Kantor y Grid. Esto suele pasar por que son regulares (3-regular) y casi regulares (4-regular internamente, 3-regular en los bordes) respectivamente y al momento de la elección del mejor vértice, la estrategia solo distingue por grado de adyacentes sin dominar por lo tanto seleccionará por el orden de la etiqueta de los nodos, las cuales son arbitrarias. 
 
+\begin {center}
+\includegraphics{./graficos/mobiusygrid.png}
+% grafico.eps: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=50 50 410 302
+\end {center} 
+
 Considerando que Möbius–Kantor se puede reducir a un circuito con arcos, nos pareció mas interesante enfocarnos en los grafos Grid, ya que es más amplia la diferencia de resultados entre los dos algoritmos, además esta familia de grafos son de más utilidad, ya que equivalen tableros representando cada celda con un nodo.
 
 La familia de grafos Grid se caracteriza principalmente por modelar un tablero en donde cada celda equivale a un nodo, y dos nodos son adyacentes si están en celdas contiguas. En base a los resultados de pruebas exactas con grandes cantidades de nodos$^{[2]}$, pudimos notar que la diferencia a las pruebas con nuestra heurísta se debe principalmente a que la estrategia seleccionará primero los nodos interiores por tener mayor grado sin dominar a su alrededor y luego completará con los bordes, siendo un grosero por el simple hecho de que con una óptima selección de nodos del borde al comienzo se podría $''$acorralar$''$ los nodos interiores necesitando una menor cantidad de estos para dominar todo el grafo. 
