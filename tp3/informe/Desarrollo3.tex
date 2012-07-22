@@ -56,7 +56,18 @@ La complejidad final del algoritmo goloso es de O($n^3$), cumpliendo el objetivo
 
 \subsection{Mejor Caso}
 
-Las familias de grafos en donde la solución es la mejor son en los grafos bipartitos completos, triangulos unidos, estrellas, arboles binarios, arbol de cliques. Por que? Porque en cada ordenamiento y selección de nodos, el nodo con más grado sin dominar es exactemente el que hay que elegir. EXPLICAR MAS
+Las familias de grafos en donde la solución es la mejor son la de los bipartitos completos, triangulos unidos, estrellas, arboles binarios, arbol de cliques, completo entre filas, hipercubos. Esto es debido al ordenamiento y selección de nodos que realiza nuestra estrategia, obteniendo en cada iteración el nodo justo para lograr el resultado óptimo, ya sea porque contienen un nodo universal o porque selecciona nodos de subgrafos completos maximales.
+
+Decidimos focalizarnos en tres tipos de familias para hacer el análisis (Triangulos Unidos, Árbol de Cliques y Completo entre Filas) por el solo hecho de ser familias átipicas y no muy frecuente analizadas, y que además de dar siempre los mejores casos, se comportan con una complejidad mas lineal que cubica.
+
+\includegraphics{./graficos/triangulosunidos.png}
+% grafico.eps: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=50 50 410 302
+
+\includegraphics{./graficos/cliquetree.png}
+% grafico.eps: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=50 50 410 302
+
+\includegraphics{./graficos/completoentrefilas.png}
+% grafico.eps: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=50 50 410 302
 
 \subsection{Peor Caso}
 
@@ -89,21 +100,20 @@ En el siguiente ejemplo, para un grafo Grid de 5x5 con 25 nodos, se puede notar 
 \includegraphics[width=8cm]{./graficos/grid_5x5_exacto.png}
 % grafico.eps: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=50 50 410 302
 
+Mediante varios casos de tests que fuimos corriendo y en comparativa con el  siguiente cuadro de valores para conjunto dominantes óptimos para grafos Grid \textbf{[3]}, encontramos que la distancia entre los tamaño de la solución
+del Greedy y del CDM puede ser bastante grande, por ejemplo, en el grafo de 29x29, con el goloso da soluciones de tamaño 248 cuando el óptimo es 188, con una diferencia de 60 nodos, bastante alto considerando que equivale a más de dos filas de nodos.
 
 \begin {center}
-\includegraphics[width=19cm]{./graficos/goloso-900nodos.png}
+\textbf{Tamaño de conjunto dominante óptimo para grafos Grid de tamaño n*m}
+\includegraphics[width=18cm]{./graficos/cd_grid_exacto.png}
 % grafico.eps: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=50 50 410 302
 \end {center} 
 
 \begin {center}
-\includegraphics[width=19cm]{./graficos/cd_grid_exacto.png}
-% grafico.eps: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=50 50 410 302
-\end {center} 
-\begin {center}
-\resizebox{20cm}{!} {
-
+\textbf{Tamaño de conjunto dominante goloso para grafos Grid de tamaño n*m}
+\resizebox{18cm}{!} {
  \begin{tabular}{ l | l l l l l l l l l l l l l l l l l l l l l l l l l l l l l}
-m/n & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 & 14 & 15 & 16 & 17 & 18 & 19 & 20 & 21 & 22 & 23 & 24 & 25 & 26 & 27 & 28 & 29 \\ \hline
+m / n & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 & 14 & 15 & 16 & 17 & 18 & 19 & 20 & 21 & 22 & 23 & 24 & 25 & 26 & 27 & 28 & 29 \\ \hline
 1 & 1 \\
 2 & 1 & 2  \\
 3 & 1 & 2 & 3  \\
@@ -137,6 +147,11 @@ m/n & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 & 14 & 15 & 16 & 17 & 18
 
 }
 \end {center} 
----
-Mejores casos: ESTRELLA
-Peores casos: GRID
+
+En base al tiempo de corrida para grafos Grid de 0 a 900 nodos, acotamos superiormente con una cubica ($0.27n^2 + 120n^2$) logrando una forma muy similar como se puede observar en el siguiente gráfico:
+\begin {center}
+\includegraphics[width=19cm]{./graficos/goloso-900nodos.png}
+% grafico.eps: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=50 50 410 302
+\end {center} 
+
+Por lo tanto se puede concluir que el algoritmo goloso no es recomendado para esta familia de grafos ya que, a pesar de tener complejidad polinomial cubica, a medida que aumenta la cantidad de nodos la diferencia aumenta considerablemente con respecto a la óptima 
