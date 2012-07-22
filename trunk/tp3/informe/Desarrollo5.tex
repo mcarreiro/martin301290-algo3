@@ -114,16 +114,16 @@ A continuación se agrega un gráfico para evaluar los tiempos para distintos k 
 
 
 \begin{center}
-\includegraphics[width=17cm]{./graficos/GRASP_distintosK.png}\\
-Flia de grafo Mobius perteneciente al peor caso con n=12, n=60, n=168, n=252 con k $<$ 25
+\includegraphics[width=17cm]{./graficos/grasp/medicionesdetiempocongrid.png}\\
+Flia de grafo Grid perteneciente al peor caso con n=60, n=168, n=252 con k $<$ 25
 \end{center}
 
-\begin{center}
-\includegraphics[width=17cm]{./graficos/GRASP_distintosK.png}\\
-Flia de grafo Triangulos Unidos perteneciente al mejor caso con n=12, n=60, n=168, n=252 con $<$ 25
-\end{center}
+%\begin{center}
+%\includegraphics[width=17cm]{./graficos/GRASP_distintosK.png}\\
+%Flia de grafo Triangulos Unidos perteneciente al mejor caso con n=12, n=60, n=168, n=252 con $<$ 25
+%\end{center}
 
-VER QUE ES MUY RAPIDO ESTE, O SEA NO ES SOLO ES MEJOR EN CANT DE NODODS SI NO EN TIEMPO
+%VER QUE ES MUY RAPIDO ESTE, O SEA NO ES SOLO ES MEJOR EN CANT DE NODODS SI NO EN TIEMPO
 
 Como era esperable, la relación es lineal. Esto es ya que el K multiplica como constante y esta es siempre menor a n, ya que correr con un k mayor a n no tendría sentido práctico. Las pequeñas diferencias se deben a que al depender de otros algoritmos como ser: Greedy y LocalSearch, que tienen una condición de corte distinta a la de este algoritmo, puede pasar que terminen antes o tarden más. Por ejemplo, en caso de que greedy con un k, elija en tres iteraciones un conjunto dominante minimal y sin embargo para otro k elija en más iteraciones.\\
 Tomamos k chicos, ya que como vimos con k muy grandes no significa mejores, resultados, y de esta forma mostramos un gráfico útil al momento de elegir qué algoritmo correr.\\
