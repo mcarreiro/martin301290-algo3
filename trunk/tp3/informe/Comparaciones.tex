@@ -9,17 +9,40 @@ Para el GRASP, elegimos correr con k=n/10, ya que después de varias pruebas, no
 Cabe destacar que el algoritmo exacto, se deja de correr para los n $<$ 30 debido a su complejidad. Por esto y porque a partir de ese numero pega saltos tan grandes (en cuanto a tiempos de ejecucion y ciclos de procesador) que se vuelve imposible graficarlo.\\
 Para el LocalSearch usamos la estrategia DosPorUno por las razones ya mencionadas en la seccion de ese algoritmo.\\
 
-
 %En el siguiente grafico se ven las corridas, en nanosegundos, de los 4 algoritmos para un mismo grafo aleatorio con probabilidad 30 (No pusimos grafos con mas de 100 nodos porque al estar corriendo los 4 
 %algoritmos para cada grafo el tiempo de corrida se hace demasiado extenso):\\ REVISAR ESTOOOOO CON LO NUEVO ABAJO
 
 
 \subsection{Por Cantidad De Nodos}
 
-Generar dos graficos con n$<$200 como eje x y p = 30 (en uno) y p = 50 (en otro)
+%Generar dos graficos con n$<$200 como eje x y p = 30 (en uno) y p = 50 (en otro)
+
+\begin{center}
+\includegraphics[width=17cm]{./graficos/comparacioncantCDprobvariablen200.png}\\
+Comparacion por cantidad de nodos con n hasta 200 y p=30
+%EL QUE ESTA CORRIENDO EN CASA
+\end{center}
 
 
-Generar dos graficos con p$<$100 como eje x y n = 50 (en uno) y n = 250 (en otro)
+\begin{center}
+\includegraphics[width=17cm]{./graficos/comparacioncantCDprobvariablen200.png}\\
+Comparacion por cantidad de nodos con n hasta 200 y p=70
+\end{center}
+
+%Generar dos graficos con p$<$100 como eje x y n = 50 (en uno) y n = 250 (en otro)
+
+\begin{center}
+\includegraphics[width=17cm]{./graficos/comparacioncantCDprobvariablen50.png}\\
+Comparacion por cantidad de nodos con p hasta 100 y n=50
+%LISTO
+\end{center}
+
+
+\begin{center}
+\includegraphics[width=17cm]{./graficos/comparacioncantCDprobvariablen200.png}\\
+Comparacion por cantidad de nodos con p hasta 100 y n=200
+%LISTO
+\end{center}
 
 
 Aca hablas que GRASP siempre fue el mejor, que el greedy no se aleja mucho del exacto, y el local search mejora 
@@ -39,9 +62,34 @@ GRASP mejora al mejorar sus dos componentes que son las heurísticas anteriores.
 
 \subsection{Por Tiempo}
 
-Generar dos graficos con n$<$200 como eje x y p = 30 (en uno) y p = 50 (en otro)
+%Generar dos graficos con n$<$200 como eje x y p = 30 (en uno) y p = 50 (en otro)
 
-Generar dos graficos con p$<$100 como eje x y n = 100 (en uno) y n = 250 (en otro)
+\begin{center}
+\includegraphics[width=17cm]{./graficos/comparaciontiemponvariablep30.png}\\
+Comparacion por tiempo con n hasta 200 y p=30
+%EL QUE ESTA CORRIENDO EN CASA
+\end{center}
+
+
+\begin{center}
+\includegraphics[width=17cm]{./graficos/comparaciontiemposprobvariablen200.png}\\
+Comparacion por tiempo con n hasta 200 y p=70
+\end{center}
+
+%Generar dos graficos con p$<$100 como eje x y n = 100 (en uno) y n = 250 (en otro)
+
+\begin{center}
+\includegraphics[width=17cm]{./graficos/comparaciontiemposprobvariablen50.png}\\
+Comparacion por tiempo con p hasta 100 y n=50
+%LISTO
+\end{center}
+
+
+\begin{center}
+\includegraphics[width=17cm]{./graficos/comparaciontiemposprobvariablen200.png}\\
+Comparacion por tiempo con p hasta 100 y n=200
+%LISTO
+\end{center}
 
 
 Si vemos que el GRASP tarda más que otros es por la cantidad de iteraciones
@@ -50,8 +98,6 @@ El grasp tarda
 Finalmente cabe mencionar que el algoritmo GRASP tarda siempre más que el de búsqueda local y este ultimo más que el
 greedy. Esto se debe a que el de búsqueda local ejecuta el greedy y luego intenta mejorar la solución, y el GRASP realiza una
 determinada cantidad de iteraciones en las que ejecuta, en cada una, el greedy y lo mejora con búsqueda local.
-
-
 
 
 \section{Conclusiones}
