@@ -18,9 +18,9 @@ Para el LocalSearch usamos la estrategia DosPorUno por las razones ya mencionada
 %Generar dos graficos con n$<$200 como eje x y p = 30 (en uno) y p = 50 (en otro)
 
 \begin{center}
-\includegraphics[width=17cm]{./graficos/comparacioncantCDprobvariablen200.png}\\
+\includegraphics[width=17cm]{./graficos/comparacioncantCDnvariablep30.png}\\
 Comparacion por cantidad de nodos con n hasta 200 y p=30
-%EL QUE ESTA CORRIENDO EN CASA, LLAMAR A FEDE A LAS 2
+%LISTO
 \end{center}
 
 
@@ -45,20 +45,14 @@ Comparacion por cantidad de nodos con p hasta 100 y n=200
 %LISTO
 \end{center}
 
-
-Aca hablas que GRASP siempre fue el mejor, que el greedy no se aleja mucho del exacto, y el local search mejora 
-
-Elegimos estos gráficos porque son representativos de los casos ejecutados durante el proceso de experimentación
-vemos que a mayor cantidad de aristas, menor cantidad de nodos en el conjunto dominante
-Otro aspecto a destacar es que cuanto más denso es el grafo, las heurísticas tienden a funcionar mejor.
-En forma intuitiva, lo que ocurre es que al aumentar la cantidad de
-aristas, aumenta la cantidad de soluciones optimas
-
-El algoritmo greedy, al tomar una decisión de qué nodo agregar tiene menos probabilidad de tomar una mala decisión. 
-En el caso de búsqueda local, al aumentar la cantidad de aristas tiene más posibilidades de intercambios de vecinos. Por ultimo, el
-GRASP mejora al mejorar sus dos componentes que son las heurísticas anteriores.
-
-
+Como se puede observar en los gráficos, el GRASP se mantiene dominante con la menor cantidad de nodos en su conjunto resultado.
+Igualmente, el GREEDY no se aleja demasiado, acompañado por la mejora de Local Search.\\
+Otro aspecto a destacar fue que mientras más aristas posee el grafo, el conjunto dominante va a ser más pequeño,
+eso es bastante claro ya que habrá más nodos cerca del grado = n-1, por lo que con pocos nodos se encuentra el conjunto dominante.\\
+Llevándolo a nuestra primera heurística, es muy probable que el goloso elija bajo su criterio uno de los mejores nodos para el menor
+conjunto dominante. Por otra parte, al tener más aristas, la búsqueda local tiene más vecindad para elegir ya que cada nodo se relaciona con
+muchos para poder aplicar sus estrategias. Por último, pero no por eso peor, tenemos al GRASP que aplica aleatoriamente los algoritmos previamente
+mencionados otorgando una forma distinta (aunque en los gráficos puede verse mejor) de encarar un problema de Conjunto Dominante.
 
 
 \subsection{Por Tiempo}
