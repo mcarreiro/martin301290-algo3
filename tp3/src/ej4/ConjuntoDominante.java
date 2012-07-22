@@ -39,7 +39,7 @@ public class ConjuntoDominante {
 		return this.dominados;
 	}
 	
-	public void selectStrategy(Comparator<DosPorUnoSet> funcion) {
+	public void selectAndExecuteStrategy(Comparator<DosPorUnoSet> funcion) {
 		for(Movimientos m: Movimientos.values() ) {
 			if( tryStrategy(m, funcion) ) return;
 		}
