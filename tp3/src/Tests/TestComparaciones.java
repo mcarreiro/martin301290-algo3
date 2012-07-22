@@ -43,9 +43,9 @@ public class TestComparaciones extends TestCase{
 		ArrayList<String> listaLocalNodos = new ArrayList<String>();
 		ArrayList<String> listaGraspNodos = new ArrayList<String>();
 		for(int i =1;i<=100;i++){
-			Grafo g = factory.grafoAleatorio(i, 30);
+			Grafo g = factory.grafoAleatorio(i, 10);
 			
-			if(i < 25){
+			if(i < 30){
 			milisegundosS = System.nanoTime();	
 			CD = ej2.obtenerConjuntoDominanteMinimo(g);
 			milisegundosE = System.nanoTime();
@@ -79,15 +79,15 @@ public class TestComparaciones extends TestCase{
 			System.out.println(listaExacto.get(i));
 		}
 		System.out.println("e");
-		for(int i=0;i<listaExacto.size();i++){
+		for(int i=0;i<listaGrasp.size();i++){
 			System.out.println(listaGreedy.get(i));
 		}
 		System.out.println("e");
-		for(int i=0;i<listaExacto.size();i++){
+		for(int i=0;i<listaGrasp.size();i++){
 			System.out.println(listaLocal.get(i));
 		}
 		System.out.println("e");
-		for(int i=0;i<listaExacto.size();i++){
+		for(int i=0;i<listaGrasp.size();i++){
 			System.out.println(listaGrasp.get(i));
 		}
 		System.out.println("e");
@@ -95,15 +95,15 @@ public class TestComparaciones extends TestCase{
 			System.out.println(listaExactoNodos.get(i));
 		}
 		System.out.println("e");
-		for(int i=0;i<listaExacto.size();i++){
+		for(int i=0;i<listaGrasp.size();i++){
 			System.out.println(listaGreedyNodos.get(i));
 		}
 		System.out.println("e");
-		for(int i=0;i<listaExacto.size();i++){
+		for(int i=0;i<listaGrasp.size();i++){
 			System.out.println(listaLocalNodos.get(i));
 		}
 		System.out.println("e");
-		for(int i=0;i<listaExacto.size();i++){
+		for(int i=0;i<listaGrasp.size();i++){
 			System.out.println(listaGraspNodos.get(i));
 		}
 		System.out.println("e");
