@@ -22,9 +22,9 @@ public class ej4 {
 	// paso por parametro tmb la funcion de prioridad de los nodos
 	// todavia no se que voy a devolver
 	public static ConjuntoDominante MCD_LocalSearch(ConjuntoDominante cd, Comparator<DosPorUnoSet> funcion) {
-		int maxIterations = (int) Math.floor(Math.random()*(20-10+1)+10);; // aletorio entre 10 y 20
-		while(cd.getEstrategiaFailed() < maxIterations ) {
-			cd.selectStrategy(funcion);
+		//int maxIterations = (int) Math.floor(Math.random()*(20-10+1)+10);; // aletorio entre 10 y 20
+		while(cd.getEstrategiaFailed() < 1 ) {
+			cd.selectAndExecuteStrategy(funcion);
 		}
 		// encontre una "solucion", un nuevo conjunto dominante, caminando siempre por una "llanura" de soluciones cercanas
 		return cd;
